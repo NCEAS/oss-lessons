@@ -27,6 +27,8 @@ library(tidyverse)
 
 #tables
 library(knitr)
+schedule <- read_csv("oss.schedule.2017.csv")
+kable(schedule)
 
 ```
 
