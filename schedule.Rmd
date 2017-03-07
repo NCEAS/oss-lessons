@@ -1,0 +1,37 @@
+---
+title:
+author: "cjlortie"
+date: "2017"
+output:
+  html_document:
+    theme: yeti
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  pdf_document:
+    toc: yes
+---
+[![](schedule/nceas.png)](http://www.nceas.ucsb.edu)  
+
+#OSS.2017
+
+###Purpose
+To explore and collaboratively teach open scientific synthesis.
+
+###Schedule
+A variety of options to visualize a knitted schedule.
+
+###Week 1
+```{r library loads, warnings = FALSE, message=FALSE}
+#library laods
+library(tidyverse)
+#library(DT)
+library(knitr)
+#wk1
+wk1 <- read_csv("schedule/wk1.csv")
+#datatable(wk1)
+kable(wk1)
+
+```
+
+
