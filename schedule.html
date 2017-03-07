@@ -232,23 +232,22 @@ div.tocify {
 </div>
 <div id="week-1" class="section level3">
 <h3>Week 1</h3>
-<pre class="r"><code>#library laods
+<pre class="r"><code>#library loads
 library(tidyverse)
-#library(DT)
 library(knitr)
+
 #wk1
 wk1 &lt;- read_csv(&quot;schedule/wk1.csv&quot;)
-#datatable(wk1)
 kable(wk1)</code></pre>
 <table>
 <thead>
 <tr class="header">
-<th align="left">Time</th>
-<th align="left">Day 1:Techniques for Collaborative Synthesis and Intro Unix</th>
-<th align="left">Day 2: Communicating Science, Version Control, and Project Management</th>
-<th align="left">Day 3: Data Management, Metadata, and Data Repositories</th>
-<th align="left">Day 4: Open Science, R</th>
-<th align="left">Day 5: R, Wrangling Messy Data from Different Formats</th>
+<th align="left">Agenda</th>
+<th align="left">Day 1. Collaborative Synthesis</th>
+<th align="left">Day 2. Communication, Versioning, Project Management</th>
+<th align="left">Day 3. Data</th>
+<th align="left">Day 4. Open Science and R</th>
+<th align="left">Day 5. R and Wrangling</th>
 </tr>
 </thead>
 <tbody>
@@ -261,7 +260,7 @@ kable(wk1)</code></pre>
 <td align="left">Feedback, questions, and discussion</td>
 </tr>
 <tr class="even">
-<td align="left">8:30-8:45</td>
+<td align="left">8:30-9:00</td>
 <td align="left">Participant intros; brief bio, project interests, goals for course (all)</td>
 <td align="left">Communications: The message box</td>
 <td align="left">Facilitating group discussions</td>
@@ -269,31 +268,15 @@ kable(wk1)</code></pre>
 <td align="left">Rmarkdown, Knitr, Jupyter notebooks, and reproducible research</td>
 </tr>
 <tr class="odd">
-<td align="left">8:45-9:00</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">9:00-9:15</td>
+<td align="left">9:00-9:30</td>
 <td align="left">Course overview, discussion of expectations (Matt, Amber)</td>
 <td align="left">Group work on message box</td>
 <td align="left">Bash shell scripts (Jones)</td>
 <td align="left">group refines message box based on feedback</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">9:15-9:30</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
+<td align="left">group refines message box based on feedback</td>
 </tr>
 <tr class="even">
-<td align="left">9:30-9:45</td>
+<td align="left">9:30-10:10</td>
 <td align="left">Break</td>
 <td align="left">Break</td>
 <td align="left">Break</td>
@@ -301,95 +284,31 @@ kable(wk1)</code></pre>
 <td align="left">Break</td>
 </tr>
 <tr class="odd">
-<td align="left">9:45-10:00</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">10:00-10:15</td>
+<td align="left">10:00-11:00</td>
 <td align="left">Intro to servers, networks, and the *nix command line (Jones)</td>
 <td align="left">Activity: Version control and Git</td>
-<td align="left">Overview of Data Management (Jones) (incl. data sources for GRP)</td>
+<td align="left">Overview of Data Management (Jones) (incl. data sources for GRP) and Scientific data repositories (Jones)</td>
 <td align="left">Topics in R and ROpenSci</td>
 <td align="left">Wrangling heterogeneous data formats, structures in R (e.g., plyr), Messy text, character encoding</td>
 </tr>
-<tr class="odd">
-<td align="left">10:15-10:30</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
 <tr class="even">
-<td align="left">10:30-10:45</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
+<td align="left">11:00-12:00</td>
+<td align="left">Thinking preferences activity (Amber, Matt)</td>
+<td align="left">Thinking preferences activity (Amber, Matt)</td>
+<td align="left">Thinking preferences activity (Amber, Matt)</td>
+<td align="left">Thinking preferences activity (Amber, Matt)</td>
+<td align="left">Thinking preferences activity (Amber, Matt)</td>
 </tr>
 <tr class="odd">
-<td align="left">10:45-11:00</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">Scientific data repositories: Data discovery, metadata, versioning, provenance, and data publication (Jones)</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">11:00-11:15</td>
-<td align="left">Thinking preferences activity (Amber, Matt) Technical setup</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">11:15-11:30</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">11:30-11:55</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">11:55-Noon</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">Noon-12:15</td>
+<td align="left">Noon-12:45</td>
 <td align="left">Lunch</td>
 <td align="left">Lunch</td>
 <td align="left">Lunch</td>
 <td align="left">Lunch</td>
 <td align="left">Lunch</td>
 </tr>
-<tr class="odd">
-<td align="left">12:15-12:30</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
 <tr class="even">
-<td align="left">12:30-12:45</td>
+<td align="left">12:30-1:30</td>
 <td align="left">Advanced unix tools (awk, sed, iconv, etc.) (Jones)</td>
 <td align="left">Activity: Git and GitHub Collaboration</td>
 <td align="left">DataONE R client (Jones)</td>
@@ -397,42 +316,10 @@ kable(wk1)</code></pre>
 <td align="left">Data summarization, visualization, QA/QC, cleaning</td>
 </tr>
 <tr class="odd">
-<td align="left">12:45-1:00</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1:00-1:15</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1:15-1:30</td>
-<td align="left">NA</td>
-<td align="left">Ticket tracking for data and group projects (Github) (Jones)</td>
-<td align="left">Documenting data with the EML R package (Jones)</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1:30-1:45</td>
+<td align="left">1:30-2:00</td>
 <td align="left">Regular expressions (Jones)</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
 <td align="left">Social aspects of collaboration, high-performing groups, data policies (Budden and Jones)</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1:45-2:00</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
+<td align="left">Social aspects of collaboration, high-performing groups, data policies (Budden and Jones)</td>
 <td align="left">NA</td>
 <td align="left">NA</td>
 </tr>
@@ -445,92 +332,12 @@ kable(wk1)</code></pre>
 <td align="left">Break</td>
 </tr>
 <tr class="odd">
-<td align="left">2:15-2:30</td>
-<td align="left">Pre-Assessment</td>
+<td align="left">2:15-5:00</td>
+<td align="left">Pre-Assessment and Group Projects</td>
 <td align="left">Group Projects at NCEAS</td>
 <td align="left">Group Projects at NCEAS</td>
 <td align="left">Group Projects at NCEAS</td>
 <td align="left">Group Projects at NCEAS</td>
-</tr>
-<tr class="even">
-<td align="left">2:30-2:45</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">2:45-3:00</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">3:00-3:15</td>
-<td align="left">Group Projects atNCEAS: Establish Group projects and project teams</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">3:15-3:30</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">3:30-3:45</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">3:45-4:00</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">4:00-4:15</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">4:15-4:30</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">4:30-4:45</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">4:45-5:00</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">5:00-5:15</td>
