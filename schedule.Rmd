@@ -13,7 +13,7 @@ output:
 ---
 [![](schedule/nceas.png)](http://www.nceas.ucsb.edu)  
 
-#OSS.2017
+###OSS.2017
 
 ###Purpose
 To explore and collaboratively teach open scientific synthesis.
@@ -22,7 +22,7 @@ To explore and collaboratively teach open scientific synthesis.
 A variety of options to visualize a knitted schedule.
 
 ###Week 1
-```{r library loads, warnings = FALSE, message=FALSE}
+```{r library loads, warnings = FALSE, message=FALSE, echo=FALSE}
 #library loads
 library(tidyverse)
 library(knitr)
