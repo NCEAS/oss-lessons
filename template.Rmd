@@ -12,26 +12,19 @@ output:
     toc: yes
 ---
 
-##Meta-analysis  
-
-![](meta-analysis/meta.jpg)     
+##Topic  
 
 ###Introduction
-**Purpose:** To examine meta-analysis as a tool for scientific synthesis. This workshop will include a workflow from primary literature compilation to meta-analysis.
+**Purpose:** To... 
 
 **Background:**
-Meta-analysis is a powerful scientific synthesis tool.
-The first step to be able to critically read and assess their relative merits because of their increasing frequency on most domains of evidence-based inquiry. 
+Brief overview of topic and relationship to scientific synthesis.
 
 **Explanation:**
 No slide decks. Ideal to keep all materials within ecosystem. Use this single rmd as your mechanism to explain, show, lecture, or demo/use tutorial to explain concepts.
 
 **Products for your open science portfolio:**  
-1. A compiled dataset of primary data on a topic of interest.  
-2. A GitHub repo.  
-3. An rmd file with code and one data viz running a meta-analysis.  
-4. A PRISMA report.  
-
+list what students will produce
 
 ###Learning outcomes
 1. To be able to 
@@ -41,7 +34,7 @@ No slide decks. Ideal to keep all materials within ecosystem. Use this single rm
 
 ###Exercise: meta-analysis
 A sample exercise or tutorial to complete.
-Herein, we will use effect sizes already compliled from an existing published study.
+work through here or provide link to tutorial.
 
 ```{r exercise, warning=FALSE, message=FALSE}
 #demo an effect size dataset in metafor
@@ -50,10 +43,7 @@ Herein, we will use effect sizes already compliled from an existing published st
 
 ```
 
-
-###Exercise: PRISMA report
-
-###Exercise: Data collection
+###Exercise: as needed.
 
 ###Summary
 
