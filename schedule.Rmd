@@ -11,9 +11,7 @@ output:
   pdf_document:
     toc: yes
 ---
-[![](schedule/nceas.png)](http://www.nceas.ucsb.edu)  
 
-###OSS.2017
 
 ```{r library loads, warnings = FALSE, message=FALSE, echo=FALSE}
 #library loads
