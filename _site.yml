@@ -5,7 +5,7 @@ navbar:
     - text: "Schedule"
       href: schedule.html
     - text: "Meta-analysis"
-      href: basic_workflow.html
+      href: meta.html
     - text: "Data Wrangling"
       href: wrangling.html
     
