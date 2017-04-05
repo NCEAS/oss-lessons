@@ -1,0 +1,18 @@
+---
+title:
+author: "cjlortie"
+date: "March 2017"
+output:
+  html_document:
+    theme: spacelab
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  pdf_document:
+    toc: yes
+---
+
+##An open science workflow for meta-analyses  
+Wrapper rmd for meta files
+
+![](meta-analysis/meta.jpg)     
