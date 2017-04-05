@@ -14,8 +14,6 @@ output:
 
 ##Meta-analysis  
 
-![](meta-analysis/meta.jpg)     
-
 ###Introduction
 **Purpose:** To examine meta-analysis as a tool for scientific synthesis. This workshop will include a workflow from primary literature compilation to meta-analysis.
 

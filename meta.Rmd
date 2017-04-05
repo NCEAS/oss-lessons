@@ -16,3 +16,5 @@ output:
 Wrapper rmd for meta files. Workflow emphasized
 
 ![](meta-analysis/meta.jpg)     
+
+[Lesson 1](meta-analysis/meta-analysis.html)   
