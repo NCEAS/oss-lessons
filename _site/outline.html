@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">OSS-GRP</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="outline.html">Outline</a>
+</li>
+<li>
+  <a href="week1.html">Week1</a>
+</li>
+<li>
+  <a href="week2.html">week2</a>
+</li>
+<li>
+  <a href="week3.html">week3</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<div id="purpose" class="section level3">
+<h3>Purpose</h3>
+<p>To explore and collaboratively teach open scientific synthesis.</p>
+</div>
+<div id="week-1" class="section level3">
+<h3>Week 1</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Agenda</th>
+<th align="left">Day 1. Synthesis &amp; Unix</th>
+<th align="left">Day 2. Communication, Versioning, Project Management</th>
+<th align="left">Day 3. Data</th>
+<th align="left">Day 4. Open Science and R</th>
+<th align="left">Day 5. R and Wrangling</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">8:15-8:30</td>
+<td align="left">Welcome (Matt, Amber)</td>
+<td align="left">Feedback, questions, and discussion</td>
+<td align="left">Feedback, questions, and discussion</td>
+<td align="left">Feedback, questions, and discussion</td>
+<td align="left">Feedback, questions, and discussion</td>
+</tr>
+<tr class="even">
+<td align="left">8:30-9:00</td>
+<td align="left">Participant intros; brief bio, project interests, goals for course (all)</td>
+<td align="left">Communications: The message box (Brun)</td>
+<td align="left">Facilitating group discussions</td>
+<td align="left">Message box 2: Group exchange and feedback</td>
+<td align="left">Rmarkdown, Knitr, Jupyter notebooks (Brun, Mecum)</td>
+</tr>
+<tr class="odd">
+<td align="left">9:00-9:30</td>
+<td align="left">Course overview, discussion of expectations (Jones, Budden)</td>
+<td align="left">Group work on message box (Jones)</td>
+<td align="left">Bash shell scripts (Jones)</td>
+<td align="left">Intoduction to R (Mecum)</td>
+<td align="left">group refines message box based on feedback (Brun)</td>
+</tr>
+<tr class="even">
+<td align="left">9:30-10:10</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+</tr>
+<tr class="odd">
+<td align="left">10:00-11:00</td>
+<td align="left">Intro to servers, networks, and the unix command line (Jones)</td>
+<td align="left">Activity: Version control and Git (Brun, Mecum)</td>
+<td align="left">Overview of Data Management &amp; Scientific data repositories (Jones)</td>
+<td align="left">Topics in R and ROpenSci</td>
+<td align="left">Wrangling heterogeneous data formats (Jones, Brun, Lortie)</td>
+</tr>
+<tr class="even">
+<td align="left">11:00-12:00</td>
+<td align="left">Thinking preferences activity (Budden)</td>
+<td align="left">Thinking preferences activity (Budden)</td>
+<td align="left">Thinking preferences activity (Budden)</td>
+<td align="left">Thinking preferences activity (Budden)</td>
+<td align="left">Thinking preferences activity (Budden)</td>
+</tr>
+<tr class="odd">
+<td align="left">Noon-12:45</td>
+<td align="left">Lunch</td>
+<td align="left">Lunch</td>
+<td align="left">Lunch</td>
+<td align="left">Lunch</td>
+<td align="left">Lunch</td>
+</tr>
+<tr class="even">
+<td align="left">12:30-1:30</td>
+<td align="left">Advanced unix tools (awk, sed, iconv, etc.) (Jones)</td>
+<td align="left">Activity: Git and GitHub Collaboration (Brun)</td>
+<td align="left">DataONE R client (Jones)</td>
+<td align="left">Data liberation (scraping, text mining) (Jones)</td>
+<td align="left">Data munging, QA/QC, cleaning (Mecum)</td>
+</tr>
+<tr class="odd">
+<td align="left">1:30-2:00</td>
+<td align="left">R Markdown (Jones)</td>
+<td align="left">Social aspects of collaboration, high-performing groups, data policies (Budden and Jones)</td>
+<td align="left">Social aspects of collaboration, high-performing groups, data policies (Budden and Jones)</td>
+<td align="left">Regular expressions (Mecum)</td>
+<td align="left">Data modelling concepts (Schildhauer)</td>
+</tr>
+<tr class="even">
+<td align="left">2:00-2:15</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+</tr>
+<tr class="odd">
+<td align="left">2:15-5:00</td>
+<td align="left">Pre-Assessment and Group Projects</td>
+<td align="left">Group Projects at NCEAS</td>
+<td align="left">Group Projects at NCEAS</td>
+<td align="left">Group Projects at NCEAS</td>
+<td align="left">Group Projects at NCEAS</td>
+</tr>
+<tr class="even">
+<td align="left">5:00-5:15</td>
+<td align="left">Adjourn at NCEAS</td>
+<td align="left">Adjourn at NCEAS</td>
+<td align="left">Adjourn at NCEAS</td>
+<td align="left">Adjourn at NCEAS</td>
+<td align="left">Adjourn at NCEAS</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="week-2" class="section level3">
+<h3>Week 2</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Agenda</th>
+<th align="left">Day 1. Meta-analysis</th>
+<th align="left">Day 2. Tabular Data</th>
+<th align="left">Day 3. OO Programming and Workflows</th>
+<th align="left">Day 4. Geospatial Data</th>
+<th align="left">Day 5. Geospatial analysis and Algorithmic Approaches</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">8:15-8:30</td>
+<td align="left">Feedback, questions, and discussion</td>
+<td align="left">Feedback, questions, and discussion</td>
+<td align="left">Feedback, questions, and discussion</td>
+<td align="left">Feedback, questions, and discussion</td>
+<td align="left">Feedback, questions, and discussion</td>
+</tr>
+<tr class="even">
+<td align="left">8:30-9:00</td>
+<td align="left">Metas and systematic reviews (Lortie)</td>
+<td align="left">Overview of Data models, esp the relational model (Schildhauer)</td>
+<td align="left">Lecture/Lab: Functions and modular code, intro to OO programming with a design pattern or two Activity: basic R functions</td>
+<td align="left">Intro to GIS - geospatial data concepts (Brun, Waser)</td>
+<td align="left">LAB: geospatial analysis (Wasser)</td>
+</tr>
+<tr class="odd">
+<td align="left">930-945</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+</tr>
+<tr class="even">
+<td align="left">9:45-11:00</td>
+<td align="left">Hands-on meta-analysis (Lortie)</td>
+<td align="left">Data Modeling Exercise with Group projects (Jones)</td>
+<td align="left">Exercise with group projects (Jones)</td>
+<td align="left">Go from an Excel-like set of data to QGIS (Brun)</td>
+<td align="left">LAB: geospatial analysis (Wasser)</td>
+</tr>
+<tr class="odd">
+<td align="left">11:00-12:00</td>
+<td align="left">Hands-on meta-analysis (Lortie)</td>
+<td align="left">SQL, PostgreSQL (via psql), and sqlite, Interfacing R and PostgreSQL (Jones)</td>
+<td align="left">Exercise with group projects (Jones)</td>
+<td align="left">Basic spatial data analysis using Excel and Python (Jupyter Notebook) (Brun)</td>
+<td align="left">LAB: geospatial analysis (Wasser)</td>
+</tr>
+<tr class="even">
+<td align="left">Noon-12:45</td>
+<td align="left">Lunch</td>
+<td align="left">Lunch</td>
+<td align="left">Lunch</td>
+<td align="left">Lunch</td>
+<td align="left">Lunch</td>
+</tr>
+<tr class="odd">
+<td align="left">12:30-1:30</td>
+<td align="left">LAB: Systematic reviews and meta-analysis (Lortie)</td>
+<td align="left">Data semantics and annotation (Schildhauer)</td>
+<td align="left">Workflow design activity (Group projects) (Jones)</td>
+<td align="left">Publishing maps to the web</td>
+<td align="left">LECTURE: HD5f (Wasser)</td>
+</tr>
+<tr class="even">
+<td align="left">1:30-2:00</td>
+<td align="left">Meta-presentations by groups</td>
+<td align="left">Emulating SQL with core R functions (Mecum)</td>
+<td align="left">Testing and Continuous Integration for science</td>
+<td align="left">Demo: Open Geospatial data (where, how, e.g., US Census)</td>
+<td align="left">LECTURE: Intro to RS (Wasser)</td>
+</tr>
+<tr class="odd">
+<td align="left">2:00-2:15</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+</tr>
+<tr class="even">
+<td align="left">2:15-5:00</td>
+<td align="left">Group Project</td>
+<td align="left">Group Project</td>
+<td align="left">Group Project</td>
+<td align="left">Group Project</td>
+<td align="left">Group Project</td>
+</tr>
+<tr class="odd">
+<td align="left">5:00-5:15</td>
+<td align="left">Adjourn at NCEAS</td>
+<td align="left">Adjourn at NCEAS</td>
+<td align="left">Adjourn at NCEAS</td>
+<td align="left">Adjourn at NCEAS</td>
+<td align="left">Adjourn at NCEAS</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="week-3" class="section level3">
+<h3>Week 3</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Agenda</th>
+<th align="left">Day 1. Communicating with videos and geospatial analysis</th>
+<th align="left">Day 2. Metagenomics</th>
+<th align="left">Day 3. Data Viz</th>
+<th align="left">Day 4. Reproducible science day</th>
+<th align="left">Day 5. Group projects! Publications. Group reports</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">8:15-8:30</td>
+<td align="left">Feedback, questions, and discussion</td>
+<td align="left">Feedback, questions, and discussion</td>
+<td align="left">Feedback, questions, and discussion</td>
+<td align="left">Feedback, questions, and discussion</td>
+<td align="left">Feedback, questions, and discussion</td>
+</tr>
+<tr class="even">
+<td align="left">8:30-9:00</td>
+<td align="left">Video storytelling (NCEAS expert)</td>
+<td align="left">Metagenomics (Teal)</td>
+<td align="left">Data Viz and interactive tools (Mecum)</td>
+<td align="left">Provenance (Jones)</td>
+<td align="left">Project presentations and discussion</td>
+</tr>
+<tr class="odd">
+<td align="left">930-945</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+</tr>
+<tr class="even">
+<td align="left">9:45-11:00</td>
+<td align="left">Lab: Building project videos</td>
+<td align="left">Scribe (Teal)</td>
+<td align="left">LECTURE: Visualizing diversity data (Teal)</td>
+<td align="left">Reproducible writing or alternatives to Word (Jones)</td>
+<td align="left">Project presentations and discussion</td>
+</tr>
+<tr class="odd">
+<td align="left">11:00-12:00</td>
+<td align="left">Lab: Building project videos</td>
+<td align="left">Phyloseq/ data visualization (Teal)</td>
+<td align="left">LECTURE: Science in the open: Provenance and Reproducibility (Jones, Schildhauer)</td>
+<td align="left">Lab: Build a CV or write a review using alt-tool</td>
+<td align="left">Project presentations and discussion</td>
+</tr>
+<tr class="even">
+<td align="left">Noon-12:45</td>
+<td align="left">Lunch</td>
+<td align="left">Lunch</td>
+<td align="left">Lunch</td>
+<td align="left">Lunch</td>
+<td align="left">Lunch</td>
+</tr>
+<tr class="odd">
+<td align="left">12:30-1:30</td>
+<td align="left">LECTURE: geospatial visualization (Wasser)</td>
+<td align="left">tmux (Teal)</td>
+<td align="left">LECTURE: Data semantics and annotation (Schildhauer)</td>
+<td align="left">LECTURE: reproducibility, replicability, transparency</td>
+<td align="left">Discussion: open science for synthesis and course feedback</td>
+</tr>
+<tr class="even">
+<td align="left">1:30-2:00</td>
+<td align="left">Hands-on with communicating geospatial analyses</td>
+<td align="left">Hands-on exercise and workflow (Teal)</td>
+<td align="left">Hands-on data viz from each subdomain presented today (all)</td>
+<td align="left">Hands-on with open science workflows</td>
+<td align="left">Fiesta Celebration</td>
+</tr>
+<tr class="odd">
+<td align="left">2:00-2:15</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+<td align="left">Break</td>
+</tr>
+<tr class="even">
+<td align="left">2:15-5:00</td>
+<td align="left">Group Project</td>
+<td align="left">Group Project</td>
+<td align="left">Group Project</td>
+<td align="left">Group Project</td>
+<td align="left">Group Project</td>
+</tr>
+<tr class="odd">
+<td align="left">5:00-5:15</td>
+<td align="left">Adjourn at NCEAS</td>
+<td align="left">Adjourn at NCEAS</td>
+<td align="left">Adjourn at NCEAS</td>
+<td align="left">Adjourn at NCEAS</td>
+<td align="left">Adjourn at NCEAS</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
