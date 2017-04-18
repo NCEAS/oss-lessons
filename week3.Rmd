@@ -1,5 +1,6 @@
 ---
 title: "week3"
+output: html_document
 
 ---
 

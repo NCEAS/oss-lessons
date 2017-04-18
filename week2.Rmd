@@ -1,5 +1,6 @@
 ---
 title: "week2"
+output: html_document
 ---
 
 ####Advanced synthesis lessons
