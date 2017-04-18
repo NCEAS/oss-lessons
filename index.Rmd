@@ -1,6 +1,5 @@
 ---
 title: "Open Science for Synthesis"
-output: html_document
 ---
 
 ![](./GM.jpg)  

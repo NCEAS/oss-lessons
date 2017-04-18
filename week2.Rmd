@@ -1,0 +1,7 @@
+---
+title: "week2"
+---
+
+####Advanced synthesis lessons
+[Open science workflow for meta-analyses](/meta-analysis/meta-analysis.html)  
+

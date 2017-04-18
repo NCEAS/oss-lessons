@@ -1,0 +1,50 @@
+---
+- title:"outline"
+---
+
+
+```{r library loads, warnings = FALSE, message=FALSE, echo=FALSE}
+#library loads
+library(tidyverse)
+library(knitr)
+```
+
+###Purpose
+To explore and collaboratively teach open scientific synthesis.
+
+###Week 1  
+```{r wk1, warnings = FALSE, message=FALSE, echo=FALSE}
+#library loads
+library(tidyverse)
+library(knitr)
+
+#wk1
+wk1 <- read_csv("schedule/wk1.csv")
+kable(wk1)
+
+```
+
+###Week 2  
+```{r wk2, warnings = FALSE, message=FALSE, echo=FALSE}
+#library loads
+library(tidyverse)
+library(knitr)
+
+#wk1
+wk2 <- read_csv("schedule/wk2.csv")
+kable(wk2)
+
+```
+
+###Week 3
+```{r wk3, warnings = FALSE, message=FALSE, echo=FALSE}
+#library loads
+library(tidyverse)
+library(knitr)
+
+#wk1
+wk3 <- read_csv("schedule/wk3.csv")
+kable(wk3)
+
+```
+

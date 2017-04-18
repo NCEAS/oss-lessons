@@ -1,15 +1,5 @@
 ---
-title:
-author: "cjlortie"
-date: "March 2017"
-output:
-  html_document:
-    theme: spacelab
-    toc: yes
-    toc_depth: 3
-    toc_float: yes
-  pdf_document:
-    toc: yes
+title:"An open science workflow for meta-analyses"
 ---
 
 ##Meta-analysis  

@@ -1,18 +1,15 @@
 name: "Open Science for Scientific Synthesis"
 navbar:
-  title: "HOME"
+  title: "OSS-GRP"
   left:
-    - text: "Schedule"
-      href: schedule.html
-    - text: "Meta-analysis"
-      href: meta.html
-    - text: "Data Wrangling"
-      href: wrangling.html
+    - text: "Home"
+      href: index.html
+    - text: "Outline"
+      href: outline.html
+    - text: "Week1"
+      href: week1.html
+    - text: "week2"
+      href: week2.html
+    - text: "week3"
+      href: week3.html
     
-output_dir: "."
-output:
-  html_document:
-    theme: yeti
-    highlight: textmate
-#    include:
-#      after_body: _footer.html
