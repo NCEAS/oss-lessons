@@ -4,12 +4,5 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Outline"
-      href: outline.html
-    - text: "Week1"
-      href: week1.html
-    - text: "week2"
-      href: week2.html
-    - text: "week3"
-      href: week3.html
+    
     
