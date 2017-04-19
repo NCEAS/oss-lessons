@@ -1,9 +1,0 @@
----
-title: "week1"
-output: html_document
----
-
-###Fundamental collaboration skills lessons
-
-then link to each lesson here.
-

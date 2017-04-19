@@ -1,7 +1,0 @@
-###Guidelines to consider for curriculum development.
-1. A single rmd per lesson.
-2. Keep rmd in main dir of repo (for bookdown or rmarkdown knit to a wesite).
-3. Use a folder with same name as rmd lesson to source supporting materials.
-4. Keep all materials (when possible) within this ecosystem.
-5. Even if your lesson is outside an rmd file, please prep an rmd.
-6. Within each rmd, please include the following sections: introduction, learning outcomes, and summary. Then use added sections as needed depending on less.

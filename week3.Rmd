@@ -1,8 +1,0 @@
----
-title: "week3"
-output: html_document
-
----
-
-###Advanced topics and group synthesis projects
-
