@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# oss-lessons\nMaster lessons for OSS data science curriculum.\n",
+    "created" : 1492630725955.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "555689536",
+    "id" : "81830F6C",
+    "lastKnownWriteTime" : 1492630686,
+    "last_content_update" : 1492630686,
+    "path" : "~/zenflow/oss-lessons/README.md",
+    "project_path" : "README.md",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "markdown"
+}
