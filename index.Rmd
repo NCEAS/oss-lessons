@@ -1,5 +1,5 @@
 ---
-title: "Open Science for Synthesis"
+title: "Home"
 output: html_document
 ---
 
