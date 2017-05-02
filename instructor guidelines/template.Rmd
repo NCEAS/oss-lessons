@@ -1,0 +1,31 @@
+---
+title:
+author: "cjlortie"
+---
+
+##Topic  
+
+###Introduction
+**Purpose:** To... 
+
+**Background:**
+Brief overview of topic and relationship to scientific synthesis.
+
+**Explanation:**
+No slide decks. Ideal to keep all materials within ecosystem. Use this single rmd as your mechanism to explain, show, lecture, or demo/use tutorial to explain concepts.
+
+**Products for your open science portfolio:**  
+list what students will produce
+
+###Learning outcomes
+1. To be able to 
+2. To examine
+3. To appreciate
+4. To explore
+
+###Exercise: 
+
+
+###Summary
+
+

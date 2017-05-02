@@ -1,0 +1,7 @@
+###Guidelines to consider for curriculum development.
+1. A single R Markdown (rmd) file per lesson.
+2. Keep all files within a topically named folder here.
+3. Use a folder with same name as rmd lesson to source supporting materials.
+4. Keep all materials (when possible) within this ecosystem.
+5. Even if your lesson is outside an rmd file, please prep an rmd.
+6. Within each rmd, please include the following sections: introduction, learning outcomes, and summary. Then use added sections as needed depending on less.
