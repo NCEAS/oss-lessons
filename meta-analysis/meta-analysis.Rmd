@@ -1,5 +1,6 @@
 ---
 title:"An open science workflow for meta-analyses"
+author: "cjlortie"
 
 ---
 
