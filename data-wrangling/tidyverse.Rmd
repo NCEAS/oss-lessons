@@ -56,6 +56,7 @@ We will cover two basic challenges you will certainly encounter.
 ###Exercise 1. Missing data
 ```{r, missing data}
 #Missing data. In error, missing cells/observations in some measure can kick back an error. In other apps, sometimes ignored but can introduce error.
+#setwd('data-wrangling')
 library(tidyverse)
 ttc <-read_csv("data/ttc.csv")
 ttc #tibble if use read_csv versus dataframe
