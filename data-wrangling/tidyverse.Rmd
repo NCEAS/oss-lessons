@@ -72,7 +72,7 @@ is.na(new.ttc) #check to see if it worked
 
 ###Exercise 2. Selecting part of a dataset
 ```{r, selections}
-survey<-read_csv("/data/5081.survey.1.csv")
+survey<-read_csv("data/5081.survey.1.csv")
 survey
 #I want just a simple dataframe with experience by discipline
 
