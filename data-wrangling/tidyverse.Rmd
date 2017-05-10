@@ -57,7 +57,7 @@ We will cover two basic challenges you will certainly encounter.
 ```{r, missing data}
 #Missing data. In error, missing cells/observations in some measure can kick back an error. In other apps, sometimes ignored but can introduce error.
 library(tidyverse)
-ttc <-read_csv("/Users/zenrunner/zenflow/oss-lessons/data-wrangling/data/ttc.csv")
+ttc <-read_csv("data/ttc.csv")
 ttc #tibble if use read_csv versus dataframe
 
 #check for missing values
@@ -72,7 +72,7 @@ is.na(new.ttc) #check to see if it worked
 
 ###Exercise 2. Selecting part of a dataset
 ```{r, selections}
-survey<-read_csv("/Users/zenrunner/zenflow/oss-lessons/data-wrangling/data/5081.survey.1.csv")
+survey<-read_csv("data/5081.survey.1.csv")
 survey
 #I want just a simple dataframe with experience by discipline
 
