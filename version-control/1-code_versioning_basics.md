@@ -1,5 +1,3 @@
-<img style="align: left;width: 250px;" src=images/NCEAS_logo.png />
-
 Code versioning - Git Basics
 ============================
 
@@ -269,10 +267,3 @@ More info about how to undo things [here](https://git-scm.com/book/en/v2/Git-Bas
 - In trouble, guide to know what to do: [http://justinhileman.info/article/git-pretty/git-pretty.png](http://justinhileman.info/article/git-pretty/git-pretty.png)
 - Want to undo something? <https://github.com/blog/2019-how-to-undo-almost-anything-with-git> 
 
-## License
-
-National Center for Ecological Analysis and Synthesis, NCEAS, UCSB
-
-Copyright the Regents of the University of California, 2016
-
-<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.

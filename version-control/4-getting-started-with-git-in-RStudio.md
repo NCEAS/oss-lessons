@@ -1,11 +1,10 @@
 ---
-title: "using git From RStudio"
+Gittitle: "using git From RStudio"
 author: "Julien Brun"
 date: "June, 2016"
 output: html_document
 ---
 
-<img style="align: left;width: 300px;" src=images/NCEAS_logo.png />
 
 # Code Versioning using RStudio
 
@@ -120,14 +119,3 @@ Once you have finished the pull process, you can click on the `push` button to u
 - Debugging with R Studio: [https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio](https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio)  
 - Using git from RStudio: [https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN)
 - Tips on using git and GitHub from RStudio, Hadley Wickham's [R packages](http://r-pkgs.had.co.nz/git.html#git-pull) book
-
-## License
-
-National Center for Ecological Analysis and Synthesis, NCEAS, UCSB
-
-Copyright the Regents of the University of California, 2016
-
-<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
-
-
-

@@ -1,5 +1,3 @@
-<img style="align: left;width: 300px;" src=images/NCEAS_logo.png />
-
 Code versioning - Working with remotes
 ===============================
 
@@ -119,9 +117,3 @@ Done with your branch? Want to merge your new - ready for prime time - script to
  - 	interactive tutorial on branches: [http://pcottle.github.io/](http://pcottle.github.io/)
 - git workflow options:
  -  unsing git in a collaborative environment: [https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow)
-
-## License
-
-Copyright the Regents of the University of California, 2016
-
-<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International License</a>.
