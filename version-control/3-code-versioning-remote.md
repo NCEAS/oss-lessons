@@ -22,7 +22,7 @@ It is important that a good portion of the worflow happen on your local machine 
 4.) ```git push``` : send your latest version of the picture album to the server
 
 
-## Working with Remote repositories
+## Working with remote repositories
 
 ### Adding your local repository to a remote server
 
@@ -31,7 +31,7 @@ Within your local repository:
 1. Add the remote address: ```git remote add origin https://github.nceas.ucsb.edu/brun/demo.git```
 2. Do your initial push: ```git push -u origin master```
 
-The `-u` flag sets the upstream tracking to allow argument less pull. You only need to set it once (per branch).
+The `-u` flag sets the upstream tracking. This allows git to track changes on the remote branch. It also allows argument less `pull` (or `merge` to be exact). You only need to set it once (per branch). Note that when you `clone` a repository, the upstream tracking is set automatically to `origin/master`, therefore you can directly use `git push` on the master branch without additional arguments. 
 
 ### Managing Merge Conflicts
 
@@ -49,9 +49,9 @@ The most common cause of merge conflicts happen if different another user change
 
 ```{bash}
 <<<<<<< HEAD
-local version
+local version (ours)
 =======
-remote version
+remote version (theirs)
 >>>>>>> [remote version (commit#)]
 ```
 
