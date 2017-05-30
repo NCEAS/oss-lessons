@@ -60,6 +60,9 @@ remote version (theirs)
 3. You want to roll back to the situation before you started a merge: `git merge --abort`
 
 ## Branches
+
+![adapted from https://www.atlassian.com/git/tutorials/git-merge](images/atlassian_branches_sketch.png)
+
 What are branches?  Well in fact nothing new, as the master is a branch. A branch represents an independent line of development, parallel to the master (branch). 
 
 Why should I use branches? For 2 main reasons:
@@ -73,10 +76,10 @@ Why should I use branches? For 2 main reasons:
 
 Few commands to deal with branches:
 
-* ```git branch```	Will list the existing branches
-* ```git branch myBranchName``` 	Will create an new branch with the
+* `git branch`	Will list the existing branches
+* `git branch myBranchName` 	Will create an new branch with the
 							name myBranchName
-* `git checkout myBranchName ` Will switch to the branch myBranchName
+* `git checkout myBranchName` Will switch to the branch myBranchName
 
 <img style="float: left;width: 30px;" src="images/tip.png"/> In a rush? create a new branch and switch to it directly:
 
@@ -105,15 +108,17 @@ Done with your branch? Want to merge your new - ready for prime time - script to
 
 ## References
 - General
- - Interactive git 101: [https://try.github.io/](https://try.github.io/)
- - Very good tutorial about git: [https://www.atlassian.com/git/tutorials/what-is-version-control](https://www.atlassian.com/git/tutorials/what-is-version-control)
- - Git tutorial gearde towards scientits: [http://nyuccl.org/pages/gittutorial/](http://nyuccl.org/pages/gittutorial/)
- - Git documentation about the basics: [http://gitref.org/basic/](http://gitref.org/basic/)
- - Git documentation - the basics: [https://git-scm.com/book/en/v2/Getting-Started-Git-Basics](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics)
- - Comparison of git repository host services: [https://www.git-tower.com/blog/git-hosting-services-compared/](https://www.git-tower.com/blog/git-hosting-services-compared/)
- - Git terminology: [https://www.atlassian.com/git/glossary/terminology](https://www.atlassian.com/git/glossary/terminology)
- - NCEAS wiki page on git: [https://help.nceas.ucsb.edu/git?s[]=git](https://help.nceas.ucsb.edu/git?s[]=git)
+ - Interactive git 101: <https://try.github.io/>
+ - Very good tutorial about git: <https://www.atlassian.com/git/tutorials/what-is-version-control>
+ - Git tutorial geared towards scientits: <http://nyuccl.org/pages/gittutorial/>
+ - Git documentation about the basics: <http://gitref.org/basic/>
+ - Git documentation - the basics: <https://git-scm.com/book/en/v2/Getting-Started-Git-Basics>
+ - Comparison of git repository host services: <https://www.git-tower.com/blog/git-hosting-services-compared/>
+ - Git terminology: <https://www.atlassian.com/git/glossary/terminology>
+ - 8 tips to work better with git: <https://about.gitlab.com/2015/02/19/8-tips-to-help-you-work-better-with-git/>
+ - GitPro book (2nd edition): <https://git-scm.com/book/en/v2>
+ - NCEAS wiki page on git: <https://help.nceas.ucsb.edu/git?s[]=git>
 - Branches
- - 	interactive tutorial on branches: [http://pcottle.github.io/](http://pcottle.github.io/)
-- git workflow options:
- -  unsing git in a collaborative environment: [https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow](https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow)
+ - 	interactive tutorial on branches: <http://learngitbranching.js.org/>
+ - git workflow options:
+ -  unsing git in a collaborative environment: <https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow>
