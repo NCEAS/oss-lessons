@@ -15,7 +15,7 @@ This training material focuses on the code verioning system calld `Git`. Note th
 
 <img style="float: right;width: 100px;" src="images/git_icon.png">
 
-![xkcd - git](images/git_xkcd.png)
+![xkcd - git, aka what we want to avoid!](images/git_xkcd.png)
 
 Git is a *free* and *open source* distributed *version control system*. It has many functionalities and was originally geared towards software development and production environment. In fact, Git was initially designed and developed in 2005 by Linux kernel developers (including Linus Torvalds) to track the development of the Linux kernel. Here is a [fun video](https://www.youtube.com/watch?v=4XpnKHJAok8) of Linus Torvalds touting Git to Google. 
 
@@ -90,7 +90,8 @@ Set your text editor:
 git config --system core.editor vim
 ```
 
-Want to know more? [here](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) 
+
+<img style="float: left;width: 30px;" src="images/tip.png"/> Want to know more about the available configuration options? How to change the default [text editor](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) used byt git? How make git remember your [GitHub credentials](https://help.github.com/articles/caching-your-github-password-in-git/#platform-all)?
 
 ### 2. Starting a git repository
 
