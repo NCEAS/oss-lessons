@@ -1,0 +1,12 @@
+---
+title: "Regular Expressions"
+author: "Bryce Mecum"
+
+Time slot: 30 minutes
+
+Learning outcomes:
+  
+Students should:
+  
+- Understand when regular expressions are appropriate
+- 

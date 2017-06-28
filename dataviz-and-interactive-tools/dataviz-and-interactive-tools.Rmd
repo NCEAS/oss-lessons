@@ -1,0 +1,20 @@
+---
+title: "Dataviz and Interactive Tools"
+author: "Bryce Mecum"
+----
+
+Making advanced plots including interactive plots
+
+- Trelliscope
+- htmlwidgets (make use of d3 in R)
+- plotly
+- Need more here to fill time slot
+- Note: I think this is too short to learn enough d3.js to matter so I should probably just stick to R packages
+
+Time slot: 135 minutes
+
+Learning outcomes
+  
+Students should be able to:
+  
+- Make awesome plots (more to outcomes to come!)

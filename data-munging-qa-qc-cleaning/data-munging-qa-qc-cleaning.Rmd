@@ -1,0 +1,12 @@
+---
+title: "Data Munging / QA / QC / Cleaning"
+author: "Bryce Mecum"
+---
+
+Time slot: 60 minutes
+
+Leaning outcomes:
+
+- Students should use the split-apply-combine methodology (base R and dplyr) (consider pushing this into wrangling session)
+- Students should learn what it means to test assumptions about their data (assertr)
+- Students should learn how to reshape and restructure their data (tidyr)

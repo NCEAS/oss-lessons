@@ -1,0 +1,16 @@
+---
+title: "SQL Database Access in R"
+author: "Bryce Mecum"
+---
+
+Time slot: 60 minutes
+
+Learning outcomes:
+
+Students should:
+
+- Be able to connect to an SQL database in R
+- Be able to load external data in CSV format into a table in the database
+- Be able to run a query against a database table in R
+- Be able to run an SQL join against two database tables in R
+
