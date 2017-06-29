@@ -1,6 +1,7 @@
 ---
 title: "Regular Expressions"
 author: "Bryce Mecum"
+---
 
 Time slot: 30 minutes
 
@@ -9,4 +10,148 @@ Learning outcomes:
 Students should:
   
 - Understand when regular expressions are appropriate
-- 
+- Have an introductory-level awareness of regular expression syntax
+- Have some experience executing and working with regular expressions in R
+
+## Overview and Example
+
+Regular expressions are a fantastic tool for filtering and even extracting information out of strings of characters such as site codes, titles, or even entire documents. 
+Regular expressions follow a custom syntax that we'll need to learn but they are worth learning because:
+
+- Regular expressions can do things other methods cannot
+- Regular expressions can be used with many other languages and tools so it's a learn-once, use-everywhere kind of tool
+
+Let's start off with a simple example of where simpler methods won't work and see how regular expressions can be used to get what we need done:
+
+Let's say we just received some data we need to analyze and we find this:
+```{r}
+site_data <- read.csv("site_data.csv", stringsAsFactors = FALSE)
+site_data
+```
+
+It looks like the author of the dataset mixed the year of measurements, site code (e.g., A, CCCC, etc.), and some sub-site code (e.g., 1, 2, 3, etc.) into a single column.
+If we wanted to, for example, calculate mean temperature by site, how could we go about this?
+We could start with `substr` which lets us slice a string by its indices:
+
+```{r}
+substr(site_data$x, 5, 7)
+```
+
+But we'd quickly find that, because the number of characters in the site code varies from one to four, we can't extract just the site code. 
+This is where regular expressions come in handy:
+
+```{r}
+library(stringr)
+str_extract(site_data$x, "[A-Z]+")
+```
+
+The expression we used above, `[A-Z]+`, is equivalent to asking for the first consecutive run of the letters A-Z in the entire string of characters.
+
+## Overview of Regular Expressions
+
+Regular expressions can match things literally, e.g.,
+
+```{r}
+str_detect("apple", "apple")
+```
+
+but they also support a large set of special characters:
+
+- `.`: Match any character
+
+```{r}
+words <- c("apple", "banana", "fork")
+str_extract(words, "a.")
+```
+
+- `[]`: Match any character in this set
+```{r}
+words <- c("apple", "banana", "fork")
+str_extract_all(words, "[aeiou]")
+```
+
+
+- `[^]`: Match any character *not* in this set
+
+```{r}
+words <- c("apple", "banana", "fork")
+str_extract_all(words, "[^aeiou]")
+```
+- `\s` & `\S`: Match any whitespace (e.g., ` `, `\t`)
+```{r}
+words <- c("apple", "banana", "fork")
+str_extract_all(words, "\\s") # Note the double \\ before the s. This is an R-specific thing.
+                          # many of our special characters must be preceded by a \\
+str_extract_all(words, "\\S")
+
+pies <- c("lemon meringue pie", "apple pie", "strawberry rhubarb pie")
+str_split(pies, "\\s")
+```
+
+
+- `\d` & `\D`: Match any digit, equivalent to `[0-9]`
+
+```{r}
+x <- c("apple", "1234", "banana")
+str_detect(x, "\\d")
+```
+
+- `\w` & `\W`: Match any word character, equivalent to `[A-Za-z0-9_]`
+```{r}
+x <- c("apple", "1234", "banana")
+str_detect(x, "\\w")
+```
+
+- `()`: Grouping
+
+```{r}
+addresses <- c("Santa Barbara, CA", "Seattle, WA", "New York, NY")
+str_match(addresses, "(\\w+), (\\w+)")
+str_replace(addresses, "(\\w+), (\\w+)", "\\1")
+```
+
+- `?`, `*`, & `+`
+
+    - `?` Optionality: 
+    
+    ```{r}
+    ```
+    
+    - `*` 0 -> infinity
+    ```{r}
+    ```
+    
+    - `+` 1 -> infinity
+    ```{r}
+    ```
+  
+- `{}`
+- `^` & `$`
+
+## Finish out our example together
+
+Now that we've gone over some basics of regular expressions, let's finish our example by splitting the various components of column `x` into a `year`, `site`, and `sub_site` column:
+
+```{r}
+```
+
+## Resources
+
+- [https://regex101.com/](https://regex101.com/) (This is the site I usually use)
+- [https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference](https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference)
+- [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
+
+## Appendicies
+
+```{r, eval=FALSE, echo=FALSE, include=FALSE}
+# Fake data generation code
+site_data <- data.frame(year = rep(seq(2000, 2009), 4))
+site_data$site <- sample(c("A", "AA", "B", "CCCC"), nrow(site_data), replace = TRUE)
+site_data$subsite <- sample(c(1,2,3,4), nrow(site_data), replace=TRUE)
+site_data$temp_c <- runif(nrow(site_data), 0, 100)
+site_data$site_code <- paste(site_data$year, site_data$site, site_data$subsite, sep="-")
+site_data <- site_data[,c("site_code", "temp_c")]
+names(site_data) <- c("x", "temp_c")
+write.csv(site_data, file = "site_data.csv", row.names = FALSE)
+```
+
