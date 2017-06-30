@@ -3,12 +3,17 @@ title: "tidyverse"
 author: "cjlortie"
 output: html_document
 ---
-![](./beemo.rodeo.png)
+![](./beemo.rodeo.png)  
+<br>
+
 [Data wrangling slide deck](http://www.slideshare.net/cjlortie/data-wrangling-in-r-be-a-wrangler)
 
 ###Introduction
 <b> Philosophy of tidyverse </b>
 Tidy data make your life easier. Data strutures should match intuition and common sense. Data should have logical structure.  Rows are are observations, columns are variables. Tidy data also increase the viability that others can use your data, do better science, reuse science, and help you and your ideas survive and thrive. A workflow should also include the wrangling you did to get your data ready. If data are already very clean in a spreadsheet, they can easily become a literate, logical dataframe. Nonetheless, you should still use annotation within the introductory code to explain the meta-data of your data to some extent and what you did pre-R to get it tidy.  The philosophy here is very similar to the data viz lesson forthcoming with two dominant paradigms. Base R code functions, and pipes %>% and the logic embodied within the libraries associated with the the tidyverse. Generally, I prefer the tidyverse because it is more logical and much easier to remember.  It also has some specific functions needed to address common errors in modern data structures with little code needed to fix them up.
+
+[Why to love the tidverse](https://www.slideshare.net/cjlortie/whyr)  
+<br>
 
 ###Learning outcomes
 1. To appreciate the differences between base R and tidyverse packages in terms of function and grammmar.  
