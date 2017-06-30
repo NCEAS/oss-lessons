@@ -18,7 +18,7 @@ Tidy data make your life easier. Data strutures should match intuition and commo
 5. To use pipes to move/wrangle chunks of your dataset.
 
 ###Key concepts listed
-b>Data wrangling</b>
+<b>Data wrangling</b>
 
 <b>Base R</b>
 key concepts:
@@ -52,14 +52,19 @@ summarise for bringing together many values
 
 [Great wrangling webinar](https://www.rstudio.com/resources/webinars/data-wrangling-with-r-and-rstudio/)
 
-We will cover two basic challenges you will certainly encounter.
+We will cover two basic challenges you will certainly encounter.  
+
 ###Exercise 1. Missing data
+Missing data are typically termed NAs. Missing data are not necessarily the same as true zeros. See [Mixed Effects Models and Extension in Ecology with R](https://link.springer.com/content/pdf/10.1007%2F978-0-387-87458-6.pdf) for an excellent discussion of this. Missing data due to experimental design, observer error, or failures to detect a process are 'false zeros' and equivalent to missing data. True negatives (measured and detected absences) are recommended to be coded as a zero.
+
+The read_csv from the tidyverse handles data import well, does not assume factors, and typically takes a parsimonous approach to vector interpretation. The analog from base R is read.csv but comes with many limitations.
+
 ```{r, missing data}
 #Missing data. In error, missing cells/observations in some measure can kick back an error. In other apps, sometimes ignored but can introduce error.
 #setwd('data-wrangling')
 library(tidyverse)
-ttc <-read_csv("data/ttc.csv")
-ttc #tibble if use read_csv versus dataframe
+ttc <-read_csv("data/ttc.csv") #The Toronto Transit Commission Data.
+ttc #tibble produced if use read_csv versus dataframe. Tibbles include str() list of vector attributes at the top of output.
 
 #check for missing values
 is.na(ttc)
@@ -72,10 +77,12 @@ is.na(new.ttc) #check to see if it worked
 ```
 
 ###Exercise 2. Selecting part of a dataset
+Dplyr provides select (columns/vectors), filter (rows/observations), and now pull (returns a vector not df or tibble). Fantastic functions (and beasts) to wrangle out specifics or simplify your dataframe.
+
 ```{r, selections}
 survey<-read_csv("data/5081.survey.1.csv")
 survey
-#I want just a simple dataframe with experience by discipline
+#I want just a simple tibble with experience by discipline for students new to rstats in a graduate-level course.
 
 experience <- survey %>% select(discipline, r.experience)
 experience
@@ -94,3 +101,53 @@ experience <-survey %>% group_by(discipline) %>% summarise(
 
 ```
 
+###Exercise 3. Updated dplyr package
+To explore the Star Wars dataset within the tidyverse updated package dplyr 0.7.0 and make a new column.
+Full details list on its own [blog](https://blog.rstudio.org/2017/06/13/dplyr-0-7-0/).
+<br>
+
+![](./starwars.png)
+<br>
+
+```{r loads, warning=FALSE, message=FALSE}
+library(tidyverse)
+data <- starwars #setup as tibble
+data #quick look
+
+#simplify species
+data <- data %>% mutate(taxa = ifelse(species == "Droid", "machine", "biological"))
+data <- data[!is.na(data$taxa), ] #remove NAs from one vector only
+
+#note, ifelses are messy and easy to get really nested and long-winded. Dplyr 0.7.0 release notes suggests considering the function case_when in its stead.
+
+#count up by gender
+counts <- data %>% group_by(gender) %>% count()
+counts <- counts[!is.na(counts$gender), ] #remove NAs from one vector only
+counts$gender <- factor(counts$gender, levels = counts$gender[order(counts$n)])
+
+#I love the count and tally functions! There is also now a new set of similar functions: add_count() and add_tally() for adding an n column within groups
+
+```
+
+<br>
+**Data viz**
+```{r viz, warning=FALSE, message=FALSE}
+#library(plotly)
+p <- ggplot(data, aes(height, mass, color = taxa)) + geom_point(size = 3, alpha = 0.5) +
+  scale_color_brewer(palette = "Dark2")
+#ggplotly(p)
+p
+
+
+p <- ggplot(counts, aes(gender, n)) + geom_bar(stat = "identity", fill = "forestgreen", width = 0.25) + coord_flip()
+p
+
+```
+
+<br>
+**Interpretation of the Star Wars dplyr verse**  
+1. Basic data in 'starwars' data associated with dplyr 0.7.0 ideal for exploring functionality of tidyverse.  
+2. Good wrangling opportunities including categorical simplifications, addressing c() within a vector such as the 'films' vector, working with NAs, and there are vectors to relate and using as grouping variables within plots/basic stats.  
+3. Adequate complexity to offer for padawan and jedi alike.
+
+![](./padawans.jpg)
