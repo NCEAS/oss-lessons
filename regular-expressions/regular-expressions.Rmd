@@ -102,31 +102,77 @@ x <- c("apple", "1234", "banana")
 str_detect(x, "\\w")
 ```
 
+We can also specify how many of a particular character or class of character to match:
+
+- `?` Optionality / 0 or 1
+
+Say we want to get just the phone numbers out of this vector but we notice that the phone numbers take on some different formats:
+
+```{r}
+phone_numbers <- c("219 733 8965", "apple", "329-293-8753 ", "123banana", "595.794.7569", "3872876718")
+str_detect(phone_numbers, "\\d\\d\\d[ \\.-]?\\d\\d\\d[ \\.-]?\\d\\d\\d\\d")
+```
+
+The above regular expression matches the number parts of the phone numbers, which can be separated by zero or one space (` `), `.`, or `-`.
+
+- `+` 1 -> infinity
+
+We can use the `+` expression to find words with one or more vowels:
+
+```{r}
+words <- c("apple", "crypt", "bike", "banana", "pygmy")
+str_detect(words, "[aeiuo]+")
+str_extract_all(words, "[aeiuo]+")
+```
+
+- `*` 0 -> infinity
+
+and the `*` is _zero or more_`.
+
+```{r}
+numbers <- c("0.2", "123.1", "547")
+str_extract(numbers, "\\d*\\.?\\d*")
+```
+
+
 - `()`: Grouping
+
+One of the most powerful parts of regular expressions is grouping.
+Grouping allows us to split up our matched expressions and do more work with them.
+For example, we can create match the city and state in a set of addresses, splitting it into components:
 
 ```{r}
 addresses <- c("Santa Barbara, CA", "Seattle, WA", "New York, NY")
 str_match(addresses, "(\\w+), (\\w+)")
-str_replace(addresses, "(\\w+), (\\w+)", "\\1")
 ```
 
-- `?`, `*`, & `+`
+Once we use groups, `()`, we can also use back references to work with the result:
 
-    - `?` Optionality: 
-    
-    ```{r}
-    ```
-    
-    - `*` 0 -> infinity
-    ```{r}
-    ```
-    
-    - `+` 1 -> infinity
-    ```{r}
-    ```
-  
-- `{}`
+```{r}
+str_replace(addresses, "(\\w+), (\\w+)", "City: \\1, State: \\2")
+```
+
 - `^` & `$`
+
+It can also be really useful to make a say something like "strings that start with a capital letter" or "strings that end with a period":
+
+```{r}
+possible_sentences <- c(
+  "This might be a sentence.",
+  "So. Might. this",
+  "but this could maybe not be?",
+  "Am I a sentence?",
+  "maybe not",
+  "Regular expressions are useful!"
+)
+# ^ specifies the start so ^[A-z] means "starts with a capital letter""
+str_detect(possible_sentences, "^[A-Z]")
+# We can also do "ends with a period"
+str_detect(possible_sentences, "\\.$")
+# We can put them together:
+str_detect(possible_sentences, "^[A-Z].*[\\.\\?!]$")
+```
+
 
 ## Finish out our example together
 
@@ -134,6 +180,11 @@ Now that we've gone over some basics of regular expressions, let's finish our ex
 
 ```{r}
 ```
+
+## More
+
+TODO: Have the group figure out you can put * onto [].
+TODO: Have the group str_split on fixed chars and a regex
 
 ## Resources
 
