@@ -30,7 +30,8 @@ site_data
 ```
 
 It looks like the author of the dataset mixed the year of measurements, site code (e.g., A, CCCC, etc.), and some sub-site code (e.g., 1, 2, 3, etc.) into a single column.
-If we wanted to, for example, calculate mean temperature by site, how could we go about this?
+If we wanted to, for example, calculate mean temperature by site, we'd need to split these up somehow into separate columns.
+How could we go about this?
 We could start with `substr` which lets us slice a string by its indices:
 
 ```{r}
@@ -38,11 +39,11 @@ substr(site_data$x, 5, 7)
 ```
 
 But we'd quickly find that, because the number of characters in the site code varies from one to four, we can't extract just the site code. 
-This is where regular expressions come in handy:
+These are the types of problems where regular expressions come in handy.
 
 ```{r}
 library(stringr)
-str_extract(site_data$x, "[A-Z]+")
+str_view_all(site_data$x, "[A-Z]+")
 ```
 
 The expression we used above, `[A-Z]+`, is equivalent to asking for the first consecutive run of the letters A-Z in the entire string of characters.
@@ -61,13 +62,22 @@ but they also support a large set of special characters:
 
 ```{r}
 words <- c("apple", "banana", "fork")
-str_extract(words, "a.")
+str_view_all(words, "a.")
 ```
 
+If you actually want to match a period and not any character, you have to do what's called escaping:
+
+```{r}
+str_view_all("apples are a fruit and my favorite fruit is an apple.", "apple\\.")
+```
+
+See how that regular expression only matched the apple with the period at the end?
+
 - `[]`: Match any character in this set
+
 ```{r}
 words <- c("apple", "banana", "fork")
-str_extract_all(words, "[aeiou]")
+str_view_all(words, "[aeiou]")
 ```
 
 
@@ -75,17 +85,19 @@ str_extract_all(words, "[aeiou]")
 
 ```{r}
 words <- c("apple", "banana", "fork")
-str_extract_all(words, "[^aeiou]")
+str_view_all(words, "[^aeiou]")
 ```
+
 - `\s` & `\S`: Match any whitespace (e.g., ` `, `\t`)
+
 ```{r}
 words <- c("apple", "banana", "fork")
-str_extract_all(words, "\\s") # Note the double \\ before the s. This is an R-specific thing.
-                          # many of our special characters must be preceded by a \\
-str_extract_all(words, "\\S")
+str_view_all(words, "\\s") # Note the double \\ before the s. This is an R-specific thing.
+                           # many of our special characters must be preceded by a \\
+str_view_all(words, "\\S")
 
 pies <- c("lemon meringue pie", "apple pie", "strawberry rhubarb pie")
-str_split(pies, "\\s")
+str_view_all(pies, "\\s")
 ```
 
 
@@ -93,13 +105,14 @@ str_split(pies, "\\s")
 
 ```{r}
 x <- c("apple", "1234", "banana")
-str_detect(x, "\\d")
+str_view_all(x, "\\d")
 ```
 
 - `\w` & `\W`: Match any word character, equivalent to `[A-Za-z0-9_]`
+
 ```{r}
 x <- c("apple", "1234", "banana")
-str_detect(x, "\\w")
+str_view_all(x, "\\w")
 ```
 
 We can also specify how many of a particular character or class of character to match:
@@ -110,7 +123,7 @@ Say we want to get just the phone numbers out of this vector but we notice that 
 
 ```{r}
 phone_numbers <- c("219 733 8965", "apple", "329-293-8753 ", "123banana", "595.794.7569", "3872876718")
-str_detect(phone_numbers, "\\d\\d\\d[ \\.-]?\\d\\d\\d[ \\.-]?\\d\\d\\d\\d")
+str_view_all(phone_numbers, "\\d\\d\\d[ \\.-]?\\d\\d\\d[ \\.-]?\\d\\d\\d\\d")
 ```
 
 The above regular expression matches the number parts of the phone numbers, which can be separated by zero or one space (` `), `.`, or `-`.
@@ -120,9 +133,8 @@ The above regular expression matches the number parts of the phone numbers, whic
 We can use the `+` expression to find words with one or more vowels:
 
 ```{r}
-words <- c("apple", "crypt", "bike", "banana", "pygmy")
-str_detect(words, "[aeiuo]+")
-str_extract_all(words, "[aeiuo]+")
+words <- c("apple", "crypt", "banana", "pygmy", "boo")
+str_view_all(words, "[aeiuo]+")
 ```
 
 - `*` 0 -> infinity
@@ -131,7 +143,7 @@ and the `*` is _zero or more_`.
 
 ```{r}
 numbers <- c("0.2", "123.1", "547")
-str_extract(numbers, "\\d*\\.?\\d*")
+str_view_all(numbers, "\\d*\\.?\\d*")
 ```
 
 
@@ -143,7 +155,7 @@ For example, we can create match the city and state in a set of addresses, split
 
 ```{r}
 addresses <- c("Santa Barbara, CA", "Seattle, WA", "New York, NY")
-str_match(addresses, "(\\w+), (\\w+)")
+str_view_all(addresses, "([\\w\\s]+), (\\w+)")
 ```
 
 Once we use groups, `()`, we can also use back references to work with the result:
