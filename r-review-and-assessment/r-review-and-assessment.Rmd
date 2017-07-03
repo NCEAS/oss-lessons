@@ -1,0 +1,38 @@
+---
+title: R Review & Assessment
+---
+
+Concepts:
+
+variables
+types
+  vectors
+    character vecs / strings
+      
+  lists
+  data.frames
+apply-family
+data import/export (e.g. read.csv)
+data manip
+  subset
+  data.frame[] notation
+plot
+model
+util functions
+  paste (combine things)
+  table
+  summary
+  str
+  seq
+  nchar
+strings vs factors
+iteration
+
+functions? prob skip
+
+Other good resources:
+
+- Great, free book: http://r4ds.had.co.nz/
+- DataCamp's R intro, https://www.datacamp.com/courses/free-introduction-to-r
+Sources:
+- Used https://www.rstudio.com/resources/cheatsheets/ to make sure I wasn't missing any basic stuff
