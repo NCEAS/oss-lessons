@@ -5,13 +5,16 @@ title: R Review & Assessment
 Concepts:
 
 variables
+  assignment
 types
   vectors
     character vecs / strings
       
   lists
+  vectors vs. lists
+    - touch on the fact that vectors are for one type and lists are for multi
+    - what does this do? `r c(1, "asdf", 2)`
   data.frames
-apply-family
 data import/export (e.g. read.csv)
 data manip
   subset
@@ -27,8 +30,12 @@ util functions
   nchar
 strings vs factors
 iteration
+  for loops
+    - when do we use for loops? when we're doing for each X where X can be year, site, etc.
+apply-family
 
-functions? prob skip
+
+functions? prob skip because this will be taught separately
 
 Other good resources:
 
