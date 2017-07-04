@@ -1,0 +1,69 @@
+---
+title: "Ecological Metadata in R"
+---
+
+Time slot: 30 min
+
+## Learning outcomes:
+
+Upon completing this module, students will
+
+- Have a basic understanding of scientific metadata and how it fits into research
+- Have a basic familiarity with generating scientific metadata using the EML R package
+- Have watched the instructor generate fairly complete metadata for an example dataset
+
+## Introduction
+
+Science metadata is:
+
+- Machine-readable
+- Standardized
+- Usually really hard to generate
+
+The R EML package aims to help us generate EML science metadata from within R.
+The learning process here is two-fold:
+
+- Learn the EML standard
+- Learn how to use the EML R package
+
+Both of these are relatively hard!
+
+### The EML standard
+
+EML covers lots of stuff, importantly:
+
+- Proper citation
+- Who is involved with the dataset and how
+- Coverage (temporal, spatial, taxonomic)
+- Methods
+- Docs on files and their formats
+
+## Generating an EML record from scratch
+
+Modeled after this vignette inside the EML package: https://github.com/ropensci/EML/blob/master/vignettes/creating-EML.Rmd
+
+```{r}
+library(EML)
+```
+
+First we start out with a new document:
+
+```{r}
+doc <- new("eml",
+           dataset = new("dataset",
+                         title = "My title"))
+doc
+```
+
+TODO: Set title
+TODO: Set abstract from file
+TODO: Set keywords
+TODO: Set creator/contact, maybe another role
+TODO: Set methods from file
+TODO: Set coverage
+TODO: Set a dataTable
+TODO: Write it out
+## Resources
+
+https://knb.ecoinformatics.org/#external//emlparser/docs/index.html
+https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/index.html
