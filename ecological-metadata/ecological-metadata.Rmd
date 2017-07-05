@@ -10,14 +10,15 @@ Upon completing this module, students will
 
 - Have a basic understanding of scientific metadata and how it fits into research
 - Have a basic familiarity with generating scientific metadata using the EML R package
-- Have watched the instructor generate fairly complete metadata for an example dataset
+- Have watched the instructor generate fairly complete metadata for an simple example dataset
 
 ## Introduction
 
 Science metadata is:
 
-- Machine-readable (usually XML)
+
 - Standardized
+- Machine-readable (usually XML)
 - Usually really hard to generate
 
 The R EML package aims to help us generate EML science metadata from within R.
@@ -42,16 +43,17 @@ EML covers lots of stuff, importantly:
 
 This is modeled after this vignette inside the EML package: https://github.com/ropensci/EML/blob/master/vignettes/creating-EML.Rmd
 
-### The data we're going to document
+### The dataset
 
-A fairly simple dataset that we didn't 
+As an example, let's create an EML record for the `iris` dataset that comes with the `ggplot2` package.
+
 ```{r}
-data("iris")
+data("iris") # requires ggplot2
 head(iris)
 summary(iris)
 ```
 
-### Getting the information in order
+### The metadata
 
 First we load the EML package:
 
@@ -65,10 +67,31 @@ So let's start with the title and abstract:
 
 ```{r}
 title <- "Edgar Anderson's Iris Data"
+```
+
+The easiest way to set an abstract is to create a separate Markdown file which lets us use rich formatting:
+
+```{r}
 abstract <- as(set_TextType("./abstract.md"), "abstract")
+```
+
+Though not required, including licensing information is a crucial step in metadata authoring.
+Let's use the Create Commons Attribute license which is a permissive license.
+
+```{r}
 intellectualRights <- "This work is licensed under a Creative Commons Attribution 4.0 International License."
 ```
-TODO: Set keywords
+
+Every dataset should have a publication date.
+I can guess at the most appropriate publication date from the ?iris help page.
+
+```{r}
+pubDate <- "1935"
+```
+
+#### Keywords
+
+Search systems often take advantage of keywords to make it easier to find what you're looking for and find related datasets.
 
 ```{r}
 keywordSet <-
@@ -80,7 +103,11 @@ keywordSet <-
                     "versicolor")))
 keywordSet
 ```
-TODO: Set creator/contact, maybe another role
+
+#### Parties
+
+Every EML record needs to have a creator and a contact set.
+The creator is the party or parties (e.g., person, organization) that should be cited when giving credit for the dataset.
 
 ```{r}
 edgar <- as.person("Edgar Anderson <edgaranderson@iris.net>") # Fake email
@@ -88,30 +115,45 @@ creator <- as(edgar, "creator")
 contact <- as(edgar, "contact")
 ```
 
-TODO: Set methods from file
+#### Methods
+
+We don't have detailed methods for this dataset so we'll make something up.
+The easiest way to get methods into an EML record is to create a separate Markdown file which lets us get rich formatting.
+
 ```{r}
 methods <- set_methods("methods.md")
 methods
 ```
 
+#### Coverage
 
-TODO: Set coverage
+We also don't have detailed coverage information but we can fill some things in from a bit of research.
 
 ```{r}
 coverage <- 
-  set_coverage(begin = '1936-01-01', end = '1936-12-31', # Fake tempporal information
+  set_coverage(beginDate = '1936-01-01', 
+               endDate = '1936-12-31', # Fake tempporal information
                sci_names = c("Iris setosa", "Iris versicolor", "Iris virginica"),
                geographicDescription = "Gaspé Peninsula", # Approximated spatial coverage
-               west = -65.75, east = -65.75,
-               north = 48.66, south = 48.66)
+               westBoundingCoordinate = -65.75, 
+               eastBoundingCoordinate = -65.75,
+               northBoundingCoordinate = 48.66, 
+               southBoundingCoordinate = 48.66)
 coverage
 ```
 
-TODO: Set a dataTable
+#### Attributes
+
+Attributes are one of the more powerful parts of EML.
+We can describe, in very specific detail, the meaning of the tabular data we're documenting.
+A lot of information is required to sufficiently describe datasets so we'll have to enter in a fair bit of information.
+The easiest way to do that is to create a separate CSV file with a set of columns that the EML package is looking for and bring it in as a `data.frame`.
 
 ```{r}
 attributes <- read.csv("attributes.csv")
 
+# For the Species column, we need to define the values as codes and we need
+# to tell EML what they mean
 species_codes <- c("setosa" = "Iris setosa",
                    "virginica" = "Iris virginica",
                    "versicolor" = "Iris versicolo")
@@ -130,6 +172,11 @@ attributeList <- set_attributes(attributes,
 attributeList
 ```
 
+#### Entities
+
+We've described the attributes (columns) for `iris.csv` but we haven't describe `iris.csv` itself.
+In EML, files like this are called `entities` and `entities` contain information about their file formats and more.
+
 ```{r}
 write.csv(iris, row.names = FALSE, "iris.csv")
 physical <- set_physical("iris.csv", 
@@ -139,6 +186,8 @@ physical <- set_physical("iris.csv",
 physical
 ```
 
+Because `iris.csv` is tabular, we create an `entity` of type `dataTable`:
+
 ```{r}
 dataTable <- new("dataTable",
                  entityName = "iris.csv",
@@ -147,12 +196,16 @@ dataTable <- new("dataTable",
                  attributeList = attributeList)
 ```
 
+Note that the `attributeList` we created before gets entered directly into the `dataTable` entity.
 
+#### Create the `eml` object
+
+Now that we have everything all entered into R, we can create the 
 ```{r}
 dataset <- new("dataset",
                title = title,
                creator = edgar,
-               pubDate = "2017",
+               pubDate = pubDate,
                intellectualRights = intellectualRights,
                abstract = abstract,
                keywordSet = keywordSet,
@@ -167,13 +220,22 @@ eml <- new("eml",
            dataset = dataset)
 ```
 
+#### Save and validate
+
+Now that our `eml` object is created, we can save it:
+
 ```{r}
 write_eml(eml, "eml.xml")
+```
+
+We should also validate the file:
+
+```{r}
 eml_validate("eml.xml")
 ```
 
-TODO: Write it out
 ## Resources
 
-https://knb.ecoinformatics.org/#external//emlparser/docs/index.html
-https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/index.html
+- https://knb.ecoinformatics.org/#external//emlparser/docs/index.html
+- https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/index.html
+- https://github.com/ropensci/EML
