@@ -16,7 +16,7 @@ Upon completing this module, students will
 
 Science metadata is:
 
-- Machine-readable
+- Machine-readable (usually XML)
 - Standardized
 - Usually really hard to generate
 
@@ -32,36 +32,146 @@ Both of these are relatively hard!
 
 EML covers lots of stuff, importantly:
 
-- Proper citation
+- Proper citation of your dataset
 - Who is involved with the dataset and how
 - Coverage (temporal, spatial, taxonomic)
-- Methods
-- Docs on files and their formats
+- Methodological information
+- Documentation on files and their formats
 
 ## Generating an EML record from scratch
 
-Modeled after this vignette inside the EML package: https://github.com/ropensci/EML/blob/master/vignettes/creating-EML.Rmd
+This is modeled after this vignette inside the EML package: https://github.com/ropensci/EML/blob/master/vignettes/creating-EML.Rmd
+
+### The data we're going to document
+
+A fairly simple dataset that we didn't 
+```{r}
+data("iris")
+head(iris)
+summary(iris)
+```
+
+### Getting the information in order
+
+First we load the EML package:
 
 ```{r}
 library(EML)
 ```
 
-First we start out with a new document:
+The easiest way to create an EML record from scratch is to get the information into R first, then create the EML record with that information.
+
+So let's start with the title and abstract:
 
 ```{r}
-doc <- new("eml",
-           dataset = new("dataset",
-                         title = "My title"))
-doc
+title <- "Edgar Anderson's Iris Data"
+abstract <- as(set_TextType("./abstract.md"), "abstract")
+intellectualRights <- "This work is licensed under a Creative Commons Attribution 4.0 International License."
+```
+TODO: Set keywords
+
+```{r}
+keywordSet <-
+  c(new("keywordSet",
+        keyword = c("iris",
+                    "ra fisher",
+                    "setosa",
+                    "virginica",
+                    "versicolor")))
+keywordSet
+```
+TODO: Set creator/contact, maybe another role
+
+```{r}
+edgar <- as.person("Edgar Anderson <edgaranderson@iris.net>") # Fake email
+creator <- as(edgar, "creator")
+contact <- as(edgar, "contact")
 ```
 
-TODO: Set title
-TODO: Set abstract from file
-TODO: Set keywords
-TODO: Set creator/contact, maybe another role
 TODO: Set methods from file
+```{r}
+methods <- set_methods("methods.md")
+methods
+```
+
+
 TODO: Set coverage
+
+```{r}
+coverage <- 
+  set_coverage(begin = '1936-01-01', end = '1936-12-31', # Fake tempporal information
+               sci_names = c("Iris setosa", "Iris versicolor", "Iris virginica"),
+               geographicDescription = "Gaspé Peninsula", # Approximated spatial coverage
+               west = -65.75, east = -65.75,
+               north = 48.66, south = 48.66)
+coverage
+```
+
 TODO: Set a dataTable
+
+```{r}
+attributes <- read.csv("attributes.csv")
+
+species_codes <- c("setosa" = "Iris setosa",
+                   "virginica" = "Iris virginica",
+                   "versicolor" = "Iris versicolo")
+
+factors <- data.frame(attributeName = "Species",
+                      code = names(species_codes),
+                      definition = species_codes)
+
+attributeList <- set_attributes(attributes, 
+                                factors,
+                                col_classes = c("numeric",
+                                                "numeric",
+                                                "numeric",
+                                                "numeric",
+                                                "factor"))
+attributeList
+```
+
+```{r}
+write.csv(iris, row.names = FALSE, "iris.csv")
+physical <- set_physical("iris.csv", 
+                         size = as.character(file.size("iris.csv")),
+                         authentication = digest::digest("iris.csv", algo = "md5", file = TRUE),
+                         authMethod = "MD5")
+physical
+```
+
+```{r}
+dataTable <- new("dataTable",
+                 entityName = "iris.csv",
+                 entityDescription = "Edgar Anderosn's Iris data exported from R",
+                 physical = physical,
+                 attributeList = attributeList)
+```
+
+
+```{r}
+dataset <- new("dataset",
+               title = title,
+               creator = edgar,
+               pubDate = "2017",
+               intellectualRights = intellectualRights,
+               abstract = abstract,
+               keywordSet = keywordSet,
+               coverage = coverage,
+               contact = contact,
+               methods = methods,
+               dataTable = dataTable)
+
+eml <- new("eml",
+           packageId = paste0("urn:uuid", uuid::UUIDgenerate()),
+           system = "uuid",
+           dataset = dataset)
+```
+
+```{r}
+write_eml(eml, "eml.xml")
+eml_validate("eml.xml")
+```
+
 TODO: Write it out
 ## Resources
 
