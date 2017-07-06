@@ -1,0 +1,74 @@
+---
+title: 
+author: "cjlortie"
+date: "2017"
+output:
+  html_document:
+    theme: yeti
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  pdf_document:
+    toc: yes
+   
+---
+
+<br>
+![](./rey.jpg)     
+<br>
+
+###Step 1. Search  
+Identify and list your search tool or resource. This is an evolving landscape and sensitivity is important. Best practices include the following attributes.  
+a. document all search instances and record total number of returned hits   
+b. explore search term sensitivity and synonyms in detail  
+c. test >1 bibliometric resource  
+d. do not add publications 'by hand' or haphazardly  
+e. do check select publications (seminal and/or top cited) to calibrate search terms  
+f. use abstract surveys to ensure you are capturing the correct set of literature  
+g. do a search for key key terms by meta-analysis, review, and systematic review to avoid re-inventing the wheel or to ensure you are on the right track  
+h. review boolean operators in searching
+
+###Open science product
+To document search process, at the minimum generate an 'evidence matrix'. The evidence matrix as a synthesis tool was formally pioneered by the evidence-based synthesis expert for public health [Joseph Lau](https://www.brown.edu/academics/public-health/research/evidence-synthesis-in-health/news/2015-08/joseph-lau-retires). It has changed significant, but it a form of summary table highlighting frequencies of search terms to illuminate the frequency of the *conjunction* of ideas.
+
+Within a contemporary workflow in R, the most facile representation is a table, and there are many excellent packages suitable for tables.
+
+###Case study  
+**A search for reearch on positive interactions and the niche in deserts.**  
+The niche is a powerful concept in ecology and at times not entirely coupled to local interactions between species. Herein, we review the capacity for these positive plant interactions to expand the niche of subdominant species. We synthesized the available literature using a formalized systematic review by using the Web of Science and associated terms with niche, positive interactions in plants such as facilitation, and deserts.    
+
+<br>  
+```{r evidence matrix, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(DT)
+
+#Search terms####
+search.terms <- read_csv("data/search.terms.csv")
+datatable(search.terms)
+
+total.lit <- search.terms %>% filter(search != "final")
+total.lit
+totals <- sum(total.lit$hits)
+totals
+final.list <- 53
+totals-final.list
+
+#We did the first search for this term set in 2016 then repeated anew in 2017. Luckily, we documented the search in R, repeated very rapidly, and were able to detect differences within the domain for primary publications.
+```
+
+
+###Exercise
+Select a topic and explore search terms, concept conjuction, and contrast at least two bibliometric resources. Note, there are also two R packages associated with data scraping the Web of Science - [bibliometrix](https://cran.r-project.org/web/packages/bibliometrix/index.html) and also [selenium](http://ropensci.github.io/RSelenium/). The former in particular is an excellent tool if you expect to do numerous scrapes of Scopus or the Web of Science.
+
+
+###Conclusions
+1. A reproducible search for evidence objects is critical for any synthesis.  
+2. A table that shows the conjuction of related concepts and their relative frequency of detection within a bibliometric resource is recommended.  
+3. There are many other viable mechanisms to communicate a search process including correlation matrix viz, wordclouds, ontologies with weighting, and conventional count/frequency data viz tools.
+
+###Additional resources
+Here is an excellent example of [alt-viz](https://arxiv.org/pdf/1611.02119.pdf).  
+If you repeat a search set > 3-6 months later, it is best to match hits to ensure you contrasting the exact same publication sets.  Here is some [code associated with matching DOIs](https://cjlortie.github.io/DOI-matcher/).  
+[Here is an excellent publication](http://onlinelibrary.wiley.com/doi/10.1002/jrsm.1120/abstract) turning the search into 10 clear considerations.  
+An [alternative](https://cran.r-project.org/web/packages/formattable/vignettes/formattable-data-frame.html) to DT::datatable
+
