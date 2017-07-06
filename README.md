@@ -2,17 +2,17 @@
 
 Master lessons for OSS data science curriculum.
 
-## Pariticpants' skills
+## Applicant skill summary:
 
 <https://cjlortie.github.io/ninja.skills.score/>
 
-## Current Schedule:
+## Current schedule:
 
 <https://nceas.github.io/oss-2017/schedule.html>
 
-## Google doc about sessions objective:
+## Overview of learning objectives for instructors:
 
-<https://docs.google.com/document/d/1PHy6LM88G6Z9QytHWvjHZ8AieBMKUclzIgJE4FBuaBw/edit?ts=5931ac66&actionButton=1#>
+<https://docs.google.com/spreadsheets/d/1eKDWwBZECTPN29tKF2DBKjI_XDcIMaP_iQCi5s6gDP4/edit#gid=0>
 
 ## Google Drive for instructors
 
