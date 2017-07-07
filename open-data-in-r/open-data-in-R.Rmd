@@ -7,9 +7,15 @@ Time slot: 30 minutes
 Getting data is a critical step in most research yet it can sometimes be one of the most difficult and time-consuming steps.
 This is especially true in synthesis research which may incorporate hundreds of thousands of datasets in the analysis.
 
+I just ran across this last week:
+
+> The first report of the Open Research Data Task Force has found that two of the greatest challenges to effectively using open research data are that: even when it is notionally accessible researchers often simply cannot find that data, and If they do find it they cannot use it because of frustrating format variabilities and other compatibility issues.
+
+From: http://www2.warwick.ac.uk/newsandevents/pressreleases/task_force_finds/
+
 ## Open data
 
-Data can come from many soruces.
+Data can come from many sources.
 On a continuum from least good to most good, we might have:
 
 - Data on a researcher's hard drive
@@ -46,12 +52,13 @@ Package categories:
 
 Full list of packages: https://ropensci.org/packages/
 Many of these are on CRAN and can be installed via `install.packages()` but some are not.
+rOpenSci addresses the issues raised in that top quote.
 
 ## Overview of some of the interetsing packages rOpenSci provides
 
 Let's go through a few of packages sponsored by rOpenSci to demonstrate the power of open data + APIs + R.
 
-### `mregions`: Tools to get marine regions data from <http:// www.marineregions.org/>
+### `mregions`: Tools to get marine regions data from  www.marineregions.org
 
 - Website: http://marineregions.org/
 - Package: https://github.com/ropenscilabs/mregions
@@ -85,12 +92,17 @@ searchplos(q='everything:"gulf of mexico"', fl='title', fq='doc_type:full', limi
 ```{r}
 library(rnaturalearth)
 library(sp)
-plot(ne_countries())
-plot(ne_countries(country = 'united states of america'))
-plot(ne_states(country = "united states of america"))
 
+# Plot the countries of the world
+plot(ne_countries())
+
+# Get the 110m coastline shapefile and make a plot of the Gulf of Mexico
 coastline <- ne_download(scale = 110, type = 'coastline', category = 'physical')
-plot(coastline)
+
+ggplot(coastline, aes(long, lat, group = group)) + 
+  geom_path() +
+  xlim(-120, -50) +
+  ylim(0, 40)
 ```
 
 ### `rfishbase`: R interface to the fishbase.org database
@@ -147,3 +159,4 @@ plot(bd$data$wind_spd)
 ## Resources
 
 - https://ropensci.org/
+- https://github.com/ropensci/opendata
