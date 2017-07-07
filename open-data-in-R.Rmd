@@ -2,6 +2,8 @@
 title: Open Data in R and rOpenSci
 ---
 
+Time slot: 30 minutes
+
 Getting data is a critical step in most research yet it can sometimes be one of the most difficult and time-consuming steps.
 This is especially true in synthesis research which may incorporate hundreds of thousands of datasets in the analysis.
 
@@ -20,7 +22,7 @@ A really great list of R packages for getting at open data can be found here:
 
 - https://github.com/ropensci/opendata
 
-## What is rOpenSci
+## What is rOpenSci?
 
 From https://ropensci.org/:
 
@@ -43,6 +45,9 @@ Package categories:
 - Data Analysis
 
 Full list of packages: https://ropensci.org/packages/
+Many of these are on CRAN and can be installed via `install.packages()` but some are not.
+
+## Overview of some of the interetsing packages rOpenSci provides
 
 Let's go through a few of packages sponsored by rOpenSci to demonstrate the power of open data + APIs + R.
 
@@ -72,7 +77,7 @@ library(rplos)
 searchplos(q='everything:"gulf of mexico"', fl='title', fq='doc_type:full', limit=10)
 ```
 
-## `rnaturalearth`  an R package to hold and facilitate interaction with natural earth map data
+### `rnaturalearth`: an R package to hold and facilitate interaction with natural earth map data
 
 - Website: www.naturalearthdata.com/
 - Package: https://github.com/ropenscilabs/rnaturalearth
@@ -88,7 +93,7 @@ coastline <- ne_download(scale = 110, type = 'coastline', category = 'physical')
 plot(coastline)
 ```
 
-## `rfishbase`: R interface to the fishbase.org database
+### `rfishbase`: R interface to the fishbase.org database
 
 - Website: http://www.fishbase.org/search.php
 - Package: https://github.com/ropensci/rfishbase
@@ -100,6 +105,9 @@ fish <- common_to_sci("grouper")
 
 species_list <- species(fish)
 
+library(ggplot2)
+library(dplyr)
+
 ggplot(species_list, aes(Length, Weight)) + geom_point()
 
 species_list %>%
@@ -110,14 +118,32 @@ species_list %>%
   coord_flip()
 ````
 
-### `taxize`
+### `taxize`: A taxonomic toolbelt for R
 
 ```{r}
 library(taxize)
 
 classification("Chironomus riparius", db = "itis")
 ```
-phylopic
+
+### `rnoaa`: R interface to many NOAA data APIs 
+
+Access data like:
+
+- Air temps
+- Sea ice extent
+- Buoy data
+- Tons more!
+
+```{r}
+library(rnoaa)
+
+# Go here: http://www.ndbc.noaa.gov/
+# Find a station ID, like http://www.ndbc.noaa.gov/station_page.php?station=42039
+bd <- buoy(dataset = "cwind",  buoyid = 42039, datatype = "cc")
+plot(bd$data$wind_spd)
+```
+
 ## Resources
 
 - https://ropensci.org/
