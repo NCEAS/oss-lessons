@@ -1,0 +1,123 @@
+---
+title: Open Data in R and rOpenSci
+---
+
+Getting data is a critical step in most research yet it can sometimes be one of the most difficult and time-consuming steps.
+This is especially true in synthesis research which may incorporate hundreds of thousands of datasets in the analysis.
+
+## Open data
+
+Data can come from many soruces.
+On a continuum from least good to most good, we might have:
+
+- Data on a researcher's hard drive
+- Data on institution website or FTP server
+- Data on some sort of portal behind a wall of some sort (e.g., accounts)
+- Data in an open repository (no API)
+- Data in an open repository (w/ public API)
+
+A really great list of R packages for getting at open data can be found here:
+
+- https://github.com/ropensci/opendata
+
+## What is rOpenSci
+
+From https://ropensci.org/:
+
+> At rOpenSci we are creating packages that allow access to data repositories through the R statistical programming environment that is already a familiar part of the workflow of many scientists. 
+
+Package categories:
+
+- Data Publication
+- Data Access
+- Literature
+- Altmetrics
+- Scalable & Reproducible Computing
+- Databases
+- Data Vizualization
+- Image Processing
+- Data Tools
+- Taxonomy
+- HTTP tools
+- Geospatial
+- Data Analysis
+
+Full list of packages: https://ropensci.org/packages/
+
+Let's go through a few of packages sponsored by rOpenSci to demonstrate the power of open data + APIs + R.
+
+### `mregions`: Tools to get marine regions data from <http:// www.marineregions.org/>
+
+- Website: http://marineregions.org/
+- Package: https://github.com/ropenscilabs/mregions
+
+```{r}
+library(mregions)
+library(leaflet)
+
+res2 <- mr_shp(key = "MarineRegions:eez_iho_union_v2", maxFeatures = 5)
+
+leaflet() %>%
+  addProviderTiles(provider = 'OpenStreetMap') %>%
+  addPolygons(data = res2)
+```
+
+### `rplos`: R client for the PLoS Journals API
+
+- Package: https://github.com/ropensci/rplos
+- Website: http://api.plos.org/
+
+```{r}
+library(rplos)
+searchplos(q='everything:"gulf of mexico"', fl='title', fq='doc_type:full', limit=10)
+```
+
+## `rnaturalearth`  an R package to hold and facilitate interaction with natural earth map data
+
+- Website: www.naturalearthdata.com/
+- Package: https://github.com/ropenscilabs/rnaturalearth
+
+```{r}
+library(rnaturalearth)
+library(sp)
+plot(ne_countries())
+plot(ne_countries(country = 'united states of america'))
+plot(ne_states(country = "united states of america"))
+
+coastline <- ne_download(scale = 110, type = 'coastline', category = 'physical')
+plot(coastline)
+```
+
+## `rfishbase`: R interface to the fishbase.org database
+
+- Website: http://www.fishbase.org/search.php
+- Package: https://github.com/ropensci/rfishbase
+
+```{r}
+library(rfishbase)
+
+fish <- common_to_sci("grouper")
+
+species_list <- species(fish)
+
+ggplot(species_list, aes(Length, Weight)) + geom_point()
+
+species_list %>%
+  group_by(Genus) %>% 
+  summarize(MeanVulnerability = mean(Vulnerability)) %>% 
+  ggplot() + 
+  geom_col(aes(Genus, MeanVulnerability)) + 
+  coord_flip()
+````
+
+### `taxize`
+
+```{r}
+library(taxize)
+
+classification("Chironomus riparius", db = "itis")
+```
+phylopic
+## Resources
+
+- https://ropensci.org/
