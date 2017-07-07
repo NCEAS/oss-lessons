@@ -61,7 +61,7 @@ ggplot(categories, aes(category, n)) + geom_bar(stat = "identity") + coord_flip(
 <br>  
 
 ###Exercise
-Use your previous search and select a reasonble set of studies to explore the importance of general versus specific exclusion criteria on processing primary research literature as a synthesis substrate. As an important consideration here, please also try the second round, even briefly, for those not immediately excluded by adding another vector in your dataframe indicating whether useable data are available/provided within the publication. For the purposes of this sort step, the data can be a list, table, or even figure that shows means, variances, and sample sizes for every treatment level needed in the synthesis.
+Use your previous search and select a reasonable set of studies to explore the importance of general versus specific exclusion criteria on processing primary research literature as a synthesis substrate. As an important consideration here, please also try the second round, even briefly, for those not immediately excluded by adding another vector in your dataframe indicating whether useable data are available/provided within the publication. For the purposes of this sort step, the data can be a list, table, or even figure that shows means, variances, and sample sizes for every treatment level needed in the synthesis.
 
 ###Conclusions
 1. A PRISMA statement is similar to a decision tree/workflow diagram and a recommended tool to summarize the synthesis process from primary research objects including publication and datasets (although typically publications).  

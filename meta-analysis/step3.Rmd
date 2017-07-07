@@ -40,16 +40,42 @@ The best to appreciate synthesis data are to see synthesis data!!
 
 ```{r synthesize, warning=FALSE, message=FALSE}
 library(tidyverse)
+library(DT)
+#Cushion plant meta-analysis#### 
+cushions.metadata <- read_csv("data/cushion-metadata.csv") #we generally keep a short meta-data table in addition to the detailed textbox and descriptions we provide in the open data repositories when we publish
+datatable(cushions.metadata)
+cushions.data <- read_csv("data/cushion-data.csv")
+datatable(cushions.data) #these data were very diverse and challenging - consequently the open data we shared were the derived data you see here
+#View(data) #best way to way to inspect entire dataframe
 
+#Positive interactions on dunes meta-analysis#### 
+dune.metadata <- read_csv("data/dune-metadata.csv")
+datatable(dune.metadata)
+dunes.data <- read_csv("data/dune-growthdata.csv")
+datatable(dunes.data)
+
+#Grassland and global change meta-analysis####
+grassland.metadata <- read_csv("data/grassland-metadata.csv")
+datatable(grassland.metadata)
+grassland.data <- read_csv("data/grassland-data.csv")
+datatable(grassland.data)
+
+#Human health meta-analysis comparing Nedocromil sodium with placebo for preventing exercise-induced bronchoconstriction####
+bronchoconstriction <- read_csv("data/bronchocontriction.csv")
+datatable(bronchoconstriction) #excellent example of an important meta within evidence-based medicine, note sample sizes and simplicity
 
 ```
 <br>  
 
 ###Exercise
-Use your previous search and select a reasonble set of studies to explore the importance of general versus specific exclusion criteria on processing primary research literature as a synthesis substrate. As an important consideration here, please also try the second round, even briefly, for those not immediately excluded by adding another vector in your dataframe indicating whether useable data are available/provided within the publication. For the purposes of this sort step, the data can be a list, table, or even figure that shows means, variances, and sample sizes for every treatment level needed in the synthesis.
+Build a dataframe for your set of studies from the search and sort meta-steps. Use an spreadsheet app but save as a .csv. Extract mean, n, and variance estimates from a total of 7-10 studies. Note whether effect size measures were reported within each study. Record location of study in lat and long.
 
 ###Conclusions
-1. 
+1. To be able to use the formal synthesis tool of a systematic review, topological data from each study are needed including location, method, number of species, hypothesis tested, and relative certainty that the primary study is relevant.  
+2. To be able to do a meta-analysis, either a reported effect size from within a study or an estimate of the mean treatment versus control effect, variance, and sample sizes are needed.  Regression or correlation coefficients can be used as an effect size measure directly but counts including number of species cannot be used in meta-statistics.  
+3. Extract data, build a dataframe, and check data are the three key process for the synthesis step of an open-science workflow for meta-analysis.  
+4. The value of an open data set published in a repository cannot be overstated.
 
 ###Additional resources
-The same principles apply to synthesis of all evidence objects including datasets. Here is an excellent example of the 'synthesize' step for [R packages](https://ropensci.org/blog/blog/2017/06/27/packagemetrics).
+[The Cochrane Collaboration Handbook](http://training.cochrane.org/handbook) is a superb resource for the workflow.   
+Chapters 3-5 in this [handbook for ecology and evolution](https://www.jstor.org/stable/j.ctt24hq6n) is also useful.
