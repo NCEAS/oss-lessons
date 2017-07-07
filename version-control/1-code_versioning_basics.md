@@ -58,7 +58,7 @@ Everytime you create a new snapshot, you add the new version of the file to the 
 
 ### [TRY GIT in 15min!](https://try.github.io/levels/1/challenges/1)
 
-Before starting using git on any computer, you will have to set your identity on your system, as every snapshot of files is associated with the user who implemented the modifications to the files.
+Before you start using git on any computer, you will have to set your identity on your system, as every snapshot of files is associated with the user who implemented the modifications to the files.
 
 ### 1. Setting up your identity
 **Setup your profile:**
@@ -97,7 +97,7 @@ git config --system core.editor vim
 
 As we mentioned earlier, a **git repository** is a folder/directory on your machine in which content is monitored for any changes by git.
 
-#### A.) Starting versioning an existing folder on your system
+#### A.) Start versioning an existing folder on your system
 
 `git init` is the command to start the tracking in a specific directory and transform it into a git repository:
 
@@ -111,7 +111,7 @@ git init
 
 #### B.) Copying an existing repository to your system
 
-`git clone` is the git command to copy an existing repository to your machine, more precisely adding the repository in the directory you are in.
+`git clone` is the git command to copy an existing repository to your machine, more precisely adding the repository to the directory you are in.
 
 ```{bash}
 cd 
@@ -119,7 +119,7 @@ mkdir git_nceas
 cd git_nceas
 git clone https://github.com/your_username/your_reponame.git
 ```
-The cloning process will automatically creates a directory on your machine named like the online repository.
+The cloning process will automatically create a directory on your machine named like the online repository.
 
 ## Tracking your changes
 
@@ -198,14 +198,14 @@ git log -1
 
 ## <img style="float: left;width: 35px;" src="images/challengeproblemred_scribble.png"/>  Challenge
 
-Write a R code to read the favorite_desserts.csv files in and add a new row to the dataframe and overwrite the csv with the new entry. Of course you need to track the development of you code using git!!
+Write a R code to read the favorite_desserts.csv files in and add a new row to the dataframe and overwrite the csv with the new entry. Of course you need to track the development of your code using git!!
 
 ## Getting information about git
 
 * `git status` this command is your friend! It will tell you where you are at and what are your options. You can use at any point in your process.
 * `git log` displays history of committed snapshots. It lets you list the project history, filter it, and search for specific changes.
 * `git diff --cached`
-To be used before committing to preview the changes to be committed. 
+To be used before committing, to preview the changes to be committed. 
 * `git diff HEAD~1 my_script.R` to inspect the changes between the last commit (HEAD) and the previous one
 * `git diff HEAD~2 my_script.py` to inspect the changes between the last commit (HEAD) and 2 commits before.
 
@@ -253,13 +253,13 @@ More info about how to undo things [here](https://git-scm.com/book/en/v2/Git-Bas
 ## Few other terms you might have heared about git
 
 * **HEAD**: it is the reference that points to the latest commit
-* **Branches**: A branch represents an independent line of development, parallel to the master. In fact, the default branch name that is create by ```git init``` is called ***master***.
+* **Branches**: A branch represents an independent line of development, parallel to the master. In fact, the default branch name that is created by ```git init``` is called ***master***.
 
 
 ## References
 - Interactive git 101: [https://try.github.io/](https://try.github.io/)
 - Very good tutorial about git: [https://www.atlassian.com/git/tutorials/what-is-version-control](https://www.atlassian.com/git/tutorials/what-is-version-control)
-- Git tutorial geared towards scientits: [http://nyuccl.org/pages/gittutorial/](http://nyuccl.org/pages/gittutorial/)
+- Git tutorial geared towards scientists: [http://nyuccl.org/pages/gittutorial/](http://nyuccl.org/pages/gittutorial/)
 - Short intro to git basics: [https://github.com/mbjones/gitbasics](https://github.com/mbjones/gitbasics)
 - Git documentation about the basics: [http://gitref.org/basic/](http://gitref.org/basic/)
 - Git documentation - the basics: [https://git-scm.com/book/en/v2/Getting-Started-Git-Basics](https://git-scm.com/book/en/v2/Getting-Started-Git-Basics)

@@ -1,11 +1,11 @@
 Code versioning - Working with remotes
 ===============================
 
-***So far we have use git locally, on one machine***. One of the strength of Git is that it allows to share and co-edit codes and files.
+***So far we have used git locally, on one machine***. One strength of Git is that it allows you to share and co-edit codes and files.
 
 ## Adding remotes to your workflow
 
-It is important that a good portion of the worflow happen on your local machine (in blue) and a part require interactions with a remote machine (in purple):
+It is important that a good portion of the worflow happens on your local machine (in blue) and a part requires interactions with a remote machine (in purple):
 
 ![](images/git_workflow_detailed.png)
 
@@ -17,7 +17,7 @@ It is important that a good portion of the worflow happen on your local machine 
 
 -------------------------------------------  REMOTE  -------------------------------------------
 
-3.) ```git pull``` : be sure you have the latest version of the picture album from the server)
+3.) ```git pull``` : be sure you have the latest version of the picture album from the server
 
 4.) ```git push``` : send your latest version of the picture album to the server
 
@@ -31,11 +31,11 @@ Within your local repository:
 1. Add the remote address: ```git remote add origin https://github.nceas.ucsb.edu/brun/demo.git```
 2. Do your initial push: ```git push -u origin master```
 
-The `-u` flag sets the upstream tracking. This allows git to track changes on the remote branch. It also allows argument less `pull` (or `merge` to be exact). You only need to set it once (per branch). Note that when you `clone` a repository, the upstream tracking is set automatically to `origin/master`, therefore you can directly use `git push` on the master branch without additional arguments. 
+The `-u` flag sets the upstream tracking. This allows git to track changes on the remote branch. It also allows you to `pull` without argument (or `merge` to be exact). You only need to set it once (per branch). Note that when you `clone` a repository, the upstream tracking is set automatically to `origin/master`, therefore you can directly use `git push` on the master branch without additional arguments. 
 
 ### Managing Merge Conflicts
 
-The most common cause of merge conflicts happen if different another user change the same file that you have modified. It can happen during pull from a remote repository (or when merging branches).
+The most common cause of merge conflicts happens if a different user changes the same file that you have modified. It can happen during pull from a remote repository (or when merging branches).
 
 1. If you **know for sure** what file version you want to keep:
 
@@ -44,7 +44,7 @@ The most common cause of merge conflicts happen if different another user change
 
 *=> You still have to* ```git add``` *and* ```git commit``` *after this*
 
-2. If you do not why there is a conflict:
+2. If you do not know why there is a conflict:
   Dig into the files, looking for:
 
 ```{bash}
@@ -77,7 +77,7 @@ Why should I use branches? For 2 main reasons:
 Few commands to deal with branches:
 
 * `git branch`	Will list the existing branches
-* `git branch myBranchName` 	Will create an new branch with the
+* `git branch myBranchName` 	Will create a new branch with the
 							name myBranchName
 * `git checkout myBranchName` Will switch to the branch myBranchName
 
@@ -110,7 +110,7 @@ Done with your branch? Want to merge your new - ready for prime time - script to
 - General
  - Interactive git 101: <https://try.github.io/>
  - Very good tutorial about git: <https://www.atlassian.com/git/tutorials/what-is-version-control>
- - Git tutorial geared towards scientits: <http://nyuccl.org/pages/gittutorial/>
+ - Git tutorial geared towards scientists: <http://nyuccl.org/pages/gittutorial/>
  - Git documentation about the basics: <http://gitref.org/basic/>
  - Git documentation - the basics: <https://git-scm.com/book/en/v2/Getting-Started-Git-Basics>
  - Comparison of git repository host services: <https://www.git-tower.com/blog/git-hosting-services-compared/>
@@ -121,4 +121,4 @@ Done with your branch? Want to merge your new - ready for prime time - script to
 - Branches
  - 	interactive tutorial on branches: <http://learngitbranching.js.org/>
  - git workflow options:
- -  unsing git in a collaborative environment: <https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow>
+ -  using git in a collaborative environment: <https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow>
