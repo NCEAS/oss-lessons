@@ -1,4 +1,4 @@
-# oss-lessons
+# OSS Lessons
 
 Master lessons for OSS data science curriculum.
 
@@ -17,3 +17,4 @@ Master lessons for OSS data science curriculum.
 ## Google Drive for instructors
 
 <https://drive.google.com/drive/folders/0Bysxc0FXqxEcVjAzaDlMV0l4SjQ>
+
