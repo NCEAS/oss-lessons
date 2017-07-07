@@ -1,0 +1,55 @@
+---
+title: 
+author: "cjlortie"
+date: "2017"
+output:
+  html_document:
+    theme: yeti
+    toc: yes
+    toc_depth: 3
+    toc_float: yes
+  pdf_document:
+    toc: yes
+   
+---
+
+<br>
+![](./synthesize.jpg)     
+<br>
+
+###Step 3. Synthesize  
+This is a relatively unassuming step. It precedes the 'summarize' step where you really dig in and work on data viz and the prepartion for meta-statistics. Nonetheless, it is a relatively critical step that is includes the following three processes.  
+a. extract evidence from the filtered list of eligible primary studies  
+b. tabulate the evidence  
+c. Data QA/QC and ensure you have what you need to do a meta.
+
+Step 3, synthesize, is akin to collect data within the primary research context. You have designed your experiment, selected the study site and target organism, and planned your sampling effort (and sample sizes). However, you are doing an experiment here but synthesizing other completed experiments with a planned and structure approach. You are in part reviewing every study and in part scraping data from each instance. 
+
+###Open science product
+The data from your efforts should be published as an independent data publication. Depending on data type and discipline, select a data repository that assigns a DOI. You have completed a significant synthesis of research by completing this step - even for a total of 10 studies. The mean, variance, and sample size for every level of each treatment from each study should be included in this dataframe and published. It is not uncommon to exclude include the effect size measure because this is derived data.
+
+###Case study  
+A very [short meta-analysis](https://peerj.com/articles/265/) of a limited set of studies, at the time, for cushion plants in the alpine and arthropods is a useful example. The primary objective was to explore whether cushion plants can faciliate arthropods. We used this synthesis as a means to identify whether research in this domain was a viable PhD topic.  It was not. We published the data on [figshare](https://figshare.com/articles/The_dataset_for_A_global_meta_analytic_contrast_of_cushion_plant_facilitation_of_plants_and_arthropods/1494752). In a second instance of a limited number of studies, we explored the frequency of study of [positive plant interactions on dunes using meta-analysis](https://peerj.com/articles/768/) and also put the data on [figshare](https://figshare.com/articles/A_meta_analytic_dataset_of_plant_facilitation_in_coastal_dune_systems_responses_regions_and_research_gaps/1495510). When the data were more comprehensive, more traditional journals were interested. Here is an example of a meta-analysis of [global change drivers and invasion in grasslands](http://onlinelibrary.wiley.com/doi/10.1111/1365-2745.12236/abstract) with the data on [figshare](https://figshare.com/articles/Dataset_for_Land_management_trumps_the_effects_of_climate_change_and_elevated_CO2_on_grassland_functioning/1112543). All of these data are appropriate for re-analysis, additional syntheses, and updated searches.  
+
+We typically publish biodiversity data with richness and species occurrence data on [knb](https://knb.ecoinformatics.org).
+<br>
+
+To build the basic dataframe, we code each study with a unique numeric ID. This facilitates connecting different dataframes and tracking. We record location, categorical classifications that describe the study, and mean, var, and n as separate vectors for each treatment and control within the experimental factor set. Trials as usually encoded with the 1.1, 1.2 notation. These are the norms from within the ecological synthesis community only.
+
+The best to appreciate synthesis data are to see synthesis data!!
+
+```{r synthesize, warning=FALSE, message=FALSE}
+library(tidyverse)
+
+
+```
+<br>  
+
+###Exercise
+Use your previous search and select a reasonble set of studies to explore the importance of general versus specific exclusion criteria on processing primary research literature as a synthesis substrate. As an important consideration here, please also try the second round, even briefly, for those not immediately excluded by adding another vector in your dataframe indicating whether useable data are available/provided within the publication. For the purposes of this sort step, the data can be a list, table, or even figure that shows means, variances, and sample sizes for every treatment level needed in the synthesis.
+
+###Conclusions
+1. 
+
+###Additional resources
+The same principles apply to synthesis of all evidence objects including datasets. Here is an excellent example of the 'synthesize' step for [R packages](https://ropensci.org/blog/blog/2017/06/27/packagemetrics).
