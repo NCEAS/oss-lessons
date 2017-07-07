@@ -19,7 +19,7 @@ output:
 [A brief description of the philosophy](http://onlinelibrary.wiley.com/doi/10.1111/oik.03161/full)  
 
 <br>
-![](./metacat.jpg)     
+![](./SW-cat.jpg)     
 <br>
 
 ###Rationale
