@@ -1,20 +1,7 @@
 ---
 title: RMarkdown and RStudio
-output:
-  html_document:
-    toc: true
-    toc_float: true
-  pdf_document:
-    fig_caption: false
+time_slot: 60 minutes
 ---
-
-- Time slot: 60 minutes
-- Learning outcomes:
-    - Gain an awareness of Markdown and RMarkdown
-    - Author a simple RMarkdown document in RStudio
-    
-TODO: Check if latest stable releases of RStudio Client support R Notebooks feature
-
 
 ## Introduction
 
@@ -50,7 +37,12 @@ Good resources:
 - [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/)
 - [http://kbroman.org/knitr_knutshell/](http://kbroman.org/knitr_knutshell/)
 
-## Steps
+## Learning Outcomes
+
+- Gain an awareness of Markdown and RMarkdown
+- Author a simple RMarkdown document in RStudio
+
+## Lesson
 
 - Get RStudio Desktop installed and running for everyone
 - Get RMarkdown dependencies installed by:
@@ -172,3 +164,10 @@ output:
 ---
 
 ```
+
+## Summary
+
+- Markdown is a simple plain text format suitable for authoring rich documents
+- RMarkdown is a slight extention of the Markdown syntax that lets us mix code and prose together
+- RMarkdown is a key part of the R reproducible science scene
+- RStudio is a great way to author RMarkdown documents

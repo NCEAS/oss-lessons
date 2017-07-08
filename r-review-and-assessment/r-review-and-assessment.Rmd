@@ -1,45 +1,50 @@
 ---
 title: R Review & Assessment
+time_slot: 60 minutes"
 ---
 
-- Time slot: 60 minutes
-- Learning outcomes:
-    - Refresh general R programming skills
-    
-Concepts:
+## Introduction
 
-variables
-  assignment
-types
-  vectors
-    character vecs / strings
+## Learning Outcomes
+
+- Refresh general R programming skills
+
+## Lesson flow
+
+- variables
+    - assignment
+- types
+    - vectors
+        - character vecs / strings
       
-  lists
-  vectors vs. lists
-    - touch on the fact that vectors are for one type and lists are for multi
-    - what does this do? `r c(1, "asdf", 2)`
-  data.frames
-data import/export (e.g. read.csv)
-data manip
-  subset
-  data.frame[] notation
-plotting
-modeling
-common util functions
-  paste (combine things)
-  table
-  summary
-  str
-  seq
-  nchar
-strings vs factors
-iteration
-  for loops
-    - when do we use for loops? when we're doing for each X where X can be year, site, etc.
-apply-family
+    - lists
+    - vectors vs. lists
+        - touch on the fact that vectors are for one type and lists are for multi
+        - what does this do? `r c(1, "asdf", 2)`
+    - data.frames
+- data import/export (e.g. read.csv)
+- data manip
+    - subset
+    - data.frame[] notation
+- plotting
+- modeling
+- common util functions
+    - paste (combine things)
+    - table
+    - summary
+    - str
+    - seq
+    - nchar
+- strings vs factors
+- iteration
+    - for loops
+        - when do we use for loops? when we're doing for each X where X can be year, site, etc.
+- apply-family
+- functions? prob skip because this will be taught separately
 
+## Summary
 
-functions? prob skip because this will be taught separately
+## Resources
 
 Other good resources:
 

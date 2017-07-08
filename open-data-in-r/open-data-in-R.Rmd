@@ -1,8 +1,9 @@
 ---
 title: Open Data in R and rOpenSci
+time_slot: 30 minutes
 ---
 
-Time slot: 30 minutes
+## Introduction
 
 Getting data is a critical step in most research yet it can sometimes be one of the most difficult and time-consuming steps.
 This is especially true in synthesis research which may incorporate hundreds of thousands of datasets in the analysis.
@@ -12,6 +13,12 @@ I just ran across this last week:
 > The first report of the Open Research Data Task Force has found that two of the greatest challenges to effectively using open research data are that: even when it is notionally accessible researchers often simply cannot find that data, and If they do find it they cannot use it because of frustrating format variabilities and other compatibility issues.
 
 From: http://www2.warwick.ac.uk/newsandevents/pressreleases/task_force_finds/
+
+## Learning Outcomes
+
+- Understand what open data is and why/how its useful
+- Be aware of the open data ecosystem in R
+- Become familiar with a few packages rOpenSci provides
 
 ## Open data
 
@@ -27,6 +34,13 @@ On a continuum from least good to most good, we might have:
 A really great list of R packages for getting at open data can be found here:
 
 - https://github.com/ropensci/opendata
+
+So what is open data?
+Open data is data that are:
+
+- Properly licensed for re-use
+- Accessible w/o gates (e.g., paywall, login)
+- Use open formats (formats you can work with)
 
 ## What is rOpenSci?
 
@@ -155,6 +169,12 @@ library(rnoaa)
 bd <- buoy(dataset = "cwind",  buoyid = 42039, datatype = "cc")
 plot(bd$data$wind_spd)
 ```
+
+## Summary
+
+- Open data greatly assist in the data aquisition step in research
+- Finding open data is still hard
+- R, via rOpenSci, has a lot of packages for accessing open data already available to you
 
 ## Resources
 

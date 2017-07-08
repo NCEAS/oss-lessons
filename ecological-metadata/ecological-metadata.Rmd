@@ -1,21 +1,11 @@
 ---
 title: "Ecological Metadata in R"
+time_slot: 30 minutes
 ---
-
-Time slot: 30 min
-
-## Learning outcomes:
-
-Upon completing this module, students will
-
-- Have a basic understanding of scientific metadata and how it fits into research
-- Have a basic familiarity with generating scientific metadata using the EML R package
-- Have watched the instructor generate fairly complete metadata for an simple example dataset
 
 ## Introduction
 
 Science metadata is:
-
 
 - Standardized
 - Machine-readable (usually XML)
@@ -28,6 +18,16 @@ The learning process here is two-fold:
 - Learn how to use the EML R package
 
 Both of these are relatively hard!
+
+## Learning outcomes:
+
+Upon completing this module, students will
+
+- Have a basic understanding of scientific metadata and how it fits into research
+- Have a basic familiarity with generating scientific metadata using the EML R package
+- Have watched the instructor generate fairly complete metadata for an simple example dataset
+
+## Lesson
 
 ### The EML standard
 
@@ -233,6 +233,8 @@ We should also validate the file:
 ```{r}
 eml_validate("eml.xml")
 ```
+
+## Summary
 
 ## Resources
 

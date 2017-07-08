@@ -1,19 +1,9 @@
 ---
 title: "Regular Expressions"
-author: "Bryce Mecum"
+time_slot: 30 minutes
 ---
 
-Time slot: 30 minutes
-
-Learning outcomes:
-  
-Students should:
-  
-- Understand when regular expressions are appropriate
-- Have an introductory-level awareness of regular expression syntax
-- Have some experience executing and working with regular expressions in R
-
-## Overview and Examples
+## Introduction
 
 Regular expressions are a fantastic tool for filtering and even extracting information out of strings of characters such as site codes, titles, or even entire documents. 
 Regular expressions follow a custom syntax that we'll need to learn but they are worth learning because:
@@ -21,8 +11,18 @@ Regular expressions follow a custom syntax that we'll need to learn but they are
 - Regular expressions can do things other methods cannot
 - Regular expressions can be used with many other languages and tools so it's a learn-once, use-everywhere kind of tool
 
-Let's start off with a simple example of where simpler methods won't work and see how regular expressions can be used to get what we need done:
 
+## Learning Outcomes
+  
+Students should:
+  
+- Understand when regular expressions are appropriate
+- Have an introductory-level awareness of regular expression syntax
+- Have some experience executing and working with regular expressions in R
+
+## Lesson
+
+Let's start off with a simple example of where simpler methods won't work and see how regular expressions can be used to get what we need done.
 Let's say we just received some data we need to analyze and we find this:
 
 ```{r}
@@ -229,6 +229,12 @@ Now that we've gone over some basics of regular expressions, let's finish our ex
   - `string_match`
   - `string_replace`
   - `string_split`
+
+## Summary
+
+- Regular expressions are a crucial tool in the data analysis toolbox
+- Regular expressions help us solve problems we may not be otherwise able to solve
+- Regular expressions are supported in many functions in R
 
 ## More
 
