@@ -9,10 +9,194 @@ time_slot: 60 minutes
 
 Students should
 
-- use the split-apply-combine methodology (base R and dplyr) (consider pushing this into wrangling session)
-- learn what it means to test assumptions about their data (assertr)
-- learn how to reshape and restructure their data (tidyr)
+- Learn what it means to test assumptions about their data (assertr)
+- Learn how to reshape and restructure their data (tidyr)
 
 ## Lesson
 
+Let's look at an example dataset (one I've purposely made).
+It is an arbitrary temperature study with six sites. Within each site, there are 6 plots and we took 10 samples of temperature (degrees C) per plot.
+
+
+```{r}
+fundata <- read.csv("fundata.csv", stringsAsFactors = FALSE)
+head(fundata)
+```
+
+Data often comes with columns mashed together which can prevent us from doing the exact analysis we want.
+For example, in this dataset, the `siteplot` column is really two variables: Site and plot number.
+How can we split them apart?
+
+```{r}
+library(tidyr)
+
+lettersdf <- data.frame(letters = paste(LETTERS, rev(LETTERS), sep = "."), val = rnorm(length(LETTERS), 0, 5))
+lettersdf %>%
+  separate(letters, c("letter_one", "letter_two"), sep = "\\.")
+```
+
+#### Exercise: Split the `siteplot` column into two columns called `site` and `plot`:
+
+```{r}
+# Your code here
+```
+
+TODO: Produce a good fake dataset with various issues
+
+- odd values
+- missing observations where we expect
+- a full replication of the time series
+
+- Look for odd values
+
+
+### Checking assumptions
+
+
+TODO: Do a col with -999s in there
+
+
+Look with `summary`:
+
+```{r}
+summary(fundata)
+```
+
+Look directly with `range`:
+
+```{r}
+range(fundata$temp_c)
+
+```
+
+### Exercise: Can we use an exploratory plot to check this assumption too?
+
+Plotting your data is always a good idea and we can often find new insights or issues this way.
+
+```{r}
+# Your code here
+```
+
+Before we move on, let's fix the -9999 observations by making them `NA`s:
+
+```{r}
+fundata[which(fundata$temp_c == -9999), "temp_c"] <- NA
+```
+
+- Check for duplicate or missing observations
+
+TODO
+
+We have a hierarchical design, we might want to check that all the data we expect are present.
+If we know we have 6 sites with 6 plots at each site and ten samples, we can check this assumption a few ways:
+
+```{r}
+nrow(fundata) == 6 * 6 * 10
+```
+
+### Exercise: Use `dplyr` to find which `site` or `plot` has the wrong number of observations
+
+```{r}
+# Put your solution here
+```
+
+
+TODO: an NA where a character vector should be
+```{r}
+
+```
+
+
+### Putting it all together
+
+TODO: Combine all the steps into a full analysis
+
+```{r}
+# read
+# detect
+# fix
+# analyze
+```
+
+### Exercise: Check if any droids have hair or gender
+
+```{r}
+library(dplyr)
+head(starwars)
+```
+
+### Exercise: Make sure every character has been in at least one film
+
+```{r}
+```
+
+## unique and duplicated
+
+The functions `unique` and `duplicated` great ways to find duplicates in a vector of values.
+For example, we can create a vector with a duplicate value in it:
+
+```{r}
+some_letters <- c("A", "F", "X", "S", "X")
+some_letters
+```
+
+```{r}
+length(unique(some_letters)) == length(some_letters)
+duplicated(some_letters)
+```
+
+See how `unique` can tell us *if* there are duplicates and `duplicated` can tell us *which* values are duplicates.
+
+#### Exercise: Remove the duplicate value with `unique` and with `duplicated`:
+
+```{r}
+# Your code here
+```
+
+### tidyr gather
+
+TODO
+
+
+
+### assertr approach
+
+> The assertr package supplies a suite of functions designed to verify assumptions about data early in an analysis pipeline so that data errors are spotted early and can be addressed quickly.
+
+- Website: https://github.com/ropensci/assertr
+
+
+
 ## Summary
+
+
+## Misc
+
+Data generation:
+
+```{r}
+n <- 6
+reps <- 10
+fundata <- data.frame(site = rep(rep(c("A", "B", "C", "D", "E", "F"), n), reps),
+                      plot = rep(rep(c(1:6), n), reps),
+                      temp_c = rnorm(n * n * reps, 30, 5))
+
+# omit 5 rows at random
+fundata <- fundata[-sample(1:nrow(fundata), 5, replace = FALSE),]
+
+# replace 5 values with -999
+fundata[sample(1:nrow(fundata), 5, replace = FALSE), "temp_c"] <- -9999
+
+# replace 1 value with a way-too-high value
+fundata[sample(1:nrow(fundata), 1), "temp_c"] <- 180
+
+# replace 1 site with NA
+fundata[sample(1:nrow(fundata), 1), "site"] <- NA
+
+# mush site and plot together into one column
+fundata$siteplot <- paste(fundata$site, fundata$plot, sep = ".")
+
+# clean it up and save it
+fundata <- fundata[,c("siteplot", "temp_c")]
+write.csv(fundata, row.names = FALSE, file = "fundata.csv")
+```
