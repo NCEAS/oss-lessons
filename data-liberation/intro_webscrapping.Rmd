@@ -62,8 +62,15 @@ Status codes:
 - `4xx`: Client Error; the famous 404: ressource not found
 - `5xx`: Server Error
 
-## HTML
+## HTML - 
 
+The HyperText Markup Language describes and defines the content of a webpage. Other technologies besides HTML are generally used to describe a webpage's appearance/presentation (CSS) or functionality (JavaScript).
+
+"HyperText" in HTM refers to links that connect webpages to one another, either within a single website or between websites. Links are a fundamental aspect of the Web. 
+
+HTML uses "markup" to annotate text, images, and other content for display in a Web browser. HTML markup includes special "elements" such as <head>, <title>, <body>, <header>, <footer>, <article>, <section>, <p>, <div>, <span>, <img>, and many others.
+
+Using you web browser, you can inspect the HTML content of any webpage of the World Wide Web.
 
 
 ## XPath
@@ -132,7 +139,7 @@ write.csv(my_cool_bars, "places_you_will_go.csv", row.names = FALSE)
 
 # Challenge
 
-By group of two work on downloading all the fishery shapefiles for the Gulf of Mexico from this NOAA website:
+By group of two, work on downloading all the fishery shapefiles for the Gulf of Mexico from this NOAA website:
 <http://sero.nmfs.noaa.gov/maps_gis_data/fisheries/gom/GOM_index.html>
 
 
