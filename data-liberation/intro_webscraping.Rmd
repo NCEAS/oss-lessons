@@ -62,13 +62,13 @@ Status codes:
 - `4xx`: Client Error; the famous 404: ressource not found
 - `5xx`: Server Error
 
-## HTML - 
+## HTML
 
 The HyperText Markup Language describes and defines the content of a webpage. Other technologies besides HTML are generally used to describe a webpage's appearance/presentation (CSS) or functionality (JavaScript).
 
 "HyperText" in HTM refers to links that connect webpages to one another, either within a single website or between websites. Links are a fundamental aspect of the Web. 
 
-HTML uses "markup" to annotate text, images, and other content for display in a Web browser. HTML markup includes special "elements" such as <head>, <title>, <body>, <header>, <footer>, <article>, <section>, <p>, <div>, <span>, <img>, and many others.
+HTML uses "markup" to annotate text, images, and other content for display in a Web browser. HTML markup includes special "elements" such as `<head>`, `<title>`, `<body>`, `<header>`, `<footer>`, `<article>`, `<section>`, `<p>`, `<div>`, `<span>`, `<img>`, and many others.
 
 Using you web browser, you can inspect the HTML content of any webpage of the World Wide Web.
 
@@ -78,7 +78,7 @@ Using you web browser, you can inspect the HTML content of any webpage of the Wo
 `XPath` is quite simple but yet very powerful. Similar syntax to a file system hierarchy, it allows  to identify nodes of interest by specifying paths through the tree, based on node names, node content, and a node’s relationship to other nodes in the hierarchy. We typically use XPath to locate nodes in a tree and then use R functions to extract data from those nodes and bring the data into R.
 
 
-## CSS selector
+## CSS
 
 Cascading Style Sheets (CSS) are a stylesheet language used to describe the presentation of a document written in HTML or XML. CSS describes how elements should be rendered on screen, on paper, in speech, or on other media.
 
