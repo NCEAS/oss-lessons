@@ -5,29 +5,40 @@ time_slot: 60 minutes"
 
 ## Introduction
 
+Let's take about an hour to touch up on basic R programming skills in a survey style and then we'll move onto some challenges which should test your understanding.
+
 ## Learning Outcomes
 
 - Refresh general R programming skills
+- Test R skills against some example problems
 
 ## Lesson flow
 
-- variables
+Based on previous R training: https://github.nceas.ucsb.edu/Training/R-intro
+
+- basic syntax
+  - comparison
+- variables / assignemtn
     - assignment
 - types
     - vectors
         - character vecs / strings
-      
     - lists
     - vectors vs. lists
         - touch on the fact that vectors are for one type and lists are for multi
         - what does this do? `r c(1, "asdf", 2)`
     - data.frames
 - data import/export (e.g. read.csv)
+  - read.csv
+  - read.table
+  - readLines
+  - save/load
 - data manip
-    - subset
-    - data.frame[] notation
-- plotting
+    - subset()
+    - data.frame [] notation
 - modeling
+- sample / runif / rnorm
+  - sampling a data.frame
 - common util functions
     - paste (combine things)
     - table
@@ -35,19 +46,162 @@ time_slot: 60 minutes"
     - str
     - seq
     - nchar
-- strings vs factors
 - iteration
     - for loops
         - when do we use for loops? when we're doing for each X where X can be year, site, etc.
+    - whie loops
 - apply-family
-- functions? prob skip because this will be taught separately
+  - sapply
+  - lapply
+- functions: We'll skip this as it will be taught in another lesson
+
+More advanced topics to cover if time allows:
+
+- Writing faster code
+  - What is 'vectorization'?
+  - Don't grow variables
+- Debugging
+  - traceback()
+  - browser()
+  - breakpoints in RStudio
+  
+## Call your shot
+
+An excellent way to really learn a programming language is to call out what the result of running some expression will be *before* you run it.
+Afterwards, you can compare your expectation with what actually happened.
+
+Here are code chunks with a series of expressions.
+Try to predict what **the final expression* does before running the entire chunk:
+
+
+```{r}
+x <- 2
+x ^ 2
+```
+
+```{r}
+x <- 1; y <- 2; x + y;
+```
+
+```{r}
+x <- "hello"
+y <- "world"
+paste(x, y)
+```
+
+```{r}
+x <- list(1, 2, 3)
+y <- list(4, 5, 6)
+z <- c(x, y)
+length(z)
+```
+
+```{r}
+x <- data.frame(x = 1:6)
+y <- data.frame(x = 1:7)
+z <- rbind(x, y)
+nrow(z)
+```
+
+
+```{r}
+x <- NA
+
+if (is.na(x)) {
+  print("foo")
+} else {
+  print("bar")
+}
+```
+
+```{r}
+numbers <- seq(1, 10)
+
+for (number in numbers) {
+  if (number %% 2){
+    print(number)
+  }
+}
+```
+
+```{r}
+x <- 10
+
+while (x >= 0) {
+  print(x)
+  
+  if (x == 5) {
+    break
+  }
+  
+  x <- x - 1
+}
+```
+
+```{r}
+x <- c(1, "2", 3)
+class(x)
+```
+
+```{r}
+x <- list(1, 2, 3)
+# todo: something with lists
+```
+
+```{r}
+x <- data.frame(letter = LETTERS)
+class(x[1,])
+```
+
+```{r}
+x <- data.frame(letter = LETTERS)
+class(x[1, 1, drop = FALSE])
+```
+
+```{r}
+x <- data.frame(x = 1)
+y <- data.frame(x = 2)
+z <- rbind(x[1,1], y[1,1])
+class(z)
+```
+```{r}
+rep(TRUE, 5) & rep(FALSE, 5)
+```
+
+```{r}
+rep(TRUE, 5) && rep(FALSE, 5)
+```
+
+```{r}
+x <- c(1, 2, 3)
+y <- c("A", "B", "C")
+z <- c(x, y)
+class(z)
+```
+
+```{r}
+x <- c(1, 2, NA, 4, NA)
+length(is.na(x))
+```
+
+```{r}
+x <- c(1, NA, 3)
+y <- c(NA, 2, NA)
+all(is.na(x + y))
+```
+
+TODO: Example where factors trip you up
 
 ## Summary
+
+By the end of this lesson, you should have feel touched up on your general R skills and you also should have seen some of the trickier parts of R.
+Hopefully having seen the trickier parts of R will help later on down the road.
 
 ## Resources
 
 Other good resources:
 
+- One of our lessons on R: https://github.nceas.ucsb.edu/Training/R-intro
 - Great, free book: http://r4ds.had.co.nz/
 - DataCamp's R intro, https://www.datacamp.com/courses/free-introduction-to-r
 Sources:
