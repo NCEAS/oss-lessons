@@ -1,0 +1,145 @@
+---
+title: "Introduction to Web Scraping"
+author: "Julien Brun"
+output: html_document
+---
+
+# Goal
+
+The Goal of this session is to learn how to get data from the World Wide Web using R. Although we are going to talk about few concepts first, the core of this session will be spent on getting data from web sites that do not offer any interface to automate information retrieval, often via  Web services (e.g. REST, SOAP) or application programming interfaces (APIs). Therefore it is necessacry to scrape the information embbeded in the Web site itself.
+
+When you want to extract information or download data from a website you should first:
+
+1. Check if the Web site as any available Web services or APIs have been developed to this end
+2. Check if any R (or other language you know) package has been developed by others as a wrapper around the API to faciliate the use of these Web services 
+3. Nothing found? Well let's code this then!
+
+
+# Which R packages are available?
+
+As usual it is a good start to look at the CRAN view to have an idea of R packages available: <https://CRAN.R-project.org/view=WebTechnologies>
+
+Here are some of the key packages:
+
+- `Rcurl`: low level wrapper for `libcurl` that allow you to provides convenient functions to fetch URIs, get & post forms; [Quick guide](http://www.omegahat.net/RCurl/philosophy.html).
+- `httr`: similar to Rcurl; provides a user-friendly interface for executing HTTP methods and provides support for modern web authentication protocols (OAuth 1.0, OAuth 2.0). wrapper fot the [`curl` package](https://cran.r-project.org/web/packages/curl/index.html)
+- `rvest`: a higher level package mostly based on httr
+- `Rselenium`: can be used to automate interactions and extract page content from dymanically generated webpages (i.e., those requiring user interaction to display results)
+
+There are also function in the `utils` package. Note that these functions do not handle https (motivation behind the `curl` R package)
+
+*In this session we are going to use `rvest`: first for a simple tutorial, followed by a challenge in groups*
+
+
+# Some background
+
+## HTTP:  Hypertext Transfer Protocol
+
+### URL
+At the heart of web communications is the request message, which are sent via *U*niform *R*esource *L*ocators (URLs). Basic URL structure:
+
+![credits: https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177](./images/http1-url-structure.png)
+
+The protocol is typically http or https for secure communications. The default port is 80, but one can be set explicitly, as illustrated in the above image. The resource path is the local path to the resource on the server.
+
+
+### Request
+
+![credits: https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177](./images/http1-req-res-details.png) 
+
+The actions that should be performed on the host are specified via HTTP verbs. Today we are going to focus on two actions that are often used in web forms:
+
+- `GET`: fetch an existing resource. The URL contains all the necessary information the server needs to locate and return the resource.
+- `POST`: create a new resource. POST requests usually carry a payload that specifies the data for the new resource.
+
+### Response
+
+Status codes:
+
+- `1xx`: Informational Messages
+- `2xx`: Successful; most known is 200: OK, request was successfully processed
+- `3xx`: Redirection
+- `4xx`: Client Error; the famous 404: ressource not found
+- `5xx`: Server Error
+
+## HTML
+
+
+
+## XPath
+
+`XPath` is quite simple but yet very powerful. Similar syntax to a file system hierarchy, it allows  to identify nodes of interest by specifying paths through the tree, based on node names, node content, and a node’s relationship to other nodes in the hierarchy. We typically use XPath to locate nodes in a tree and then use R functions to extract data from those nodes and bring the data into R.
+
+
+## CSS selector
+
+SelectorGadget: http://selectorgadget.com/
+
+
+# `rvest` quick example
+
+Let us get started with organizing your evenings. The Funk Zone is a pretty fun part of Santa Barabara, where you can find wineries, bars and restaurants. Check this out: <http://santabarbaraca.com/explore-and-discover-santa-barbara/neighborhoods-towns/santa-barbara/the-funk-zone/>
+
+We are going to scrape the name of the places and their websites out of this webpage and compile this information into a csv, so you will be able to quickly choose where to go to relax.
+
+First, Let us have a closer look at the website
+
+```{r}
+#install.packages("rvest")
+library("rvest")
+
+URL <- "http://santabarbaraca.com/explore-and-discover-santa-barbara/neighborhoods-towns/santa-barbara/the-funk-zone/"
+
+# Read the webpage into R
+webpage <- read_html(URL)
+
+# Parse the webpage for bars
+bars <- html_nodes(webpage, ".neighborhoods-towns-business .neighborhoods-towns-business-title")
+
+# Extract the name of the bar
+bar_names <- html_text(bars)
+
+bar_names
+```
+
+Now let us get the URLs to the websites
+
+```{r}
+
+# Parse the page for the nodes containing the website URLs
+websites <- html_nodes(webpage, ".neighborhoods-towns-business .website-button")
+
+# Extract the reference 
+websites_urls <- html_attr(websites, "href")
+
+websites_urls
+```
+
+Create a data frame and save it as csv
+
+```{r}
+# Create the data frame
+my_cool_bars <- data.frame(funkzone_bar = bar_names, 
+                           website = websites_urls)
+
+my_cool_bars
+
+# write it to csv
+write.csv(my_cool_bars, "places_you_will_go.csv", row.names = FALSE)
+
+```
+
+
+# Challenge
+
+By group of two work on downloading all the fishery shapefiles for the Gulf of Mexico from this NOAA website:
+<http://sero.nmfs.noaa.gov/maps_gis_data/fisheries/gom/GOM_index.html>
+
+
+# References and sources
+
+- CRAN view on webtechnologies: https://CRAN.R-project.org/view=WebTechnologies
+- HTML intro: https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177
+- Scrapping via API; example of rnoaa: http://bradleyboehmke.github.io/2016/01/scraping-via-apis.html
+- Munzert, Simon. Automated Data Collection with R: A Practical Guide to Web Scraping and Text Mining. Chichester, West Sussex, United Kingdom: John Wiley & Sons Inc, 2015.
+- Nolan, Deborah, and Duncan Temple Lang. XML and Web Technologies for Data Sciences with R. Use R! New York, NY: Springer New York, 2014. doi:10.1007/978-1-4614-7900-0.
