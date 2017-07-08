@@ -14,7 +14,7 @@ Students should
 
 ## Lesson
 
-Let's look at an example dataset (one I've purposely made).
+Let's look at an example dataset (one I've made).
 It is an arbitrary temperature study with six sites. Within each site, there are 6 plots and we took 10 samples of temperature (degrees C) per plot.
 
 
@@ -30,7 +30,8 @@ How can we split them apart?
 ```{r}
 library(tidyr)
 
-lettersdf <- data.frame(letters = paste(LETTERS, rev(LETTERS), sep = "."), val = rnorm(length(LETTERS), 0, 5))
+lettersdf <- data.frame(letters = paste(LETTERS, rev(LETTERS), sep = "."))
+lettersdf
 lettersdf %>%
   separate(letters, c("letter_one", "letter_two"), sep = "\\.")
 ```
@@ -41,20 +42,7 @@ lettersdf %>%
 # Your code here
 ```
 
-TODO: Produce a good fake dataset with various issues
-
-- odd values
-- missing observations where we expect
-- a full replication of the time series
-
-- Look for odd values
-
-
 ### Checking assumptions
-
-
-TODO: Do a col with -999s in there
-
 
 Look with `summary`:
 
@@ -102,6 +90,7 @@ nrow(fundata) == 6 * 6 * 10
 
 
 TODO: an NA where a character vector should be
+
 ```{r}
 
 ```
