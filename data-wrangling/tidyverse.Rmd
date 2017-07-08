@@ -1,9 +1,9 @@
 ---
-title: "tidyverse"
+title: "tidyverse wrangling and surfing data"
 author: "cjlortie"
 output: html_document
 ---
-![](./beemo.rodeo.png)  
+![](./datasurfing.jpg)  
 <br>
 
 [Data wrangling slide deck](http://www.slideshare.net/cjlortie/data-wrangling-in-r-be-a-wrangler)
@@ -57,7 +57,7 @@ summarise for bringing together many values
 
 [Great wrangling webinar](https://www.rstudio.com/resources/webinars/data-wrangling-with-r-and-rstudio/)
 
-We will cover two basic challenges you will certainly encounter.  
+Here are some exercises to address basic challenges you will certainly encounter.  
 
 ###Exercise 1. Missing data
 Missing data are typically termed NAs. Missing data are not necessarily the same as true zeros. See [Mixed Effects Models and Extension in Ecology with R](https://link.springer.com/content/pdf/10.1007%2F978-0-387-87458-6.pdf) for an excellent discussion of this. Missing data due to experimental design, observer error, or failures to detect a process are 'false zeros' and equivalent to missing data. True negatives (measured and detected absences) are recommended to be coded as a zero.
