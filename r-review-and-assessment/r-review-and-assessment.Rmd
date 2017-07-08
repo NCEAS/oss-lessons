@@ -2,6 +2,10 @@
 title: R Review & Assessment
 ---
 
+- Time slot: 60 minutes
+- Learning outcomes:
+    - Refresh general R programming skills
+    
 Concepts:
 
 variables
@@ -19,9 +23,9 @@ data import/export (e.g. read.csv)
 data manip
   subset
   data.frame[] notation
-plot
-model
-util functions
+plotting
+modeling
+common util functions
   paste (combine things)
   table
   summary
