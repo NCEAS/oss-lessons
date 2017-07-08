@@ -39,12 +39,22 @@ Good resources:
 
 ## Learning Outcomes
 
+- Get set up for using RStudio
+- Become familiar with RStudio and its interface
 - Gain an awareness of Markdown and RMarkdown
 - Author a simple RMarkdown document in RStudio
 
 ## Lesson
 
 - Get RStudio Desktop installed and running for everyone
+- Go over RStudio's interface:
+  - Source 
+  - Console
+  - Plots
+  - Help
+  - Environment
+  - History
+  
 - Get RMarkdown dependencies installed by:
     - Create new RMarkdown document in RStudio Desktop
     - See this dialog:
