@@ -19,7 +19,7 @@ dir_out <- "~/GOM_fisheries_shapefiles"
 # Get the webpage content
 webpage <- read_html(URL)
 
-# Extracte the information of interest from the website
+# Extract the information of interest from the website
 data <- html_nodes(webpage, ".dataBox p a")
 
 # Grab the base URLs to download all the referenced data
