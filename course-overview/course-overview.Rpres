@@ -116,11 +116,19 @@ Communication, geospatial analysis, data viz, and synthesis project results.
 
 View the [Full Schedule](https://nceas.github.io/oss-2017/schedule.html)
 
-Parking Lot
+Communications
 ========================================================
 
-[Parking Lot](https://github.com/NCEAS/oss-2017/labels/ParkingLot)
+## Slack
 
+- https://slack.nceas.ucsb.edu, Channel #oss
+- Daily discussion
+- Questions, comments, additional links
+- We will create channels for each of the synthesis projects as well
+
+## Parking Lot
+
+- https://github.com/NCEAS/oss-2017/labels/ParkingLot
 - Running issues that we need to resolve
     - Especially if off-topic, or lengthy discussion
 - Add anything you’d like addressed
@@ -130,7 +138,11 @@ Parking Lot
 
 Code of Conduct
 ========================================================
-- Place holder for Amber
+
+- Governs our interactions
+- Collaborative Community Document
+    - http://bit.ly/OSSGRP-CoC
+
 
 Daily Schedule
 ========================================================
