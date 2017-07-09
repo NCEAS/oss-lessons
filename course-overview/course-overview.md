@@ -6,7 +6,11 @@ height: 900
 font-family: 'Gill Sans', 'Source Sans Pro', 'Aller', 'Helvetica'
 css: oss.css
 
+# Gulf Research Program
+
 ![NCEAS](images/nceas-logo.png)
+
+Matthew B. Jones, Amber Budden, Christopher Lortie
 
 July 10-28, 2017
 
