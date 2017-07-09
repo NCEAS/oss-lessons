@@ -5,6 +5,7 @@ author: "Bryce Mecum"
 
 Making advanced plots including interactive plots
 
+- ggplot2 overview
 - Trelliscope
 - htmlwidgets (make use of d3 in R)
 - plotly
@@ -18,3 +19,9 @@ Learning outcomes
 Students should be able to:
   
 - Make awesome plots (more to outcomes to come!)
+
+
+## Resources
+
+http://enhancedatascience.com/2017/07/06/pick-best-r-packages-interactive-plot-visualisation-22/
+http://enhancedatascience.com/2017/04/12/pick-best-r-packages-data-visualization/
