@@ -130,7 +130,8 @@ Parking Lot
 
 Code of Conduct
 ========================================================
-- Place holder for Amber
+- Collaborative Community Document
+- http://bit.ly/OSSGRP-CoC
 
 Daily Schedule
 ========================================================
