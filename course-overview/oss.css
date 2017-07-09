@@ -344,6 +344,18 @@
 }
 
 body {
-      background: white;
+   background: white;
 }
+
+/*
+ * Fix the problem with full screen mode in Safari showing slides with a black background,
+ * which was fixed in reveal.js (see ), but not RPresentation
+ */
+ html:-webkit-full-screen-ancestor {
+   background-color: inherit;
+ }
+
+ html:-moz-full-screen-ancestor {
+   background-color: inherit;
+ }
 

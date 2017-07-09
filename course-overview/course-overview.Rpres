@@ -36,13 +36,17 @@ Ocean Health Index
 ## Science
 
 <strong>An index to assess the health and benefits of the global ocean</strong>
-Benjamin S. Halpern, Catherine Longo, Darren Hardy, Karen L. McLeod, Jameal F. Samhouri, et al. Nature, (30 August 2012) DOI: [10.1038/nature11397](http://doi.org/10.1038/nature11397)
+Halpern et al. Nature, (30 August 2012) DOI: [10.1038/nature11397](http://doi.org/10.1038/nature11397)
 
 ![](images/ohi-global.png)
 
 ***
 ## Data
 ![](images/knb-ohi-global.png)
+
+## Software
+![](images/ohicore-github.png)
+
 
 Synthesis Skills
 ========================================================
@@ -80,6 +84,18 @@ Tabular data, reproducible research and coding, and metagenomics.
 Communication, geospatial analysis, data viz, and synthesis project results.
 
 View the [Full Schedule](https://nceas.github.io/oss-2017/schedule.html)
+
+Parking Lot
+========================================================
+
+[Parking Lot](https://github.com/NCEAS/oss-2017/labels/ParkingLot)
+
+- Running issues that we need to resolve
+    - Especially if off-topic, or lengthy discussion
+- Add anything you’d like addressed
+- Create one issue per discussion item
+- We'll review each morning
+
 
 A final nooooote on Excel
 ========================================================
