@@ -8,26 +8,26 @@ NCEAS and the OSS workshop participants are partners in providing a welcoming an
 As a cohort, our goal is to create a community of learning; ehancing our collective skills and understanding of data science and synthesis practices for application in the area of Gulf reseach.  We will …
 
 **Norms**
-*Be responsive and professional
-*Ask for and respect confidentiality requests
-*Contribute; but recognize sensitivities to sharing that might affect contributions to the community (workplace permissions, intellectual property, etc.)
-*Develop pride and a sense of community
-*Give credit
-*Not tolerate racist, sexist, ageist or other discriminatory language or behavior
+- Be responsive and professional
+- Ask for and respect confidentiality requests
+- Contribute; but recognize sensitivities to sharing that might affect contributions to the community (workplace permissions, intellectual property, etc.)
+- Develop pride and a sense of community
+- Give credit
+- Not tolerate racist, sexist, ageist or other discriminatory language or behavior
 
 **Collaborative and Community Guidelines**
-*Create a community of learning, a network developed from everyone’s collective experience
-*Recognize, respect and appreciate every community member’s  diverse background, perspective, breadth of experience and style of communication
-*Share resources, challenges, and tools within our legal ability; provide support
-*Create a safe and supportive space for participants to build trust: inviting, inclusive, open-minded, positive, and FUN! Be active in keeping it safe, maintaining group integrity
+- Create a community of learning, a network developed from everyone’s collective experience
+- Recognize, respect and appreciate every community member’s  diverse background, perspective, breadth of experience and style of communication
+- Share resources, challenges, and tools within our legal ability; provide support
+- Create a safe and supportive space for participants to build trust: inviting, inclusive, open-minded, positive, and FUN! Be active in keeping it safe, maintaining group integrity
 
 
 **Education + Growth Goals**
-*Teach/Learn within the cohort, sharing-out
-*Give honest and transparent feedback for leadership so the program can grow
+- Teach/Learn within the cohort, sharing-out
+- Give honest and transparent feedback for leadership so the program can grow
 
 
 **Accountability**
-*We are committed to actively reinforcing the norms, and following up on them while encouraging constructive conversation.
+- We are committed to actively reinforcing the norms, and following up on them while encouraging constructive conversation.
 
 In the instance of a violation of the above guidelines please speak to either Matt Jones or Amber Budden if direct interaction is not feasible, desireable or appropriate. 
