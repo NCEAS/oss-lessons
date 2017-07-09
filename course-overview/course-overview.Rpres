@@ -135,6 +135,15 @@ Daily Schedule
 ***
 ![](images/day1-schedule2.png)
 
+Course materials and resources
+========================================================
+
+Course materials will be downloadable
+
+- Lessons and code examples: https://nceas.github.io/oss-2017/lessons.html
+    - Plus raw source code in GitHub: https://github.com/NCEAS/oss-lessons
+- Reading list by day: https://nceas.github.io/oss-2017/readings.html
+
 
 Acknowledgements
 =========================================================
