@@ -47,6 +47,33 @@ Halpern et al. Nature, (30 August 2012) DOI: [10.1038/nature11397](http://doi.or
 ## Software
 ![](images/ohicore-github.png)
 
+Synthesis in the Gulf Research Program
+========================================================
+
+- Environment
+- Energy
+- Health
+
+![](images/Sediment_in_the_Gulf_of_Mexico.jpg)
+
+***
+
+- Natural systems
+- Human societies
+- Engineered systems
+
+![](images/gulf-grp-components.jpg)
+
+
+Introductions
+========================================================
+
+- 30 seconds: <strong>Name, brief bio, project interests</strong>
+- Software you love, or love to hate
+
+<video id="Oliver" controls src="https://www.nceas.ucsb.edu/~jones/oliver-noooo-excel-snippet-web.mp4"></video>
+
+
 
 Synthesis Skills
 ========================================================
@@ -74,10 +101,10 @@ Instructors
 Curriculum
 ========================================================
 
-## Week 1: Fundamental collaboration skills
+## Week 1: Fundamental data and collaboration skills
 Introduction to command line, communicating science, R, meta-analysis and data management.
 
-## Week 2: Advanced topics
+## Week 2: Towards efficient and reproducible research
 Tabular data, reproducible research and coding, and metagenomics.
 
 ## Week 3: Advanced topics & group projects
@@ -97,10 +124,17 @@ Parking Lot
 - We'll review each morning
 
 
-A final nooooote on Excel
+Code of Conduct
+========================================================
+- Place holder for Amber
+
+Daily Schedule
 ========================================================
 
-<video id="Oliver" controls src="https://www.nceas.ucsb.edu/~jones/oliver-noooo-excel-snippet-web.mp4"></video>
+![](images/day1-schedule1.png)
+***
+![](images/day1-schedule2.png)
+
 
 Acknowledgements
 =========================================================
