@@ -1,11 +1,17 @@
 ---
 title: "SQL Database Access in R"
-author: "Bryce Mecum"
+time_slot: 60 minutes
 ---
 
-Time slot: 60 minutes
+## Introduction
 
-Learning outcomes:
+Continuing on from our earlier lesson on SQL, we're going to learn how to work with SQL and database in R.
+There are two ways we're going to go over:
+
+1. Directly executing SQL statements against a database
+2. Using `dplyr`'s seamless ability to work with SQL databases
+
+## Learning outcomes
 
 Students should:
 
@@ -13,4 +19,57 @@ Students should:
 - Be able to load external data in CSV format into a table in the database
 - Be able to run a query against a database table in R
 - Be able to run an SQL join against two database tables in R
+- Become familiar with connecting `dplyr` to a database
 
+## Lesson
+
+### Work with SQL directly using the `DBI` package
+
+This content is largely adapted from the [DBI homepage](http://rstats-db.github.io/DBI/).
+
+```{r}
+# Create an ephemeral in-memory RSQLite database
+library(DBI)
+# Create an ephemeral in-memory RSQLite database
+con <- dbConnect(RSQLite::SQLite(), dbname = ":memory:")
+
+dbListTables(con)
+dbWriteTable(con, "mtcars", mtcars)
+dbListTables(con)
+
+dbListFields(con, "mtcars")
+dbReadTable(con, "mtcars")
+
+# You can fetch all results:
+res <- dbSendQuery(con, "SELECT * FROM mtcars WHERE cyl = 4")
+dbFetch(res)
+dbClearResult(res)
+
+# Or a chunk at a time
+res <- dbSendQuery(con, "SELECT * FROM mtcars WHERE cyl = 4")
+while(!dbHasCompleted(res)){
+  chunk <- dbFetch(res, n = 5)
+  print(nrow(chunk))
+}
+dbClearResult(res)
+
+dbDisconnect(con)
+```
+
+**Exercise**: DBI and starwars
+
+Instructions: Load the starwars dataset from the `dplyr` package into an in-memory SQLite database and execute a query against the table.
+
+e.g. list just the Droids
+
+```{r}
+# Your code here
+```
+
+### Automatic SQL with dplyr
+
+```{r}
+library(dplyr)
+src_sqlite()
+```
+## Summary
