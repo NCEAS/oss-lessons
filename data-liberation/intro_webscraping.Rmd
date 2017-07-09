@@ -96,8 +96,11 @@ Cascading Style Sheets (`CSS`) are a stylesheet language used to describe the pr
 3. Choice of strategy: e.g. Xpath, CSS selector, ...
 4. Information extraction: Choose the relevant R package(s) to accomplish your data Extraction and code it
 
+<br>
 
 # `rvest` 
+
+`rvest` is a set of wrappers around the `xml2` and `httr` packages
 
 ## Main functions
 
@@ -105,6 +108,8 @@ Cascading Style Sheets (`CSS`) are a stylesheet language used to describe the pr
 - *html_nodes*: extract pieces out of HTML documents using XPath and/or CSS selectors
 - *html_attr*: extract attributes from HTML, such as `href`
 - *html_text*: extract text content
+
+For more: [here](https://github.com/hadley/rvest)
 
 ## Quick example
 
