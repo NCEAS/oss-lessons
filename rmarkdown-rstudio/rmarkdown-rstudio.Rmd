@@ -11,13 +11,14 @@ Plain text is a great way to write information down. Plain text has some major a
 - Works perfectly with version control software like git. MS Word does not.
 - Easy to read, easy to write
 
-Markdown is a plain text format that allows for more advanced typesetting features such as:
+Markdown is a plain text format that allows for common typesetting features including:
 
 - Text formatting (bold, italic, etc.)
 - Links
 - Tables
 - In-lined images
 
+Without the need for spending time typesetting which is tedious and usually unnecessary.
 So if we want those kinds of things, we might want to use Markdown.
 
 RMarkdown allows us to produce an output document (PDF, DOCX, website) based upon a mix of Markdown and R code.
@@ -54,6 +55,7 @@ Good resources:
   - Help
   - Environment
   - History
+  - Projects
   
 - Get RMarkdown dependencies installed by:
     - Create new RMarkdown document in RStudio Desktop
@@ -76,7 +78,6 @@ Good resources:
 ### Chunks
 
 Chunks take options, see: https://yihui.name/knitr/options/
-
 
 #### echo and include
 
@@ -140,7 +141,6 @@ knitr::kable(head(mpg))
 
 Reference: http://rmarkdown.rstudio.com/lesson-7.html
 
-
 ### Output formats
 
 RMarkdown documents can be converted into many formats, most often:
@@ -181,3 +181,4 @@ output:
 - RMarkdown is a slight extention of the Markdown syntax that lets us mix code and prose together
 - RMarkdown is a key part of the R reproducible science scene
 - RStudio is a great way to author RMarkdown documents
+- Later on in this workshop, we'll see how to deal with citations so we can write academic manuscripts
