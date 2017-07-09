@@ -57,9 +57,12 @@ Explore the five Ws for your set of studies. To do this, produce an evidence map
 ###Conclusions
 1. A summary of synthesis data is a powerful, relatively direct mechanism to provide a sense of the scope of research for a specific topic.  
 2. A data summary is a recap of synthesis dataframe that highlights the main idea of the selection of studies.  
-3. An excellent indicator of an appropriate synthesis fit is also an open science product.
+3. An excellent indicator of an appropriate synthesis fit is also an open science product.  
+4. **Organizing ideas is just as important as organizing data**.  Consider using tools such as ontologies, conceptual frameworks, standard vocabularies, and heuristic idea mapping methodologies.
 
 ###Additional resources
 [Evidence maps](https://systematicreviewsjournal.biomedcentral.com/articles/10.1186/s13643-016-0204-x) can take numerous forms.  
 
-[Conceptual frameworks](http://onlinelibrary.wiley.com/doi/10.1111/geb.12202/full) summarizing the ideas are also an important outcome of the data summary process for synthesis data. [Here](http://onlinelibrary.wiley.com/doi/10.1111/j.1466-8238.2011.00713.x/abstract) is another conceptual framework from a less formal synthesis process but is nonetheless a powerful tool for inspiration.
+[Conceptual frameworks](http://onlinelibrary.wiley.com/doi/10.1111/geb.12202/full) summarizing the ideas are also an important outcome of the data summary process for synthesis data.  
+
+[Here](http://onlinelibrary.wiley.com/doi/10.1111/j.1466-8238.2011.00713.x/abstract) is another conceptual framework from a less formal synthesis process but is nonetheless a powerful tool for inspiration. In doing these syntheses, other tools such as ontologies, conceptual frameworks, and standardizing the terminology within a field of research are a profound contribution.

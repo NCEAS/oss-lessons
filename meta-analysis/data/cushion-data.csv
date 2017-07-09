@@ -1,4 +1,4 @@
-Study #,UniqueID,Authors,GPS,GPS/elevation,taxon,species,measure,cushion species,elevation,actual elevation,Rii,Var Rii,n
+Study,UniqueID,Authors,GPS,GPS/elevation,taxon,species,measure,cushion species,elevation,actual elevation,Rii,Var Rii,n
 1,1,Anthelme et al. 2012,"00ᵒ28’S,78ᵒ09’W","0°28'22.52''S, 78°09'57.62''W",plant,Astragalus geminiflorus,presence,Azorella aretioides,low,4400,-1,0.05,1
 1,2,Anthelme et al. 2012,"00ᵒ28’S,78ᵒ09’W","0°28'22.52''S, 78°09'57.62''W",plant,Azorella aretioides,presence,Azorella aretioides,low,4400,-1,0.05,1
 1,3,Anthelme et al. 2012,"00ᵒ28’S,78ᵒ09’W","0°28'22.52''S, 78°09'57.62''W",plant,Baccharis caespitosa,presence,Azorella aretioides,low,4400,0.156756757,0.05,1
