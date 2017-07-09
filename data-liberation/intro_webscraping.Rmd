@@ -8,7 +8,7 @@ output: html_document
 
 The Goal of this session is to learn how to get data from the World Wide Web using R. Although we are going to talk about few concepts first, the core of this session will be spent on getting data from web sites that do not offer any interface to automate information retrieval, often via  Web services (e.g. REST, SOAP) or application programming interfaces (APIs). Therefore it is necessacry to scrape the information embbeded in the Web site itself.
 
-When you want to extract information or download data from a website you should first:
+When you want to extract information or download data from a website that is too large for efficient manual downloading or needs to be frequently updated, you should first:
 
 1. Check if the Web site as any available Web services or APIs have been developed to this end
 2. Check if any R (or other language you know) package has been developed by others as a wrapper around the API to faciliate the use of these Web services 
@@ -28,7 +28,7 @@ Here are some of the key packages:
 
 There are also function in the `utils` package. Note that these functions do not handle https (motivation behind the `curl` R package)
 
-*In this session we are going to use `rvest`: first for a simple tutorial, followed by a challenge in groups*
+**In this session we are going to use `rvest`: first for a simple tutorial, followed by a challenge in groups**
 
 
 # Some background
@@ -36,6 +36,7 @@ There are also function in the `utils` package. Note that these functions do not
 ## HTTP:  Hypertext Transfer Protocol
 
 ### URL
+
 At the heart of web communications is the request message, which are sent via *U*niform *R*esource *L*ocators (URLs). Basic URL structure:
 
 ![credits: https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177](./images/http1-url-structure.png)
@@ -62,31 +63,50 @@ Status codes:
 - `4xx`: Client Error; the famous 404: ressource not found
 - `5xx`: Server Error
 
+
 ## HTML
 
-The HyperText Markup Language describes and defines the content of a webpage. Other technologies besides HTML are generally used to describe a webpage's appearance/presentation (CSS) or functionality (JavaScript).
+The *H*yper*T*ext *M*arkup *L*anguage (`HTML`) describes and defines the content of a webpage. Other technologies besides HTML are generally used to describe a webpage's appearance/presentation (CSS) or functionality (JavaScript).
 
-"HyperText" in HTM refers to links that connect webpages to one another, either within a single website or between websites. Links are a fundamental aspect of the Web. 
+"HyperText" in HTML refers to links that connect webpages to one another, either within a single website or between websites. Links are a fundamental aspect of the Web. 
 
 HTML uses "markup" to annotate text, images, and other content for display in a Web browser. HTML markup includes special "elements" such as `<head>`, `<title>`, `<body>`, `<header>`, `<footer>`, `<article>`, `<section>`, `<p>`, `<div>`, `<span>`, `<img>`, and many others.
 
 Using you web browser, you can inspect the HTML content of any webpage of the World Wide Web.
 
 
+## XML
+
+The e*X*tensible *M*arkup *L*anguage (XML) provides a general approach for representing all types of information, such as data sets containing numerical and categorical variables. XML provides the basic, common, and quite simple structure and syntax for all of “dialects” or vocabularies. For example, `HTML`, `SVG` and `EML` are a particular vocabularies of XML.
+
+
 ## XPath
 
-`XPath` is quite simple but yet very powerful. Similar syntax to a file system hierarchy, it allows  to identify nodes of interest by specifying paths through the tree, based on node names, node content, and a node’s relationship to other nodes in the hierarchy. We typically use XPath to locate nodes in a tree and then use R functions to extract data from those nodes and bring the data into R.
+`XPath` is quite simple but yet very powerful. Similar syntax to a file system hierarchy, it allows to identify nodes of interest by specifying paths through the tree, based on node names, node content, and a node’s relationship to other nodes in the hierarchy. We typically use XPath to locate nodes in a tree and then use R functions to extract data from those nodes and bring the data into R.
 
 
 ## CSS
 
-Cascading Style Sheets (CSS) are a stylesheet language used to describe the presentation of a document written in HTML or XML. CSS describes how elements should be rendered on screen, on paper, in speech, or on other media.
+Cascading Style Sheets (`CSS`) are a stylesheet language used to describe the presentation of a document written in HTML or XML. CSS describes how elements should be rendered on screen, on paper, in speech, or on other media. In CSS, **selectors** are used to target the HTML elements on our web pages that we want to style. There are a wide variety of CSS selectors available, allowing for fine grained precision when selecting elements to style.
+
+# Web scraping Tasks
+
+1. Check for existing API and existing R packages
+2. Information identication: use you web browser and/or http://selectorgadget.com/
+3. Choice of strategy: e.g. Xpath, CSS selector, ...
+4. Information extraction: Choose the relevant R package(s) to accomplish your data Extraction and code it
 
 
-SelectorGadget: http://selectorgadget.com/
+# `rvest` 
 
+## Main functions
 
-# `rvest` quick example
+- *read_html*:  read a webpage into R as XML (document and nodes)
+- *html_nodes*: extract pieces out of HTML documents using XPath and/or CSS selectors
+- *html_attr*: extract attributes from HTML, such as `href`
+- *html_text*: extract text content
+
+## Quick example
 
 Let us get started with organizing your evenings. The Funk Zone is a pretty fun part of Santa Barabara, where you can find wineries, bars and restaurants. Check this out: <http://santabarbaraca.com/explore-and-discover-santa-barbara/neighborhoods-towns/santa-barbara/the-funk-zone/>
 
@@ -150,6 +170,8 @@ By group of two, work on downloading all the fishery shapefiles for the Gulf of 
 
 - CRAN view on webtechnologies: https://CRAN.R-project.org/view=WebTechnologies
 - HTML intro: https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177
+- Good definitions and introduction to web basics: https://developer.mozilla.org/en-US/docs/Web
 - Scrapping via API; example of rnoaa: http://bradleyboehmke.github.io/2016/01/scraping-via-apis.html
 - Munzert, Simon. Automated Data Collection with R: A Practical Guide to Web Scraping and Text Mining. Chichester, West Sussex, United Kingdom: John Wiley & Sons Inc, 2015.
 - Nolan, Deborah, and Duncan Temple Lang. XML and Web Technologies for Data Sciences with R. Use R! New York, NY: Springer New York, 2014. doi:10.1007/978-1-4614-7900-0.
+
