@@ -5,17 +5,18 @@ time_slot: 60 minutes"
 
 ## Introduction
 
-Let's take about an hour to touch up on basic R programming skills in a survey style and then we'll move onto some challenges which should test your understanding.
+Let's take about an hour to take a quick assessment, touch up on basic R programming skills in a survey style, and then we'll move onto some challenges which should test your understanding if we have time.
 
 ## Learning Outcomes
 
+- Assess where everyone is with R so we can shape the curricula
 - Refresh general R programming skills
 - Test R skills against some example problems
 
 ## Assessment
 
 Everyone will arrive to this lesson with different experiences with R.
-Skill with R isn't necessarily a continuum and can instead be thought of as a set of tools.
+Skill with R doesn't necessarily exist a continuum and can instead be thought of as a set of tools.
 Each particpant may start the workshop with different tools.
 
 In order to get a better sense of what topics in R we should focus more heavily on, let's do a quick assessment.
@@ -48,8 +49,40 @@ A. "applepie"
 B. "apple, pie"
 C. "apple pie"
 D. An error
-  
+
 ### Question 3
+
+What does the following expression return?
+
+```{r}
+max(abs(c(15, 6, -5, -7, -7, -20, -16, 7, 17, 11)))
+```
+
+A. 20
+B. -7
+C. An error
+D. 17
+
+
+### Question 4
+
+Given the following `data.frame`:
+
+```{r}
+x <- data.frame(y = LETTERS)
+```
+
+How can we get *just* the `y` column back?
+
+Multiple possible answers:
+
+A. with(x, y)
+B. x$y
+C. y
+D. x[,"y"]
+E. y %in% x
+
+### Question 5
 
 If x and y are both data.frames, 
 
@@ -73,12 +106,14 @@ z
 9
 10
 
+Multiple possible answers:
+
 A. `join(x, y)`
 B. `c(x, y)`
 C. `rbind(x, y)`
 D. `x + y`
 
-### Question 4
+### Question 6
   
 Given the following data.frame,
 
@@ -86,13 +121,15 @@ x <- data.frame(y = 1:10)
 
 Which expression(s) return a `data.frame` with rows where y is greater than 5 (i.e. 6 - 10)
 
+Multiple possible answers:
+
 A. `x[x$y > 5,]`
 B. ``x$y > 5`
 C. `x[which(x$y > 6),]`
 D. `x[y > 5,]`
 E. `subset(x, y > 5)`
     
-### Question 5
+### Question 7
 
 What does the following bit of code print out?
 
@@ -109,7 +146,7 @@ B. 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 C. 2, 4, 6, 8, 10
 D. 1, 3, 4, 7, 9
 
-### Question 6
+### Question 8
 
 Given the following `data.frame`:
 
@@ -124,7 +161,7 @@ B. numeric
 C. logical
 D. character
 
-### Question 7
+### Question 9
 
 Given a list of the letters in the English alphabet defined by:
 
@@ -135,15 +172,9 @@ What does the following expression result in?
 `length(x["y"])`
 
 A. 0
-C. An error
+B. An error
 C. 26
 D. 1
-
-### Question 8
-TODO
-
-### Question 9
-TODO
 
 ### Question 10
 
@@ -174,43 +205,41 @@ bar()
 Based on previous R training: https://github.nceas.ucsb.edu/Training/R-intro.
 Instructor will go over these live with the classroom.
 
-- basic syntax
-  - comparison
-- variables / assignemtn
-    - assignment
-- types
-    - vectors
-        - character vecs / strings
-    - lists
-    - vectors vs. lists
-        - touch on the fact that vectors are for one type and lists are for multi
-        - what does this do? `r c(1, "asdf", 2)`
-    - data.frames
+- Basic syntax
+  - Variables & assignemnt
+  - R as a calculator: `+ - * / > >= %% %/%` etc
+- Common types
+    - Vectors
+        - Character vecs / strings
+          - `paste` / `paste0`
+    - Lists
+    - Vectors vs. lists
+        - What does this do? `r c(1, "asdf", 2)`
+    - `data.frame`s
 - data import/export (e.g. read.csv)
-  - read.csv
-  - read.table
-  - readLines
-  - save/load
-- data manip
-    - subset()
-    - data.frame [] notation
-- modeling
-- sample / runif / rnorm
-  - sampling a data.frame
+  - `read.csv`
+  - `read.table`
+  - `readLines`
+  - `save/load`
+- Basic  data manip
+    - `data.frame` [] notation
+    - `subset()`
+- Modeling
+  - `sample` / `runif` / `rnorm`
+    - sampling a data.frame
 - common util functions
-    - paste (combine things)
-    - table
-    - summary
-    - str
-    - seq
-    - nchar
-- iteration
-    - for loops
-        - when do we use for loops? when we're doing for each X where X can be year, site, etc.
-    - whie loops
+    - `table`
+    - `summary`
+    - `str`
+    - `seq`
+    - `nchar`
+- Iteration
+    - `for` loops
+        - When do we use for loops?
+    - `while` loops
 - apply-family
-  - sapply
-  - lapply
+  - `sapply`
+  - `lapply`
 - functions: We'll skip this as it will be taught in another lesson
 
 More advanced topics to cover if time allows:
@@ -229,8 +258,7 @@ An excellent way to really learn a programming language is to call out what the 
 Afterwards, you can compare your expectation with what actually happened.
 
 Here are code chunks with a series of expressions.
-Try to predict what **the final expression* does before running the entire chunk:
-
+Try to predict what **the final expression* does before running the entire chunk and add a note if you got one wrong.
 
 ```{r}
 x <- 2
@@ -303,7 +331,7 @@ class(x)
 
 ```{r}
 x <- list(1, 2, 3)
-# todo: something with lists
+lapply(x, cumsum)
 ```
 
 ```{r}
@@ -347,8 +375,6 @@ x <- c(1, NA, 3)
 y <- c(NA, 2, NA)
 all(is.na(x + y))
 ```
-
-TODO: Example where factors trip you up
 
 ## Summary
 
