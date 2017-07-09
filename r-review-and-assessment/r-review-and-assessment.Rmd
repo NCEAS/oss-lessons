@@ -12,9 +12,167 @@ Let's take about an hour to touch up on basic R programming skills in a survey s
 - Refresh general R programming skills
 - Test R skills against some example problems
 
-## Lesson flow
+## Assessment
 
-Based on previous R training: https://github.nceas.ucsb.edu/Training/R-intro
+Everyone will arrive to this lesson with different experiences with R.
+Skill with R isn't necessarily a continuum and can instead be thought of as a set of tools.
+Each particpant may start the workshop with different tools.
+
+In order to get a better sense of what topics in R we should focus more heavily on, let's do a quick assessment.
+The results will help us shape instruction so that we can ensure we're meeting everyone's needs.
+
+**Instructions:** 
+
+TODO: Decide if I really like/prefer a Google Form to get more quantitative
+
+Question ideas:
+
+### Question 1
+
+Which of the following expressions assigns the number 2 to the variable x?
+
+A. `x == 2`
+B. `x <- 2`
+C. `x - 2`
+D. `x = 2`
+
+### Question 2
+
+What does the following expression return?
+
+```{r}
+paste("apple", "pie")
+```
+
+A. "applepie"
+B. "apple, pie"
+C. "apple pie"
+D. An error
+  
+### Question 3
+
+If x and y are both data.frames, 
+
+```{r}
+x <- data.frame(z = 1:5)
+y <- data.frame(z = 6:10)
+```
+
+which of the following expressions would be a correct way to combine them into one data.frame that looks like this:
+
+z
+-
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+
+A. `join(x, y)`
+B. `c(x, y)`
+C. `rbind(x, y)`
+D. `x + y`
+
+### Question 4
+  
+Given the following data.frame,
+
+x <- data.frame(y = 1:10)
+
+Which expression(s) return a `data.frame` with rows where y is greater than 5 (i.e. 6 - 10)
+
+A. `x[x$y > 5,]`
+B. ``x$y > 5`
+C. `x[which(x$y > 6),]`
+D. `x[y > 5,]`
+E. `subset(x, y > 5)`
+    
+### Question 5
+
+What does the following bit of code print out?
+
+```{r}
+for (i in 1:10) {
+  if (i %% 2) {
+    print(i)
+  }
+}
+```
+
+A. An error
+B. 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+C. 2, 4, 6, 8, 10
+D. 1, 3, 4, 7, 9
+
+### Question 6
+
+Given the following `data.frame`:
+
+`x <- data.frame(x = LETTERS)`
+
+What is the result of this expression?
+
+`class(x$x)`
+
+A. factor
+B. numeric
+C. logical
+D. character
+
+### Question 7
+
+Given a list of the letters in the English alphabet defined by:
+
+`x <- list("y" = LETTERS)`
+
+What does the following expression result in?
+
+`length(x["y"])`
+
+A. 0
+C. An error
+C. 26
+D. 1
+
+### Question 8
+TODO
+
+### Question 9
+TODO
+
+### Question 10
+
+If package `foo` contains a function `bar` and package `baz` also contains a function `bar`, defined as such:
+
+```
+# in package foo
+bar <- function() {
+  return "buzz"
+}
+
+# in package baz
+bar <- function() {
+  return "woof"
+}
+```
+
+What output, if any, does the following line of code produce?
+
+```
+library(foo)
+library(baz)
+bar()
+```
+
+## R overview
+
+Based on previous R training: https://github.nceas.ucsb.edu/Training/R-intro.
+Instructor will go over these live with the classroom.
 
 - basic syntax
   - comparison
