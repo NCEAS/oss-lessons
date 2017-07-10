@@ -18,3 +18,11 @@ Thinking Preferences
 
 ![WholeBrain](images/wholebrain.png)
 
+Slide 3
+========================================================
+
+![Brain](images/Brain.jpg)
+
+***
+
+![WholeBrain](images/wholebrain.png)
