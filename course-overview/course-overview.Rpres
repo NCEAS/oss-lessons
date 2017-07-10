@@ -81,7 +81,8 @@ Synthesis in the Gulf Research Program
 Introductions
 ========================================================
 
-- 30 seconds: <strong>Name, brief bio, project interests</strong>
+- Participant bios: https://www.nceas.ucsb.edu/OSS2017
+- <strong>Name, brief bio, project interests</strong>
 - Software you love, or love to hate
 
 <video id="Oliver" controls src="https://www.nceas.ucsb.edu/~jones/oliver-noooo-excel-snippet-web.mp4"></video>
