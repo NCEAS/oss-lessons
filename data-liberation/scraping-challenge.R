@@ -1,12 +1,17 @@
+######################################################################################
+# OSS 2017: Web Scraping challenge                                                   #
+# Julien Brun, brun@nceas.ucsb.edu, NCEAS 2017                                       #
+#                                                                                    #
+# Challenge:                                                                         #
+# Download all the fisheries shapefile for the Gulf of Mexico from the NOAA website: #
+# http://sero.nmfs.noaa.gov/maps_gis_data/fisheries/gom/GOM_index.html               #
+#                                                                                    #
+######################################################################################
+
+
 ## LIBRARY ----
 # install.packages("rvest")
 library("rvest")
-
-
-## CHALLENGE ----
-
-# Downloading all the fisheries shapefile for the Gulf of Mexico from the NOAA website:
-# http://sero.nmfs.noaa.gov/maps_gis_data/fisheries/gom/GOM_index.html
 
 
 ## CONSTANT ----
