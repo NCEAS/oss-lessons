@@ -22,7 +22,7 @@ remote computing and computing in the 'Cloud' for speeding up scientific analysi
 3. To learn to connect to a remote computer via a shell
 4. To appreciate the value of remote and cloud computing
 
-# Exercise
+# Background
 
 ## The Internet
 
@@ -59,15 +59,16 @@ remote computing and computing in the 'Cloud' for speeding up scientific analysi
 
 ## IP Numbers and Hostnames
 
-* Hosts are assigned a unique IP number used for all communication and routing
-    - 128.111.220.7
+* Hosts are assigned a **unique address** used for all communication and routing
+    - Internet Protocol Address (IP Address)
+        - 128.111.220.7
 * Each IP Address can be used to communicate over various "ports"
     - Allows multiple applications to communicate with a host without mixing up traffic
 
-* IP numbers can be difficult to remember, so also assign hostnames
+* IP numbers can be difficult to remember, so also assign **hostnames**
     - Handled through the global Domain Name System (DNS)
     - Clients first look up a hostname in DNS to find the IP Number
-    - isis.nceas.ucsb.edu -> 128.111.220.46
+    - aurora.nceas.ucsb.edu -> 128.111.220.46
     - Then they open a connection to the IP Number
 
 
@@ -85,7 +86,11 @@ remote computing and computing in the 'Cloud' for speeding up scientific analysi
 ### What is the difference?
 
 * Internet: Global communication network using the Internet Protocol (IP)
-    - Supports many application protocols, including HTTP
+    - Supports many application protocols, including:
+        - HTTP (web)
+        - FTP (file transfer)
+        - SMTP (email)
+        - SSH (secure shell)
 
 * Web: Global system of interlinked hypertext documents
     - Transported over HTTP application protocol (over IP)
@@ -123,22 +128,57 @@ remote computing and computing in the 'Cloud' for speeding up scientific analysi
 * Tremendously simplifies remote computing
 * Supported out-of-the-box on Linux and Macs
 
-### Connecting to a remote server
+# Exercise
+
+## Launch your Terminal program
+
+- MacOS: __Terminal__ Navigate to `Applications | Utilities` and open `Terminal`
+- Windows: __Git Bash__ Navigate to `Windows Start | Git` and open `Git Bash`
+    - Note: Alternate and possibly better terminal for Windows is [cmder](http://cmder.net/)
+
+![](images/terminal-powder.png)
+
+
+## Connecting to a remote server
 
 ```bash
-$ ssh aurora.nceas.ucsb.edu
+jones@powder:~$ ssh jones@aurora.nceas.ucsb.edu
+jones@aurora.nceas.ucsb.edu's password: 
+jones@aurora:~$ 
 ```
 
+![](images/terminal-aurora.png)
+
+## Change your password
+
+```bash
+jones@aurora:~$ passwd
+Changing password for jones.
+(current) UNIX password: 
+Enter new UNIX password: 
+Retype new UNIX password: 
+```
+
+- **Add your new password to your password manager!**
+- Later you will need it to connect over the web to RStudio Server
+
 # Modern cloud computing
+In this session, we are introducing you to computing on a `cluster`, which is
+just another name for a remote computer with a lot of processors. However,
+computing is evolving rapidly, and there are many new technologies emerging to
+help with scientific computing, and to speed it up. The maturing field of 
+`cloud computing` is certainly useful to researchers conducting synthesis because
+it allows them to access really large computing systems without having to purchase
+the hardware.  Amazon, Google, and Microsoft are among the many companies trying
+to capture the demand for computing infrastructure through cloud platforms. In each,
+the cloud computing environment enables users to create a `virtual machine`, which
+looks and acts like a standalong server, but in actuality is sharing an underlying
+host computer with many other virtual machines.
 
-## Cluster computing
+Cloud computing is also evoloving mechanisms to make those virtualized platforms
+easier to create and maintain with the advent of `container computing` systems.
+Systems like `Docker` for building virtual containers are beyond our scope, but 
+further reading is available online:
 
-## Virtual machines
-
-## Cloud computing
-
-## Container infrastructures
-
-
-
-
+__Preethi Kasireddy__. [**A Beginner-Friendly Introduction to Containers, VMs 
+    and Docker**](https://medium.freecodecamp.org/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b).
