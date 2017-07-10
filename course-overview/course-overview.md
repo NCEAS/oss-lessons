@@ -17,6 +17,15 @@ July 10-28, 2017
 Sponsor: [Gulf Research Program, National Academy of Sciences](http://www.nationalacademies.org/gulf/index.html)
 
 
+Instructors
+========================================================
+
+- Matt Jones, Amber Budden, Chris Lortie
+- Bryce Mecum, Leah Wasser, Julien Brun, Tracy Teal
+
+![](images/instructors.png)
+
+
 NCEAS Synthesis
 ========================================================
 title: true
@@ -96,11 +105,6 @@ Course Topics
 - Data analysis and modeling
 - Communicating results to broad communities
 
-Instructors
-========================================================
-- NCEAS: Matt Jones, Amber Budden, Chris Lortie, Julien Brun, Bryce Mecum
-- Univ. Colorado: Leah Wasser
-- Data Carpentry: Tracy Teal
 
 Curriculum
 ========================================================
@@ -136,14 +140,6 @@ Communications
 - We'll review each morning
 
 
-Code of Conduct
-========================================================
-
-- Governs our interactions
-- Collaborative Community Document
-    - http://bit.ly/OSSGRP-CoC
-
-
 Daily Schedule
 ========================================================
 
@@ -154,11 +150,25 @@ Daily Schedule
 Course materials and resources
 ========================================================
 
-Course materials will be downloadable
+## Course materials will be downloadable
 
 - Lessons and code examples: https://nceas.github.io/oss-2017/lessons.html
     - Plus raw source code in GitHub: https://github.com/NCEAS/oss-lessons
 - Reading list by day: https://nceas.github.io/oss-2017/readings.html
+
+<br>
+
+## Peanut Gallery
+
+- Your time to {comment, question, dance, sing, discuss, act, joke, play, ...}
+![](images/statler-and-waldorf.png)
+
+Code of Conduct
+========================================================
+
+- Governs our interactions
+- Collaborative Community Document
+    - http://bit.ly/OSSGRP-CoC
 
 
 Acknowledgements
