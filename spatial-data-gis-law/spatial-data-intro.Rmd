@@ -1,0 +1,65 @@
+---
+title: Introduction to spatial data in R
+author: "Leah A. Wasser"
+---
+
+## Topic
+
+### Introduction
+**Purpose:** In this lesson we will introduce some of the key concepts associated
+with spatial data including:
+
+* spatial extent
+* resolution
+* coordinate reference system
+
+We will also define raster vs vector data structures.
+
+**Background:**
+Brief overview of topic and relationship to scientific synthesis.
+
+**Explanation:**
+No slide decks. Ideal to keep all materials within ecosystem. Use this single rmd as your mechanism to explain, show, lecture, or demo/use tutorial to explain concepts.
+
+**Products for your open science portfolio:**
+list what students will produce
+
+### Learning outcomes
+
+At the end of this 30 minute overview you will be able to:
+
+1. Explain the difference between the raster vs vector data structures.
+1. Define spatial extent, resolution, coordinate reference system.
+1. List the 3 vector data structures.
+1. List 2-3 R packages that can be used to work with spatial data.
+
+
+## Raster vs. Vector
+
+About raster data:
+
+* data are stored in a regular grid
+* a value is associated with each grid cell (also called a pixel)
+* each pixel represents a geographic area - in our case that is often an area on the earth
+
+
+(About raster data)[http://neondataskills.org/GIS-spatial-data/Working-With-Rasters/]
+!(About raster data)[http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-concept.png]
+
+### Raster resolution
+
+* The size of each pixel is referred to as **resolution**
+* If pixels are smaller (represent a smaller area on the earth, they are considered HIGHER resolution) - in the example of an image, this makes the image look more 'crisp'
+
+(raster resolution)[http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-resolution.png]
+
+
+* if you have fewer pixels within a particular spatial extent, the resolution is LOWER
+* if you have more pixels within a particular spatial extent, the resolution is HIGHER
+
+
+http://neondataskills.org/GIS-spatial-data/Working-With-Rasters/
+
+>> Create a blog post on raster extent vs resolution
+
+About raster data:
