@@ -70,6 +70,34 @@ e.g. list just the Droids
 
 ```{r}
 library(dplyr)
-src_sqlite()
+library(dbplyr)
+
+mtcars_db <- tbl(con, "mtcars")
+mtcars_db
+
+mtcars_db %>% 
+  select(mpg)
+
+mpg_query <- mtcars_db %>% 
+  group_by(cyl) %>% 
+  summarize(mean(mpg))
+mpg_query %>% show_query()
+
+# To get the data out of our query, we use collect()
+class(mpg_query)
+mpg_query %>% collect() %>% class()
 ```
+
+There, that's it.
+`dbplyr` automatically converts our `dplyr` code into SQL queries behind the scenes.
+
+***Exercise: Load the `diamonds` dataset from the `ggplot2` package and calculate the average price for each carat and make a plot of the relationship:
+
+```{r}
+# Your code here
+```
+
 ## Summary
+
+- Using SQL via R only requires a couple of lines of code
+- We can use `dplyr` against an SQL database for intuitive querying that is fast
