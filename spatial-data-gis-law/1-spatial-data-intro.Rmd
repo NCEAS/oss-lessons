@@ -30,7 +30,7 @@ At the end of this 30 minute overview you will be able to:
 
 1. Explain the difference between the raster vs vector data structures.
 1. Define spatial extent, resolution, coordinate reference system.
-1. List the 3 vector data structures.
+1. List the 3 vector data structures (point, line polygon).
 1. List 2-3 R packages that can be used to work with spatial data.
 
 
@@ -38,7 +38,7 @@ At the end of this 30 minute overview you will be able to:
 
 About raster data:
 
-* data are stored in a regular grid
+* data are stored in a **regular grid**
 * a value is associated with each grid cell (also called a pixel)
 * each pixel represents a geographic area - in our case that is often an area on the earth
 
@@ -135,9 +135,9 @@ in a geojson structure this may look like this:
 ```
 
 
-## Coordinate reference systems - how spatial data to line up
+## Coordinate reference systems - how spatial data line up
 
-[](http://earthdatascience.org/course-materials/earth-analytics/week-4/intro-to-coordinate-reference-systems/)
+[Coordinate Reference Systems - 101 ](http://earthdatascience.org/course-materials/earth-analytics/week-4/intro-to-coordinate-reference-systems/)
 
 
 ### CRS storage formats
