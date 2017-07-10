@@ -43,15 +43,16 @@ About raster data:
 * each pixel represents a geographic area - in our case that is often an area on the earth
 
 
-(About raster data)[http://neondataskills.org/GIS-spatial-data/Working-With-Rasters/]
-!(About raster data)[http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-concept.png]
+[About raster data](http://neondataskills.org/GIS-spatial-data/Working-With-Rasters/)
+
+![About raster data](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-concept.png)
 
 ### Raster resolution
 
 * The size of each pixel is referred to as **resolution**
 * If pixels are smaller (represent a smaller area on the earth, they are considered HIGHER resolution) - in the example of an image, this makes the image look more 'crisp'
 
-(raster resolution)[http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-resolution.png]
+[raster resolution](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-resolution.png)
 
 
 * if you have fewer pixels within a particular spatial extent, the resolution is LOWER
