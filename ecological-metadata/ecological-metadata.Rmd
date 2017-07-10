@@ -11,6 +11,12 @@ Science metadata is:
 - Machine-readable (usually XML)
 - Usually really hard to generate
 
+Science metadata underpins data repositories:
+
+- https://search.dataone.org/
+- https://www.ncdc.noaa.gov/data-access
+- https://data.nasa.gov/browse
+
 The R EML package aims to help us generate EML science metadata from within R.
 The learning process here is two-fold:
 
@@ -18,6 +24,8 @@ The learning process here is two-fold:
 - Learn how to use the EML R package
 
 Both of these are relatively hard!
+
+Today, I'll show a bit of EML and a bit of the EML R package in the hopes that when it comes time to create your own science metadata you'll know where to look for guidance.
 
 ## Learning outcomes:
 
@@ -39,6 +47,11 @@ EML covers lots of stuff, importantly:
 - Methodological information
 - Documentation on files and their formats
 
+Examples:
+
+- Simple: https://github.com/ropensci/EML/blob/master/inst/examples/example-eml-2.1.1.xml
+- Advanced: https://github.com/ropensci/EML/blob/master/inst/examples/hf205.xml
+
 ## Generating an EML record from scratch
 
 This is modeled after this vignette inside the EML package: https://github.com/ropensci/EML/blob/master/vignettes/creating-EML.Rmd
@@ -48,6 +61,7 @@ This is modeled after this vignette inside the EML package: https://github.com/r
 As an example, let's create an EML record for the `iris` dataset that comes with the `ggplot2` package.
 
 ```{r}
+library(ggplot2)
 data("iris") # requires ggplot2
 head(iris)
 summary(iris)
@@ -235,6 +249,9 @@ eml_validate("eml.xml")
 ```
 
 ## Summary
+
+- EML can be used to create scientific metadata for our datasets
+- The R EML package can help us create EML from scratch
 
 ## Resources
 

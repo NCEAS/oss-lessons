@@ -73,6 +73,21 @@ Regular expressions work great here.
 str_match_all(dates, "(\\d{1,2})([A-Za-z]+)(\\d{2,4})")
 ```
 
+That above regular expression was complex. Let's break it down into its main parts.
+Below, I've re-formatted the data and the regular expression a bit so we can see what's going on.
+
+```
+|---------------|---------------| ---------|
+| 1             | July          | 17       |
+| 02            | July          | 2017     |
+| 3             | July          | 17       |
+| 4             | July          | 17       |
+|---------------|---------------| ---------|
+| \\d{1,2}      | [A-Za-z]+     | \\d{2,4} |
+|---------------|---------------| ---------|
+
+```
+
 ## Overview of Regular Expressions
 
 Regular expressions can match things literally, e.g.,

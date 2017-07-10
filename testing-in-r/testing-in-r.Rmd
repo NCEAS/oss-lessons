@@ -1,0 +1,23 @@
+---
+title: "Testing R Code and Analysis"
+time_slot: 30 minutes
+---
+
+- Step 1: Get set up
+  - Use already-created package if we get there in previous lesson
+  - Setup
+      - Add to Suggests. What is Suggests?
+  
+      - Add to tests/testthat.R:
+  
+      ```
+      library(testthat)
+      library(yourpackage)
+      
+      test_check("yourpackage")
+      ```
+      
+      - Each test file should start with test and end in .R or .r
+- Step 2: Test our code and analyis
+  - Basic code testing analysis
+  - Show a model function being tested
