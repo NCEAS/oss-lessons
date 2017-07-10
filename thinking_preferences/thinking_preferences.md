@@ -12,17 +12,7 @@ css: ../course-overview/oss.css
 ![Brain](images/brain.jpg)
 
 
-Thinking Preferences
-========================================================
-
-<br><br>
-
-![Brain](images/Brain.jpg)
-
-
-
-
-The whole brain
+The brain
 ========================================================
 
 <br><br>
@@ -30,19 +20,68 @@ The whole brain
 ![Brain](images/Brain.jpg)
 
 ***
+
+<br><br>
+
+Left brain
+========================================================
+
+<br><br>
+
+![Brain](images/LeftBrain.jpg)
+
+***
+
+<br><br>
+### Analytical / Systematic
+
+Right brain
+========================================================
+
+<br><br>
+
+![Brain](images/RightBrain.jpg)
+
+***
+
+<br><br>
+### Artistic / Emotional
+
+Neocortex 
+========================================================
+
+<br><br>
+
+![Brain](images/Neocortex.jpg)
+
+***
+
+<br><br>
+### Intellect
+
+Limbic system
+========================================================
+
+<br><br>
+
+![Brain](images/Limbic.jpg)
+
+***
+
+<br><br>
+### Emotion
+
+
+Ned Hermann: The whole brain
+========================================================
 
 <br><br>
 
 ![WholeBrain](images/wholebrain.png)
 
+
 The whole brain
 ========================================================
-
-<br><br>
-
-![Brain](images/Brain.jpg)
-
-***
 
 <br><br>
 
