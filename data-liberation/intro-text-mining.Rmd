@@ -16,13 +16,15 @@ Looking at the Natural Language Processing (NLP) CRAN view, you will realize the
 Today we are going to look into 2 packages:
 
 - `tm`: provides a framework and the algorithmic background for mining text
-- `quanteda`: A fast and flexible framework for for the management, processing, and quantitative analysis of textual data in R. It has very nice feature, among wich finding words and their context.
+- `quanteda`: A fast and flexible framework for for the management, processing, and quantitative analysis of textual data in R. It has very nice feature, among wich finding words and their context
+- `tidytext`: provides means for text mining for word processing and sentiment analysis using dplyr, ggplot2, and other tidy tools
 
 **In this quick introdution we are going to use `quanteda`**
 
 
-```{r}
+# Analyzing peer-reviewed journal articles about BP Deep Horizon's oil spill
 
+```{r}
 library("readtext")
 library("quanteda")
 ```
