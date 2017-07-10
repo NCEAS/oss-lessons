@@ -1,7 +1,7 @@
 
 # Open Science for Synthesis: Gulf Research Program Code of Conduct
 
-Collaborative document edited by 2017 OSS:GRP course participants.  Draft document build from principles developed by Data Carpentry and the AAAS Community Fellows Program.
+Collaborative document edited by 2017 OSS:GRP course participants.  Draft document built from principles developed by Data Carpentry and the AAAS Community Fellows Program.
 
 ## Purpose
 NCEAS and the OSS workshop participants are partners in providing a welcoming and supportive environment for all people, regardless of background or identity. We recognise that some groups in our community are subject to historical and ongoing discrimination, and may be vulnerable or disadvantaged. We do not tolerate discrimination or harassment of participants on the basis of gender, sexual orientation, disability, physical appearance, body size, race, nationality, sex, colour, ethnic or social origin, pregnancy, citizenship, familial status, veteran status, genetic information, religion or belief, political or any other opinion, membership of a national minority, property, birth, age, choice of text editor, or for any other reason.
