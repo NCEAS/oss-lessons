@@ -72,19 +72,36 @@ Limbic system
 ### Emotion
 
 
-Ned Hermann: The whole brain
-========================================================
-
-<br><br>
-
-![WholeBrain](images/wholebrain.png)
-
-
 The whole brain
 ========================================================
 
 <br><br>
 
+Analytical
+
+Artistic
+
+Intellect
+
+Emotion
+
+***
+
+<br><br>
 ![WholeBrain](images/wholebrain.png)
+
+
+Ned Herrmann: Whole Brain Model
+========================================================
+
+
+![WholeBrain](images/whole-brain-model-2016.jpg)
+www.herrmannsolutions.com
+
+Ned Herrmann: Whole Brain Model
+========================================================
+
+
+![WholeBrain](images/whole-brain-model-2016v2.jpg)
 
 
