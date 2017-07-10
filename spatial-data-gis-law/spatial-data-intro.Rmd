@@ -34,7 +34,7 @@ At the end of this 30 minute overview you will be able to:
 1. List 2-3 R packages that can be used to work with spatial data.
 
 
-## Raster vs. Vector
+## About raster data
 
 About raster data:
 
@@ -61,6 +61,90 @@ About raster data:
 
 http://neondataskills.org/GIS-spatial-data/Working-With-Rasters/
 
->> Create a blog post on raster extent vs resolution
+>> Create a blog post on raster extent vs resolution so i can update the content above some of which is off...
 
-About raster data:
+### Raster spatial extent
+
+more here on this...
+
+## About vector data
+
+[Intro to vector data EDS website ](http://earthdatascience.org/course-materials/earth-analytics/week-4/intro-vector-data-r/)
+* discrete geometric locations
+* x,y locations are vertices
+* organization of those vertices determines structure: points, lines, polygons
+
+![About vector data](http://earthdatascience.org/images/course-materials/earth-analytics/week-5/pnt_line_poly.png)
+
+
+## Vector data formats
+
+* shapefile
+* json, geojson
+* text files
+* others??
+
+
+## Vector data spatial extent
+
+The spatial extent of a vector **dataset** is determined by the min and max x,y location
+of ALL OF THE SPATIAL OBJECTS stored in the dataset.
+
+NOTE: the spatial extent of an individual object can also be quantified!
+
+![About vector data extent](http://earthdatascience.org/images/course-materials/earth-analytics/week-5/spatial_extent.png)
+
+
+### Vector data attributes
+
+* vector data can store attribute tables - when in a shapefile format, these look like excel spreadsheets where each object has an associated set of attributes.
+
+
+[Attribute tables](http://earthdatascience.org/images/course-materials/earth-analytics/week-5/attribute_table.png)
+
+in a geojson structure this may look like this:
+
+
+```xml
+[ {
+  "station_name" : "SOUTH PLATTE RIVER AT COOPER BRIDGE NEAR BALZAC",
+  "amount" : "262.00",
+  "flag" : "na",
+  "station_status" : "Gage temporarily anavailable",
+  "county" : "MORGAN",
+  "wd" : "1",
+  "dwr_abbrev" : "PLABALCO",
+  "data_source" : "Co. Division of Water Resources",
+  "http_linkage" : {
+    "url" : "http://www.dwr.state.co.us/SurfaceWater/data/detail_graph.aspx?ID=PLABALCO&MTYPE=DISCHRG"
+  },
+  "div" : "1",
+  "date_time" : "2017-02-15T09:00:00",
+  "stage" : "1.86",
+  "usgs_station_id" : "06759910",
+  "variable" : "DISCHRG",
+  "location" : {
+    "latitude" : "40.357498",
+    "needs_recoding" : false,
+    "longitude" : "-103.528053"
+  },
+  "station_type" : "Stream"
+}
+...
+]
+```
+
+
+## Coordinate reference systems - how spatial data to line up
+
+[](http://earthdatascience.org/course-materials/earth-analytics/week-4/intro-to-coordinate-reference-systems/)
+
+
+### CRS storage formats
+
+* EPSG
+* proj.4
+* WKT
+* others!!!
+
+http://earthdatascience.org/course-materials/earth-analytics/week-4/understand-epsg-wkt-and-other-crs-definition-file-types/
