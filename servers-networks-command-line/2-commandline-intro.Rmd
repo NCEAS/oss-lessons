@@ -1,24 +1,64 @@
 ---
-title: "Introduction to commandline computing"
-author: "Matt Jones"
+title: "Introduction to command-line computing"
 date: '2017-06-17'
 ---
 
 # Introduction
+
 **Purpose:** 
+Introduce participants to the unix command line to increase efficiency and reproducibility.
 
 **Background:**
+Scientific research, and especially scientific synthesis, requires extensive computing, which typically
+involves creation of hudreds or thousands of data files, analytical processes, and
+many products such as graphs, model outputs, maps, images, and more.  Managing this
+complexity is often really hard, and researchers can easily lose track of just
+what they did, when, and why.  Thus, traditional approaches to managing the research process
+often fail the reproducibility test, as even the original investigators can't repeat their initial
+process.
 
-**Products for your open science portfolio:**  
-list what students will produce
+![versions](images/phd-datamanagement-story-filenames-052810s.gif)
+- From [PhDComics](http://phdcomics.com/comics/archive.php?comicid=1323)
+
+Thus, the __command line__.  The command-line provides two major advantages to the researcher:
+
+- Repeatability
+    - Once you do it once, you can just re-run it
+- Efficiency
+    - What you can do to one file, you can do to millions
+
+These advantages come at the cost of:
+
+- A steep learning curve (with copious esoteric terminology)
+
 
 # Learning outcomes
+1. To understand the advantages of the command line over graphical interfaces
+2. To understand the basic philosophy of Unix
+3. To learn core Unix commands for navigation and file management
 
-# Exercise
 
-## The Command Line
+# The Command Line
 
-![Command Line](images/isis-bash.png)
+![Command Line](images/terminal-aurora.png)
+Command line interpreters come in many flavors.  We will focus on Unix shell syntax, 
+but even with Unix there is tremendous diversity.  Learning all of the nuances of one shell
+can take years, but you will also find many variants on the servers you encounter.
+
+## Draw Bridge
+
+![](images/draw-bridge-literalism.jpg)
+
+In this lesson, you will learn the power of the command line. But, you will 
+undoubtedly also internalize that computers are exceedingly literal.  You type, they do. 
+Or, more commonly, you type, they give an error.  My experience has been that I am 
+far more productive when my attitude towards the computer is:
+
+- Patient
+- Persistent
+- Systematic
+- Incremental
+
 
 ## The operating system
 
@@ -28,25 +68,12 @@ list what students will produce
 
 ## All about the X
 
-![UNIX logo](images/40years.png
-    "http://www.unix.org/40years.png")
-
-UNIX
- :  Originally developed at AT&T Bell Labs circa 1970. Has
-     experienced a [contentious, fractured
-     evolution](https://upload.wikimedia.org/wikipedia/commons/7/77/Unix_history-simple.svg)
-POSIX
- :  think of this as a set of specifications of what an OS needs to qualify as "a Unix"
-
-
-## All about the X
-
-![The unix family tree](images/400px-Unix_history.svg.png)
+![UNIX logo](images/40years.png)
 
 * OS X
  :  [is a Unix](http://unix.stackexchange.com/questions/1489/is-mac-os-x-unix)!
 * Linux
- :  is _not_ fully POSIX-compliant, but certainly can be
+ :  is _not_ fully compliant, but certainly can be
       regarded as [functionally Unix](http://en.wikipedia.org/wiki/Unix-like)
 
 ## Some Unix hallmarks
@@ -62,20 +89,18 @@ POSIX
 
 ![Screenshot of SQL DB Browser GUI](images/SQLite_Cmd_GUI_Compare.png)
 
-GUI
- :  Graphical user interface
-CLI
- :  Command-line interface
+- GUI: Graphical user interface
+- CLI: Command-line interface
  
 ## GUIs can be impressive
 
-![Screenshot of SQL DB browser](images/oz-wizard.png)
+![](images/oz-wizard.png)
 
 #### [Pay no attention to that man behind the curtain](http://www.youtube.com/watch?v=YWyCCJ6B2WE)
 
 # CLIs let you get things done
 
-![Wizard of Oz](images/oz-man.jpg)
+![](images/oz-man.jpg)
 
 
 ## Why the CLI is worth learning
@@ -88,31 +113,196 @@ CLI
 
 ## Let's connect
 
-![ssh command line screenshot](images/isis-ssh.png)
+```bash
+jones@powder:~$ ssh jones@aurora.nceas.ucsb.edu
+```
 
-## Lay of the land
+which should give you a terminal window showing `aurora` as the host name:
 
-![The directory hierarchy](images/f778-1.gif)
+![](images/terminal-aurora.png)
 
-### Navigating and managing files/directories
 
-* `pwd`, `ls`, `cd`
-* `~`, `.`, `..`
-* `mkdir`, `cp`, `mv`
-* `rm`, `rmdir`
+## Files and directories
+
+In the following code examples, you need to type the command, but not include 
+the command prompt (e.g., `jones@aurora:~$`) which just shows that the computer 
+is ready to accept a command.
+
+We'll start by:
+
+- creating two directories with `mkdir` (make directory)
+- create a simple text file using `echo`
+- Show the contents of that file using `cat` (concatenate)
+
+```bash
+jones@aurora:~$ mkdir oss
+jones@aurora:~$ mkdir oss/data
+jones@aurora:~$ echo "# Tutorial files related to OSS" > oss/README.md
+jones@aurora:~$ cat oss/README.md
+# Tutorial files related to OSS
+jones@aurora:~$ 
+```
+
+Next, let's copy another file and look around in the directories:
+
+- copy a file into your directory with `cp` (copy)
+- change our working directory to that newly created directory using `cd` (change directory)
+- list the files in the directory with `ls` (list)
+- look where we are in the filesystem using `pwd` (print working directory)
+- get an overview of the directory contents using `tree`
+
+
+```bash
+jones@aurora:~$ cp /tmp/plotobs.csv oss/data
+jones@aurora:~$ cd oss
+jones@aurora:~/oss$ ls
+data  README.md
+jones@aurora:~/oss$ pwd
+/home/jones/oss
+.
+├── data
+│   └── plotobs.csv
+└── README.md
+
+1 directory, 2 files
+jones@aurora:~/oss$
+```
+
+Now, let's create another directory with two files so that we can demonstrate
+removing files and directories.
+
+- create another two directories named `sites` and `lakes` using `mkdir`
+- create 3 files in each directory using `echo`
+- examine our file structure using `tree`
+- move or rename a file using `mv` (move)
+- change our working directory to the `sites` directory using `cd` and check it with `pwd`
+- remove two of the files using `rm` (remove) and list files with `ls`
+- change directory back to the parent and check it with `pwd`
+- remove the `sites` directory using `rmdir`, which will produce and error because the directory contains files
+    - `rmdir` can only remove empty directories
+- try again, using a command-line switch `rm -r sites` to recursively remove the directory and its files
+
+```bash
+jones@aurora:~/oss$ mkdir sites lakes
+jones@aurora:~/oss$ echo "Site 1 Info" > sites/site1.txt
+jones@aurora:~/oss$ echo "Site 2 Info" > sites/site2.txt
+jones@aurora:~/oss$ echo "Site 3 Info" > sites/site3.txt
+jones@aurora:~/oss$ echo "Lake Mary" > lakes/LakeMary.md
+jones@aurora:~/oss$ echo "Lake Hunter" > lakes/HunterLake.md
+jones@aurora:~/oss$ tree .
+.
+├── data
+│   └── plotobs.csv
+├── lakes
+│   ├── HunterLake.md
+│   └── LakeMary.md
+├── README.md
+└── sites
+    ├── site1.txt
+    ├── site2.txt
+    └── site3.txt
+
+3 directories, 7 files
+jones@aurora:~/oss$ mv lakes/HunterLake.md lakes/LakeHunter.md
+jones@aurora:~/oss$ ls lakes
+LakeHunter.md  LakeMary.md
+jones@aurora:~/oss$ cd sites
+jones@aurora:~/oss/sites$ pwd
+/home/jones/oss/sites
+jones@aurora:~/oss/sites$ rm site2.txt site3.txt
+jones@aurora:~/oss/sites$ ls
+site1.txt
+jones@aurora:~/oss/sites$ cd ..
+jones@aurora:~/oss$ pwd
+/home/jones/oss
+jones@aurora:~/oss$ rmdir sites
+rmdir: failed to remove 'sites': Directory not empty
+jones@aurora:~/oss$ rm -r sites
+jones@aurora:~/oss$ ls
+data  lakes  README.md
+jones@aurora:~/oss$
+```
+
+Note the use of the single dot `.` and the double dot `..` symbols in these
+commands.  A single dot `.` represents the current directory, and a double dot `..`
+represents the parent directory.  One can also use the tilde symbol `~` to represent
+the your home directory, which is main directory where your files will reside.
+
+## Let's look at our text file
+
+- `cat` print file(s)
+- `head` print first few lines of file(s)
+- `tail` print last few lines of file(s)
+- `grep` search for matching lines of file(s)
+- `less` "pager" -- view file interactively
+
+```bash
+jones@aurora:~/oss$ head data/plotobs.csv 
+obsid,siteid,plot,date_sampled,sciname ,diameter,condition
+1,1,A,6/13/11,Abies lasiocarpa,31.84,normal
+2,1,A,6/13/11,Picea engelmannii,3.21,dry
+3,1,A,6/13/11,Picea engelmannii,7.2,dry
+4,1,A,6/13/11,Picea engelmannii,11.62,dry
+5,1,A,6/13/11,Picea engelmannii,11.25,dry
+6,1,A,6/13/11,Picea engelmannii,13.16,normal
+7,1,A,6/13/11,Picea engelmannii,18.6,normal
+8,1,A,6/13/11,Picea engelmannii,23.62,dry
+9,1,A,6/13/11,Picea engelmannii,31.75,normal
+jones@aurora:~/oss$ tail data/plotobs.csv 
+3287,32,B,6/10/12,Pseudotsuga menziesii,4.38,normal
+3288,32,B,6/10/12,Pseudotsuga menziesii,3.09,dry
+3289,32,B,6/10/12,Jamesia americana,7.98,dry
+3290,32,B,6/10/12,Abies lasiocarpa,10.85,normal
+3291,32,B,6/10/12,Abies lasiocarpa,13.55,dry
+3292,32,B,6/10/12,Abies lasiocarpa,17.26,normal
+3293,32,B,6/10/12,Abies lasiocarpa,21.65,dry
+3294,32,B,6/10/12,Abies lasiocarpa,17.8,dry
+3295,32,B,6/10/12,Abies lasiocarpa,23.4,normal
+3296,32,B,6/10/12,Abies lasiocarpa,25.79,normal
+jones@aurora:~/oss$ grep Sambucus data/plotobs.csv
+13,1,A,6/13/11,Sambucus racemosa,3.83,dry
+44,1,A,6/10/12,Sambucus racemosa,17.04,dry
+75,1,B,6/13/11,Sambucus racemosa,3.39,dry
+91,1,B,6/10/12,Sambucus racemosa,19.53,dry
+116,2,A,6/13/11,Sambucus racemosa,1.4,dry
+147,2,A,6/10/12,Sambucus racemosa,20.19,dry
+...
+jones@aurora:~/oss$
+```
 
 ## Permissions
+
+Working on syntheis projects means collaborating, which is really easy on unix
+because multiple people can use the same computer at the same time. Right now,
+we are all using `aurora` at the same time, running commands in our own part of
+the file storage system.  But what if we want to share files?  Unix lets each
+person control who can access their files through a set of permissions which can 
+be seen by doing a long listing with `ls -l`:
+
+```bash
+jones@aurora:~/oss$ ls -l README.md 
+-rw-rw-r-- 1 jones staff 32 Jul 10 01:10 README.md
+jones@aurora:~/oss$ 
+```
+
+You can interpret the permissions as follows:
 
 ![File permissions](images/UnixFileLongFormat.png)
 
 ### All files have permissions and ownership
 
-* Change permissions: `chmod`
+* Change permissions: `chmod`, using for example `chmod o+r README.md`
 * Change ownership: `chown`
 
-## Elevate your permissions
+To see someone else's files, they have to permit you to have the proper permissions.
+For example, you can examine the contents of one of my data files using the full
+path to the file, as long as you have the needed file permissions:
 
-![Act as root](images/sandwich.png)
+```bash
+jones@aurora:~/oss$ cat ~jones/oss/lakes/LakeMary.md 
+Lake Mary
+jones@aurora:~/oss$
+```
 
 ## Getting help
 
@@ -133,15 +323,11 @@ CLI
 * short form: `-h`
 * long form: `--help`
 
-<!--
-```bash
-$ sudo vi /etc/postgresql/9.1/main/postgresql.conf
-```
--->
+## Cheatsheets for remembering it all
+
+**Linux/Unix Cheetsheet**: http://cheatsheetworld.com/programming/unix-linux-cheat-sheet/
 
 ## Text editing
-
-### (Text rules!)
 
 ### Some editors
 
@@ -149,17 +335,10 @@ $ sudo vi /etc/postgresql/9.1/main/postgresql.conf
 * `emacs`
 * `nano`
 
-### `$ nano .bashrc`
+### `$ nano lakes/LakeMary.md`
 
-## Let's look at our text file
 
-* `cat` print file(s)
-* `head` print first few lines of file(s)
-* `tail` print last few lines of file(s)
-* `less` "pager" -- view file interactively
-  
-
-## A sampling of simple commands
+## A sampling of useful commands
 
 * `wc` count lines, words, and/or characters
 * `diff` compare two files for differences
@@ -171,8 +350,8 @@ $ sudo vi /etc/postgresql/9.1/main/postgresql.conf
 ![`stdin`, `stdout`, `stderr`](images/pipe_split.png)
 
 ```bash
-$ ls *.jpg | wc -l
-$ ls *.jpg | wc -l > jpegcount.txt
+$ ls -1 lakes | wc -l
+$ ls -1 lakes | wc -l > lakecount.txt
 $ diff <(sort file1.txt) <(sort file2.txt)
 $ ls foo 2>/dev/null
 $ tee
@@ -183,6 +362,8 @@ $ tee
 * `grep` search files for text
 * `sed` filter and transform text
 * `find` advanced search for files/directories
+* `cut` extract parts of files like columns
+* `join` merge files using a common shared column
 
 ## grep
 
@@ -259,22 +440,10 @@ $ find . -iname '*.pdf'
 $ find . -size +10G -ls
 ```
 
-## Getting things done
-
-* Process management
-    * Like Windows Task Manager, OSX Activity Monitor
-    * `top`, `ps`, `jobs`
-* Foreground and background
-* Stay persistent with `screen`
-* Need to go visual?
-    * X11 forwarding, x2go, VNC
-
 ## Online resources
 
 * http://www.ibm.com/developerworks/linux/library/l-lpic1-v3-103-1/
-* http://linuxcommand.org/learning_the_shell.php
-* http://www.tuxfiles.org/linuxhelp/cli.html
-* http://www.linfo.org/command_line_lesson_1.html
+* http://linuxcommand.org/lc3_learning_the_shell.php
 * [Free book!](http://linuxcommand.org/tlcl.php)
 
 
