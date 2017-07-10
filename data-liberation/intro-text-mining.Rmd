@@ -1,0 +1,111 @@
+---
+title: "Text Mining"
+author: "Julien Brun and Gabriel Daldegan"
+output: html_document
+---
+
+# Goal
+
+The Goal of this session is to learn how to mine PDFs to get information out of them. Text mining encompasses a vast field of theoretical approaches and methods with one thing in common: text as input information (Feiner et al, 2008) 
+
+
+# Which R packages are available?
+
+Looking at the Natural Language Processing (NLP) CRAN view, you will realize there are a lot of different packages to accomplish this complex task : <https://cran.r-project.org/web/views/NaturalLanguageProcessing.html>
+
+Today we are going to look into 2 packages:
+
+- `tm`: provides a framework and the algorithmic background for mining text
+- `quanteda`: A fast and flexible framework for for the management, processing, and quantitative analysis of textual data in R. It has very nice feature, among wich finding words and their context.
+
+**In this quick introdution we are going to use `quanteda`**
+
+
+```{r}
+
+library("readtext")
+library("quanteda")
+```
+
+### Import the PDFs into R
+
+```{r}
+# List the PDFs about the BP oil spill
+pdfs <- list.files(path="./oil_spill_pdfs/", pattern= 'pdf$',  full.names = TRUE) 
+
+# Import the PDFs into R
+spill_texts <- readtext(pdfs)
+
+# Quick look
+spill_texts
+
+```
+
+### Create the Coprus object needed for the text analysis
+
+```{r}
+
+# Transform the journal articles into a corpus object
+spill_corpus  <- corpus(spill_texts)
+
+# Some stats about the journal articles
+summary(spill_corpus, 5)
+
+```
+
+### Add metadata to the Corpus object
+
+For example we can add that texts are written in English.
+```{r}
+# add metadata to files, in this case that they are written in english
+metadoc(spill_corpus, 'language') <- "english" 
+
+# visualize corpus structure and contents, now with added metadata
+summary(spill_corpus, showmeta = T)
+```
+
+### Search for words with context: 3 words on each side of the keyword
+
+```{r}
+
+kwic(spill_corpus, "dispersant", 3)
+
+```
+
+
+### Build a Document-Feature Matrix (DFM). 
+
+More information about DFM can be found on Quanteda's vignette: http://quanteda.io/articles/quickstart.html
+
+```{r}
+# construct the DFM, which is the base object to further analyze the journal articles
+spills_DFM <- dfm(spill_corpus, tolower = TRUE, stem = F, 
+                  remove = c("et", "al", "fig", "table", "ml", "http", stopwords("SMART")),
+                  remove_punct = TRUE, remove_numbers = TRUE)
+
+# returns the top 10 frequent words
+topfeatures(spills_DFM, 20) 
+```
+
+### Word cloud
+
+Quiclky visualize the most frequent words.
+
+```{r}
+# set the seed for wordcloud
+set.seed(1)
+
+# plots wordcloud
+textplot_wordcloud(spills_DFM, min.freq = 70, random.order=F, 
+                   rot.per = .10,  
+                   colors = RColorBrewer::brewer.pal(8,'Dark2')) 
+```
+
+# References and sources
+
+- Book on text mining in R: http://tidytextmining.com/
+- tm package: https://cran.r-project.org/web/packages/tm/vignettes/tm.pdf
+- quanteda package:
+    - Overview: https://github.com/kbenoit/quanteda
+    - Getting started: http://quanteda.io/articles/quickstart.html
+- Munzert, Simon. Automated Data Collection with R: A Practical Guide to Web Scraping and Text Mining. Chichester, West Sussex, United Kingdom: John Wiley & Sons Inc, 2015.
