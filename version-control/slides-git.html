@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Julien Brun and Mark Schildhauer, NCEAS, UCSB" />
+  <title>Version Control</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" type="text/css" media="screen, projection, print"
+    href="http://www.w3.org/Talks/Tools/Slidy2/styles/slidy.css" />
+  <script src="http://www.w3.org/Talks/Tools/Slidy2/scripts/slidy.js"
+    charset="utf-8" type="text/javascript"></script>
+</head>
+<body>
+<div class="slide titlepage">
+  <h1 class="title">Version Control</h1>
+  <p class="author">
+Julien Brun and Mark Schildhauer, NCEAS, UCSB
+  </p>
+  <p class="date">OSS 2017</p>
+</div>
+<div id="why-do-i-need-that-again" class="slide section level2">
+<h2>Why do I need that again?</h2>
+<p align="center">
+<img style="width: 550px;" src=images/phd_comics_final.png />
+</p>
+</div>
+<div id="why-do-i-need-that-again-1" class="slide section level2">
+<h2>Why do I need that again?</h2>
+<p><br></p>
+<h3 id="version-control-is-very-useful-to-keep-track-of-changes-you-or-your-collaborators-made-to-your-scripts.">=&gt; Version Control is very useful to keep track of changes you or your collaborators made to your scripts.</h3>
+</div>
+<div id="git-and-github" class="slide section level2">
+<h2>Git and GitHub</h2>
+<p><br></p>
+<p><img style="align: left;width: 300px;" src="images/git_icon.png"></p>
+<p><br> Git is a <em>free</em> and <em>open source</em> distributed <em>version control system</em>. Git allows you to take snapshots of your files, creating an history of versions that you can navigate. <br></p>
+<div class="incremental">
+<p><img style="algn: right;width: 350px;" src="images/GitHub_logo.png"></p>
+<p><strong>GitHub is a company that hosts git repositories online</strong> and provides several collaboration features (among which <code>fork</code>).</p>
+<p>GitHub fosters a great user community and has built a nice graphical interface to git, adding great visualization capacities of your data.</p>
+</div>
+</div>
+<div id="what-we-want-to-avoid" class="slide section level2">
+<h2>What we want to avoid</h2>
+<br>
+<p align="center">
+<img style="width: 300px;" src="images/git_xkcd.png">
+</p>
+<p><em>xkcd - git</em></p>
+</div>
+<div id="section" class="slide section level2">
+<h2><img style="align: middle;width: 300px;" src="images/git_icon.png"></h2>
+<h3 id="what-is-git">What is git</h3>
+<ul>
+<li>Git is free and open source versioning system</li>
+<li>Git tracks changes per lines</li>
+<li>Git stores snapshot of your files and create a history of changes</li>
+<li>Git is distributed</li>
+<li>Git has integrity</li>
+</ul>
+<h3 id="what-git-is-not">What git is not</h3>
+<ul>
+<li>Git is not a backup per se</li>
+<li>Git is not GitHub (or more exactly: GitHub is not Git)</li>
+<li>Git is not good at storing large data (by default)</li>
+</ul>
+</div>
+<div id="repository" class="slide section level2">
+<h2>Repository</h2>
+<p>A repository is simply a directory/folder in which you have enabled git to track its content (files and subfolders).</p>
+</div>
+<div id="git-workflow" class="slide section level2">
+<h2>git workflow</h2>
+<p><img style="float: right;width: 300px;" src="images/git_workflow_general.png"></p>
+<ol style="list-style-type: decimal">
+<li><p>You modify files in your working directory and save them as usual</p></li>
+<li><p>You <strong>add</strong> snapshots of your changes files to your staging area.</p></li>
+<li><p>You do a <strong>commit</strong>, which takes the files as they are in the staging area and stores them as snapshots permanently to your Git directory.</p></li>
+</ol>
+<p><strong>And repeat!!</strong></p>
+</div>
+<div id="git-commit-history" class="slide section level2">
+<h2>git commit history</h2>
+<br>
+<p align="center">
+<img style="width: 300px;" src="images/version-graph_mattJones.png">
+</p>
+</div>
+</body>
+</html>
