@@ -5,7 +5,6 @@ height: 900
 font-family: 'Gill Sans', 'Source Sans Pro', 'Aller', 'Helvetica'
 css: ../course-overview/oss.css
 
-
 ### Communicating Your Science Effectively
 
 ![](images/MessageBox.png)
