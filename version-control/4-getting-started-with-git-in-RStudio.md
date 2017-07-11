@@ -1,5 +1,5 @@
 ---
-Gittitle: "using git From RStudio"
+title: "Using git From RStudio"
 author: "Julien Brun"
 date: "June, 2016"
 output: html_document
