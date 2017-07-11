@@ -151,8 +151,8 @@ p
 
 <br>
 **Interpretation of the Star Wars dplyr verse**  
-1. Basic data in 'starwars' data associated with dplyr 0.7.0 ideal for exploring functionality of tidyverse.  
-2. Good wrangling opportunities including categorical simplifications, addressing c() within a vector such as the 'films' vector, working with NAs, and there are vectors to relate and using as grouping variables within plots/basic stats.  
-3. Adequate complexity to offer for padawan and jedi alike.
+1. Adequate complexity to offer for padawan and jedi alike.  
+2. Literate coding is embodied with the tidyverse structure.  
+3. The code is not verbose but gets the job done.
 
 ![](./padawans.jpg)
