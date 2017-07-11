@@ -94,14 +94,37 @@ Emotion
 Ned Herrmann: Whole Brain Model
 ========================================================
 
-
 ![WholeBrain](images/whole-brain-model-2016.jpg)
 www.herrmannsolutions.com
 
 Ned Herrmann: Whole Brain Model
 ========================================================
 
-
 ![WholeBrain](images/whole-brain-model-2016v2.jpg)
+www.herrmannsolutions.com
+
+Traits Exhibited
+========================================================
+
+![WholeBrain](images/WholeBrainTraits.jpg)
+
+
+A Complex Self
+========================================================
+
+![WholeBrain](images/WholeBrainSelf.jpg)
+
+
+Mapping Your Thinking Preferences
+========================================================
+
+![WholeBrain](images/WholeBrainMap.jpg)
+
+
+Communication and Learning
+========================================================
+
+
+![WholeBrain](images/WholeBrainCommunication.jpg)
 
 

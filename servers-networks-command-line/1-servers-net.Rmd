@@ -1,6 +1,5 @@
 ---
 title: "Introduction to servers and networks"
-author: "Matt Jones"
 date: '2017-06-17'
 ---
 
