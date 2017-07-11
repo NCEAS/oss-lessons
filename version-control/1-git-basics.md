@@ -79,8 +79,8 @@ You need to do this step the first time you use git on a computer.
 Your name and email: 
 
 ```{bash}
-git config --global user.name “yourName”
-git config --global user.email “yourEmail”
+git config --global user.name "yourName"
+git config --global user.email "yourEmail"
 ```
 
 **Optional:**
@@ -172,7 +172,7 @@ Exit vim and save `:wq`
 
 ```{bash}
 git status
-git add favorite_dessert.csv
+git add favorite_desserts.csv
 git status
 git commit -m "Julien's favorite dessert"
 git status
@@ -180,7 +180,7 @@ git status
 4.) Add a friend to the csv:
 
 ```{bash}
-vim favorite_dessert.csv
+vim favorite_desserts.csv
 
 My name, My desert
 Julien, Ice cream
@@ -192,7 +192,7 @@ Save and exit vim
 
 ```{bash}
 git status
-git add favorite_dessert.csv
+git add favorite_desserts.csv
 git status
 git commit -m "Adding Eliott's favorite dessert"
 git status
