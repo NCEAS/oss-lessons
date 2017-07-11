@@ -18,6 +18,9 @@ https://www.compassscicomm.org/the-message-box-workbook
 
 ![](images/Compass.png)
 
+<br><br><br><br><br><br>
+https://www.compassscicomm.org/the-message-box-workbook
+
 
 Principles of Science Communication
 ========================================================
