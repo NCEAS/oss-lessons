@@ -92,7 +92,7 @@ Section 3: The "So What?"
 - This is the crux of the message box
 - Why should you audience care?
 - What about your research is important for them to know?
-- Whay are you talking to them about it?
+- Why are you talking to them about it?
 
 ![](images/SoWhat.png)
 
