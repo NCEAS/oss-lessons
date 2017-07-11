@@ -1,5 +1,15 @@
-Code versioning - Git Basics
-============================
+---
+title: "Version Control - Git Basics"
+author: "Julien Brun"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+
+# Git 
+
 
 ## Why do I need that again?
 
@@ -36,9 +46,9 @@ Git can be enabled on a specific folder/directory on your filesystem to version 
 - Git is not good at versioning large data (there are work around that)
 
 
-## The Git workflow
+# The Git workflow
 
-### Overview
+## Overview
 <img style="float: right;width: 300px;" src="images/git_workflow_general.png">
 
 1. You modify files in your working directory and save them as usual
@@ -54,13 +64,13 @@ Everytime you create a new snapshot, you add the new version of the file to the 
 <img style="align: left;width: 200px;" src=images/version-graph_mattJones.png />
 
 
-## Getting started with Git
+# Getting started with Git
 
-### [TRY GIT in 15min!](https://try.github.io/levels/1/challenges/1)
+## [TRY GIT in 15min!](https://try.github.io/levels/1/challenges/1)
 
 Before you start using git on any computer, you will have to set your identity on your system, as every snapshot of files is associated with the user who implemented the modifications to the files.
 
-### 1. Setting up your identity
+## 1. Setting up your identity
 
 You need to do this step the first time you use git on a computer.
 
@@ -96,11 +106,11 @@ git config --system core.editor vim
 
 <img style="float: left;width: 30px;" src="images/tip.png"/> Want to know more about the available configuration options? How to change the default [text editor](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) used byt git? How make git remember your [GitHub credentials](https://help.github.com/articles/caching-your-github-password-in-git/#platform-all)?
 
-### 2. Starting a git repository
+## 2. Starting a git repository
 
 As we mentioned earlier, a **git repository** is a folder/directory on your machine in which content is monitored for any changes by git.
 
-#### A.) Start versioning an existing folder on your system
+### A.) Start versioning an existing folder on your system
 
 `git init` is the command to start the tracking in a specific directory and transform it into a git repository:
 
@@ -113,7 +123,7 @@ pwd
 git init
 ```
 
-#### B.) Copying an existing repository to your system
+### B.) Copying an existing repository to your system
 
 `git clone` is the git command to copy an existing repository to your machine, more precisely adding the repository to the directory you are in.
 
@@ -131,7 +141,7 @@ Let us have a closer look at the git workflow. It is important to stress that al
 
 ![](images/git_commands_workflow.png)
 
-### Example
+## Example
 
 Navigate in the `dessert` repository you just created.
 
@@ -204,7 +214,7 @@ git log -1
 
 Write a R code to read the favorite_desserts.csv files in and add a new row to the dataframe and overwrite the csv with the new entry. Of course you need to track the development of your code using git!!
 
-## Getting information about git
+# Getting information about git
 
 * `git status` this command is your friend! It will tell you where you are at and what are your options. You can use at any point in your process.
 * `git log` displays history of committed snapshots. It lets you list the project history, filter it, and search for specific changes.
@@ -216,7 +226,7 @@ To be used before committing, to preview the changes to be committed.
 
 Git has a lot of terms and commands, see reference at the end of this document for an extensive terminology.
 
-## Ignoring certain types of file
+# Ignoring certain types of file
 
 `.gitignore` is a specific file used to list what (type of) files you do not want git to track. This file need to be placed at the top level of the directory.
 
@@ -232,9 +242,9 @@ vim .gitignore
 To know more: <https://git-scm.com/docs/gitignore>
 
 
-## Undoing things
+# Undoing things
 
-### Unstage a file
+## Unstage a file
 
 `git reset HEAD` lets you remove a file from the staging area
 
@@ -243,7 +253,7 @@ git reset HEAD <my_file_I_added_by_mistake.xls>
 ``` 
 This will remove the file from your next commit. Can be used to undo an erronous `git add`.
 
-### Undo your last commit
+## Undo your last commit
 
 `git commit --amend` let you amend your last commit with the most recent changes, like for example if you forgot a file
 
@@ -254,7 +264,7 @@ git commit --amend -m "My new message"
 
 More info about how to undo things [here](https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things)
 
-### Undo your changes
+## Undo your changes
 
 ***Warning!*** `git checkout` overwrite the file version by the latest commited one => your changes will be lost!
 
@@ -269,13 +279,13 @@ git checkout e11e34 test_file.txt
 ``` 
 
 
-## Few other terms you might have heared about git
+# Few other terms you might have heard
 
 * **HEAD**: it is the reference that points by default to the latest commit
 * **Branches**: A branch represents an independent line of development, parallel to the master. In fact, the default branch name that is created by ```git init``` is called ***master***.
 
 
-## References
+# References
 - Interactive git 101: [https://try.github.io/](https://try.github.io/)
 - Very good tutorial about git: [https://www.atlassian.com/git/tutorials/what-is-version-control](https://www.atlassian.com/git/tutorials/what-is-version-control)
 - Git tutorial geared towards scientists: [http://nyuccl.org/pages/gittutorial/](http://nyuccl.org/pages/gittutorial/)

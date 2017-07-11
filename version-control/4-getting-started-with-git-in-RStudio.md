@@ -1,8 +1,10 @@
 ---
 title: "Using git From RStudio"
 author: "Julien Brun"
-date: "June, 2016"
-output: html_document
+output: 
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
 

@@ -1,5 +1,15 @@
-Code versioning - Working with remotes
-===============================
+---
+title: "git - advanced"
+author: "Julien Brun"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+
+# Working with remotes
+
 
 ***So far we have used git locally, on one machine***. One strength of Git is that it allows you to share and co-edit codes and files.
 
@@ -68,7 +78,7 @@ During this process, if you want to roll back to the situation before you starte
 5. `git push`
 
 
-## Branches
+# Branches
 
 ![adapted from https://www.atlassian.com/git/tutorials/git-merge](images/atlassian_branches_sketch.png)
 

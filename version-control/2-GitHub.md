@@ -1,5 +1,13 @@
-GitHub
-=======
+---
+title: "GitHub"
+author: "Julien Brun"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+# GitHub
 	
 You might also have heard of [GitHub](https://github.com). **GitHub is a company that hosts git repositories online** and provides several collaboration features (among which `forking`). GitHub fosters a great user community and has built a nice webinterface to git, also adding great visualization/rendering capacities of your data.
 
@@ -36,7 +44,7 @@ We are going to create a new repository on your GitHub account:
 
 
 
-## Collaborating with git and GitHub
+# Collaborating with git and GitHub
 
 ### Collaborating through Forking, aka the GitHub workflow
 
