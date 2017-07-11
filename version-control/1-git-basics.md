@@ -103,6 +103,11 @@ Set your text editor:
 git config --system core.editor vim
 ```
 
+Cache your GitHub credentials (for 1 hour):
+
+```{bash}
+git config --global credential.helper 'cache --timeout=3600'
+```
 
 <img style="float: left;width: 30px;" src="images/tip.png"/> Want to know more about the available configuration options? How to change the default [text editor](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) used byt git? How make git remember your [GitHub credentials](https://help.github.com/articles/caching-your-github-password-in-git/#platform-all)?
 
