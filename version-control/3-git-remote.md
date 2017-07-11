@@ -57,7 +57,16 @@ remote version (theirs)
 
 *=> You still have to* `git add` *and* `git commit` *after this*
 
-3. You want to roll back to the situation before you started a merge: `git merge --abort`
+During this process, if you want to roll back to the situation before you started the merge: `git merge --abort`
+
+**NOTE:** By doing a `pull` before commiting, you can avoid a lot of git conflicts. Your git workflow should therefore be:
+
+1. `git add`
+2. `git pull`
+3. `commit -m "descriptive message"`
+4. `git pull`
+5. `git push`
+
 
 ## Branches
 
@@ -107,6 +116,7 @@ Done with your branch? Want to merge your new - ready for prime time - script to
 
 
 ## References
+
 - General
  - Interactive git 101: <https://try.github.io/>
  - Very good tutorial about git: <https://www.atlassian.com/git/tutorials/what-is-version-control>
@@ -120,5 +130,4 @@ Done with your branch? Want to merge your new - ready for prime time - script to
  - NCEAS wiki page on git: <https://help.nceas.ucsb.edu/git?s[]=git>
 - Branches
  - 	interactive tutorial on branches: <http://learngitbranching.js.org/>
- - git workflow options:
  -  using git in a collaborative environment: <https://www.atlassian.com/git/tutorials/comparing-workflows/centralized-workflow>

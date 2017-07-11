@@ -1,30 +1,52 @@
 % Version Control
 % Julien Brun and Mark Schildhauer, NCEAS, UCSB
-% May, 2017
+% OSS 2017
 
 
 ## Why do I need that again?
 
-<img style="align: left;width: 550px;" src=images/phd_comics_final.png />
+<p align="center">
+  <img style="width: 550px;" src=images/phd_comics_final.png />
+</p>
 
 ## Why do I need that again?
 
+<br>
 
-_**=> Code versioning is very useful to keep track of changes you or your collaborators made to your scripts.**_
+### => Version Control is very useful to keep track of changes you or your collaborators made to your scripts.
 
 
 ## Git and GitHub
 
-<img style="float: center;width: 300px;" src="images/git_icon.png">
+<br>
 
-<img style="float: center;width: 350px;" src="images/GitHub_logo.png">
+<img style="align: left;width: 300px;" src="images/git_icon.png">
+
+<br>
+Git is a *free* and *open source* distributed *version control system*. Git allows you to take snapshots of your files, creating an history of versions that you can navigate.
+<br>
+
+. . .
+
+<img style="algn: right;width: 350px;" src="images/GitHub_logo.png">
+
+
+**GitHub is a company that hosts git repositories online** and provides several collaboration features (among which `fork`). 
+
+GitHub fosters a great user community and has built a nice graphical interface to git, adding great visualization capacities of your data.
 
 
 ## What we want to avoid
 
-![xkcd - git](images/git_xkcd.png)
+<br>
+<p align="center">
+  <img style="width: 300px;" src="images/git_xkcd.png">
+</p>
 
-## <img style="align: left;;width: 300px;" src="images/git_icon.png"> 
+
+*xkcd - git*
+
+## <img style="align: middle;width: 300px;" src="images/git_icon.png"> 
 
 ### What is git
 
@@ -34,11 +56,18 @@ _**=> Code versioning is very useful to keep track of changes you or your collab
 - Git is distributed
 - Git has integrity
 
+. . .
+
 ### What git is not
 
 - Git is not a backup per se
 - Git is not GitHub (or more exactly: GitHub is not Git)
 - Git is not good at storing large data (by default)
+
+## Repository
+
+A repository is simply a directory/folder in which you have enabled git to track its content (files and subfolders). 
+
 
 ## git workflow
 
@@ -53,10 +82,10 @@ _**=> Code versioning is very useful to keep track of changes you or your collab
 **And repeat!!**
 
 
-## <img style="align: left;width: 350px;" src="images/GitHub_logo.png">
+## git commit history
 
-You might also have heard of [GitHub](https://github.com). **GitHub is a company that hosts git repositories online** and provides several collaboration features (among which `fork`). 
+<br>
+<p align="center">
+  <img style="width: 300px;" src="images/version-graph_mattJones.png">
+</p>
 
-. . .
-
-GitHub fosters a great user community and has built a nice graphical interface to git, adding great visualization capacities of your data.

@@ -3,11 +3,11 @@ Code versioning - Git Basics
 
 ## Why do I need that again?
 
-<img style="align: left;width: 420px;" src=images/phd_comics_final.png />
+<img style="align: left;width: 450px;" src=images/phd_comics_final.png />
 
 So code versioning is very useful to **keep track of changes you made to your scripts**. It allows you to choose when you have reached a stage in your code that you think is worth keeping track of, like a new function that makes your data analysis soooooo much better. 
 
-For scientists, code versioning is a useful tool to help you to track changes you make to your scripts and enable you to share your codes with your collaborators. For example, if you break your code, git can help you to revert to an earlier working version. Want one of your collaborators to add a feature to your code to do a specific analysis? Code versioning can help you to do so in a smooth and organized manner, tracking who changed what.
+For scientists, version control is a useful tool to help you to track changes you make to your scripts and enable you to share your codes with your collaborators. For example, if you break your code, git can help you to revert to an earlier working version. Want one of your collaborators to add a feature to your code to do a specific analysis? Code versioning can help you to do so in a smooth and organized manner, tracking who changed what.
 
 This training material focuses on the code verioning system calld `Git`. Note that there are others, such as `Mercurial` or `svn` for example.
 
@@ -61,6 +61,9 @@ Everytime you create a new snapshot, you add the new version of the file to the 
 Before you start using git on any computer, you will have to set your identity on your system, as every snapshot of files is associated with the user who implemented the modifications to the files.
 
 ### 1. Setting up your identity
+
+You need to do this step the first time you use git on a computer.
+
 **Setup your profile:**
 
 Your name and email: 
@@ -102,10 +105,11 @@ As we mentioned earlier, a **git repository** is a folder/directory on your mach
 `git init` is the command to start the tracking in a specific directory and transform it into a git repository:
 
 ```{bash}
-cd
-mkdir git_nceas
-cd git_nceas
-mkdir testing-git
+mkdir oss
+cd oss
+mkdir dessert
+cd dessert
+pwd
 git init
 ```
 
@@ -115,21 +119,21 @@ git init
 
 ```{bash}
 cd 
-mkdir git_nceas
-cd git_nceas
+mkdir oss
+cd oss
 git clone https://github.com/your_username/your_reponame.git
 ```
 The cloning process will automatically create a directory on your machine named like the online repository.
 
 ## Tracking your changes
 
-Let us have a closer look at the git workflow. It is important that a good portion of the workflow happens on your local machine (in blue), whereas a part requires interactions with a remote machine (in purple):
+Let us have a closer look at the git workflow. It is important to stress that almost all of the git workflow happens on your local machine:
 
 ![](images/git_commands_workflow.png)
 
 ### Example
 
-Navigate in the `testing-git` repository you just created.
+Navigate in the `dessert` repository you just created.
 
 1.) Let us create a csv file containing our name and favorite dessert:
 
@@ -141,7 +145,7 @@ vim favorite_desserts.csv
 Note: hit the key `i` to switch to *insert mode* in vim. My file would look like this
 
 ```
-My name, My dessert
+Name, Dessert
 Julien, Ice cream
 ```
 
@@ -241,7 +245,7 @@ This will remove the file from your next commit. Can be used to undo an erronous
 
 ### Undo your last commit
 
-`git commit --amend` let you change your last commit, like for example if you forgot a file
+`git commit --amend` let you amend your last commit with the most recent changes, like for example if you forgot a file
 
 ```{bash}
 git add <missing_script.R>
@@ -250,9 +254,24 @@ git commit --amend -m "My new message"
 
 More info about how to undo things [here](https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things)
 
+### Undo your changes
+
+***Warning!*** `git checkout` overwrite the file version by the latest commited one => your changes will be lost!
+
+```{bash}
+git checkout -- test_file.txt
+``` 
+
+You can also revert a file to a former commit in the history using the unique commit hash
+
+```{bash}
+git checkout e11e34 test_file.txt
+``` 
+
+
 ## Few other terms you might have heared about git
 
-* **HEAD**: it is the reference that points to the latest commit
+* **HEAD**: it is the reference that points by default to the latest commit
 * **Branches**: A branch represents an independent line of development, parallel to the master. In fact, the default branch name that is created by ```git init``` is called ***master***.
 
 
