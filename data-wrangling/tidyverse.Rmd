@@ -72,10 +72,11 @@ ttc <-read_csv("data/ttc.csv") #The Toronto Transit Commission Data.
 ttc #tibble produced if use read_csv versus dataframe. Tibbles include str() list of vector attributes at the top of output.
 
 #check for missing values
-is.na(ttc)
+is.na(ttc) #returns a logical vector, true is missing (i.e. NA), false is present
 summary(ttc, na.rm=TRUE) #excludes NA
 new.ttc <-na.omit(ttc) # returns without missing values
 is.na(new.ttc) #check to see if it worked
+setdiff(ttc, new.ttc)
 
 #many other solutions but I use these two frequently
 
@@ -151,10 +152,33 @@ p
 
 <br>
 
-###Exercise 4. Two-table wrangle
+###Exercise 4. Two-table wrangle challenge
 Data are likely to be distributed amongst different tables and files. The updated package dpyr (and tidy friend packages) provides an excellent set of verbs to address this challenge.
 
-Take a moment and review the brief blog post [here](http://dplyr.tidyverse.org/articles/two-table.html) describing the two categories of tools. Now, on your own, explore two datasets using the three families of tools (mutating, filtering joins, and set element exploration).
+Take a moment and review the brief blog post [here](http://dplyr.tidyverse.org/articles/two-table.html) describing the two categories of tools. Now, on your own, examine two datasets using the three families of tools (mutating, filtering joins, and set element exploration). Select ONE of the following challenges.
+
+**SEAMAP Challenge**
+```{r SEAMAP, warning=FALSE, message=FALSE}
+
+seamap <- read_csv("data/BGSREC.csv") #all meta-data listed in the PDF in directory
+seamap
+
+cruises <- read_csv("data/CRUISES.csv")
+cruises
+
+```
+
+
+**Whole brain-challenge**
+```{r brains, warning=FALSE, message=FALSE}
+
+brains <- read_csv("data/brains.csv")
+brains
+
+ninja.scores <- read_csv("data/ninja.scores.csv")
+ninja.scores
+
+```
 
 <br>  
 
