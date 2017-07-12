@@ -32,7 +32,7 @@ The Need for Data Management: Public Perception
 
 *"The climate scientists at the centre of a media storm over leaked emails were yesterday cleared of accusations that they fudged their results and silenced critics, but a review found they had failed to be open enough about their work."*
 
-Why Manage Data? Resercher Perspective
+Why Manage Data? Researcher Perspective
 ========================================================
 - Keep yourself organized – be able to find your files (data inputs, analytic scripts, outputs at various stages of the analytic process, etc.) 
 - Track your science processes for reproducibility – be able to match up your outputs with exact inputs and transformations that produced them
