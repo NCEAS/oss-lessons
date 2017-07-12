@@ -29,6 +29,8 @@ We will be using a test server, so login and retrieve your token at https://sear
 
 Once you are logged in, navigate to your Profile Settings, and locate the "Authentication Token" section, and then copy the token for R to your clipboard.
 
+## Next, modify the metadata file associated with the package to set yourself as the owner.  This will help us differentiate the test data later.  Open the `strix-pacific-northwest.xml` file in RStudio, and change the `givenName` and `surName` fields at the top to your name.
+
 ## Uploading A Package Using `uploadDataPackage`
 Datasets and metadata can be uploaded individually or as a collection. Such a collection, whether contained in local 
 R objects or existing on a DataONE repository, will be informally referred to as a `package`. The steps necessary to
@@ -43,6 +45,7 @@ library(datapack)
 library(uuid)
 
 dp <- new("DataPackage")
+dp
 ```
 
 We then add a metadata file, data file, R script and output data file to this package:
@@ -67,6 +70,7 @@ dp <- addData(dp, outputObj, metadataObj)
 
 myAccessRules <- data.frame(subject="orcid.org/0000-0003-0077-4738", permission="changePermission") 
 
+dp
 ```
 
 Finally, we upload the package to the Testing server for the KNB.
