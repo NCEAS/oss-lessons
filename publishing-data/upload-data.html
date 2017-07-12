@@ -90,8 +90,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Once you are logged in, navigate to your Profile Settings, and locate the “Authentication Token” section, and then copy the token for R to your clipboard.</p>
 </div>
 </div>
-<div id="next-modify-the-metadata-file-associated-with-the-package-to-set-yourself-as-the-owner.-this-will-help-us-differentiate-the-test-data-later.-open-the-strix-pacific-northwest.xml-file-in-rstudio-and-change-the-givenname-and-surname-fields-at-the-top-to-your-name." class="section level2">
-<h2>Next, modify the metadata file associated with the package to set yourself as the owner. This will help us differentiate the test data later. Open the <code>strix-pacific-northwest.xml</code> file in RStudio, and change the <code>givenName</code> and <code>surName</code> fields at the top to your name.</h2>
+<div id="modify-metadata" class="section level2">
+<h2>Modify metadata</h2>
+<p>Next, modify the metadata file associated with the package to set yourself as the owner. This will help us differentiate the test data later. Open the <code>strix-pacific-northwest.xml</code> file in RStudio, and change the <code>givenName</code> and <code>surName</code> fields at the top to your name.</p>
 </div>
 <div id="uploading-a-package-using-uploaddatapackage" class="section level2">
 <h2>Uploading A Package Using <code>uploadDataPackage</code></h2>
@@ -131,20 +132,20 @@ dp</code></pre></div>
 <pre><code>## Members:
 ## 
 ## identifier format          submitter       rightsHolder    mediaType       filename             size       
-## urn...0283 application/R   NA              NA              text/x-rsrc     filterSpecies.R      380        
-## urn...19cd text/csv        NA              NA              NA              sample.csv           11577      
-## urn...f770 eml://...-2.1.1 NA              NA              NA              strix-pa...hwest.xml 4767       
-## urn...a932 text/csv        NA              NA              NA              filteredSpecies.csv  6017       
+## urn...64ad application/R   NA              NA              text/x-rsrc     filterSpecies.R      380        
+## urn...07c1 text/csv        NA              NA              NA              filteredSpecies.csv  6017       
+## urn...f744 text/csv        NA              NA              NA              sample.csv           11577      
+## urn...6491 eml://...-2.1.1 NA              NA              NA              strix-pa...hwest.xml 4770       
 ## 
 ## Relationships:
 ## 
 ##                 subject           predicate                object
 ## 4       filterSpecies.R cito:isDocumentedBy strix-pac...hwest.xml
+## 6   filteredSpecies.csv cito:isDocumentedBy strix-pac...hwest.xml
 ## 2            sample.csv cito:isDocumentedBy strix-pac...hwest.xml
 ## 3 strix-pac...hwest.xml      cito:documents       filterSpecies.R
-## 1 strix-pac...hwest.xml      cito:documents            sample.csv
 ## 5 strix-pac...hwest.xml      cito:documents   filteredSpecies.csv
-## 6   filteredSpecies.csv cito:isDocumentedBy strix-pac...hwest.xml</code></pre>
+## 1 strix-pac...hwest.xml      cito:documents            sample.csv</code></pre>
 <p>Finally, we upload the package to the Testing server for the KNB.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d1c &lt;-<span class="st"> </span><span class="kw">D1Client</span>(<span class="st">&quot;STAGING2&quot;</span>, <span class="st">&quot;urn:node:mnTestKNB&quot;</span>)
 packageId &lt;-<span class="st"> </span><span class="kw">uploadDataPackage</span>(d1c, dp, <span class="dt">public=</span><span class="ot">TRUE</span>, <span class="dt">accessRules=</span>myAccessRules, <span class="dt">quiet=</span><span class="ot">FALSE</span>)</code></pre></div>
