@@ -6,16 +6,19 @@ Collaborative document edited by 2017 OSS:GRP course participants.  Draft docume
 ## Purpose
 NCEAS and the OSS workshop participants are partners in providing a welcoming and supportive environment for all people, regardless of background or identity. We recognise that some groups in our community are subject to historical and ongoing discrimination, and may be vulnerable or disadvantaged. We do not tolerate discrimination or harassment of participants on the basis of gender, sexual orientation, disability, physical appearance, body size, race, nationality, sex, colour, ethnic or social origin, pregnancy, citizenship, familial status, veteran status, genetic information, religion or belief, political or any other opinion, membership of a national minority, property, birth, age, choice of text editor, or for any other reason.
 
-As a cohort, our goal is to create a community of learning; enhancing our collective skills and understanding of data science and synthesis practices for application in the area of Gulf reseach.  We will …
+As a cohort, our goal is to create a community of learning; enhancing our collective skills and understanding of data science and synthesis practices for application in the area of Gulf research.  
 
 ## Norms
 
 - Be responsive and professional
+- Embrace and promote cognitive diversity
 - Ask for and respect confidentiality requests
 - Contribute; but recognize sensitivities to sharing that might affect contributions to the community (workplace permissions, intellectual property, etc.)
 - Develop pride and a sense of community
 - Give credit
+- Respect others point of view
 - Not tolerate racist, sexist, ageist or other discriminatory language or behavior
+- Not speak over one another and give space to other people to speak
 
 ## Collaborative and Community Guidelines
 
@@ -35,4 +38,8 @@ As a cohort, our goal is to create a community of learning; enhancing our collec
 
 - We are committed to actively reinforcing the norms, and following up on them while encouraging constructive conversation.
 
-In the instance of a violation of the above guidelines please speak to either Matt Jones or Amber Budden if direct interaction is not feasible, desireable or appropriate. 
+In the instance of a violation of the above guidelines please speak to either Matt Jones or Amber Budden if direct interaction is not feasible, desirable or appropriate. 
+
+- Provide a mechanism to table questions and comments
+
+
