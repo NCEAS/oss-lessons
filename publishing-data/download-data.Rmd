@@ -1,0 +1,159 @@
+---
+title: "Downloading Data From DataONE"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Downloading Data From DataONE}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+<!--
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache=TRUE)
+```
+-->
+
+## Downloading Data from DataONE
+
+This document describes how to download data from the DataONE Federation of Member Nodes.
+Before data can be downloaded from DataONE it is necessary to find the identifiers that
+are associated with the data. The DataONE search facility is used to find these identifiers that
+are used to download any metadata file or dataset.
+
+The *dataone::query* method is used to send data searches from R to the DataONE search facility, and 
+is shown in the examples in the next section. A more complete description of using the query method to
+search DataONE is available in the *searching-dataone* vignette (`vignette("searching-dataone"`)).
+
+### Search all of DataONE For Datasets of Interest
+
+The DataONE Coordinating Node (CN) contains metadata about datasets from all Member Nodes (MN) in the network.
+Sending a query to the CN may find matching datasets located on potentially any Member Node in the network.
+The search may be limited to the data holdings of a particular MN by either specifying the "datasource"
+search term in the query sent to the CN, or by just sending the query to a specific MN. 
+
+The following query shows how to query the entire DataONE network and locate and download data from 
+any MN that has the desired data:
+```{r,warning=FALSE,autodep=T,message=FALSE}
+library(dataone)
+cn <- CNode("PROD")
+# Ask for the id, title and abstract
+queryParams <- list(q="abstract:kelp", fq="attribute:biomass", fq="id:doi*", 
+                    fq="formatType:METADATA", fl="id,title,abstract") 
+result <- query(cn, solrQuery=queryParams, as="data.frame", parse=FALSE)
+result[1,c("id", "title")]
+```
+
+The *result* object, a data.frame, can be inspected to determine which matching dataset to download, as
+multiple matching dataset identifiers may be returned from the query.
+Each object in DataONE is uniquely identified by a Persistent Identifier (PID) that can be used to refer to the object and perform operations on it, such as downloading it to a local machine. 
+
+(As an alternative to retrieving dataset information from a query, it is of course possible to use the DataONE web browser search interface located at http://search.dataone.org to find the identifiers of data to download.)
+
+In the R example, after inspecting the *result* data, we will use the first matching dataset:
+```{r}
+ pid <- result[1,'id']
+```
+
+Now that the PID is determined, the MN that holds the data must be located. For this, the *resolve*
+method is used to find an MN that holds the data and that is currently available: 
+
+```{r, warning=FALSE, eval=FALSE}
+locations <- resolve(cn, pid)
+mnId <- locations$data[2, "nodeIdentifier"]
+mn <- getMNode(cn, mnId)
+```
+
+Multiple MNs may hold the data, depending on the DataONE replication policy that is in effect for the dataset and which member nodes are currenctly available. (DataONE copies or 'replicates' datasets from one MN to other MNs, depending on what was requested by the user
+when a dataset was first uploaded to DatqONE). In this example the second location from the resolve list will be downloaded. Now the call can be made that downloads the object itself:
+```{r, warning=FALSE,eval=FALSE}
+obj <- getObject(mn, pid)
+```
+
+If the search is limited to a particular MN, in this case the Knowledge Network for Biocomplexity (KNB), then the search and download are performed with the statements:
+    
+```{r, warning=FALSE, eval=FALSE, message=FALSE}
+# Query the data holdings on a member node
+cn <- CNode("PROD")
+mn <- getMNode(cn, "urn:node:KNB")
+queryParams <- list(q="abstract:habitat", fl="id,title,abstract") 
+result <- query(mn, queryParams, as="data.frame", parse=FALSE)
+# Choose the first matchin PID
+pid <- result[1,'id']
+obj <- getObject(mn, pid)
+```
+
+### Alternate Approach for DataONE-wide search and download
+
+This approach uses the *getDataObject* method from the R package.  The *getDataObject* method determines which 
+member node in DataONE holds the data item and downloads it into a datapack::DataObject. The DataObject R object is 
+a wrapper that contains the data bytes for the DataONE dataset requested as well as the DataONE system metadata for the object. 
+
+```{r, warning=FALSE, eval=FALSE, message=FALSE}
+d1c <- D1Client("PROD", "urn:node:KNB")
+# Ask for the id, title and abstract
+queryParams <- list(q="abstract:\"biogenic hydrocarbon\"", fq="id:doi*", 
+                    fq="formatType:METADATA", fl="id,title") 
+result <- query(d1c@mn, solrQuery=queryParams, as="data.frame", parse=FALSE)
+pid <- result[1,'id']
+dataObj <- getDataObject(d1c, pid)
+bytes <- getData(dataObj)
+metadataXML <- rawToChar(bytes)
+```
+The following functions are available to extract information from the DataObject:
+
+- getIdentifier(obj) : Get the identifier (PID) of a DataObject
+- getFormatId(obj) : Get the format type of a DataObject, e.g. "text/csv"
+- getData(obj) : Get the data contents of the DataObject
+
+For example, to extract the data byes from the DataObject:
+```{r, eval=FALSE}
+dataBytes <- getData(dataObj)
+```
+
+In addition to the DataObject functions, the complete set of information from the DataONE system metadata is available from the 
+object's slot:
+
+```{r, eval=FALSE}
+str(dataObj@sysmeta)
+```
+### Download a data package
+
+A DataONE data package is a collection of datasets that are documented by a metadata object that is
+also included in the package. For example, a data package might contain all source data, scripts and 
+analysis products for an experiment or study. For example, the data package available from the Knowledge 
+Network for Biocomplexity that is available https://knb.ecoinformatics.org/#view/corina_logan.20.3
+that contains data for an experiment related to Western scrub-jays food caching behaviors.
+
+Note: to use the *getPackage* method, the *id* parameter must be the package identifier associated with the ORE package description.
+If the pid of the metadata object or science data object is known, then the package identifier can be discovered
+using a query such as:
+
+```{r, eval=FALSE}
+cn <- CNode()
+mn <- getMNode(cn, "urn:node:KNB")
+queryParamList <- list(q="id:Blandy.77.1", fl="resourceMap")
+result <- query(cn, solrQuery=queryParamList, as="data.frame")
+packagePid <- result[1,1]
+```
+
+Once the package identifier is determined, the entire data package can be downloaded using the *getPackage* method: 
+
+```{r, eval=FALSE}
+cn <- CNode()
+mn <- getMNode(cn, "urn:node:KNB")
+bagitFileName <- getPackage(mn, id=packagePid)
+```
+
+Care must be taken, however, as these commands download the entire package. 
+
+The package is downloaded to a single file that is structured according
+to the [Bagit](https://tools.ietf.org/html/draft-kunze-bagit-10) packaging guidelines. The *getPackage*
+method returns the name this file that is created in a temporary directory.
+
+Because the *getPackage* method downloads the entire collection of files for a data package, the
+downloaded Bagit file can be quiet large and may take a significant amount of time to download,
+depending on the package contents. 
+
+Technical information about DataONE data package design and contents is available at
+[DataONE data packages](https://purl.dataone.org/architecture/design/DataPackage.html)
