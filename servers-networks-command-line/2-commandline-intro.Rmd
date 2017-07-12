@@ -159,6 +159,7 @@ jones@aurora:~/oss$ ls
 data  README.md
 jones@aurora:~/oss$ pwd
 /home/jones/oss
+jones@aurora:~/oss$ tree
 .
 ├── data
 │   └── plotobs.csv
@@ -327,15 +328,59 @@ jones@aurora:~/oss$
 
 **Linux/Unix Cheetsheet**: http://cheatsheetworld.com/programming/unix-linux-cheat-sheet/
 
+## Clone the lessons git repository to aurora
+
+To make it easier to follow the remaining commands, lets use git to make a copy of the lessons repository.
+
+Go find the git URL of the repository we want to clone.  First, go to the GitHub 
+repository page and copy the reposiotry clone URL:
+
+https://github.com/NCEAS/oss-lessons
+
+![](images/github-clone.png)
+Now, open a terminal on aurora, login, and clone the repository:
+
+```bash
+jones@powder:~$ ssh aurora.nceas.ucsb.edu
+jones@aurora:~$ cd oss
+jones@aurora:~/oss$ ls
+data  lakes  README.md
+jones@aurora:~/oss$ git clone https://github.com/NCEAS/oss-lessons.git
+Cloning into 'oss-lessons'...
+remote: Counting objects: 1554, done.
+remote: Compressing objects: 100% (796/796), done.
+remote: Total 1554 (delta 673), reused 1548 (delta 667), pack-reused 0
+Receiving objects: 100% (1554/1554), 90.17 MiB | 21.84 MiB/s, done.
+Resolving deltas: 100% (673/673), done.
+Checking connectivity... done.
+jones@aurora:~/oss$ ls
+data  lakes  oss-lessons  README.md
+jones@aurora:~/oss$ cd oss-lessons/servers-networks-command-line
+jones@aurora:~/oss/oss-lessons/servers-networks-command-line$ ls
+1-servers-net.html        3-bash-loops.Rmd   paleo-mammals-v2.txt
+1-servers-net.Rmd         4-regex.Rmd        paleo-mammals-v3.txt
+2-commandline-intro.html  images             plotobs.csv
+2-commandline-intro.Rmd   paleo-mammals.txt
+jones@aurora:~/oss/oss-lessons/servers-networks-command-line$
+```
+
+
 ## Text editing
 
 ### Some editors
 
-* `vim`
-* `emacs`
-* `nano`
+There are many text editors available for Unix systems. `nano` is one that is
+simple and fairly easy to learn, so we'll use that when needed, but most people
+prefer `vim` or `emacs` which are much more powerful but also harder to learn.
+If you use the commandline, I recommend learning one of them thoroughly.
 
-### `$ nano lakes/LakeMary.md`
+- `vim`
+- `emacs`
+- `nano`
+
+```bash
+$ nano paleo-mammals.txt
+```
 
 
 ## A sampling of useful commands
@@ -350,11 +395,60 @@ jones@aurora:~/oss$
 ![`stdin`, `stdout`, `stderr`](images/pipe_split.png)
 
 ```bash
-$ ls -1 lakes | wc -l
-$ ls -1 lakes | wc -l > lakecount.txt
-$ diff <(sort file1.txt) <(sort file2.txt)
-$ ls foo 2>/dev/null
-$ tee
+$ ls -1 ../../lakes | wc -l
+2
+$ ls -1 ../../lakes | wc -l > lakecount.txt
+$ cat lakecount.txt 
+2
+```
+
+```bash
+$ diff -u paleo-mammals.txt paleo-mammals-v2.txt
+--- paleo-mammals.txt	2017-07-12 06:13:24.979291128 -0700
++++ paleo-mammals-v2.txt	2017-07-12 06:13:24.979291128 -0700
+@@ -4,7 +4,7 @@
+ Homotherium serum,American Scimitar Cat,1m,1.5M,10K
+ Castoroides ohioensis,Giant Beaver,1m,1.5M,10K
+ Dasypus bellus,Beautiful Armadillo,1m,1M,10K
+-Osteoborus cynoides,Bone-Crushing Dog,.9m,8M,1.5M
++Osteoborus cynoides,Bone-Crushing Dog,9m,8M,1.5M
+ Camelops hesternus,American Camel,3.6m,1M,10K
+ Aepycamelus,Giraffe Camel,3m,10M,5M
+ Megalocerous giganteus,Giant Irish Elk,2.1m,500k,10K
+@@ -16,7 +16,7 @@
+ Doedicurus,Glyptodon,1.5m,1.5M,12K 
+ Uintatherium robustum,,1.5m,50M,35M
+ Odobenocetops peruvianus,Walrus-Whale,2.1m,5M,1M
+-Mammuthus primigenius,Woolly mammoth,2.75m,1.5M,8K 
++Mammuthus primigenios,Woolly mammoth,2.75m,1.5M,8K 
+ Coelodonta antiquitatis,Woolly rhinoceros,2m,500K,10K
+ Megatherium americanum,Ground sloth,6m,30M,8K 
+ Megalonyx jeffersonii,Jefferson's Ground Sloth,3m,30M,8K 
+$ diff -u <(sort paleo-mammals.txt) <(sort paleo-mammals-v2.txt)
+--- /dev/fd/63	2017-07-12 06:27:26.274193251 -0700
++++ /dev/fd/62	2017-07-12 06:27:26.270193219 -0700
+@@ -12,12 +12,12 @@
+ Gomphotheres,Four-Tusked Elephant,2.4m,15M,5M
+ Homotherium serum,American Scimitar Cat,1m,1.5M,10K
+ Indricotherium transsouralicum,,4.7m,30M,25M
+-Mammuthus primigenius,Woolly mammoth,2.75m,1.5M,8K 
++Mammuthus primigenios,Woolly mammoth,2.75m,1.5M,8K 
+ Megalocerous giganteus,Giant Irish Elk,2.1m,500k,10K
+ Megalonyx jeffersonii,Jefferson's Ground Sloth,3m,30M,8K 
+ Megatherium americanum,Ground sloth,6m,30M,8K 
+ Nothrotheriops shastensis,Shasta Ground Sloth,1.5m,30M,8K 
+ Odobenocetops peruvianus,Walrus-Whale,2.1m,5M,1M
+-Osteoborus cynoides,Bone-Crushing Dog,.9m,8M,1.5M
++Osteoborus cynoides,Bone-Crushing Dog,9m,8M,1.5M
+ Smilodon fatalis,Sabertooth Cat,1.2m,1.5M,10K
+ Uintatherium robustum,,1.5m,50M,35M
+```
+
+```bash
+$ ls nofilehere.txt
+ls: cannot access 'nofilehere.txt': No such file or directory
+$ ls nofilehere.txt 2>/dev/null
+$
 ```
 
 ## A sampling of more advanced utilities
