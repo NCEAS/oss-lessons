@@ -40,7 +40,7 @@ library(arcticdatautils)
 doc <- read_eml("strix-pacific-northwest.xml")
 
 # Change creator to us
-doc@dataset@creator <- c(eml_creator("Bryce", "Mecum"))
+doc@dataset@creator <- c(eml_creator("Bryce", "Mecum", email = "mecum@nceas.ucsb.edu"))
 
 # Change abstract to the better one we wrote
 doc@dataset@abstract <- as(set_TextType("better-abstract.md"), "abstract")
