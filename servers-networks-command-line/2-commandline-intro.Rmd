@@ -468,25 +468,43 @@ $
 ### Show all lines containing "bug" in my R scripts
 
 ```bash
-$ grep bug *.R
+$ grep bug *.Rmd
+2-commandline-intro.Rmd:### Show all lines containing "bug" in my R scripts
+2-commandline-intro.Rmd:$ grep bug *.R
+2-commandline-intro.Rmd:$ grep -c bug *.R
+2-commandline-intro.Rmd:### Print the names of files that contain bug
+2-commandline-intro.Rmd:$ grep -l bug *.R
+2-commandline-intro.Rmd:### Print the lines of files that __don't__ contain bug
+2-commandline-intro.Rmd:$ grep -v bug *.R
+2-commandline-intro.Rmd:### Remove all lines containing "bug"!
+2-commandline-intro.Rmd:$ sed '/bug/d' myscript.R
+2-commandline-intro.Rmd:### Call them buglets, not bugs!
+2-commandline-intro.Rmd:$ sed 's/bug/buglet/g' myscript.R
+2-commandline-intro.Rmd:$ sed '/#/ s/bug/buglet/g' myscript.R
 ```
 
 ### Now count the number of occurrences per file
 
 ```bash
-$ grep -c bug *.R
+$ grep -c bug *.Rmd
+1-servers-net.Rmd:0
+2-commandline-intro.Rmd:12
+3-bash-loops.Rmd:0
+4-regex.Rmd:0
 ```
 
 ### Print the names of files that contain bug
 
 ```bash
-$ grep -l bug *.R
+$ grep -l bug *.Rmd
+2-commandline-intro.Rmd
 ```
 
-### Print the lines of files that __don't__ contain bug
+### Print the count lines of files that __don't__ contain bug
 
 ```bash
-$ grep -v bug *.R
+$ grep -v bug *.Rmd |wc -l
+841
 ```
 
 ## sed
@@ -498,19 +516,19 @@ $ grep -v bug *.R
 ### Remove all lines containing "bug"!
 
 ```bash
-$ sed '/bug/d' myscript.R
+$ sed '/bug/d' 2-commandline-intro.Rmd
 ```
 
 ### Call them buglets, not bugs!
 
 ```bash
-$ sed 's/bug/buglet/g' myscript.R
+$ sed 's/bug/buglet/g' 2-commandline-intro.Rmd
 ```
 
-### Actually, only do this on lines starting with #
+### Actually, only do this on lines containing a #
 
 ```bash
-$ sed '/#/ s/bug/buglet/g' myscript.R
+$ sed '/#/ s/bug/buglet/g' 2-commandline-intro.Rmd
 ```
 
 
@@ -522,18 +540,61 @@ $ sed '/#/ s/bug/buglet/g' myscript.R
 
 ## find
 
-### Show me my pdfs!
+### Show me my Rmd files!
 
 ```bash
-$ find . -iname '*.pdf'
+$ find . -iname '*.Rmd'
 ```
 
 ### Which files are larger than 10GB?
 
 ```bash
-$ find . -size +10G -ls
+$ find . -size +5K -ls
 ```
 
+## cut
+
+Cut is used to extract columns from a delimited text file, like a CSV file. It is fast and simple.
+
+```bash
+$ cut -d , -f 1,5 plotobs.csv 
+obsid,sciname 
+1,Abies lasiocarpa
+2,Picea engelmannii
+3,Picea engelmannii
+4,Picea engelmannii
+5,Picea engelmannii
+...
+```
+
+```bash
+$ cut -d , -f 1,5 plotobs.csv > plot-spp.csv 
+$ cut -d , -f 1,6 plotobs.csv > plot-diam.csv
+$ head plot-spp.csv plot-diam.csv 
+==> plot-spp.csv <==
+obsid,sciname 
+1,Abies lasiocarpa
+2,Picea engelmannii
+3,Picea engelmannii
+4,Picea engelmannii
+5,Picea engelmannii
+6,Picea engelmannii
+7,Picea engelmannii
+8,Picea engelmannii
+9,Picea engelmannii
+
+==> plot-diam.csv <==
+obsid,diameter
+1,31.84
+2,3.21
+3,7.2
+4,11.62
+5,11.25
+6,13.16
+7,18.6
+8,23.62
+9,31.75
+```
 ## Online resources
 
 * http://www.ibm.com/developerworks/linux/library/l-lpic1-v3-103-1/
