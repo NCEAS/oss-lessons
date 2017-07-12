@@ -28,8 +28,8 @@ date: '2017-06-17'
 
 ```bash
 $ for filen in paleo*
->    do echo $filen
-> done
+    do echo $filen
+ done
 ```
 
 produces
@@ -43,11 +43,11 @@ paleo-mammals.txt
 ## Running multiple commands in a loop
 ```bash
 $ for file in paleo-mammals-v?*
-> do
->        echo $file
->        wc -l $file
->        diff -q paleo-mammals.txt $file
-> done
+do
+       echo $file
+       wc -l $file
+       diff -q paleo-mammals.txt $file
+done
 ```
 
 produces
