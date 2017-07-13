@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2017-07-12" />
+<meta name="date" content="2017-07-13" />
 
 <title>Uploading Data to DataONE</title>
 
@@ -68,7 +68,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Uploading Data to DataONE</h1>
-<h4 class="date"><em>2017-07-12</em></h4>
+<h4 class="date"><em>2017-07-13</em></h4>
 
 
 
@@ -93,6 +93,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="modify-metadata" class="section level2">
 <h2>Modify metadata</h2>
 <p>Next, modify the metadata file associated with the package to set yourself as the owner. This will help us differentiate the test data later. Open the <code>strix-pacific-northwest.xml</code> file in RStudio, and change the <code>givenName</code> and <code>surName</code> fields at the top to your name.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(EML)
+<span class="kw">library</span>(arcticdatautils)
+
+<span class="co"># Load the EML file into R</span>
+doc &lt;-<span class="st"> </span><span class="kw">read_eml</span>(<span class="st">&quot;strix-pacific-northwest.xml&quot;</span>)
+
+<span class="co"># Change creator to us</span>
+doc@dataset@creator &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">eml_creator</span>(<span class="st">&quot;Bryce&quot;</span>, <span class="st">&quot;Mecum&quot;</span>, <span class="dt">email =</span> <span class="st">&quot;mecum@nceas.ucsb.edu&quot;</span>))
+
+<span class="co"># Change abstract to the better one we wrote</span>
+doc@dataset@abstract &lt;-<span class="st"> </span><span class="kw">as</span>(<span class="kw">set_TextType</span>(<span class="st">&quot;better-abstract.md&quot;</span>), <span class="st">&quot;abstract&quot;</span>)
+
+<span class="co"># Save it back to the filesystem</span>
+<span class="kw">write_eml</span>(doc, <span class="st">&quot;strix-pacific-northwest.xml&quot;</span>)</code></pre></div>
 </div>
 <div id="uploading-a-package-using-uploaddatapackage" class="section level2">
 <h2>Uploading A Package Using <code>uploadDataPackage</code></h2>
@@ -126,26 +140,26 @@ outputData &lt;-<span class="st"> &quot;filteredSpecies.csv&quot;</span>
 outputObj &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;DataObject&quot;</span>, <span class="dt">format=</span><span class="st">&quot;text/csv&quot;</span>, <span class="dt">filename=</span><span class="kw">paste</span>(<span class="kw">getwd</span>(), outputData, <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>), <span class="dt">suggestedFilename=</span><span class="kw">basename</span>(outputData))
 dp &lt;-<span class="st"> </span><span class="kw">addData</span>(dp, outputObj, metadataObj)
 
-myAccessRules &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">subject=</span><span class="st">&quot;orcid.org/0000-0003-0077-4738&quot;</span>, <span class="dt">permission=</span><span class="st">&quot;changePermission&quot;</span>) 
+myAccessRules &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">subject=</span><span class="st">&quot;http://orcid.org/0000-0003-0077-4738&quot;</span>, <span class="dt">permission=</span><span class="st">&quot;changePermission&quot;</span>) 
 
 dp</code></pre></div>
 <pre><code>## Members:
 ## 
 ## identifier format          submitter       rightsHolder    mediaType       filename             size       
-## urn...64ad application/R   NA              NA              text/x-rsrc     filterSpecies.R      380        
-## urn...07c1 text/csv        NA              NA              NA              filteredSpecies.csv  6017       
-## urn...f744 text/csv        NA              NA              NA              sample.csv           11577      
-## urn...6491 eml://...-2.1.1 NA              NA              NA              strix-pa...hwest.xml 4770       
+## urn...cdbb text/csv        NA              NA              NA              sample.csv           11577      
+## urn...0fac application/R   NA              NA              text/x-rsrc     filterSpecies.R      380        
+## urn...1e79 eml://...-2.1.1 NA              NA              NA              strix-pa...hwest.xml 5116       
+## urn...f0b3 text/csv        NA              NA              NA              filteredSpecies.csv  6017       
 ## 
 ## Relationships:
 ## 
 ##                 subject           predicate                object
-## 4       filterSpecies.R cito:isDocumentedBy strix-pac...hwest.xml
-## 6   filteredSpecies.csv cito:isDocumentedBy strix-pac...hwest.xml
 ## 2            sample.csv cito:isDocumentedBy strix-pac...hwest.xml
+## 4       filterSpecies.R cito:isDocumentedBy strix-pac...hwest.xml
+## 1 strix-pac...hwest.xml      cito:documents            sample.csv
 ## 3 strix-pac...hwest.xml      cito:documents       filterSpecies.R
 ## 5 strix-pac...hwest.xml      cito:documents   filteredSpecies.csv
-## 1 strix-pac...hwest.xml      cito:documents            sample.csv</code></pre>
+## 6   filteredSpecies.csv cito:isDocumentedBy strix-pac...hwest.xml</code></pre>
 <p>Finally, we upload the package to the Testing server for the KNB.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d1c &lt;-<span class="st"> </span><span class="kw">D1Client</span>(<span class="st">&quot;STAGING2&quot;</span>, <span class="st">&quot;urn:node:mnTestKNB&quot;</span>)
 packageId &lt;-<span class="st"> </span><span class="kw">uploadDataPackage</span>(d1c, dp, <span class="dt">public=</span><span class="ot">TRUE</span>, <span class="dt">accessRules=</span>myAccessRules, <span class="dt">quiet=</span><span class="ot">FALSE</span>)</code></pre></div>
