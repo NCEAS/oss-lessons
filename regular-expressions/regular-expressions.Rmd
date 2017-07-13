@@ -122,9 +122,9 @@ str_view_all(fish, "[^aeiou]")
 fish <- c("gag grouper", "striper", "red drum")
 str_view_all(fish, "\\s") # Note the double \\ before the s. This is an R-specific thing.
                            # many of our special characters must be preceded by a \\
-str_view_all(words, "\\S")
+str_view_all(fish, "\\S")
 ```
-
+Note that the lower case version `\\s` selects any whitespace characters, whereas the uppercase version `\\S` selects all non-whitespace characters.  The next pattern is analogous for digits:
 
 - `\d` & `\D`: Match any digit, equivalent to `[0-9]`
 
