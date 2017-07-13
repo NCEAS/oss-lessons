@@ -169,7 +169,7 @@ cruises
 ```
 
 
-**Whole brain-challenge**
+**Whole-brain Challenge**
 ```{r brains, warning=FALSE, message=FALSE}
 
 brains <- read_csv("data/brains.csv")
