@@ -183,16 +183,16 @@ y %>% spread(var, val)
 
 The basic idea is that we should check qualities of our dataset prior to analysis and that we can actually make the analysis not run if certain assertions are not met.
 
-```
+```{r}
 library(assertr)
 
 mtcars %>% verify(TRUE) %>% nrow(.)
 mtcars %>% verify(FALSE) %>% nrow(.)
 ```
 
-Let's walk through the inntroduction taken from the [README](https://github.com/ropensci/assertr):
+Let's walk through the introduction taken from the [README](https://github.com/ropensci/assertr):
 
-Let's work with the `mtcars dataset.
+Let's work with the `mtcars` dataset.
 We don't know who created it and, in order to do an analysis with it, we might want to check a few assumptions:
 
 - that it has the columns "mpg", "vs", and "am"
@@ -246,7 +246,7 @@ What are some things we might like to assert *before* we do that analysis?
 
 - There are a number of ways to munge and qc data with base R
 - The `tidyr` package provides a few very useful functions that do things not easily done in base R
-- The `assertr` package shows a new methdology where the assertions are built into the analysis pipeline
+- The `assertr` package shows a new methodology where the assertions are built into the analysis pipeline
 
 ## Misc
 
