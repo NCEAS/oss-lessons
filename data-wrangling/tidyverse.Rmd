@@ -1,5 +1,5 @@
 ---
-title: "tidyverse wrangling and surfing data"
+title: "tidyverse: wrangling and surfing data with dplyr and friends"
 author: "cjlortie"
 output: html_document
 ---
@@ -72,10 +72,11 @@ ttc <-read_csv("data/ttc.csv") #The Toronto Transit Commission Data.
 ttc #tibble produced if use read_csv versus dataframe. Tibbles include str() list of vector attributes at the top of output.
 
 #check for missing values
-is.na(ttc)
+is.na(ttc) #returns a logical vector, true is missing (i.e. NA), false is present
 summary(ttc, na.rm=TRUE) #excludes NA
 new.ttc <-na.omit(ttc) # returns without missing values
 is.na(new.ttc) #check to see if it worked
+setdiff(ttc, new.ttc)
 
 #many other solutions but I use these two frequently
 
@@ -150,9 +151,41 @@ p
 ```
 
 <br>
-**Interpretation of the Star Wars dplyr verse**  
-1. Basic data in 'starwars' data associated with dplyr 0.7.0 ideal for exploring functionality of tidyverse.  
-2. Good wrangling opportunities including categorical simplifications, addressing c() within a vector such as the 'films' vector, working with NAs, and there are vectors to relate and using as grouping variables within plots/basic stats.  
-3. Adequate complexity to offer for padawan and jedi alike.
 
-![](./padawans.jpg)
+###Exercise 4. Two-table wrangle challenge
+Data are likely to be distributed amongst different tables and files. The updated package dpyr (and tidy friend packages) provides an excellent set of verbs to address this challenge.
+
+Take a moment and review the brief blog post [here](http://dplyr.tidyverse.org/articles/two-table.html) describing the two categories of tools. Now, on your own, examine two datasets using the three families of tools (mutating, filtering joins, and set element exploration). Select ONE of the following challenges.
+
+**SEAMAP Challenge**
+```{r SEAMAP, warning=FALSE, message=FALSE}
+
+seamap <- read_csv("data/BGSREC.csv") #all meta-data listed in the PDF in directory
+seamap
+
+cruises <- read_csv("data/CRUISES.csv")
+cruises
+
+```
+
+
+**Whole-brain Challenge**
+```{r brains, warning=FALSE, message=FALSE}
+
+brains <- read_csv("data/brains.csv")
+brains
+
+ninja.scores <- read_csv("data/ninja.scores.csv")
+ninja.scores
+
+```
+
+<br>  
+
+###Interpretation of the tidyverse   
+1. Even a simple datframe can provide adequate complexity for padawan and jedi alike.  
+2. Literate coding is embodied with the tidyverse structure.  
+3. The code is not verbose but gets the job done.  
+4. Just a few keystrokes and a nice code snippet can allow you to surf an ocean of data. The code is not limited by the depth or width of the data. The term wrangling often implies rounding-up individuals into groups for management but really the power of dplyr and the tidyverse is in providing coherent, clear code grammar that works with almost almost all data (distributed, deep, and diverse) provided the structure can be tidied.
+
+![](./padawans.jpg)  

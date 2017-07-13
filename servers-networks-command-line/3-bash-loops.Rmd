@@ -6,17 +6,17 @@ date: '2017-06-17'
 
 # Introduction
 **Purpose:** 
+Understand how shell constructs for looping can help improve the efficiency and correctness
+of scientific data processing.
 
 **Background:**
+Individual commands are powerful, but the ability to repeat operations in a loop
+massively increases the efficiency and effectiveness of scientific computations.
 
 # Learning outcomes
-
-# Exercise
-
-## Loops tutorial objective
-
-- Learn why its useful to use loops
-- Practice basic loop syntax
+- Learn how to build a loop to repeat commands in bash
+- Understand how this can be used to increase efficiency
+- Appreciate how eliminating code repitition decreases errors
 
 ## Why loops
 
@@ -28,8 +28,8 @@ date: '2017-06-17'
 
 ```bash
 $ for filen in paleo*
->    do echo $filen
-> done
+    do echo $filen
+ done
 ```
 
 produces
@@ -43,11 +43,11 @@ paleo-mammals.txt
 ## Running multiple commands in a loop
 ```bash
 $ for file in paleo-mammals-v?*
-> do
->        echo $file
->        wc -l $file
->        diff -q paleo-mammals.txt $file
-> done
+do
+       echo $file
+       wc -l $file
+       diff -q paleo-mammals.txt $file
+done
 ```
 
 produces
@@ -67,10 +67,11 @@ Files paleo-mammals.txt and paleo-mammals-v3.txt differ
 - To rename all of them, try a loop like:
 
 ```bash
-$ for filename in *.csv
-> do
->    mv $filename orig-$filename
-> done
+$ for filename in plot-*.csv
+do
+   mv $filename orig-$filename
+done
+$ ls orig*
 ```
 
 ## Bash scripts
@@ -93,4 +94,19 @@ for file in $FILES
 do
     cp $file $PREFIX$file
 done
+```
+
+Save this in a file called 'crazy-backup.sh', and then make it executable, and run it:
+
+```bash
+$ chmod u+x crazy-backup.sh                                                            
+$ ./crazy-backup.sh paleo*
+$ ls
+1-servers-net.Rmd           4-regex.Rmd                 paleo-mammals-v2.txt
+1-servers-net.html          backup-paleo-mammals-v2.txt paleo-mammals-v3.txt
+2-commandline-intro.Rmd     backup-paleo-mammals-v3.txt paleo-mammals.txt
+2-commandline-intro.html    backup-paleo-mammals.txt    plotobs.csv
+3-bash-loops.Rmd            crazy-backup.sh
+3-bash-loops.html           images
+$
 ```
