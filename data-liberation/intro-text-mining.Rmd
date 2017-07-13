@@ -4,6 +4,7 @@ author: "Julien Brun and Gabriel Daldegan"
 output: html_document
 ---
 
+
 # Goal
 
 The Goal of this session is to learn how to mine PDFs to get information out of them. Text mining encompasses a vast field of theoretical approaches and methods with one thing in common: text as input information (Feiner et al, 2008) 
@@ -24,34 +25,33 @@ Today we are going to look into 2 packages:
 
 # Analyzing peer-reviewed journal articles about BP Deep Horizon's oil spill
 
-```{r}
+```{r, echo=FALSE,warning=F,message=F}
 library("readtext")
 library("quanteda")
 ```
 
-### Import the PDFs into R
+## Import the PDFs into R
 
 ```{r}
 # List the PDFs about the BP oil spill
-pdfs <- list.files(path="/tmp/oil_spill_pdfs/", pattern= 'pdf$',  full.names = TRUE) 
+pdfs <- list.files(path="/tmp/oil_spill_pdfs", pattern= 'pdf$',  full.names = TRUE) 
 
 # Import the PDFs into R
-spill_texts <- readtext(pdfs)
-
-# Quick look
-spill_texts
-
+spill_texts <- readtext(pdfs, 
+                        docvarsfrom = "filenames", 
+                        sep = "_", 
+                        docvarnames = c("First_author", "Year"))
 ```
 
-### Create the Corpus object needed for the text analysis
+## Create the Corpus object needed for the text analysis
 
 ```{r}
 
 # Transform the journal articles into a corpus object
 spill_corpus  <- corpus(spill_texts)
 
-# Some stats about the journal articles
-summary(spill_corpus, 5)
+# Some stats about the 5 first journal articles
+tokenInfo <- summary(spill_corpus)
 
 ```
 
@@ -66,27 +66,39 @@ metadoc(spill_corpus, 'language') <- "english"
 summary(spill_corpus, showmeta = T)
 ```
 
-### Search for words with context: 3 words on each side of the keyword
+### Subset coprus
+
+Want only articles before 2017?
 
 ```{r}
+summary(corpus_subset(spill_corpus, Year < 2017))
+```
+### Search for words with context: 4 words on each side of the keyword
 
-kwic(spill_corpus, "dispersant", 3)
-
+```{r}
+kwic(spill_corpus, "dispersant", 4)
 ```
 
 
-### Build a Document-Feature Matrix (DFM). 
+## Build a Document-Feature Matrix (DFM) 
 
-More information about DFM can be found on Quanteda's vignette: http://quanteda.io/articles/quickstart.html
+More information about DFM can be found on Quanteda's vignette: http://quanteda.io/articles/quickstart.html. In a nutshell, additional rules can be applied on top of the tokenization process, such as ignoring certain words, punctuation, case, ...
+
 
 ```{r}
 # construct the DFM, which is the base object to further analyze the journal articles
-spills_DFM <- dfm(spill_corpus, tolower = TRUE, stem = F, 
-                  remove = c("et", "al", "fig", "table", "ml", "http", stopwords("SMART")),
+spills_DFM <- dfm(spill_corpus, tolower = TRUE, stem = FALSE, 
+                  remove = c("et", "al", "fig", "table", "ml", "http",
+                             stopwords("SMART")),
                   remove_punct = TRUE, remove_numbers = TRUE)
 
-# returns the top 10 frequent words
+# returns the top 20 frequent words
 topfeatures(spills_DFM, 20) 
+```
+
+Note: You can check what words are listed by default in stopwords:
+```{r}
+head(stopwords("english"), 20)
 ```
 
 ### Word cloud
@@ -98,10 +110,44 @@ Quickly visualize the most frequent words.
 set.seed(1)
 
 # plots wordcloud
-textplot_wordcloud(spills_DFM, min.freq = 70, random.order=F, 
+textplot_wordcloud(spills_DFM, min.freq = 60, random.order=F, 
                    rot.per = .10,  
                    colors = RColorBrewer::brewer.pal(8,'Dark2')) 
 ```
+
+
+### Grouping documents by metadata
+
+Here we are grouping the documents by year of publication:
+
+```{r}
+spills_DFM_yearly <- dfm(spill_corpus, groups = "Year", tolower = TRUE, stem = TRUE, 
+                  remove = c("et", "al", "fig", "table", "ml", "http",
+                             stopwords("SMART")),
+                  remove_punct = TRUE, remove_numbers = TRUE)
+
+# Sort by year and show the top 20 most frequent words
+dfm_sort(spills_DFM_yearly)[,1:20]
+```
+
+### Searching for concepts using sets of keywords
+
+One very powerful feature of `quanteda` is to allow to group keywords by dictionary to mine texts. 
+
+```{r}
+myDict <- dictionary(list(pollution = c("oil", "oiled", "crude", "petroleum", "pahs", "pah", "tph", "benzo", "hydrocarbons", "pollution"),
+                          measurement = c("data", "sample", "samples", "sampling", "study")))
+```
+
+```{r}
+spills_DFM <- dfm(spill_corpus, dictionary = myDict)
+
+spills_DFM
+```
+
+***The above text manipulations are the necessary steps to enable more advance text analaysis, such as topical modeling and similarities between texts.***
+
+
 
 # References and sources
 
