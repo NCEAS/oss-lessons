@@ -32,6 +32,23 @@ Once you are logged in, navigate to your Profile Settings, and locate the "Authe
 ## Modify metadata
 Next, modify the metadata file associated with the package to set yourself as the owner.  This will help us differentiate the test data later.  Open the `strix-pacific-northwest.xml` file in RStudio, and change the `givenName` and `surName` fields at the top to your name.
 
+```{r}
+library(EML)
+library(arcticdatautils)
+
+# Load the EML file into R
+doc <- read_eml("strix-pacific-northwest.xml")
+
+# Change creator to us
+doc@dataset@creator <- c(eml_creator("Bryce", "Mecum", email = "mecum@nceas.ucsb.edu"))
+
+# Change abstract to the better one we wrote
+doc@dataset@abstract <- as(set_TextType("better-abstract.md"), "abstract")
+
+# Save it back to the filesystem
+write_eml(doc, "strix-pacific-northwest.xml")
+```
+
 ## Uploading A Package Using `uploadDataPackage`
 Datasets and metadata can be uploaded individually or as a collection. Such a collection, whether contained in local 
 R objects or existing on a DataONE repository, will be informally referred to as a `package`. The steps necessary to
