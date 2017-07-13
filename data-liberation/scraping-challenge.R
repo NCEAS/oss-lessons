@@ -17,7 +17,7 @@ library("rvest")
 ## CONSTANT ----
 
 URL <- "http://sero.nmfs.noaa.gov/maps_gis_data/fisheries/gom/GOM_index.html"
-dir_out <- "~/GOM_fisheries_shapefiles"
+dir_out <- "~/oss/data/GOM_fisheries_shapefiles"
 
 ## MAIN ----
 
@@ -33,20 +33,20 @@ url_base <- html_attr(data,"href")
 # Filter the zip files
 shapefile_base <- grep("*.zip",url_base, value=TRUE)
 
-# Add the URL
-shapefile_full <- paste0("http://sero.nmfs.noaa.gov/",shapefile_base)
-
 # Fix the double `//`
-shapefile_fixed <- gsub("//", "/", shapefile_full)
+shapefile_fixed <- gsub("//", "/", shapefile_base)
+
+# Add the URL prefix
+shapefile_full <- paste0("http://sero.nmfs.noaa.gov/",shapefile_fixed)
 
 # Create the output directory
 dir.create(dir_out, showWarnings = FALSE)
 
 # Create a list of filenames
-filenames_full <- file.path(dir_out,basename(shapefile_fixed))
+filenames_full <- file.path(dir_out,basename(shapefile_full))
 
 # Download the files
-lapply(shapefile_fixed, FUN=function(x) download.file(x, file.path(dir_out,basename(x))))
+lapply(shapefile_full, FUN=function(x) download.file(x, file.path(dir_out,basename(x))))
 
 # Unzip the files
 unzip(filenames_full, overwrite = TRUE)

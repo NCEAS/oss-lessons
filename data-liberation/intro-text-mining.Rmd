@@ -33,7 +33,7 @@ library("quanteda")
 
 ```{r}
 # List the PDFs about the BP oil spill
-pdfs <- list.files(path="./oil_spill_pdfs/", pattern= 'pdf$',  full.names = TRUE) 
+pdfs <- list.files(path="/tmp/oil_spill_pdfs/", pattern= 'pdf$',  full.names = TRUE) 
 
 # Import the PDFs into R
 spill_texts <- readtext(pdfs)

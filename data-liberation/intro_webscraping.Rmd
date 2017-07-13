@@ -63,7 +63,6 @@ Status codes:
 - `4xx`: Client Error; the famous 404: resource not found
 - `5xx`: Server Error
 
-
 ## HTML
 
 The *H*yper*T*ext *M*arkup *L*anguage (`HTML`) describes and defines the content of a webpage. Other technologies besides HTML are generally used to describe a webpage's appearance/presentation (CSS) or functionality (JavaScript).
@@ -74,22 +73,20 @@ HTML uses "markup" to annotate text, images, and other content for display in a 
 
 Using you web browser, you can inspect the HTML content of any webpage of the World Wide Web.
 
-
 ## XML
 
 The e*X*tensible *M*arkup *L*anguage (XML) provides a general approach for representing all types of information, such as data sets containing numerical and categorical variables. XML provides the basic, common, and quite simple structure and syntax for all “dialects” or vocabularies. For example, `HTML`, `SVG` and `EML` are specific vocabularies of XML.
-
 
 ## XPath
 
 `XPath` is quite simple but yet very powerful. Similar syntax to a file system hierarchy, it allows to identify nodes of interest by specifying paths through the tree, based on node names, node content, and a node’s relationship to other nodes in the hierarchy. We typically use XPath to locate nodes in a tree and then use R functions to extract data from those nodes and bring the data into R.
 
-
 ## CSS
 
-Cascading Style Sheets (`CSS`) is a stylesheet language used to describe the presentation of a document written in HTML or XML. CSS describes how elements should be rendered on screen, on paper, in speech, or on other media. In CSS, **selectors** are used to target the HTML elements on our web pages that we want to style. There are a wide variety of CSS selectors available, allowing for fine grained precision when selecting elements to style.
+*C*ascading *S*tyle *S*heets (`CSS`) is a stylesheet language used to describe the presentation of a document written in HTML or XML. CSS describes how elements should be rendered on screen, on paper, in speech, or on other media. In CSS, **selectors** are used to target the HTML elements on a web page that we want to style. There are a wide variety of CSS selectors available, allowing for fine grained precision when selecting elements to style.
 
-# Web scraping Tasks
+
+# Web scraping workflow
 
 1. Check for existing API and existing R packages
 2. Information identication: use your web browser and/or http://selectorgadget.com/
@@ -160,7 +157,7 @@ my_cool_bars <- data.frame(funkzone_bar = bar_names,
 my_cool_bars
 
 # write it to csv
-write.csv(my_cool_bars, "places_you_will_go.csv", row.names = FALSE)
+write.csv(my_cool_bars, "~/oss/places_you_will_go.csv", row.names = FALSE)
 
 ```
 
@@ -169,6 +166,11 @@ write.csv(my_cool_bars, "places_you_will_go.csv", row.names = FALSE)
 
 In groups of two, work on downloading all the fishery shapefiles for the Gulf of Mexico from this NOAA website:
 <http://sero.nmfs.noaa.gov/maps_gis_data/fisheries/gom/GOM_index.html>
+
+
+# Final Thoughts
+
+Please always check that **the data you are scraping are public data** and that there is no personal or confidential information gathered. Also please **do not overload the web server** you are scraping: when getting large amount of data, it is often recommended to insert pauses between requests sent to the web server.  
 
 
 # References and sources
