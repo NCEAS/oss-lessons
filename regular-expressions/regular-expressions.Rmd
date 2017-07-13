@@ -192,7 +192,7 @@ Once we use groups, `()`, we can also use back references to work with the resul
 Back references are \\ and a number, where \\1 is the first thing in (), \\2 is the second thing in (), and so on.
 
 ```{r}
-str_replace(addresses, "(\\w+), (\\w+)", "City: \\1, State: \\2")
+str_replace(addresses, "([\\w\\s]+), (\\w+)", "City: \\1, State: \\2")
 ```
 
 - `^` & `$`
