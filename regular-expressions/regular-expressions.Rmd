@@ -11,6 +11,13 @@ Regular expressions follow a custom syntax that we'll need to learn but they are
 - Regular expressions can do things other methods cannot
 - Regular expressions can be used with many other languages and tools so it's a learn-once, use-everywhere kind of tool
 
+But they're somethig that you only need to learn a bit of to get a lot of value out of them.
+I often use fairly simple regular expressions, like the ones we used on the command line,
+
+```bash
+ls *.Rmd
+```
+
 
 ## Learning Outcomes
   
@@ -21,6 +28,18 @@ Students should:
 - Have some experience executing and working with regular expressions in R
 
 ## Lesson
+
+Earlier this week, we used some simple regular expression on the command line (terminal).
+The same type of operations we used on the command line work in R:
+
+```{r}
+getwd() # Like pwd()
+dir() # Like `ls()`
+
+library(stringr)
+str_view_all(dir(), ".*Rmd")
+str_view_all(dir(), ".*html")
+```
 
 Let's start off with a simple example of where simpler methods won't work and see how regular expressions can be used to get what we need done.
 Let's say we just received some data we need to analyze and we find this:
@@ -36,7 +55,8 @@ How could we go about this?
 We could start with `substr` which lets us slice a string by its indices:
 
 ```{r}
-substr(site_data$x, 5, 7)
+substr(site_data$x, 1, 4)
+substr(site_data$x, 5, 16)
 ```
 
 But we'd quickly find that, because the number of characters in the site code varies from one to four, we can't extract just the site code. 
@@ -47,10 +67,187 @@ In real use, we would use another function to actually get and work with the res
 
 ```{r}
 library(stringr)
-str_view_all(site_data$x, "[A-Z]+")
+str_view_all(site_data$x, "[a-z ]+")
 ```
 
-The expression we used above, `[A-Z]+`, is equivalent to asking for the first consecutive run of the letters A-Z in the entire string of characters.
+The expression we used above, `[a-z ]+`, is equivalent to asking for the first consecutive run of the letters a-z or " " (a space) in the entire string of characters.
+This is the type of problem regular expression were created for!
+
+
+## Overview of Regular Expressions
+
+Regular expressions can match things literally, e.g.,
+
+```{r}
+str_detect("grouper", "striper")
+str_detect("grouper", "grouper")
+```
+
+but they also support a large set of special characters:
+
+- `.`: Match any character
+
+```{r}
+fish <- c("grouper", "striper", "sheepshead")
+str_view_all(fish, ".p")
+```
+
+If you actually want to match a period and not any character, you have to do what's called escaping:
+
+```{r}
+fish <- c("stripers", "striper.", "grouper")
+str_view_all(fish, "striper\\.")
+```
+
+See how that regular expression only matched the striper with the period at the end and not the string stripers?
+
+- `[]`: Match any character in this set
+
+```{r}
+fish <- c("grouper", "striper", "sheepshead")
+str_view_all(fish, "[aeiou]")
+```
+
+
+- `[^]`: Match any character *not* in this set
+
+```{r}
+fish <- c("grouper", "striper", "sheepshead")
+str_view_all(fish, "[^aeiou]")
+```
+
+- `\s` & `\S`: Match any whitespace (e.g., ` `, `\t`)
+
+```{r}
+fish <- c("gag grouper", "striper", "red drum")
+str_view_all(words, "\\s") # Note the double \\ before the s. This is an R-specific thing.
+                           # many of our special characters must be preceded by a \\
+str_view_all(words, "\\S")
+```
+
+
+- `\d` & `\D`: Match any digit, equivalent to `[0-9]`
+
+```{r}
+fish <- c("striper1", "red drum2", "tarpon123")
+str_view_all(fish, "\\d")
+```
+
+- `\w` & `\W`: Match any word character, equivalent to `[A-Za-z0-9_]`
+
+```{r}
+fish <- c("striper1", "red drum2", "tarpon123")
+str_view_all(fish, "\\w")
+```
+
+We can also specify how many of a particular character or class of character to match:
+
+- `?` Optionality / 0 or 1
+
+Say we want to get just the phone numbers out of this vector but we notice that the phone numbers take on some different formats:
+
+```{r}
+phone_numbers <- c("219 733 8965", "apple", "329-293-8753 ", "123banana", "595.794.7569", "3872876718")
+str_view_all(phone_numbers, "\\d\\d\\d[ \\.-]?\\d\\d\\d[ \\.-]?\\d\\d\\d\\d")
+```
+
+The above regular expression matches the number parts of the phone numbers, which can be separated by zero or one space (` `), `.`, or `-`.
+
+- `+` 1 -> infinity
+
+We can use the `+` expression to find words with one or more vowels:
+
+```{r}
+fish <- c("gag grouper", "striper", "red drum", "cobia", "sheepshead")
+str_view_all(words, "[aeiuo]+")
+```
+
+- `*` 0 -> infinity
+
+and the `*` is _zero or more_`.
+
+```{r}
+numbers <- c("0.2", "123.1", "547")
+str_view_all(numbers, "\\d*\\.?\\d*")
+
+# Regular expressions are greedy
+letters <- "abcdefghijkc"
+str_view_all(letters, "a.*c") # Greedy
+str_view_all(letters, "a.*?c") # Lazy
+```
+
+- `()`: Grouping
+
+One of the most powerful parts of regular expressions is grouping.
+Grouping allows us to split up our matched expressions and do more work with them.
+For example, we can create match the city and state in a set of addresses, splitting it into components:
+
+```{r}
+addresses <- c("Santa Barbara, CA", "Seattle, WA", "New York, NY")
+str_view_all(addresses, "([\\w\\s]+), (\\w+)")
+str_match_all(addresses, "([\\w\\s]+), (\\w+)")
+```
+
+Once we use groups, `()`, we can also use back references to work with the result.
+Back references are \\ and a number, where \\1 is the first thing in (), \\2 is the second thing in (), and so on.
+
+```{r}
+str_replace(addresses, "(\\w+), (\\w+)", "City: \\1, State: \\2")
+```
+
+- `^` & `$`
+
+It can also be really useful to make a say something like "strings that start with a capital letter" or "strings that end with a period":
+
+```{r}
+possible_sentences <- c(
+  "This might be a sentence.",
+  "So. Might. this",
+  "but this could maybe not be?",
+  "Am I a sentence?",
+  "maybe not",
+  "Regular expressions are useful!"
+)
+# ^ specifies the start so ^[A-z] means "starts with a capital letter""
+str_detect(possible_sentences, "^[A-Z]")
+possible_sentences[str_detect(possible_sentences, "^[A-Z]")]
+
+# We can also do "ends with a period"
+str_detect(possible_sentences, "\\.$")
+possible_sentences[str_detect(possible_sentences, "\\.$")]
+
+# We can put them together:
+str_detect(possible_sentences, "^[A-Z].*[\\.\\?!]$")
+possible_sentences[str_detect(possible_sentences, "^[A-Z].*[\\.\\?!]$")]
+```
+
+
+## Finish out our example together
+
+Now that we've gone over some basics of regular expressions, let's finish our example by splitting the various components of column `x` into a `year`, `site`, and `sub_site` column:
+
+```{r}
+site_data
+
+# I'll show you how to extract the year part
+site_data$year <- str_extract(site_data$x, "\\d{4}")
+
+# You do the rest
+site_data$site <- str_extract(site_data$x, "") # <- Fill this in between the ""
+site_data$plot <- str_extract(site_data$x, "") # <- Fill this in between the ""
+```
+
+# Common R functions that use regular expressions
+
+- Base R
+  - `grep`
+  - `gsub`
+  - `strsplit`
+- `stringr` package
+  - `string_detect`
+  - `string_match`
+  - `string_replace`
+  - `string_split`
 
 ### Another example
 
@@ -88,163 +285,6 @@ Below, I've re-formatted the data and the regular expression a bit so we can see
 
 ```
 
-## Overview of Regular Expressions
-
-Regular expressions can match things literally, e.g.,
-
-```{r}
-str_detect("apple", "apple")
-```
-
-but they also support a large set of special characters:
-
-- `.`: Match any character
-
-```{r}
-words <- c("apple", "banana", "fork")
-str_view_all(words, "a.")
-```
-
-If you actually want to match a period and not any character, you have to do what's called escaping:
-
-```{r}
-str_view_all("apples are a fruit and my favorite fruit is an apple.", "apple\\.")
-```
-
-See how that regular expression only matched the apple with the period at the end?
-
-- `[]`: Match any character in this set
-
-```{r}
-words <- c("apple", "banana", "fork")
-str_view_all(words, "[aeiou]")
-```
-
-
-- `[^]`: Match any character *not* in this set
-
-```{r}
-words <- c("apple", "banana", "fork")
-str_view_all(words, "[^aeiou]")
-```
-
-- `\s` & `\S`: Match any whitespace (e.g., ` `, `\t`)
-
-```{r}
-words <- c("apple", "banana", "fork")
-str_view_all(words, "\\s") # Note the double \\ before the s. This is an R-specific thing.
-                           # many of our special characters must be preceded by a \\
-str_view_all(words, "\\S")
-
-pies <- c("lemon meringue pie", "apple pie", "strawberry rhubarb pie")
-str_view_all(pies, "\\s")
-```
-
-
-- `\d` & `\D`: Match any digit, equivalent to `[0-9]`
-
-```{r}
-x <- c("apple", "1234", "banana")
-str_view_all(x, "\\d")
-```
-
-- `\w` & `\W`: Match any word character, equivalent to `[A-Za-z0-9_]`
-
-```{r}
-x <- c("apple", "1234", "banana")
-str_view_all(x, "\\w")
-```
-
-We can also specify how many of a particular character or class of character to match:
-
-- `?` Optionality / 0 or 1
-
-Say we want to get just the phone numbers out of this vector but we notice that the phone numbers take on some different formats:
-
-```{r}
-phone_numbers <- c("219 733 8965", "apple", "329-293-8753 ", "123banana", "595.794.7569", "3872876718")
-str_view_all(phone_numbers, "\\d\\d\\d[ \\.-]?\\d\\d\\d[ \\.-]?\\d\\d\\d\\d")
-```
-
-The above regular expression matches the number parts of the phone numbers, which can be separated by zero or one space (` `), `.`, or `-`.
-
-- `+` 1 -> infinity
-
-We can use the `+` expression to find words with one or more vowels:
-
-```{r}
-words <- c("apple", "crypt", "banana", "pygmy", "boo")
-str_view_all(words, "[aeiuo]+")
-```
-
-- `*` 0 -> infinity
-
-and the `*` is _zero or more_`.
-
-```{r}
-numbers <- c("0.2", "123.1", "547")
-str_view_all(numbers, "\\d*\\.?\\d*")
-```
-
-
-- `()`: Grouping
-
-One of the most powerful parts of regular expressions is grouping.
-Grouping allows us to split up our matched expressions and do more work with them.
-For example, we can create match the city and state in a set of addresses, splitting it into components:
-
-```{r}
-addresses <- c("Santa Barbara, CA", "Seattle, WA", "New York, NY")
-str_view_all(addresses, "([\\w\\s]+), (\\w+)")
-```
-
-Once we use groups, `()`, we can also use back references to work with the result:
-
-```{r}
-str_replace(addresses, "(\\w+), (\\w+)", "City: \\1, State: \\2")
-```
-
-- `^` & `$`
-
-It can also be really useful to make a say something like "strings that start with a capital letter" or "strings that end with a period":
-
-```{r}
-possible_sentences <- c(
-  "This might be a sentence.",
-  "So. Might. this",
-  "but this could maybe not be?",
-  "Am I a sentence?",
-  "maybe not",
-  "Regular expressions are useful!"
-)
-# ^ specifies the start so ^[A-z] means "starts with a capital letter""
-str_detect(possible_sentences, "^[A-Z]")
-# We can also do "ends with a period"
-str_detect(possible_sentences, "\\.$")
-# We can put them together:
-str_detect(possible_sentences, "^[A-Z].*[\\.\\?!]$")
-```
-
-
-## Finish out our example together
-
-Now that we've gone over some basics of regular expressions, let's finish our example by splitting the various components of column `x` into a `year`, `site`, and `sub_site` column:
-
-```{r}
-```
-
-# Common R functions that use regular expressions
-
-- Base R
-  - `grep`
-  - `gsub`
-  - `strsplit`
-- `stringr` package
-  - `string_detect`
-  - `string_match`
-  - `string_replace`
-  - `string_split`
-
 ## Summary
 
 - Regular expressions are a crucial tool in the data analysis toolbox
@@ -269,7 +309,7 @@ Here's the code I used to generate the fake site_data `data.frame` above.
 ```{r, eval=FALSE, echo=FALSE, include=FALSE}
 # Fake data generation code
 site_data <- data.frame(year = rep(seq(2000, 2009), 4))
-site_data$site <- sample(c("A", "AA", "B", "CCCC"), nrow(site_data), replace = TRUE)
+site_data$site <- sample(c("galveston bay", "choctawhatchee bay", "aransas bay", "copany bay"), nrow(site_data), replace = TRUE)
 site_data$subsite <- sample(c(1,2,3,4), nrow(site_data), replace=TRUE)
 site_data$temp_c <- runif(nrow(site_data), 0, 100)
 site_data$site_code <- paste(site_data$year, site_data$site, site_data$subsite, sep="-")
