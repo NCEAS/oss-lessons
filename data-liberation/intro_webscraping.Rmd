@@ -6,11 +6,11 @@ output: html_document
 
 # Goal
 
-The Goal of this session is to learn how to get data from the World Wide Web using R. Although we are going to talk about few concepts first, the core of this session will be spent on getting data from web sites that do not offer any interface to automate information retrieval, often via  Web services (e.g. REST, SOAP) or application programming interfaces (APIs). Therefore it is necessacry to scrape the information embbeded in the Web site itself.
+The Goal of this session is to learn how to get data from the World Wide Web using R. Although we are going to talk about a few concepts first, the core of this session will be spent on getting data from websites that do not offer any interface to automate information retrieval, often via  Web services (e.g. REST, SOAP) or application programming interfaces (APIs). Therefore it is necessary to scrape the information embedded in the website itself.
 
 When you want to extract information or download data from a website that is too large for efficient manual downloading or needs to be frequently updated, you should first:
 
-1. Check if the Web site as any available Web services or APIs have been developed to this end
+1. Check if the website has any available Web services or if APIs have been developed to this end
 2. Check if any R (or other language you know) package has been developed by others as a wrapper around the API to faciliate the use of these Web services 
 3. Nothing found? Well let's code this then!
 
@@ -21,10 +21,10 @@ As usual it is a good start to look at the CRAN view to have an idea of R packag
 
 Here are some of the key packages:
 
-- `Rcurl`: low level wrapper for `libcurl` that allow you to provides convenient functions to fetch URIs, get & post forms; [Quick guide](http://www.omegahat.net/RCurl/philosophy.html).
-- `httr`: similar to Rcurl; provides a user-friendly interface for executing HTTP methods and provides support for modern web authentication protocols (OAuth 1.0, OAuth 2.0). wrapper fot the [`curl` package](https://cran.r-project.org/web/packages/curl/index.html)
+- `Rcurl`: low level wrapper for `libcurl` that provides convenient functions to allow you to fetch URIs, get & post forms; [Quick guide](http://www.omegahat.net/RCurl/philosophy.html).
+- `httr`: similar to Rcurl; provides a user-friendly interface for executing HTTP methods and provides support for modern web authentication protocols (OAuth 1.0, OAuth 2.0). wrapper for the [`curl` package](https://cran.r-project.org/web/packages/curl/index.html)
 - `rvest`: a higher level package mostly based on httr
-- `Rselenium`: can be used to automate interactions and extract page content from dymanically generated webpages (i.e., those requiring user interaction to display results)
+- `Rselenium`: can be used to automate interactions and extract page content from dynamically generated webpages (i.e., those requiring user interaction to display results)
 
 There are also function in the `utils` package. Note that these functions do not handle https (motivation behind the `curl` R package)
 
@@ -37,7 +37,7 @@ There are also function in the `utils` package. Note that these functions do not
 
 ### URL
 
-At the heart of web communications is the request message, which are sent via *U*niform *R*esource *L*ocators (URLs). Basic URL structure:
+At the heart of web communications is the request message, which is sent via *U*niform *R*esource *L*ocators (URLs). Basic URL structure:
 
 ![credits: https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177](./images/http1-url-structure.png)
 
@@ -60,7 +60,7 @@ Status codes:
 - `1xx`: Informational Messages
 - `2xx`: Successful; most known is 200: OK, request was successfully processed
 - `3xx`: Redirection
-- `4xx`: Client Error; the famous 404: ressource not found
+- `4xx`: Client Error; the famous 404: resource not found
 - `5xx`: Server Error
 
 
@@ -77,7 +77,7 @@ Using you web browser, you can inspect the HTML content of any webpage of the Wo
 
 ## XML
 
-The e*X*tensible *M*arkup *L*anguage (XML) provides a general approach for representing all types of information, such as data sets containing numerical and categorical variables. XML provides the basic, common, and quite simple structure and syntax for all of “dialects” or vocabularies. For example, `HTML`, `SVG` and `EML` are a particular vocabularies of XML.
+The e*X*tensible *M*arkup *L*anguage (XML) provides a general approach for representing all types of information, such as data sets containing numerical and categorical variables. XML provides the basic, common, and quite simple structure and syntax for all “dialects” or vocabularies. For example, `HTML`, `SVG` and `EML` are specific vocabularies of XML.
 
 
 ## XPath
@@ -87,14 +87,14 @@ The e*X*tensible *M*arkup *L*anguage (XML) provides a general approach for repre
 
 ## CSS
 
-Cascading Style Sheets (`CSS`) are a stylesheet language used to describe the presentation of a document written in HTML or XML. CSS describes how elements should be rendered on screen, on paper, in speech, or on other media. In CSS, **selectors** are used to target the HTML elements on our web pages that we want to style. There are a wide variety of CSS selectors available, allowing for fine grained precision when selecting elements to style.
+Cascading Style Sheets (`CSS`) is a stylesheet language used to describe the presentation of a document written in HTML or XML. CSS describes how elements should be rendered on screen, on paper, in speech, or on other media. In CSS, **selectors** are used to target the HTML elements on our web pages that we want to style. There are a wide variety of CSS selectors available, allowing for fine grained precision when selecting elements to style.
 
 # Web scraping Tasks
 
 1. Check for existing API and existing R packages
-2. Information identication: use you web browser and/or http://selectorgadget.com/
+2. Information identication: use your web browser and/or http://selectorgadget.com/
 3. Choice of strategy: e.g. Xpath, CSS selector, ...
-4. Information extraction: Choose the relevant R package(s) to accomplish your data Extraction and code it
+4. Information extraction: Choose the relevant R package(s) to accomplish your data extraction and code it
 
 <br>
 
@@ -113,7 +113,7 @@ For more: [here](https://github.com/hadley/rvest)
 
 ## Quick example
 
-Let us get started with organizing your evenings. The Funk Zone is a pretty fun part of Santa Barabara, where you can find wineries, bars and restaurants. Check this out: <http://santabarbaraca.com/explore-and-discover-santa-barbara/neighborhoods-towns/santa-barbara/the-funk-zone/>
+Let us get started with organizing your evenings. The Funk Zone is a pretty fun part of Santa Barbara, where you can find wineries, bars and restaurants. Check this out: <http://santabarbaraca.com/explore-and-discover-santa-barbara/neighborhoods-towns/santa-barbara/the-funk-zone/>
 
 We are going to scrape the name of the places and their websites out of this webpage and compile this information into a csv, so you will be able to quickly choose where to go to relax.
 
@@ -167,7 +167,7 @@ write.csv(my_cool_bars, "places_you_will_go.csv", row.names = FALSE)
 
 # Challenge
 
-By group of two, work on downloading all the fishery shapefiles for the Gulf of Mexico from this NOAA website:
+In groups of two, work on downloading all the fishery shapefiles for the Gulf of Mexico from this NOAA website:
 <http://sero.nmfs.noaa.gov/maps_gis_data/fisheries/gom/GOM_index.html>
 
 

@@ -16,10 +16,10 @@ Looking at the Natural Language Processing (NLP) CRAN view, you will realize the
 Today we are going to look into 2 packages:
 
 - `tm`: provides a framework and the algorithmic background for mining text
-- `quanteda`: A fast and flexible framework for for the management, processing, and quantitative analysis of textual data in R. It has very nice feature, among wich finding words and their context
+- `quanteda`: A fast and flexible framework for the management, processing, and quantitative analysis of textual data in R. It has very nice features, among which include finding specific words and their context in the text
 - `tidytext`: provides means for text mining for word processing and sentiment analysis using dplyr, ggplot2, and other tidy tools
 
-**In this quick introdution we are going to use `quanteda`**
+**In this quick introduction we are going to use `quanteda`**
 
 
 # Analyzing peer-reviewed journal articles about BP Deep Horizon's oil spill
@@ -43,7 +43,7 @@ spill_texts
 
 ```
 
-### Create the Coprus object needed for the text analysis
+### Create the Corpus object needed for the text analysis
 
 ```{r}
 
@@ -91,7 +91,7 @@ topfeatures(spills_DFM, 20)
 
 ### Word cloud
 
-Quiclky visualize the most frequent words.
+Quickly visualize the most frequent words.
 
 ```{r}
 # set the seed for wordcloud
