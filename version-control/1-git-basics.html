@@ -285,8 +285,8 @@ div.tocify {
 <p>You need to do this step the first time you use git on a computer.</p>
 <p><strong>Setup your profile:</strong></p>
 <p>Your name and email:</p>
-<pre class="{bash}"><code>git config --global user.name “yourName”
-git config --global user.email “yourEmail”</code></pre>
+<pre class="{bash}"><code>git config --global user.name &quot;yourName&quot;
+git config --global user.email &quot;yourEmail&quot;</code></pre>
 <p><strong>Optional:</strong></p>
 <p>Check that everything is correct:</p>
 <pre class="{bash}"><code>git config --global --list</code></pre>
@@ -342,12 +342,12 @@ Julien, Ice cream</code></pre>
 <p>Exit vim and save <code>:wq</code></p>
 <p>3.) Add the new file to git:</p>
 <pre class="{bash}"><code>git status
-git add favorite_dessert.csv
+git add favorite_desserts.csv
 git status
 git commit -m &quot;Julien's favorite dessert&quot;
 git status</code></pre>
 <p>4.) Add a friend to the csv:</p>
-<pre class="{bash}"><code>vim favorite_dessert.csv
+<pre class="{bash}"><code>vim favorite_desserts.csv
 
 My name, My desert
 Julien, Ice cream
@@ -355,7 +355,7 @@ Eliott, Crepes</code></pre>
 <p>Save and exit vim</p>
 <p>5.) Add (stage) and commit the new version of the file</p>
 <pre class="{bash}"><code>git status
-git add favorite_dessert.csv
+git add favorite_desserts.csv
 git status
 git commit -m &quot;Adding Eliott's favorite dessert&quot;
 git status</code></pre>
