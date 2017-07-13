@@ -120,7 +120,7 @@ str_view_all(fish, "[^aeiou]")
 
 ```{r}
 fish <- c("gag grouper", "striper", "red drum")
-str_view_all(words, "\\s") # Note the double \\ before the s. This is an R-specific thing.
+str_view_all(fish, "\\s") # Note the double \\ before the s. This is an R-specific thing.
                            # many of our special characters must be preceded by a \\
 str_view_all(words, "\\S")
 ```
