@@ -154,7 +154,7 @@ Create a data frame and save it as csv
 my_cool_bars <- data.frame(funkzone_bar = bar_names, 
                            website = websites_urls)
 
-my_cool_bars
+# my_cool_bars
 
 # write it to csv
 write.csv(my_cool_bars, "~/oss/places_you_will_go.csv", row.names = FALSE)
@@ -170,7 +170,7 @@ In groups of two, work on downloading all the fishery shapefiles for the Gulf of
 
 # Final Thoughts
 
-Please always check that **the data you are scraping are public data** and that there is no personal or confidential information gathered. Also please **do not overload the web server** you are scraping: when getting large amount of data, it is often recommended to insert pauses between requests sent to the web server.  
+Please always check that **the data you are scraping are publicly available data** and that there is no personal or confidential information gathered. Also please **do not overload the web server** you are scraping: when getting a large amount of data, it is often recommended to insert pauses between the requests sent to the web server.  
 
 
 # References and sources

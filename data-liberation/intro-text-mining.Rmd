@@ -1,6 +1,6 @@
 ---
 title: "Text Mining"
-author: "Julien Brun and Gabriel Daldegan"
+author: "Julien Brun"
 output: html_document
 ---
 
@@ -12,15 +12,15 @@ The Goal of this session is to learn how to mine PDFs to get information out of 
 
 # Which R packages are available?
 
-Looking at the Natural Language Processing (NLP) CRAN view, you will realize there are a lot of different packages to accomplish this complex task : <https://cran.r-project.org/web/views/NaturalLanguageProcessing.html>
+Looking at the Natural Language Processing (NLP) CRAN view, you will realize there are a lot of different packages to accomplish this complex task : <https://cran.r-project.org/web/views/NaturalLanguageProcessing.html>.
 
-Today we are going to look into 2 packages:
+Here are some examples:
 
 - `tm`: provides a framework and the algorithmic background for mining text
 - `quanteda`: A fast and flexible framework for the management, processing, and quantitative analysis of textual data in R. It has very nice features, among which include finding specific words and their context in the text
 - `tidytext`: provides means for text mining for word processing and sentiment analysis using dplyr, ggplot2, and other tidy tools
 
-**In this quick introduction we are going to use `quanteda`**
+***=> In this quick introduction we are going to use `quanteda`***
 
 
 # Analyzing peer-reviewed journal articles about BP Deep Horizon's oil spill
@@ -50,7 +50,7 @@ spill_texts <- readtext(pdfs,
 # Transform the journal articles into a corpus object
 spill_corpus  <- corpus(spill_texts)
 
-# Some stats about the 5 first journal articles
+# Some stats about the journal articles
 tokenInfo <- summary(spill_corpus)
 
 ```
@@ -75,7 +75,7 @@ summary(corpus_subset(spill_corpus, Year < 2017))
 ```
 ### Search for words with context: 4 words on each side of the keyword
 
-```{r}
+```{r, results="hide"}
 kwic(spill_corpus, "dispersant", 4)
 ```
 
@@ -145,15 +145,17 @@ spills_DFM <- dfm(spill_corpus, dictionary = myDict)
 spills_DFM
 ```
 
-***The above text manipulations are the necessary steps to enable more advance text analaysis, such as topical modeling and similarities between texts.***
+***The above text manipulations are the necessary steps to enable more advanced text analaysis, such as topical modeling and similarities between texts.***
 
 
 
 # References and sources
 
 - Book on text mining in R: http://tidytextmining.com/
-- tm package: https://cran.r-project.org/web/packages/tm/vignettes/tm.pdf
-- quanteda package:
+- `tm` package: https://cran.r-project.org/web/packages/tm/vignettes/tm.pdf
+- `quanteda` package:
     - Overview: https://github.com/kbenoit/quanteda
     - Getting started: http://quanteda.io/articles/quickstart.html
 - Munzert, Simon. Automated Data Collection with R: A Practical Guide to Web Scraping and Text Mining. Chichester, West Sussex, United Kingdom: John Wiley & Sons Inc, 2015.
+- [Text Mining with R](http://tidytextmining.com): A Tidy Approach, by Julia Silge and David Robinson.
+
