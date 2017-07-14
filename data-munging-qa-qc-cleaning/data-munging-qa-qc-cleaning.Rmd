@@ -294,11 +294,7 @@ So with the combination of `gather` and `spread`, we can easily switch between a
 
 The basic idea is that we should check qualities of our dataset prior to analysis and that we can actually make the analysis not run if certain assertions are not met.
 
-<<<<<<< HEAD
-```{r}
-=======
-  ```{r, eval=FALSE}
->>>>>>> Re-work munging lesson
+```{r, eval=FALSE}
 library(assertr)
 
 mtcars %>% verify(TRUE) %>% nrow(.)
