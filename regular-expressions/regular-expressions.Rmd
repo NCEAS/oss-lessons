@@ -159,7 +159,7 @@ We can use the `+` expression to find words with one or more vowels:
 
 ```{r}
 fish <- c("gag grouper", "striper", "red drum", "cobia", "sheepshead")
-str_view_all(words, "[aeiuo]+")
+str_view_all(fish, "[aeiuo]+")
 ```
 
 - `*` 0 -> infinity
