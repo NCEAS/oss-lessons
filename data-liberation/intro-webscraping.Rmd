@@ -11,7 +11,7 @@ The Goal of this session is to learn how to get data from the World Wide Web usi
 When you want to extract information or download data from a website that is too large for efficient manual downloading or needs to be frequently updated, you should first:
 
 1. Check if the website has any available Web services or if APIs have been developed to this end
-2. Check if any R (or other language you know) package has been developed by others as a wrapper around the API to faciliate the use of these Web services 
+2. Check if any R (or other language you know) package has been developed by others as a wrapper around the API to facilitate the use of these Web services 
 3. Nothing found? Well let's code this then!
 
 
