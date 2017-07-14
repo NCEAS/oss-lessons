@@ -10,7 +10,7 @@ This is especially true in synthesis research which may incorporate hundreds of 
 
 I just ran across this last week:
 
-> The first report of the Open Research Data Task Force has found that two of the greatest challenges to effectively using open research data are that: even when it is notionally accessible researchers often simply cannot find that data, and If they do find it they cannot use it because of frustrating format variabilities and other compatibility issues.
+> The first report of the Open Research Data Task Force has found that two of the greatest challenges to effectively using open research data are that: even when it is notionally accessible researchers often simply cannot find that data, and if they do find it they cannot use it because of frustrating format variabilities and other compatibility issues.
 
 From: http://www2.warwick.ac.uk/newsandevents/pressreleases/task_force_finds/
 
@@ -106,6 +106,7 @@ searchplos(q='everything:"gulf of mexico"', fl='title', fq='doc_type:full', limi
 ```{r}
 library(rnaturalearth)
 library(sp)
+library(ggplot2)
 
 # Plot the countries of the world
 plot(ne_countries())
