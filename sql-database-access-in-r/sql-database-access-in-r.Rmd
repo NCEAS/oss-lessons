@@ -57,21 +57,16 @@ dbListFields(con, "mtcars")
 dbReadTable(con, "mtcars")
 ```
 
-Running queries is pretty simple but requires some care.
-Each query is going to be three lines of code:
+Running queries is pretty simple:
 
 ```{r}
-res <- dbSendQuery(con, "SELECT * FROM mtcars WHERE cyl = 4")
-dbFetch(res)
-dbClearResult(res)
+dbGetQuery(con, "SELECT * FROM mtcars WHERE cyl = 4")
 ```
-
-Make sure to run your queries just like that to make sure you don't run into any errors.
 
 Often times, when working with database, we won't want to see all of the rows because there are just too many to store in memory.
 In fact, that's often the point of using the database in the first place.
 
-The `DBI` package lets us iterate through the rows in groups of our choosing so that memroy usage stays low:
+The `DBI` package lets us iterate through the rows in groups of our choosing so that memory usage stays low:
 
 ```{r}
 res <- dbSendQuery(con, "SELECT * FROM mtcars WHERE cyl = 4")
@@ -133,12 +128,15 @@ mtcars_db <- tbl(con, "mtcars")
 mtcars_db
 
 mtcars_db %>% 
-  select(mpg)
+  select(mpg) %>% 
+  show_query()
 
 mpg_query <- mtcars_db %>% 
   group_by(cyl) %>% 
   summarize(mean(mpg))
-mpg_query %>% show_query()
+
+mpg_query %>% 
+  show_query()
 
 # To get the data out of our query, we use collect()
 class(mpg_query)
@@ -184,9 +182,7 @@ library(dplyr)
 con <- dbConnect(RSQLite::SQLite(), dbname = ":memory:")
 dbWriteTable(con, "starwars", select(starwars, -films, -vehicles, -starships))
 
-res <- dbSendQuery(con, "SELECT * FROM starwars WHERE species = 'Droid'")
-dbFetch(res)
-dbClearResult(res)
+dbGetQuery(con, "SELECT * FROM starwars WHERE species = 'Droid'")
 
 dbDisconnect(con)
 ```
