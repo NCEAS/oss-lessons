@@ -70,7 +70,7 @@ No relations found.
 ## Create a table
 
 In the following block, we use the `CREATE TABLE` command to create a table called `sites` with three columns, a `siteid`, `altitude`, and `habitat`.  We also
-specify thwt the column `siteid` will act as the primary key constraint on the table,
+specify that the column `siteid` will act as the primary key constraint on the table,
 which will automatically set up a `UNIQUE` index on the `siteid` column.  Note how
 each of the columns has a data type which constrains the possible values for that column.
 
