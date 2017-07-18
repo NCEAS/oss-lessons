@@ -22,6 +22,14 @@ Learning outcomes
 - Learn how to design and create effective data tables in SQL
 - Learn to query tables in SQL
 
+Benefits of relational data systems
+========================================================
+
+- Powerful search and filtering
+- Handle large, complex data sets
+- Enforce data integrity
+- Decrease errors from redundant updates
+
 Data Organization
 ========================================================
 title: false
@@ -89,6 +97,11 @@ Foreign Key: reference to a primary key in another table
 ***
 ![](images/tables-keys.png)
 
+Entity-Relationship Model (ER)
+========================================================
+
+![](images/plotobs-diagram.png)
+
 Simple Guidelines for Effective Data
 ========================================================
 
@@ -109,6 +122,21 @@ Related resources
 
 - [Borer et al. 2009. **Some Simple Guidelines for Effective Data Management.** Bulletin of the Ecological Society of America.](http://matt.magisa.org/pubs/borer-esa-2009.pdf)
 - [Software Carpentry SQL tutorial](https://swcarpentry.github.io/sql-novice-survey/)
+
+Data modeling exercise
+========================================================
+
+- Break into project teams
+
+- Choose two related data sets for your project
+  - Should need to be integrated
+  
+- Draw an ER model for the tables
+  - Indicate the primary and foreign keys
+  
+***
+
+![](images/ERD_Relationship_Symbols_Quick_Reference-1.png)
 
 Acknowledgements
 =========================================================
