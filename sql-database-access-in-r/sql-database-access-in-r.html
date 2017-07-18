@@ -353,7 +353,7 @@ dbDisconnect(con)</code></pre>
 library(dbplyr)
 library(DBI)
 
-con &lt;- dbConnect(RSQLite::SQLite(), &quot;~/tmp/ramlegacy.db&quot;)
+con &lt;- dbConnect(RSQLite::SQLite(), &quot;/home/mecum/oss/ramlegacy.db&quot;)
 dbListTables(con)
 
 assessments &lt;- tbl(con, &quot;assessments&quot;)

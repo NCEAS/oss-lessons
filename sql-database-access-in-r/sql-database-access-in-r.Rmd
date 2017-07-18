@@ -196,7 +196,7 @@ library(dplyr)
 library(dbplyr)
 library(DBI)
 
-con <- dbConnect(RSQLite::SQLite(), "~/tmp/ramlegacy.db")
+con <- dbConnect(RSQLite::SQLite(), "/home/mecum/oss/ramlegacy.db")
 dbListTables(con)
 
 assessments <- tbl(con, "assessments")
