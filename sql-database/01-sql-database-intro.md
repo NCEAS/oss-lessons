@@ -94,7 +94,8 @@ Simple Guidelines for Effective Data
 
 - Design to add rows, not columns
 - Each column one type
-- Eliminate redundancy- Uncorrected data file
+- Eliminate redundancy
+- Uncorrected data file
 - Header line
 - Nonproprietary formats
 - Descriptive names
