@@ -1,0 +1,68 @@
+---
+title: Introduction to Quantum GIS (QGIS) a free, open source GIS tool
+author: "Leah A. Wasser (adapted from Julien Brun's work!!)"
+---
+
+## Topic
+
+### Introduction
+**Purpose:**
+
+
+### Background:
+Brief overview of topic and relationship to scientific synthesis.
+
+
+### Learning outcomes
+
+At the end of this 30 minute overview you will be able to:
+
+* Add vector data to QGIS
+* Add raster data to QGIS
+* Explore the metadata - CRS, resolution, extent of a spatial data layer in QGIS
+* Create a basic map in QGIS
+
+
+## Intro to Quantum GIS (QGIS)
+
+![QGIS logo](images/QGIS-logo.png)
+
+[QGIS](http://www.qgis.org/en/site/) is a free and open GIS tool that can be used
+across many different platforms. You can think of it as ESRI's ArcGIS but it plays
+nicely with MACs and PC's!
+
+QGIS is:
+
+* Cross-platform
+* Open source
+* Free
+
+QGIS is an ideal tool to explore  geospatial data. Naturally it can also be used
+for geospatial processing and analysis however keep in mind that these workflows
+can also be performed in R and Python and make even **more reproducible**! 
+
+It is also possible to script QGIS analysis in Python.
+
+# Visualize and explore spatial data
+
+* Load raster, vector, and delimited coordinate data
+* Adjust colors, symbols, transparency
+* Select features, measure distances, and more
+
+
+# Make maps
+
+* Design map layouts
+* Add legend, scale bar, labels, images
+
+# Create data
+
+* Digitize, edit, and save data
+
+
+# Harness greater powers
+
+* Interface to GRASS GIS
+    - Full-fledged analytical GIS environment
+* Run many GDAL/OGR utilities
+    - Swiss army knife for geospatial data
