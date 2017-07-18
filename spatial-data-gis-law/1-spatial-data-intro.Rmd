@@ -6,23 +6,22 @@ author: "Leah A. Wasser"
 ## Topic
 
 ### Introduction
+
 **Purpose:** In this lesson we will introduce some of the key concepts associated
 with spatial data including:
 
-* spatial extent
-* resolution
-* coordinate reference system
+* Spatial extent
+* Resolution
+* Coordinate reference system
 
-We will also define raster vs vector data structures.
+We will also define raster vs. vector data structures.
 
 **Background:**
-Brief overview of topic and relationship to scientific synthesis.
-
-**Explanation:**
-No slide decks. Ideal to keep all materials within ecosystem. Use this single rmd as your mechanism to explain, show, lecture, or demo/use tutorial to explain concepts.
-
-**Products for your open science portfolio:**
-list what students will produce
+Often we need to use spatial data in our analysis - that is data that correspond
+to some x,y (and z) location on the Earth. however, not all spatial data are
+created the same. understanding the basic foundations of working with spatial
+data will save you a lot of time when it comes to processing the data in tools
+like R, QGIS and python!
 
 ### Learning outcomes
 
@@ -30,8 +29,8 @@ At the end of this 30 minute overview you will be able to:
 
 1. Explain the difference between the raster vs vector data structures.
 1. Define spatial extent, resolution, coordinate reference system.
-1. List the 3 vector data structures (point, line polygon).
-1. List 2-3 R packages that can be used to work with spatial data.
+1. List the 3 vector data structures (point, line, polygon).
+1. List 2-3 `R` packages that can be used to work with spatial data.
 
 
 ## About raster data
@@ -51,25 +50,37 @@ About raster data:
 
 * The size of each pixel is referred to as **resolution**
 * If pixels are smaller (represent a smaller area on the earth, they are considered HIGHER resolution) - in the example of an image, this makes the image look more 'crisp'
-
-[raster resolution](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-resolution.png)
-
-
 * if you have fewer pixels within a particular spatial extent, the resolution is LOWER
 * if you have more pixels within a particular spatial extent, the resolution is HIGHER
 
 
-http://neondataskills.org/GIS-spatial-data/Working-With-Rasters/
+![Raster resolution](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-resolution.png)
 
->> Create a blog post on raster extent vs resolution so i can update the content above some of which is off...
+![Raster pixel resolution](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-pixel-resolution.png)
+
+[NEON Data Skills - work with raster data overview](http://neondataskills.org/GIS-spatial-data/Working-With-Rasters/)
 
 ### Raster spatial extent
 
-more here on this...
+The spatial extent of a raster refers to the area on the earth's surface that
+the raster covers.
+
+![Raster spatial extent](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-spatial-extent-coordinates.png)
+
+Note that the raster spatial extent relates directly to the
+spatial resolution.
+
+CHALLENGE question
+1. If you have more pixels over the same spatial extent - will the image look sharper (more clear) or more blurry?
+2. If you have fewer pixels over the same spatial extent...
+
+
+![Raster pixel resolution](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-spatial-extent.png)
 
 ## About vector data
 
 [Intro to vector data EDS website ](http://earthdatascience.org/course-materials/earth-analytics/week-4/intro-vector-data-r/)
+
 * discrete geometric locations
 * x,y locations are vertices
 * organization of those vertices determines structure: points, lines, polygons
