@@ -42,7 +42,7 @@ About raster data:
 * each pixel represents a geographic area - in our case that is often an area on the earth
 
 
-[About raster data](http://neondataskills.org/GIS-spatial-data/Working-With-Rasters/)
+[About raster data](https://earthdatascience.org/course-materials/earth-analytics/week-3/open-lidar-raster-r/)
 
 ![About raster data](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-concept.png)
 
@@ -58,7 +58,6 @@ About raster data:
 
 ![Raster pixel resolution](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-pixel-resolution.png)
 
-[NEON Data Skills - work with raster data overview](http://neondataskills.org/GIS-spatial-data/Working-With-Rasters/)
 
 ### Raster spatial extent
 
@@ -79,22 +78,25 @@ CHALLENGE question
 
 ## About vector data
 
-[Intro to vector data EDS website ](http://earthdatascience.org/course-materials/earth-analytics/week-4/intro-vector-data-r/)
+[Intro to vector data - EarthDataScience.org ](http://earthdatascience.org/course-materials/earth-analytics/week-4/intro-vector-data-r/)
 
-* discrete geometric locations
+Attributes of vector data
+
+* Discrete geometric locations
 * x,y locations are vertices
-* organization of those vertices determines structure: points, lines, polygons
+* Organization of those vertices determines structure: points, lines, polygons
 
 ![About vector data](http://earthdatascience.org/images/course-materials/earth-analytics/week-5/pnt_line_poly.png)
 
 
 ## Vector data formats
 
+There are many different spatial vector data formats. Let's list a few:
+
 * shapefile
-* json, geojson
+* geojson
 * text files
 * others??
-
 
 ## Vector data spatial extent
 
@@ -108,10 +110,12 @@ NOTE: the spatial extent of an individual object can also be quantified!
 
 ### Vector data attributes
 
-* vector data can store attribute tables - when in a shapefile format, these look like excel spreadsheets where each object has an associated set of attributes.
+Vector data often has associated attribute tables. When in a shapefile format,
+these look like excel spreadsheets where each object has an associated set of
+attributes.
 
 
-[Attribute tables](http://earthdatascience.org/images/course-materials/earth-analytics/week-5/attribute_table.png)
+![Attribute tables](http://earthdatascience.org/images/course-materials/earth-analytics/week-5/attribute_table.png)
 
 in a geojson structure this may look like this:
 
@@ -158,4 +162,6 @@ in a geojson structure this may look like this:
 * WKT
 * others!!!
 
-http://earthdatascience.org/course-materials/earth-analytics/week-4/understand-epsg-wkt-and-other-crs-definition-file-types/
+#### Other CRS resources
+
+* [Getting to know EPSG, WKT and other CRS definition structures - EarthDataScience.org](http://earthdatascience.org/course-materials/earth-analytics/week-4/understand-epsg-wkt-and-other-crs-definition-file-types/)
