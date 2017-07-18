@@ -192,11 +192,7 @@ dbListTables(con)</code></pre>
 ## 30 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
 ## 31 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
 ## 32 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
-</div>
-</div>
-<div id="you-can-fetch-all-results" class="section level1">
-<h1>You can fetch all results:</h1>
-<p>Running queries is pretty simple but requires some care. Note the three specific commands used here:</p>
+<p>Running queries is pretty simple but requires some care. Each query is going to be three lines of code:</p>
 <pre class="r"><code>res &lt;- dbSendQuery(con, &quot;SELECT * FROM mtcars WHERE cyl = 4&quot;)
 dbFetch(res)</code></pre>
 <pre><code>##     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
@@ -213,9 +209,11 @@ dbFetch(res)</code></pre>
 ## 11 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
 <pre class="r"><code>dbClearResult(res)</code></pre>
 <p>Make sure to run your queries just like that to make sure you don’t run into any errors.</p>
-<p>Often times, when working with database, we won’t want to see all of the rows because there are just too many to store in memory. The <code>DBI</code> package lets us iterate through the rows in groups of our choosing so that memroy usage stays low:</p>
+<p>Often times, when working with database, we won’t want to see all of the rows because there are just too many to store in memory. In fact, that’s often the point of using the database in the first place.</p>
+<p>The <code>DBI</code> package lets us iterate through the rows in groups of our choosing so that memroy usage stays low:</p>
 <pre class="r"><code>res &lt;- dbSendQuery(con, &quot;SELECT * FROM mtcars WHERE cyl = 4&quot;)
-while (!dbHasCompleted(res)){
+
+while (!dbHasCompleted(res)) {
   chunk &lt;- dbFetch(res, n = 5)
   print(nrow(chunk))
 }</code></pre>
@@ -226,6 +224,7 @@ while (!dbHasCompleted(res)){
 <p>Notice the output: 5, 5, 1. Since we specified <code>n = 5</code> in <code>dbFetch</code>, we get new rows in chunks of 5.</p>
 <p>After we’re done, our script should close its connection:</p>
 <pre class="r"><code>dbDisconnect(con)</code></pre>
+<p>That’s the approach you’ll use.</p>
 <p><strong>Exercise</strong>: DBI and starwars</p>
 <p>Instructions: Load the starwars dataset from the <code>dplyr</code> package into an in-memory SQLite database and execute a query against the table.</p>
 <p>e.g. list just the Droids</p>
@@ -243,9 +242,13 @@ library(dplyr)</code></pre>
 dbWriteTable(con, &quot;starwars&quot;, select(starwars, -films, -vehicles, -starships))
              
 # Your code here</code></pre>
+</div>
 <div id="automatic-sql-with-dplyr" class="section level3">
 <h3>Automatic SQL with dplyr</h3>
-<pre class="r"><code>library(dplyr)
+<p><code>dplyr</code> is already an amazing tool for analyzing data. But when we use it we’re usually using it against a <code>data.frame</code> (or something similar). Because it’s <em>awesome</em>, <code>dplyr</code> also supports working directly with database tables as if they were regular old <code>data.frame</code>s.</p>
+<p>All we have to do is use the <code>tbl</code> instead of, for example, our <code>read.csv</code> function call:</p>
+<pre class="r"><code># Set up an SQLite database again, as before
+library(dplyr)
 library(dbplyr)</code></pre>
 <pre><code>## 
 ## Attaching package: 'dbplyr'</code></pre>
@@ -257,6 +260,7 @@ library(dbplyr)</code></pre>
 con &lt;- dbConnect(RSQLite::SQLite(), dbname = &quot;:memory:&quot;)
 dbWriteTable(con, &quot;mtcars&quot;, mtcars)
 
+# Now the real magic
 mtcars_db &lt;- tbl(con, &quot;mtcars&quot;)
 mtcars_db</code></pre>
 <pre><code>## # Source:   table&lt;mtcars&gt; [?? x 11]
@@ -306,7 +310,7 @@ class(mpg_query)</code></pre>
   collect() %&gt;% 
   class()</code></pre>
 <pre><code>## [1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
-<p>There, that’s it. <code>dbplyr</code> automatically converts our <code>dplyr</code> code into SQL queries behind the scenes.</p>
+<p>There, that’s it. <code>dbplyr</code> automatically converts our <code>dplyr</code> code into SQL queries behind the scenes and we get to use the usual <code>dplyr</code> functionality. Awesome!</p>
 <p>***Exercise: Connect to the SQLite database at <code>/home/mecum/oss/ramlegacy.db</code> on Aurora and calculate:</p>
 <ul>
 <li>Mean catch by stock ID</li>
@@ -324,6 +328,7 @@ dbListTables(con)
 
 # Time range of assessment per stock
 # Your code here</code></pre>
+</div>
 </div>
 <div id="summary" class="section level2">
 <h2>Summary</h2>
@@ -364,7 +369,6 @@ left_join(timeseries, assessments, &quot;stockid&quot;) %&gt;%
   group_by(stockid) %&gt;% 
   summarise(year_start = min(tsyear),
             year_end = max(tsyear))</code></pre>
-</div>
 </div>
 
 

@@ -57,10 +57,8 @@ dbListFields(con, "mtcars")
 dbReadTable(con, "mtcars")
 ```
 
-# You can fetch all results:
-
 Running queries is pretty simple but requires some care.
-Note the three specific commands used here:
+Each query is going to be three lines of code:
 
 ```{r}
 res <- dbSendQuery(con, "SELECT * FROM mtcars WHERE cyl = 4")
@@ -71,14 +69,18 @@ dbClearResult(res)
 Make sure to run your queries just like that to make sure you don't run into any errors.
 
 Often times, when working with database, we won't want to see all of the rows because there are just too many to store in memory.
+In fact, that's often the point of using the database in the first place.
+
 The `DBI` package lets us iterate through the rows in groups of our choosing so that memroy usage stays low:
 
 ```{r}
 res <- dbSendQuery(con, "SELECT * FROM mtcars WHERE cyl = 4")
-while (!dbHasCompleted(res)){
+
+while (!dbHasCompleted(res)) {
   chunk <- dbFetch(res, n = 5)
   print(nrow(chunk))
 }
+
 dbClearResult(res)
 ```
 
@@ -91,6 +93,8 @@ After we're done, our script should close its connection:
 dbDisconnect(con)
 ```
 
+That's the approach you'll use.
+
 **Exercise**: DBI and starwars
 
 Instructions: Load the starwars dataset from the `dplyr` package into an in-memory SQLite database and execute a query against the table.
@@ -99,6 +103,7 @@ e.g. list just the Droids
 
 ```{r}
 library(DBI)
+library(dplyr)
 con <- dbConnect(RSQLite::SQLite(), dbname = ":memory:")
 dbWriteTable(con, "starwars", select(starwars, -films, -vehicles, -starships))
              
@@ -108,10 +113,22 @@ dbWriteTable(con, "starwars", select(starwars, -films, -vehicles, -starships))
 
 ### Automatic SQL with dplyr
 
+`dplyr` is already an amazing tool for analyzing data.
+But when we use it we're usually using it against a `data.frame` (or something similar).
+Because it's *awesome*, `dplyr` also supports working directly with database tables as if they were regular old `data.frame`s.
+
+All we have to do is use the `tbl` instead of, for example, our `read.csv` function call:
+
 ```{r}
+# Set up an SQLite database again, as before
 library(dplyr)
 library(dbplyr)
+library(DBI)
 
+con <- dbConnect(RSQLite::SQLite(), dbname = ":memory:")
+dbWriteTable(con, "mtcars", mtcars)
+
+# Now the real magic
 mtcars_db <- tbl(con, "mtcars")
 mtcars_db
 
@@ -131,14 +148,15 @@ mpg_query %>%
 ```
 
 There, that's it.
-`dbplyr` automatically converts our `dplyr` code into SQL queries behind the scenes.
+`dbplyr` automatically converts our `dplyr` code into SQL queries behind the scenes and we get to use the usual `dplyr` functionality.
+Awesome!
 
 ***Exercise: Connect to the SQLite database at `/home/mecum/oss/ramlegacy.db` on Aurora and calculate:
 
 - Mean catch by stock ID
 - Start and end year of each assessment
 
-```{r}
+```{r, eval=FALSE}
 library(dplyr)
 library(dbplyr)
 library(DBI)
@@ -162,6 +180,7 @@ dbListTables(con)
 
 ```{r, eval=FALSE}
 library(DBI)
+library(dplyr)
 con <- dbConnect(RSQLite::SQLite(), dbname = ":memory:")
 dbWriteTable(con, "starwars", select(starwars, -films, -vehicles, -starships))
 
