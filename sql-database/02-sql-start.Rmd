@@ -1,0 +1,560 @@
+---
+title: Starting SQL with Postgres
+time_slot: 75 minutes
+---
+
+## Introduction
+
+Manipulating data at scale is challenging at best, particularly with tools like R
+that do most data management in memory. Relational databases are mature systems
+that easily handle storing, querying, and manipulating large, complex data sets.
+
+A relational database management system (RDBMS) is a software system design to
+manage relations, or tabular, data.  Several popular relational databases exist, 
+including the following:
+
+- PostgreSQL
+- MariaDB
+- sqlite
+- Oracle
+- MS Access
+- MS SQL Server
+
+In this lesson, we will use postgres to learn to create, query, and manipulate 
+relational database tables.
+
+## Learning Outcomes
+
+- Learn the commands to create a postgres database
+- Be exposed to querying databases using SQL
+- Become familiar with manipulating data using SQL
+
+## Creating a user and a database
+
+Creating a database in postgres is straightforward given the proper permissions using
+the `createuser` and `createdb` utilities that ship with postgres.  
+
+To create a user account, first log in as the `postgres` user, and then create an account in postgres that matches the name of your shell account:
+
+```bash
+$ createuser jones -N -P -s -d
+```
+
+The `-s` gives the account supeuser priviledges, while `-d` gives the permission to
+create new databases.  See `createdb --help` for an explanation of all of the options.
+
+Next, exit the postgres account and, from your local user account, cd into the lessons
+directory and then create the database:
+
+```bash
+$ cd ~/oss-lessons/sql-database
+$ createdb oss
+$ psql oss
+psql (9.3.17)
+Type "help" for help.
+
+oss=#
+```
+
+This should open the `psql` commandline utility for interacting with the database.  The prompt should look something like `oss=#`.  From that prompt, you can then run
+both SQL and psql utilities to view and manipulate the database.  For example:
+
+```{sql eval=FALSE}
+oss=#	\?
+oss=# \pset pager
+Pager usage is off.
+oss=#	\d
+No relations found.
+```
+
+## Create a table
+
+In the following block, we use the `CREATE TABLE` command to create a table called `sites` with three columns, a `siteid`, `altitude`, and `habitat`.  We also
+specify that the column `siteid` will act as the primary key constraint on the table,
+which will automatically set up a `UNIQUE` index on the `siteid` column.  Note how
+each of the columns has a data type which constrains the possible values for that column.
+
+```{sql eval=FALSE}
+CREATE TABLE sites (
+		siteid INT8,
+		altitude INT8, 
+		habitat VARCHAR(25), 
+		CONSTRAINT site_pk PRIMARY KEY (siteid)
+);
+```
+
+And the output will indicate that the command was run successfully with:
+```{sql eval=FALSE}
+CREATE TABLE
+```
+
+Now, in `psql` you can inspect the table that was created to see who owns it, its
+structure, and its contents:
+
+```{sql eval=FALSE}
+oss=# \d
+       List of relations
+ Schema | Name  | Type  | Owner
+--------+-------+-------+-------
+ public | sites | table | jones
+(1 row)
+
+oss=# \d sites
+             Table "public.sites"
+  Column  |         Type          | Modifiers
+----------+-----------------------+-----------
+ siteid   | bigint                | not null
+ altitude | bigint                |
+ habitat  | character varying(25) |
+Indexes:
+    "site_pk" PRIMARY KEY, btree (siteid)
+
+oss=# SELECT * FROM sites;
+ siteid | altitude | habitat
+--------+----------+---------
+(0 rows)
+```
+
+Not so interesting without any data in the table.  We can insert a single row
+of data with the `INSERT` sql command. Let's insert a bunch (note that from here we are not showing the `oss=#` prompt):
+
+```{sql eval=FALSE}
+INSERT INTO sites (siteid, altitude, habitat) VALUES (1, 722, 'riparian');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (2, 805, 'riparian');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (3, 887, 'mixed');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (4, 920, 'mixed');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (5, 110, 'forest');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (6, 192, 'mixed');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (7, 121, 'forest');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (8, 108, 'riparian');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (9, 722, 'riparian');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (10, 805, 'riparian');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (11, 887, 'mixed');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (12, 920, 'mixed');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (13, 110, 'forest');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (14, 192, 'mixed');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (15, 121, 'forest');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (16, 108, 'riparian');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (17, 722, 'riparian');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (18, 805, 'riparian');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (19, 887, 'mixed');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (20, 920, 'mixed');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (21, 110, 'forest');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (22, 192, 'mixed');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (23, 121, 'forest');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (24, 108, 'riparian');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (25, 722, 'riparian');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (26, 805, 'riparian');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (27, 887, 'mixed');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (28, 920, 'mixed');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (29, 110, 'forest');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (30, 192, 'mixed');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (31, 121, 'forest');
+INSERT INTO sites (siteid, altitude, habitat) VALUES (32, 108, 'riparian');
+```
+
+## Use SELECT to query
+
+And now we can run various queries to explore the data. The `*` keyword is used
+to select all of the columns from the table.
+
+```{sql eval=FALSE}
+-- SIMPLE SELECT
+SELECT * from sites;
+```
+```
+ siteid | altitude | habitat  
+--------+----------+----------
+      1 |      722 | riparian
+      2 |      805 | riparian
+      3 |      887 | mixed
+      4 |      920 | mixed
+      5 |      110 | forest
+      6 |      192 | mixed
+      7 |      121 | forest
+      8 |      108 | riparian
+      9 |      722 | riparian
+     10 |      805 | riparian
+     11 |      887 | mixed
+     12 |      920 | mixed
+     13 |      110 | forest
+     14 |      192 | mixed
+     15 |      121 | forest
+     16 |      108 | riparian
+     17 |      722 | riparian
+     18 |      805 | riparian
+     19 |      887 | mixed
+     20 |      920 | mixed
+     21 |      110 | forest
+     22 |      192 | mixed
+     23 |      121 | forest
+     24 |      108 | riparian
+     25 |      722 | riparian
+     26 |      805 | riparian
+     27 |      887 | mixed
+     28 |      920 | mixed
+     29 |      110 | forest
+     30 |      192 | mixed
+     31 |      121 | forest
+     32 |      108 | riparian
+(32 rows)
+```
+
+One can also select just a single column from the table such as `habitat`, 
+order the results using the `ORDER BY` clause, and remove all of the duplicate
+results using the `DISTINCT` clause:
+
+```{sql eval=FALSE}
+
+SELECT habitat from sites;
+SELECT habitat from sites order by habitat;
+SELECT DISTINCT habitat from sites order by habitat;
+```
+```
+ habitat  
+----------
+ forest
+ mixed
+ riparian
+(3 rows)
+```
+
+## SELECT using filter constraints
+
+The power of SQL truly comes to the fore with the `WHERE` clause, which allows you
+to choose which rows of the tables will be returned.  A simple `WHERE` clause will provide a comparator against one of the table variables, such as finding all sites where the altitude is greater than 500, or where the habitat is `riparian`:
+
+```{sql eval=FALSE}
+-- SELECT with a constraint
+SELECT * from sites where altitude > 500;
+```
+```
+ siteid | altitude | habitat  
+--------+----------+----------
+      1 |      722 | riparian
+      2 |      805 | riparian
+      3 |      887 | mixed
+      4 |      920 | mixed
+      9 |      722 | riparian
+     10 |      805 | riparian
+     11 |      887 | mixed
+     12 |      920 | mixed
+     17 |      722 | riparian
+     18 |      805 | riparian
+     19 |      887 | mixed
+     20 |      920 | mixed
+     25 |      722 | riparian
+     26 |      805 | riparian
+     27 |      887 | mixed
+     28 |      920 | mixed
+(16 rows)
+```
+```{sql eval=FALSE}
+SELECT * from sites where habitat = 'riparian';
+```
+```
+ siteid | altitude | habitat  
+--------+----------+----------
+      1 |      722 | riparian
+      2 |      805 | riparian
+      8 |      108 | riparian
+      9 |      722 | riparian
+     10 |      805 | riparian
+     16 |      108 | riparian
+     17 |      722 | riparian
+     18 |      805 | riparian
+     24 |      108 | riparian
+     25 |      722 | riparian
+     26 |      805 | riparian
+     32 |      108 | riparian
+(12 rows)
+```
+
+The constraints can be logically combined to create poweful filters. 
+```{sql eval=FALSE}
+-- SELECT with a more complex constraint
+SELECT * from sites where habitat = 'riparian' AND altitude > 500;
+```
+```
+ siteid | altitude | habitat  
+--------+----------+----------
+      1 |      722 | riparian
+      2 |      805 | riparian
+      9 |      722 | riparian
+     10 |      805 | riparian
+     17 |      722 | riparian
+     18 |      805 | riparian
+     25 |      722 | riparian
+     26 |      805 | riparian
+(8 rows)
+```
+
+## Aggregation 
+
+In addition, queries can aggregate values across the records that share some 
+characteristic using the `GROUP BY` clause.  This is useful to calculate a count, 
+sum, average, or maximum of the records in groups.  For example, to count how many
+records are represented in each `habitat`, use:
+
+```{sql eval=FALSE}
+-- SELECT with an aggregation function using group by
+SELECT habitat, count(*) from sites group by habitat order by habitat;
+```
+```
+ habitat  | count 
+----------+-------
+ forest   |     8
+ mixed    |    12
+ riparian |    12
+(3 rows)
+
+```
+
+## Integrity constraints
+
+Integrity constraints ensure that primary keys are unique, and that foreign keys in
+a child table are matched to a corresponding record in the parent table.  In this example, because the `siteid` with value `1` is already in the table, the `INSERT` operation will fail.
+
+```{sql eval=FALSE}
+-- INTEGRITY CONSTRAINTS: PRIMARY KEY ENFORCEMENT
+INSERT INTO sites (siteid, altitude, habitat) VALUES (1, 721, 'scrub');
+```
+```
+ERROR:  duplicate key value violates unique constraint "site_pk"
+DETAIL:  Key (siteid)=(1) already exists.
+```
+
+## Update, Delete, and Transactions
+
+Updating and deleting records occurs by selecting the records to be changed using a `WHERE` clause within the containing `UPDATE` or `DELETE`.
+
+```{sql eval=FALSE}
+-- UPDATE
+UPDATE sites SET altitude=721 where siteid=1;
+```
+```
+UPDATE 1
+```
+```{sql eval=FALSE}
+-- DELETE
+INSERT INTO sites (siteid, altitude, habitat) VALUES (33, 121, 'forest');
+SELECT count(*) from sites;
+```
+```
+ count 
+-------
+    33
+(1 row)
+```
+```{sql eval=FALSE}
+DELETE from sites where siteid=33;
+SELECT count(*) from sites;
+```
+```
+ count 
+-------
+    32
+(1 row)
+```
+
+Both the `UPDATE` and `DELETE` commands need to be used with caution, as they can easily delete or change all of your data if they are run with a poorly constructed `WHERE` clause.  One way to protect yourself is to nest your commands in a `TRANSACTION`, which holds the changes in a temporary store until you have verified them and instruct the system to `COMMIT` the changes.
+
+```{sql eval=FALSE}
+-- TRANSACTIONS
+INSERT INTO sites (siteid, altitude, habitat) VALUES (33, 121, 'forest');
+START TRANSACTION;
+    DELETE FROM sites WHERE siteid > 7;
+```
+```
+DELETE 26
+```
+```{sql eval=FALSE}
+SELECT * from sites order by siteid;
+```
+```
+ siteid | altitude | habitat  
+--------+----------+----------
+      1 |      721 | riparian
+      2 |      805 | riparian
+      3 |      887 | mixed
+      4 |      920 | mixed
+      5 |      110 | forest
+      6 |      192 | mixed
+      7 |      121 | forest
+(7 rows)
+```
+```{sql eval=FALSE}
+-- Oh Crap!
+ROLLBACK;
+SELECT * from sites WHERE siteid > 32 order by siteid;
+```
+```
+ siteid | altitude | habitat 
+--------+----------+---------
+     33 |      121 | forest
+(1 row)
+```
+```{sql eval=FALSE} 
+-- Try again to delete the right set of rows
+START TRANSACTION;
+    DELETE FROM sites WHERE siteid > 32;
+SELECT * from sites WHERE siteid > 32 order by siteid;
+COMMIT;
+```
+
+## Batch loading data
+
+Inserting data one row at a time can be tedious.  The SQL `COPY` command can be used to batch load large numbers of records from various file formats, including delimited files such as CSV files.  Let's create a new table called `plotobs`, and load the data for that table from a CSV file.
+
+```{sql eval=FALSE}
+
+-- CREATE ANOTHER TABLE THAT WILL BE RELATED TO site
+CREATE TABLE plotobs (
+	obsid INT8,
+	siteid INT8, 
+	plot CHAR(10), 
+	date_sampled DATE, 
+	sciname VARCHAR(100),
+	diameter NUMERIC,
+	condition VARCHAR(10),
+	CONSTRAINT plotobs_pk PRIMARY KEY (obsid),
+	CONSTRAINT plotobs_site_fk FOREIGN KEY (siteid) REFERENCES sites
+);
+```
+
+```{sql eval=FALSE}
+
+-- Batch load data from a CSV file
+COPY plotobs FROM '/home/jones/oss-lessons/sql-database/plotobs.csv' DELIMITER ',' CSV HEADER;
+```
+```
+COPY 3296
+```
+
+And now we can show another aggregation query to calculate the average diameter by the scientific name of the organism.
+```{sql eval=FALSE}
+-- ANOTHER AGGREGATION QUERY
+SELECT sciname, avg(diameter) FROM plotobs GROUP BY sciname ORDER BY sciname;
+```
+```
+        sciname        |         avg         
+-----------------------+---------------------
+ Abies lasiocarpa      | 19.4460416666666667
+ Jamesia americana     |  5.5339062500000000
+ Picea engelmannii     | 18.3617659883720930
+ Pseudotsuga menziesii | 18.3057226562500000
+ Sambucus racemosa     | 10.4759375000000000
+(5 rows)
+```
+
+## Inner, Left, and Outer Joins
+
+Combining tables in order to use the data in one table in combination with 
+data from another allows powerful aggregations.  Most of the time, users will want to use an [INNER JOIN](http://www.postgresqltutorial.com/postgresql-inner-join/) in which two tables are joined using a common key, and in which the rows in the first table are matched to the rows in the second table with the same key value.  One can also use the more rare but at times useful [LEFT JOIN](http://www.postgresqltutorial.com/postgresql-left-join/) and the [FULL OUTER JOIN](http://www.postgresqltutorial.com/postgresql-full-outer-join/).
+
+In the next example, we show an INNER JOIN that is used to integrate the `sites` table with the `plotobs` table by joining on the `siteid` key that is shared between the tables. The query returns one row for each `siteid` that is on both tables, and associates the columns that are selected.  In this example, the resulting table could be used to graph tree `diameter` as a function of `altitude`, possibly grouping by `sciname`.
+
+```{sql eval=FALSE}
+-- SIMPLE INNER JOIN
+SELECT s.siteid, s.altitude, p.obsid, p.plot, p.sciname, p.diameter FROM sites s, plotobs p WHERE p.siteid = s.siteid;
+```
+```
+ siteid | altitude | obsid |    plot    |        sciname        | diameter 
+--------+----------+-------+------------+-----------------------+----------
+      1 |      721 |     1 | A          | Abies lasiocarpa      |    31.84
+      1 |      721 |     2 | A          | Picea engelmannii     |     3.21
+      1 |      721 |     3 | A          | Picea engelmannii     |      7.2
+      1 |      721 |     4 | A          | Picea engelmannii     |    11.62
+      1 |      721 |     5 | A          | Picea engelmannii     |    11.25
+      1 |      721 |     6 | A          | Picea engelmannii     |    13.16
+      1 |      721 |     7 | A          | Picea engelmannii     |     18.6
+      1 |      721 |     8 | A          | Picea engelmannii     |    23.62
+      1 |      721 |     9 | A          | Picea engelmannii     |    31.75
+      1 |      721 |    10 | A          | Picea engelmannii     |    33.27
+      1 |      721 |    11 | A          | Picea engelmannii     |    36.52
+      1 |      721 |    12 | A          | Picea engelmannii     |    60.59
+      1 |      721 |    13 | A          | Sambucus racemosa     |     3.83
+      1 |      721 |    14 | A          | Pseudotsuga menziesii |     0.75
+      1 |      721 |    15 | A          | Pseudotsuga menziesii |    17.51
+      1 |      721 |    16 | A          | Pseudotsuga menziesii |    20.56
+      1 |      721 |    17 | A          | Pseudotsuga menziesii |    49.51
+      1 |      721 |    18 | A          | Jamesia americana     |      1.8
+...
+     32 |      108 |  3284 | B          | Sambucus racemosa     |    18.06
+     32 |      108 |  3285 | B          | Pseudotsuga menziesii |    47.18
+     32 |      108 |  3286 | B          | Pseudotsuga menziesii |     1.59
+     32 |      108 |  3287 | B          | Pseudotsuga menziesii |     4.38
+     32 |      108 |  3288 | B          | Pseudotsuga menziesii |     3.09
+     32 |      108 |  3289 | B          | Jamesia americana     |     7.98
+     32 |      108 |  3290 | B          | Abies lasiocarpa      |    10.85
+     32 |      108 |  3291 | B          | Abies lasiocarpa      |    13.55
+     32 |      108 |  3292 | B          | Abies lasiocarpa      |    17.26
+     32 |      108 |  3293 | B          | Abies lasiocarpa      |    21.65
+     32 |      108 |  3294 | B          | Abies lasiocarpa      |     17.8
+     32 |      108 |  3295 | B          | Abies lasiocarpa      |     23.4
+     32 |      108 |  3296 | B          | Abies lasiocarpa      |    25.79
+```
+
+Finally, a `UNION` is used to concatenate the results of two or more queries, while `INTERSECT` is used to subtract the results of a second query from the results of a first query.
+
+```{sql eval=FALSE}
+-- UNION for concatenating results of two queries
+SELECT * FROM plotobs WHERE diameter > 30
+UNION
+SELECT * FROM plotobs WHERE diameter < 10;
+
+-- INTERSECT for finding common results between two queries
+SELECT * FROM plotobs WHERE diameter > 34
+INTERSECT
+SELECT * FROM plotobs WHERE diameter < 35;
+```
+```
+ obsid | siteid |    plot    | date_sampled |      sciname      | diameter | condition 
+-------+--------+------------+--------------+-------------------+----------+-----------
+  2647 |     26 | B          | 2011-06-13   | Picea engelmannii |    34.27 | dry
+  1967 |     20 | A          | 2011-06-13   | Picea engelmannii |    34.16 | dry
+  1680 |     17 | A          | 2012-06-10   | Abies lasiocarpa  |    34.59 | normal
+  1205 |     12 | B          | 2011-06-13   | Picea engelmannii |    34.33 | dry
+  1814 |     18 | B          | 2011-06-13   | Abies lasiocarpa  |    34.83 | normal
+   484 |      5 | B          | 2011-06-13   | Picea engelmannii |     34.4 | dry
+  2070 |     21 | A          | 2011-06-13   | Picea engelmannii |    34.56 | dry
+  1886 |     19 | A          | 2012-06-10   | Abies lasiocarpa  |     34.2 | normal
+  1720 |     17 | B          | 2011-06-13   | Picea engelmannii |    34.16 | dry
+   341 |      4 | A          | 2012-06-10   | Abies lasiocarpa  |     34.5 | normal
+   825 |      9 | A          | 2011-06-13   | Abies lasiocarpa  |    34.19 | normal
+  2482 |     25 | A          | 2011-06-13   | Picea engelmannii |    34.48 | dry
+  3050 |     30 | B          | 2011-06-13   | Abies lasiocarpa  |    34.93 | normal
+  2710 |     27 | A          | 2012-06-10   | Abies lasiocarpa  |    34.62 | normal
+  1761 |     18 | A          | 2011-06-13   | Picea engelmannii |     34.9 | dry
+  2164 |     22 | A          | 2011-06-13   | Abies lasiocarpa  |    34.61 | normal
+  2235 |     22 | B          | 2011-06-13   | Picea engelmannii |    34.07 | dry
+  3162 |     31 | B          | 2011-06-13   | Picea engelmannii |    34.66 | dry
+  1608 |     16 | B          | 2011-06-13   | Abies lasiocarpa  |    34.29 | normal
+   238 |      3 | A          | 2012-06-10   | Abies lasiocarpa  |    34.83 | normal
+   175 |      2 | B          | 2011-06-13   | Picea engelmannii |    34.02 | dry
+  1917 |     19 | B          | 2011-06-13   | Abies lasiocarpa  |    34.83 | normal
+    72 |      1 | B          | 2011-06-13   | Picea engelmannii |     34.9 | dry
+   207 |      3 | A          | 2011-06-13   | Abies lasiocarpa  |    34.39 | normal
+  1474 |     15 | A          | 2012-06-10   | Abies lasiocarpa  |    34.74 | normal
+   216 |      3 | A          | 2011-06-13   | Picea engelmannii |    34.71 | dry
+  2132 |     21 | B          | 2011-06-13   | Picea engelmannii |    34.17 | dry
+  3225 |     32 | A          | 2012-06-10   | Abies lasiocarpa  |    34.22 | normal
+  1505 |     15 | B          | 2011-06-13   | Abies lasiocarpa  |    34.63 | normal
+   784 |      8 | B          | 2011-06-13   | Abies lasiocarpa  |    34.56 | normal
+  2473 |     25 | A          | 2011-06-13   | Abies lasiocarpa  |    34.33 | normal
+(31 rows)
+```
+
+## Summary
+
+- SQL databases are relatively easy to set up and use
+- Postgres and other open source databases can scale to huge data sizes
+- You can directly connect to databases using other languages like R
+
+## Resources
+
+- [Software Carpentry SQL tutorial](https://swcarpentry.github.io/sql-novice-survey/)
+- [PostgresQL Inner Join](http://www.postgresqltutorial.com/postgresql-inner-join/)
+- [PostgresQL Left Join](http://www.postgresqltutorial.com/postgresql-left-join/)
+- [PostgresQL Outer Join](http://www.postgresqltutorial.com/postgresql-full-outer-join/)
+

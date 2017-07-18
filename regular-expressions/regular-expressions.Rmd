@@ -120,11 +120,11 @@ str_view_all(fish, "[^aeiou]")
 
 ```{r}
 fish <- c("gag grouper", "striper", "red drum")
-str_view_all(words, "\\s") # Note the double \\ before the s. This is an R-specific thing.
+str_view_all(fish, "\\s") # Note the double \\ before the s. This is an R-specific thing.
                            # many of our special characters must be preceded by a \\
-str_view_all(words, "\\S")
+str_view_all(fish, "\\S")
 ```
-
+Note that the lower case version `\\s` selects any whitespace characters, whereas the uppercase version `\\S` selects all non-whitespace characters.  The next pattern is analogous for digits:
 
 - `\d` & `\D`: Match any digit, equivalent to `[0-9]`
 
@@ -159,7 +159,7 @@ We can use the `+` expression to find words with one or more vowels:
 
 ```{r}
 fish <- c("gag grouper", "striper", "red drum", "cobia", "sheepshead")
-str_view_all(words, "[aeiuo]+")
+str_view_all(fish, "[aeiuo]+")
 ```
 
 - `*` 0 -> infinity
@@ -192,7 +192,7 @@ Once we use groups, `()`, we can also use back references to work with the resul
 Back references are \\ and a number, where \\1 is the first thing in (), \\2 is the second thing in (), and so on.
 
 ```{r}
-str_replace(addresses, "(\\w+), (\\w+)", "City: \\1, State: \\2")
+str_replace(addresses, "([\\w\\s]+), (\\w+)", "City: \\1, State: \\2")
 ```
 
 - `^` & `$`

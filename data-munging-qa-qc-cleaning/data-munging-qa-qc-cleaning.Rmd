@@ -1,32 +1,41 @@
 ---
-title: "Data Munging / QA / QC / Cleaning"
+  title: "Data Munging / QA / QC / Cleaning"
 time_slot: 60 minutes
 ---
+  
+  ## Introduction
+  
+  ## Leaning outcomes
+  
+  Students should
 
-## Introduction
-
-## Leaning outcomes
-
-Students should
-
-- Learn what it means to test assumptions about their data (assertr)
+- Learn what it means to test assumptions about their data with base R
 - Learn how to reshape and restructure their data (tidyr)
 - Be introduced to the `assertr` package for analysis QA
 
 ## Lesson
 
-Let's look at an example dataset (one I've made).
+Let's look at an example dataset (one I've made) and go over some ways we might QA/QC this dataset.
+
 It is an arbitrary temperature study with six sites. Within each site, there are 6 plots and we took 10 samples of temperature (degrees C) per plot.
 
+### Step one: Import and prepare
 
 ```{r}
 fundata <- read.csv("fundata.csv", stringsAsFactors = FALSE)
-head(fundata)
+head(fundata) # Look at the data
+str(fundata)
+summary(fundata)
 ```
 
-Data often comes with columns mashed together which can prevent us from doing the exact analysis we want.
-For example, in this dataset, the `siteplot` column is really two variables: Site and plot number.
-How can we split them apart?
+What's our assessment of this dataset from the above commands?
+
+
+- The site and plot codes are smushed together in one column
+- The dates look a bit funky. What format is that?
+- The range on the temperatures surely can't be right
+
+#### Split siteplot into two columns
 
 ```{r}
 library(tidyr)
@@ -37,33 +46,59 @@ lettersdf %>%
   separate(letters, c("letter_one", "letter_two"), sep = "\\.")
 ```
 
-**Exercise:** Split the `siteplot` column into two columns called `site` and `plot`:
 
-```{r}
+**Exercise:** Split the `siteplot` column into two columns called `site` and `plot`:
+  
+  ```{r}
 # Your code here
 ```
 
-### Checking assumptions
+#### Convert the dates to real R dates
+
+When you have dates in R, it's usually best to convert them to a `Date` object.
+This is mainly so plotting functions work correctly but it helps elsewhere too.
+
+The function we'll use is `as.Date`:
+  
+  ```{r}
+datestrings <- c("2000-08-03", "2017-02-20", "1980-04-27")
+mydate <- as.Date(datestrings, format = "%Y-%m-%d")
+mydate
+class(mydate)
+```
+
+** Exercise: Convert the `date` column in `fundata` to from a character vector to a Date vector with `as.Date()`:
+  
+  ```{r}
+# Your code here
+# e.g fundata$date <- 
+```
+
+### Step two: Checking assumptions in the data
 
 #### site & plot
 
-Let's start by looking at the `site` column for issues.
+Let's start by looking at the `site` column for potential issues.
+
 The `table` function is a great way tally the occurrence of each of the unique values in a vector:
+
+```{r}
+table(c(5, 5, 2, 2, 3, 3))
+table(c("A", "A", "B", "C")) # Also good for character vectors
+
+fish <- c("gag grouper", "striped bass", "red drum", "gag grouper")
+table(fish)
+```
 
 ```{r}
 table(fundata$site)
 ```
 
-We can see we're missing some observations from A, C, and E.
-And there's even an NA.
+From the summary of the dataset, we would expect 60s across the board there.
+But we don't see that!
+  
+  We can see we're missing some observations from A, C, and E.
 Depending on our needs, we may need to go back to our field notes to find out what happened.
-For this mock analysis, let's remove the row with the `NA` for `site`:
-
-**Exercise:** Remove the row with the `NA` as a value for `site`
-
-```{r}
-# Your code here
-```
 
 #### temp_c
 
@@ -82,71 +117,124 @@ range(fundata$temp_c)
 **Exercise:** Can we use an exploratory plot to check this assumption too?
 
 Plotting your data is always a good idea and we can often find new insights or issues this way.
+For univariate data, a box plot is a great way to look at the distribution of values:
+
+```{r}
+boxplot(rnorm(100, 50, 5))
+```
+
+Use `boxplot` to make a boxplot of the temperature values:
 
 ```{r}
 # Your code here
 ```
 
-Before we move on, let's fix the -9999 and 180 observations by making them `NA`s:
-
-```{r}
-fundata[which(fundata$temp_c == -9999), "temp_c"] <- NA
-fundata[which(fundata$temp_c == 180), "temp_c"] <- NA
+Before we move on, let's fix the -9999 and 180 observations by removing them:
+  
+  **Exercise: Remove the rows with temperatures of -9999 and 180:**
+  
+  ```{r}
+# Your code here
 ```
 
-### Check for duplicate or missing observations
+```{r}
+any(is.na(fundata$temp_c))
+```
+
+**Exercise:** Remove the row with the `NA` as a value for `temp_c`
+
+"NA" is its own type in R.
+
+```{r}
+is.na(2)
+is.na(NA)
+is.na(c(1, NA, 3))
+
+fish <- c("gag grouper", NA, "red drum", NA)
+fish
+
+# Filter NAs in a character vector
+fish[!is.na(fish)]
+```
+
+```{r}
+# Remember we can subset the rows in a data.frame like:
+fundata[c(1, 2, 3),] # First, second, third rows
+#or
+fundata[which(fundata$site == "A"),] # Just the rows with site == "A"
+
+# Write an expression using `is.na` to subset fundata and save the result
+# Your code here:
+# e.g. fundata$site <- 
+```
+
+#### Check for duplicate
 
 Since have a hierarchical design, we might want to check that all the data we expect are present.
 If we know we have 6 sites with 6 plots at each site and ten samples, we can check this assumption a few ways:
-
-```{r}
+  
+  ```{r}
 nrow(fundata) == 6 * 6 * 10
 ```
 
-**Exercise:** Use `dplyr` to find which `site` or `plot` has the wrong number of observations
+**Exercise:** Use `dplyr` with `group_by` and `summarize` to find which `site` or `plot` has the wrong number of observations
 
 ```{r}
 # Put your solution here
 ```
 
-**Exercise:** Check if any droids have hair or gender
-
-```{r}
-library(dplyr)
-head(starwars)
-```
-
-**Exercise:** Make sure every character has been in at least one film
-
-```{r}
-```
-
-### unique and duplicated
-
 The functions `unique` and `duplicated` great ways to find duplicates in a vector of values.
 For example, we can create a vector with a duplicate value in it:
-
-```{r}
+  
+  ```{r}
 some_letters <- c("A", "F", "X", "S", "X")
 some_letters
-```
-
-```{r}
 length(unique(some_letters)) == length(some_letters)
 duplicated(some_letters)
+some_letters[!duplicated(some_letters)]
 ```
 
-See how `unique` can tell us *if* there are duplicates and `duplicated` can tell us *which* values are duplicates?
-
-**Exercise:** Remove the duplicate value with `unique` and with `duplicated`:
-
-```{r}
+See how `nrow` and `unique` can tell us *if* there are duplicates and `duplicated` can tell us *which* values are duplicates?
+  
+  **Exercise:** Remove the duplicate value with duplicated from the following data.frame:
+  
+  ```{r}
+mydf <- data.frame(fish = c("Redfish", "Gag Grouper", "Striped Bass", "Redfish"),
+                   size = runif(4, 50, 100),
+                   stringsAsFactors = FALSE)
 # Your code here
 ```
 
-### more `tidyr`
+### Complete analysis script:
 
-We already saw how separate and how useful it can be. 
+```{r}
+# Import
+fundata <- read.csv("fundata.csv", stringsAsFactors = FALSE)
+
+# Munge
+fundata <- fundata %>% 
+  separate(siteplot, c("site", "plot"), sep = "\\.")
+fundata$date <- as.Date(fundata$date, "%m-%d-%Y")
+
+# Check
+any(is.na(fundata$site))
+any(fundata$temp_c < 0)
+any(fundata$temp_c > 100)
+
+# Fix temp_c column:
+fundata <- fundata[which(!is.na(fundata$temp_c)),] # Remove the NA
+fundata <- fundata[fundata$temp_c != -9999,]
+fundata <- fundata[fundata$temp_c != 180,]
+
+# Analyze
+fundata %>% 
+  group_by(site) %>% 
+  summarise(meantemp = mean(temp_c))
+```
+
+### more `tidyr` package
+
+We already saw how useful `separate` can be. 
 `tidyr` provides two other functions I use all the time: `gather` and `spread`.
 
 #### `gather`
@@ -155,25 +243,48 @@ We already saw how separate and how useful it can be.
 
 ```{r}
 # Make some 'wide' data first
-x <- data.frame(site = c("A", "B", "C"),
-                width = runif(3, 2, 10),
-                height = runif(3, 40, 80))
-x
+fishdf <- data.frame(fish = c("Redfish", "Gag Grouper", "Striped Bass"),
+                     weight = runif(3, 2, 10),
+                     age = runif(3, 5, 80))
+fishdf
 
 # Gather it
-y <- gather(x, var, val, -site)
-y
+fishdf_g <- gather(fishdf, variable, value, -fish)
+fishdf_g
 ```
 
+Why gather? Analysis often needs us to reshape the data in this way:
+  
+  ```{r}
+library(dplyr)
+
+fishdf_g %>% 
+  group_by(variable) %>% 
+  summarize(meanvalue = mean(value))
+```
+
+Also, ggplot2 needs this form:
+  
+  ```{r}
+library(ggplot2)
+ggplot(fishdf_g, aes(variable, value)) + geom_boxplot()
+```
 
 #### `spread`
 
-`spread` does the opposite:
-
-```{r}
-y %>% spread(var, val)
+`spread` does the opposite of `gather`:
+  
+  ```{r}
+fishdf_g %>% spread(variable, value)
 ```
 
+Why spread? Usually modeling requires this "wide" format:
+  
+  ```{r}
+lm(weight ~ age, data = fishdf)
+```
+
+So with the combination of `gather` and `spread`, we can easily switch between analysis and modeling.
 
 ### The `assertr` package approach
 
@@ -183,11 +294,17 @@ y %>% spread(var, val)
 
 The basic idea is that we should check qualities of our dataset prior to analysis and that we can actually make the analysis not run if certain assertions are not met.
 
-```{r}
+```{r, eval=FALSE}
 library(assertr)
 
 mtcars %>% verify(TRUE) %>% nrow(.)
 mtcars %>% verify(FALSE) %>% nrow(.)
+
+# Only plot mpg ~ wt if the columns exist and all mpg are > 0
+mtcars %>% 
+  verify(has_all_names("mpg", "wt")) %>% 
+  verify(mpg > 0) %>% 
+  ggplot(aes(wt, mpg)) + geom_point()
 ```
 
 Let's walk through the introduction taken from the [README](https://github.com/ropensci/assertr):
@@ -205,8 +322,8 @@ We don't know who created it and, in order to do an analysis with it, we might w
 - each row's mahalanobis distance is within 10 median absolute deviations of all the distances (for outlier detection)
 
 This could be written (in order) using assertr like this:
-
-```{r}
+  
+  ```{r}
 library(dplyr)
 library(assertr)
 
@@ -248,16 +365,36 @@ What are some things we might like to assert *before* we do that analysis?
 - The `tidyr` package provides a few very useful functions that do things not easily done in base R
 - The `assertr` package shows a new methodology where the assertions are built into the analysis pipeline
 
+## Extra things to do:
+
+### `starwars` dataset
+
+**Exercise:** Check if any droids have hair or gender
+
+```{r}
+library(dplyr)
+head(starwars)
+# Your code here
+```
+
+**Exercise:** Make sure every character has been in at least one film
+
+```{r}
+# Your code here
+```
+
 ## Misc
 
-Data generation:
+This chunk generates the fundata.csv file we used in this lesson
 
 ```{r}
 n <- 6
 reps <- 10
 fundata <- data.frame(site = rep(rep(c("A", "B", "C", "D", "E", "F"), n), reps),
-                      plot = rep(rep(c(1:6), n), reps),
-                      temp_c = rnorm(n * n * reps, 30, 5))
+plot = rep(rep(c(1:6), n), reps),
+date = rep(c("03-21-2017", "04-21-2017", "05-21-2017", "06-21-2017", "07-21-2017", "08-21-2017"), reps),
+temp_c = round(rnorm(n * n * reps, 30, 5), 2),
+stringsAsFactors = FALSE)
 
 # omit 5 rows at random
 fundata <- fundata[-sample(1:nrow(fundata), 5, replace = FALSE),]
@@ -268,13 +405,10 @@ fundata[sample(1:nrow(fundata), 5, replace = FALSE), "temp_c"] <- -9999
 # replace 1 value with a way-too-high value
 fundata[sample(1:nrow(fundata), 1), "temp_c"] <- 180
 
-# replace 1 site with NA
-fundata[sample(1:nrow(fundata), 1), "site"] <- NA
-
 # mush site and plot together into one column
 fundata$siteplot <- paste(fundata$site, fundata$plot, sep = ".")
 
 # clean it up and save it
-fundata <- fundata[,c("siteplot", "temp_c")]
+fundata <- fundata[,c("siteplot", "date", "temp_c")]
 write.csv(fundata, row.names = FALSE, file = "fundata.csv")
 ```
