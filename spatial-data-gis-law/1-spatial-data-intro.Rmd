@@ -152,9 +152,6 @@ in a geojson structure this may look like this:
 
 ## Coordinate reference systems - how spatial data line up
 
-[Coordinate Reference Systems - 101 ](http://earthdatascience.org/course-materials/earth-analytics/week-4/intro-to-coordinate-reference-systems/)
-
-
 ### CRS storage formats
 
 * EPSG
@@ -164,4 +161,5 @@ in a geojson structure this may look like this:
 
 #### Other CRS resources
 
+* [Coordinate Reference Systems - 101 - Earthdatascience.org ](http://earthdatascience.org/course-materials/earth-analytics/week-4/intro-to-coordinate-reference-systems/)
 * [Getting to know EPSG, WKT and other CRS definition structures - EarthDataScience.org](http://earthdatascience.org/course-materials/earth-analytics/week-4/understand-epsg-wkt-and-other-crs-definition-file-types/)
