@@ -169,6 +169,22 @@ dbListTables(con)
 # Your code here
 ```
 
+### Accessing an Microsoft Access database in R
+
+Working with Microsoft Access databases in R is notoriously tricky.
+As far as I can tell, the only way to make it work is to be running 32-bit Windows.
+Most people are not running 32-bit Windows.
+
+If you are, the basic incantation is:
+
+```{r, eval=FALSE}
+install.packages('RODBC')
+library(RODBC)
+db <- odbcConnectAccess("yourAccessDB.db")
+```
+
+And then you can send queries with `odbcQuery()`
+
 ## Summary
 
 - Using SQL via R only requires a couple of lines of code
