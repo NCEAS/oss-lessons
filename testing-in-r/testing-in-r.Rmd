@@ -3,19 +3,49 @@ title: "Testing R Code and Analysis"
 time_slot: 30 minutes
 ---
 
+When we write R code to do our analyses, we're usually making use of other peoples' functions.
+But sometimes we have a need to write our own functions and, when we do this, it is a great idea to test them to make sure they work as we expect.
+
+As an example, we'll create a new R package that provides a single function to calculate Z scores for a vector of numbers.
+A Z score tells us how many standard deviations a value is from the mean of a set of values.
+Mathematically, it is defined as $z = (X - μ) / σ$ where $X$ is the value, $µ$ is the mean and $σ$ is the standard deviation.
+In reality, this is the `scale` function in R but we're going to write it for ourselves as a simple example.
+
 - Step 1: Get set up
   - Use already-created package if we get there in previous lesson
-  - Setup
-      - Add to Suggests. What is Suggests?
   
-      - Add to tests/testthat.R:
-  
-      ```
-      library(testthat)
-      library(yourpackage)
-      
-      test_check("yourpackage")
-      ```
+```{r}
+install.packages(c("testthat", "devtools"))
+```
+
+```{r}
+devtools::use_testthat()
+```
+
+rename hello.R to z_score.R
+
+replace hellow.R with:
+
+```{r}
+z_score <- function(x) {
+  x
+}
+```
+
+source it
+runit in console
+
+```{r}
+z_score <- function(x) {
+  (x - mean(x)) / sd(x)
+}
+```
+
+- Create tests/testthat/test_z_score.R
+
+```
+context("z_score")
+```
       
       - Each test file should start with test and end in .R or .r
 - Step 2: Test our code and analyis
