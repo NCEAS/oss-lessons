@@ -47,7 +47,7 @@ About raster data:
 * each pixel represents a geographic area - in our case that is often an area on the earth
 
 
-[About raster data](https://earthdatascience.org/course-materials/earth-analytics/week-3/open-lidar-raster-r/)
+[About raster data  earthdatascience.org website](https://earthdatascience.org/course-materials/earth-analytics/week-3/open-lidar-raster-r/)
 
 ![About raster data](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-concept.png)
 
@@ -157,7 +157,7 @@ in a geojson structure this may look like this:
 
 ## Coordinate reference systems - how spatial data line up
 
-~[The human head projected](https://earthdatascience.org/images/course-materials/earth-analytics/week-9/human-head-projections.jpg)
+![The human head projected](https://earthdatascience.org/images/course-materials/earth-analytics/week-9/human-head-projections.jpg)
 
 
 ### CRS storage formats
