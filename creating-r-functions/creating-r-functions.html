@@ -182,6 +182,33 @@ celsius</code></pre>
 <pre class="r"><code># Your code goes here</code></pre>
 <p>Did you encounter any issues with rounding or precision?</p>
 </div>
+<div id="documenting-r-functions" class="section level2">
+<h2>Documenting R functions</h2>
+<p>Functions need documentation so that we can communicate what they do, and why. The <code>roxygen2</code> package provides a simple means to document your functions so that you can explain what the function does, the assumptions about the input values, a description of the value that is returned, and the rationale for decisions made about implementation.</p>
+<p>Documentation in ROxygen is placed immediately before the function definition, and is indicated by a special comment line that always starts with the characters <code>#'</code>. Here’s a documented version of a function:</p>
+<pre class="r"><code>#' Convert temperature data from Fahrenheit to Celsius
+#'
+#' @param fahr Temperature data in degrees Fahrenheit to be converted
+#' @return temperature value in degrees Celsius
+#' @keywords conversion
+#' @export
+#' @examples
+#' fahr_to_celsius(32)
+#' fahr_to_celsius(c(32, 212, 72))
+fahr_to_celsius &lt;- function(fahr) {
+  celsius &lt;- (fahr-32)*5/9
+  return(celsius)
+}</code></pre>
+<p>Note the use of the <code>@param</code> keyword to define the expectations of input data, and the <code>@return</code> keyword for defining the value that is returned from the function. The <code>@examples</code> function is useful as a reminder as to how to use the function. Finally, the <code>@export</code> keyword indicates that, if this function were added to a package, then the function should be available to other code and packages to utilize.</p>
+</div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<ul>
+<li>Functions are useful to reduce redundancy, reuse code, and reduce errors</li>
+<li>Build functions with the <code>function</code> function</li>
+<li>Document functions with <code>roxygen2</code> comments</li>
+</ul>
+</div>
 
 
 

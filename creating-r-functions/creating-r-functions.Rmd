@@ -97,3 +97,32 @@ Now, create a function named `celsius_to_fahr` that does the reverse, it takes t
 
 Did you encounter any issues with rounding or precision?
 
+## Documenting R functions
+
+Functions need documentation so that we can communicate what they do, and why.  The `roxygen2` package provides a simple means to document your functions so that you can explain what the function does, the assumptions about the input values, a description of the value that is returned, and the rationale for decisions made about implementation.
+
+Documentation in ROxygen is placed immediately before the function definition, and is indicated by a special comment line that always starts with the characters `#'`.  Here's a documented version of a function:
+
+```{r}
+#' Convert temperature data from Fahrenheit to Celsius
+#'
+#' @param fahr Temperature data in degrees Fahrenheit to be converted
+#' @return temperature value in degrees Celsius
+#' @keywords conversion
+#' @export
+#' @examples
+#' fahr_to_celsius(32)
+#' fahr_to_celsius(c(32, 212, 72))
+fahr_to_celsius <- function(fahr) {
+  celsius <- (fahr-32)*5/9
+  return(celsius)
+}
+```
+
+Note the use of the `@param` keyword to define the expectations of input data, and the `@return` keyword for defining the value that is returned from the function.  The `@examples` function is useful as a reminder as to how to use the function.  Finally, the `@export` keyword indicates that, if this function were added to a package, then the function should be available to other code and packages to utilize.
+
+## Summary
+
+- Functions are useful to reduce redundancy, reuse code, and reduce errors
+- Build functions with the `function` function
+- Document functions with `roxygen2` comments
