@@ -36,7 +36,7 @@ At the end of this 30 minute overview you will be able to:
 
 ## Getting started with R
 
-~[the R / Python learning curve](https://earthdatascience.org/images/course-materials/earth-analytics/week-9/learning-r.png)
+![the R / Python learning curve](https://earthdatascience.org/images/course-materials/earth-analytics/week-9/learning-r.png)
 
 ## About raster data
 
