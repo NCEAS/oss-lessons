@@ -34,6 +34,10 @@ At the end of this 30 minute overview you will be able to:
 1. List 2-3 `R` packages that can be used to work with spatial data.
 
 
+## Getting started with R
+
+~[the R / Python learning curve](https://earthdatascience.org/images/course-materials/earth-analytics/week-9/learning-r.png)
+
 ## About raster data
 
 About raster data:
@@ -152,6 +156,9 @@ in a geojson structure this may look like this:
 
 
 ## Coordinate reference systems - how spatial data line up
+
+~[The human head projected](https://earthdatascience.org/images/course-materials/earth-analytics/week-9/human-head-projections.jpg)
+
 
 ### CRS storage formats
 
