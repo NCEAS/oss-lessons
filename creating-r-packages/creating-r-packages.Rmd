@@ -1,10 +1,9 @@
 ---
-title: "creating-r-packages.Rmd"
+title: "Creating R packages"
 author: "Matt Jones and Karthik Ram"
 date: "July 28, 2014"
 output:
-  html_document:
-    keep_md: yes
+  html_document
 ---
 
 ## Why packages?
@@ -14,7 +13,9 @@ Most R users are familiar with loading and utilizing packages in their work. And
 - Mechanism to redistribute reusable code
 - Mechanism to reproducibly document analysis and models and their results
 
-The `devtools` and `roxygen` package makes creating and maintining a package to be a straightforward experience.
+The `devtools` and `roxygen` package makes creating and maintaining a package to be a straightforward experience.
+
+Creating a package for your own personal use is a convenient way to build utility functions that you can include throughout your code, rather than using `source` to import files.  Using `source` can work, but it makes your code more fragile by introducing dependencies on the specific locations of the files that you source.  In comparison, an installed package is available to your code anywhere, and is easily updatable.
 
 ## Install and load packages
 
