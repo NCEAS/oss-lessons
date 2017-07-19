@@ -116,6 +116,10 @@ document()
 
 That's really it.  You now have a package that you can `check()` and `install()` and `release()`.  See below for these helper utilities.
 
+## Exercise
+
+Add two functions to the `mytools` package for converting temperatures from Fahrenheit to Celsius and back.  Then check, build, and install the package, and then use it from the console to do some conversions.
+
 ## Checking and installing your package
 
 Now that your package is built, you can check it for consistency and completeness using `check()`, and then you can install it locally using `install()`, which needs to be run from the parent directory of your module.
