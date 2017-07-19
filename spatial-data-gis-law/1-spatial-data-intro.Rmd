@@ -6,23 +6,23 @@ author: "Leah A. Wasser"
 ## Topic
 
 ### Introduction
+**Time:** 30 minutes
+
 **Purpose:** In this lesson we will introduce some of the key concepts associated
 with spatial data including:
 
-* spatial extent
-* resolution
-* coordinate reference system
+* Spatial extent
+* Resolution
+* Coordinate reference system
 
-We will also define raster vs vector data structures.
+We will also define raster vs. vector data structures.
 
 **Background:**
-Brief overview of topic and relationship to scientific synthesis.
-
-**Explanation:**
-No slide decks. Ideal to keep all materials within ecosystem. Use this single rmd as your mechanism to explain, show, lecture, or demo/use tutorial to explain concepts.
-
-**Products for your open science portfolio:**
-list what students will produce
+Often we need to use spatial data in our analysis - that is data that correspond
+to some x,y (and z) location on the Earth. however, not all spatial data are
+created the same. understanding the basic foundations of working with spatial
+data will save you a lot of time when it comes to processing the data in tools
+like R, QGIS and python!
 
 ### Learning outcomes
 
@@ -30,8 +30,8 @@ At the end of this 30 minute overview you will be able to:
 
 1. Explain the difference between the raster vs vector data structures.
 1. Define spatial extent, resolution, coordinate reference system.
-1. List the 3 vector data structures (point, line polygon).
-1. List 2-3 R packages that can be used to work with spatial data.
+1. List the 3 vector data structures (point, line, polygon).
+1. List 2-3 `R` packages that can be used to work with spatial data.
 
 
 ## About raster data
@@ -43,7 +43,7 @@ About raster data:
 * each pixel represents a geographic area - in our case that is often an area on the earth
 
 
-[About raster data](http://neondataskills.org/GIS-spatial-data/Working-With-Rasters/)
+[About raster data](https://earthdatascience.org/course-materials/earth-analytics/week-3/open-lidar-raster-r/)
 
 ![About raster data](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-concept.png)
 
@@ -51,39 +51,53 @@ About raster data:
 
 * The size of each pixel is referred to as **resolution**
 * If pixels are smaller (represent a smaller area on the earth, they are considered HIGHER resolution) - in the example of an image, this makes the image look more 'crisp'
-
-[raster resolution](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-resolution.png)
-
-
 * if you have fewer pixels within a particular spatial extent, the resolution is LOWER
 * if you have more pixels within a particular spatial extent, the resolution is HIGHER
 
 
-http://neondataskills.org/GIS-spatial-data/Working-With-Rasters/
+![Raster resolution](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-resolution.png)
 
->> Create a blog post on raster extent vs resolution so i can update the content above some of which is off...
+![Raster pixel resolution](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-pixel-resolution.png)
+
 
 ### Raster spatial extent
 
-more here on this...
+The spatial extent of a raster refers to the area on the earth's surface that
+the raster covers.
+
+![Raster spatial extent](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-spatial-extent-coordinates.png)
+
+Note that the raster spatial extent relates directly to the
+spatial resolution.
+
+CHALLENGE question
+1. If you have more pixels over the same spatial extent - will the image look sharper (more clear) or more blurry?
+2. If you have fewer pixels over the same spatial extent...
+
+
+![Raster pixel resolution](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-spatial-extent.png)
 
 ## About vector data
 
-[Intro to vector data EDS website ](http://earthdatascience.org/course-materials/earth-analytics/week-4/intro-vector-data-r/)
-* discrete geometric locations
+[Intro to vector data - EarthDataScience.org ](http://earthdatascience.org/course-materials/earth-analytics/week-4/intro-vector-data-r/)
+
+Attributes of vector data
+
+* Discrete geometric locations
 * x,y locations are vertices
-* organization of those vertices determines structure: points, lines, polygons
+* Organization of those vertices determines structure: points, lines, polygons
 
 ![About vector data](http://earthdatascience.org/images/course-materials/earth-analytics/week-5/pnt_line_poly.png)
 
 
 ## Vector data formats
 
+There are many different spatial vector data formats. Let's list a few:
+
 * shapefile
-* json, geojson
+* geojson
 * text files
 * others??
-
 
 ## Vector data spatial extent
 
@@ -97,10 +111,12 @@ NOTE: the spatial extent of an individual object can also be quantified!
 
 ### Vector data attributes
 
-* vector data can store attribute tables - when in a shapefile format, these look like excel spreadsheets where each object has an associated set of attributes.
+Vector data often has associated attribute tables. When in a shapefile format,
+these look like excel spreadsheets where each object has an associated set of
+attributes.
 
 
-[Attribute tables](http://earthdatascience.org/images/course-materials/earth-analytics/week-5/attribute_table.png)
+![Attribute tables](http://earthdatascience.org/images/course-materials/earth-analytics/week-5/attribute_table.png)
 
 in a geojson structure this may look like this:
 
@@ -137,9 +153,6 @@ in a geojson structure this may look like this:
 
 ## Coordinate reference systems - how spatial data line up
 
-[Coordinate Reference Systems - 101 ](http://earthdatascience.org/course-materials/earth-analytics/week-4/intro-to-coordinate-reference-systems/)
-
-
 ### CRS storage formats
 
 * EPSG
@@ -147,4 +160,7 @@ in a geojson structure this may look like this:
 * WKT
 * others!!!
 
-http://earthdatascience.org/course-materials/earth-analytics/week-4/understand-epsg-wkt-and-other-crs-definition-file-types/
+#### Other CRS resources
+
+* [Coordinate Reference Systems - 101 - Earthdatascience.org ](http://earthdatascience.org/course-materials/earth-analytics/week-4/intro-to-coordinate-reference-systems/)
+* [Get to know EPSG, WKT and other CRS definition structures - EarthDataScience.org](http://earthdatascience.org/course-materials/earth-analytics/week-4/understand-epsg-wkt-and-other-crs-definition-file-types/)

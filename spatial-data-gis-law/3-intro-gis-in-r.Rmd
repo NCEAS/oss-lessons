@@ -1,0 +1,131 @@
+---
+title: Free GIS for everyone! QGIS Intro
+author: "Leah A. Wasser"
+---
+
+## Topic
+
+### Introduction
+**Purpose:**
+
+
+### Background:
+Brief overview of topic and relationship to scientific synthesis.
+
+
+### Learning outcomes
+
+At the end of this 30 minute overview you will be able to:
+
+1. 
+
+```{r the-data, echo=FALSE, eval=FALSE}
+# https://coastalmap.marine.usgs.gov/regional/contusa/gomex/gloria/data.html
+```
+
+```{r}
+# devtools::install_github("dkahle/ggmap")
+library(ggplot2)
+library(ggmap)
+```
+
+Let's create a basemap! 
+
+
+https://earthdatascience.org/course-materials/earth-analytics/week-3/ggmap-basemap/
+
+```{r}
+# get map
+sq_map <- get_map(location = c(lon = -89.89, lat = 25.68), 
+                  maptype = "satellite", 
+                  source = "google", zoom=5)
+
+ggmap(sq_map)
+```
+
+Your turn -- try a different maptype
+
+Hinte: use ??get_map to find different options 
+
+
+```{r, echo=FALSE}
+# get map
+sq_map <- get_map(location = c(lon = -89.89, lat = 25.68), 
+                  maptype = "terrain", 
+                  source = "google", zoom=5)
+
+ggmap(sq_map)
+```
+
+```{r, echo=FALSE}
+# get map
+sq_map <- get_map(location = c(lon = -89.89, lat = 25.68), 
+                  maptype = "watercolor", 
+                  source = "stamen", zoom=5)
+
+ggmap(sq_map)
+```
+
+Do the following
+
+Create a  map of the gulf region 
+
+
+```{r}
+library(rnaturalearth)
+```
+
+```{r}
+# Get the 110m coastline shapefile and make a plot of the Gulf of Mexico
+coastline <- ne_download(scale = 110, type = 'coastline', category = 'physical')
+coastline
+class(coastline)
+```
+
+
+```{r}
+ggplot(coastline, aes(long,lat, group=group)) +
+  geom_path() + 
+  coord_fixed()
+```
+
+```{r}
+ggplot() +
+  geom_path(coastline, aes(long,lat, group=group)) + 
+  coord_fixed()
+```
+
+```{r}
+library(raster)
+library(rgdal)
+library(rasterVis)
+data <- raster("gom_bathy_srtm30plus_asc.asc")
+plot(data)
+
+# set 0 to NA
+data[data==0] <- NA
+
+# don't forget the data argument
+my_map <- gplot(data) + geom_tile(aes(fill = value)) +
+  geom_path(data=coastline, aes(long, lat, group=group))+ 
+  coord_fixed()
+my_map
+```
+
+
+Overlay 
+```{r}
+my_map +
+  xlim(-120, -50) +
+  ylim(0, 40) + scale_fill_continuous(na.value = 'gray90', alpha=.3) + scale_alpha_manual(values=c(-10000,-1), guide="none")
+
+
+!is.na(z)
+
+my_map <- gplot() + 
+  geom_tile(data = subset(data, !is.na(z)), aes(fill = z))) +
+  geom_path(data=coastline, aes(long, lat, group=group))+ 
+  coord_fixed()
+my_map
+```
+
