@@ -20,7 +20,7 @@ At the end of this 30 minute overview you will be able to:
 * Add vector data to QGIS
 * Add raster data to QGIS
 * Explore the metadata - CRS, resolution, extent of a spatial data layer in QGIS
-* Create a basic map in QGIS
+* Create a basic map in QGIS ??
 
 
 ## Intro to Quantum GIS (QGIS)
@@ -39,26 +39,15 @@ QGIS is:
 
 QGIS is an ideal tool to explore  geospatial data. Naturally it can also be used
 for geospatial processing and analysis however keep in mind that these workflows
-can also be performed in R and Python and make even **more reproducible**! 
+can also be performed in R and Python and make even **more reproducible**!
 
-It is also possible to script QGIS analysis in Python.
+NOTE: you can script QGIS analysis in Python.
 
-# Visualize and explore spatial data
+You can do just about anything you can do with ArcGIS in QGIS including:
 
-* Load raster, vector, and delimited coordinate data
-* Adjust colors, symbols, transparency
-* Select features, measure distances, and more
-
-
-# Make maps
-
-* Design map layouts
-* Add legend, scale bar, labels, images
-
-# Create data
-
-* Digitize, edit, and save data
-
+1. data visualization and exploration
+1. Make maps
+1. Edit / Manipulate / create and save new data
 
 # Harness greater powers
 
@@ -66,3 +55,25 @@ It is also possible to script QGIS analysis in Python.
     - Full-fledged analytical GIS environment
 * Run many GDAL/OGR utilities
     - Swiss army knife for geospatial data
+
+# Something about plugins in QGIS will go here...
+
+QGIS is an open source product and as with many open source, tools, there are
+people constantly creating new features via PLUGINS to this tool. To install a
+plugin, use the Plugins drop down and select manage and install plugins. You will
+then see a list of plugins - similar to the list below.
+
+![QGIS plugins](http://underdark.files.wordpress.com/2014/04/installpluginbuilder.png)
+
+A few of my favorite plugins
+
+* **Value tool:** A MUST if you work with raster data. use this to view the value of a pixel in a raster dataset like you would the identify tool in ArcMap.
+* **MapSwipeTool:** A cool tool if you want to view before/ after rasters and look at differences.
+
+Note: that there is also a python console tool that can be used to add command
+line access to the tool.
+
+## Challenge -
+
+Create a map of the Gulf of mexico?? OR maybe just explore CRS information
+Still a work in progress...
