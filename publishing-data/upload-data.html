@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2017-07-13" />
+<meta name="date" content="2017-07-20" />
 
 <title>Uploading Data to DataONE</title>
 
@@ -68,7 +68,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Uploading Data to DataONE</h1>
-<h4 class="date"><em>2017-07-13</em></h4>
+<h4 class="date"><em>2017-07-20</em></h4>
 
 
 
@@ -142,24 +142,37 @@ dp &lt;-<span class="st"> </span><span class="kw">addData</span>(dp, outputObj, 
 
 myAccessRules &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">subject=</span><span class="st">&quot;http://orcid.org/0000-0003-0077-4738&quot;</span>, <span class="dt">permission=</span><span class="st">&quot;changePermission&quot;</span>) 
 
+dp &lt;-<span class="st"> </span><span class="kw">describeWorkflow</span>(dp, <span class="dt">sources=</span>sourceObj, <span class="dt">program=</span>progObj, <span class="dt">derivations=</span>outputObj)
+
 dp</code></pre></div>
 <pre><code>## Members:
 ## 
 ## identifier format          submitter       rightsHolder    mediaType       filename             size       
-## urn...cdbb text/csv        NA              NA              NA              sample.csv           11577      
-## urn...0fac application/R   NA              NA              text/x-rsrc     filterSpecies.R      380        
-## urn...1e79 eml://...-2.1.1 NA              NA              NA              strix-pa...hwest.xml 5116       
-## urn...f0b3 text/csv        NA              NA              NA              filteredSpecies.csv  6017       
+## urn...4582 text/csv        NA              NA              NA              filteredSpecies.csv  6017       
+## urn...7331 eml://...-2.1.1 NA              NA              NA              strix-pa...hwest.xml 5116       
+## urn...55ec text/csv        NA              NA              NA              sample.csv           11577      
+## urn...4b90 application/R   NA              NA              text/x-rsrc     filterSpecies.R      380        
 ## 
 ## Relationships:
 ## 
-##                 subject           predicate                object
-## 2            sample.csv cito:isDocumentedBy strix-pac...hwest.xml
-## 4       filterSpecies.R cito:isDocumentedBy strix-pac...hwest.xml
-## 1 strix-pac...hwest.xml      cito:documents            sample.csv
-## 3 strix-pac...hwest.xml      cito:documents       filterSpecies.R
-## 5 strix-pac...hwest.xml      cito:documents   filteredSpecies.csv
-## 6   filteredSpecies.csv cito:isDocumentedBy strix-pac...hwest.xml</code></pre>
+##                  subject             predicate                object
+## 12 _:33b94f4...baa28d67f              rdf:type      prov:Association
+## 11 _:33b94f4...baa28d67f          prov:hadPlan       filterSpecies.R
+## 6    filteredSpecies.csv   cito:isDocumentedBy strix-pac...hwest.xml
+## 8    filteredSpecies.csv              rdf:type          provone:Data
+## 17   filteredSpecies.csv   prov:wasDerivedFrom            sample.csv
+## 16   filteredSpecies.csv   prov:wasGeneratedBy urn:uuid:...70cc1a61a
+## 5  strix-pac...hwest.xml        cito:documents   filteredSpecies.csv
+## 1  strix-pac...hwest.xml        cito:documents            sample.csv
+## 3  strix-pac...hwest.xml        cito:documents       filterSpecies.R
+## 14 urn:uuid:...70cc1a61a    dcterms:identifier urn:uuid:...70cc1a61a
+## 10 urn:uuid:...70cc1a61a              rdf:type     provone:Execution
+## 9  urn:uuid:...70cc1a61a prov:qual...sociation _:33b94f4...baa28d67f
+## 15 urn:uuid:...70cc1a61a             prov:used            sample.csv
+## 2             sample.csv   cito:isDocumentedBy strix-pac...hwest.xml
+## 7             sample.csv              rdf:type          provone:Data
+## 4        filterSpecies.R   cito:isDocumentedBy strix-pac...hwest.xml
+## 13       filterSpecies.R              rdf:type       provone:Program</code></pre>
 <p>Finally, we upload the package to the Testing server for the KNB.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d1c &lt;-<span class="st"> </span><span class="kw">D1Client</span>(<span class="st">&quot;STAGING2&quot;</span>, <span class="st">&quot;urn:node:mnTestKNB&quot;</span>)
 packageId &lt;-<span class="st"> </span><span class="kw">uploadDataPackage</span>(d1c, dp, <span class="dt">public=</span><span class="ot">TRUE</span>, <span class="dt">accessRules=</span>myAccessRules, <span class="dt">quiet=</span><span class="ot">FALSE</span>)</code></pre></div>
