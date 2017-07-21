@@ -28,7 +28,7 @@ In this lesson we'll go through an introduction and example of the role of micro
 ### I. Overview of the awesomeness of microbes and how we can use metagenomics to study them
 **Goals:** Introduce the role and importance of microbes in systems, using an example from soil microbial communities in agricultural systems and their impact on greenhouse gas fluxes. Describe how we can use genomic data to study microbial systems - amplicon (16S) and shotgun metagenomics.
 
-**Materials:** [Lecture slides]()
+**Materials:** [Lecture slides](NCEAS_microbes.pdf)
 
 **Additional resources:**  
 - [Article: Microbial Responses to the Deepwater Horizon Oil Spill: From Coastal Wetlands to the Deep Sea](http://hazenlab.utk.edu/files/pdf/2015King_etal_ARMS.pdf)
