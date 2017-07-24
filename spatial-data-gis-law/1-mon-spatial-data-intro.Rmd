@@ -141,6 +141,16 @@ in a geojson structure this may look like this:
 
 ![The human head projected](https://earthdatascience.org/images/course-materials/earth-analytics/week-9/human-head-projections.jpg)
 
+## Components of a CRS
+
+The Components of a CRS
+
+The coordinate reference system is made up of several key components:
+
+* **Coordinate System:** the X, Y grid upon which our data is overlayed and how we define where a point is located in space.
+* **Horizontal and vertical units:** The units used to define the grid along the x, y (and z) axis.
+* **Datum:** A modeled version of the shape of the earth which defines the origin used to place the coordinate system in space. We will explain this further, below.
+* **Projection Information:** the mathematical equation used to flatten objects that are on a round surface (e.g. the earth) so we can view them on a flat surface (e.g. our computer screens or a paper map).
 
 ### CRS storage formats
 
