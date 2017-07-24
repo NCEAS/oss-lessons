@@ -1,0 +1,66 @@
+---
+title: Demo Leaflet Map
+output: html_document
+---
+
+```{r, echo=FALSE, message=FALSE}
+suppressPackageStartupMessages({
+  library(leaflet)
+  library(rgdal)
+})
+```
+
+```{r, echo=FALSE, include=FALSE}
+states <- readOGR("data/cb_2016_us_state_20m/cb_2016_us_state_20m.shp",
+                  layer = "cb_2016_us_state_20m", GDAL1_integer64_policy = TRUE)
+
+```
+
+```{r, echo=FALSE}
+gom_states <- subset(states, states$STUSPS %in% c(
+  "TX", "LA", "MS", "AL", "GA", "FL"
+))
+
+npoints <- 20
+gom <- list("lat" = 28, "lng" = -89) # Near the center of the Gulf of Mexico
+
+cpue_data <- data.frame(latitude = runif(npoints, gom$lat - 2, gom$lat + 2),
+                        longitude = runif(npoints, gom$lng - 7, gom$lng + 7),
+                        cpue = rpois(npoints, 20))
+cpue_data$label <- paste0(cpue_data$cpue, " tons")
+
+pal <- colorNumeric(
+  palette = "YlOrRd",
+  domain = gom_states$ALAND
+)
+
+m <- leaflet(gom_states) %>%
+  addTiles() %>% 
+  addPolygons(color = "#444444", 
+              weight = 1, 
+              smoothFactor = 0.5,
+              opacity = 1.0, 
+              fillOpacity = 0.5,
+              fillColor = ~colorQuantile("YlOrRd", ALAND)(ALAND),
+              highlightOptions = highlightOptions(color = "white", weight = 2, bringToFront = TRUE),
+              data = gom_states,
+              group = "States") %>% 
+  addCircles(lng = ~longitude, 
+             lat = ~latitude, 
+             weight = 1, 
+             radius = ~ sqrt(cpue) * 1e4, 
+             popup = ~ as.character(cpue),
+             data = cpue_data,
+             group = "CPUE") %>% 
+  addLegend("topright", 
+            pal = pal, 
+            values = ~ ALAND, labels = ~ALAND,
+            title = "Land area",
+            labFormat = labelFormat(suffix = " sqkm"),
+            opacity = 1) %>%
+  addLayersControl(
+    overlayGroups = c("States", "CPUE"),
+    options = layersControlOptions(collapsed = FALSE))
+
+m
+```
