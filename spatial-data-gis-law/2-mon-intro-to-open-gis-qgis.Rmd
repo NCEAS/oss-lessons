@@ -1,6 +1,10 @@
 ---
 title: "Introduction to Quantum GIS (QGIS) a free, open source GIS tool"
 author: "Leah A. Wasser (adapted from Julien Brun's work!!)"
+output: 
+  html_document: 
+    highlight: pygments
+    theme: cerulean
 ---
 
 ## Topic
@@ -56,7 +60,7 @@ You can do just about anything you can do with ArcGIS in QGIS including:
 * Run many GDAL/OGR utilities
     - Swiss army knife for geospatial data
 
-# Something about plugins in QGIS will go here...
+# QGIS plugins
 
 QGIS is an open source product and as with many open source, tools, there are
 people constantly creating new features via PLUGINS to this tool. To install a
@@ -73,7 +77,6 @@ A few of my favorite plugins
 Note: that there is also a python console tool that can be used to add command
 line access to the tool.
 
-## Challenge -
+## Challenge
 
-Create a map of the Gulf of mexico?? OR maybe just explore CRS information
-Still a work in progress...
+If there's time...create a map of the Gulf of mexico.

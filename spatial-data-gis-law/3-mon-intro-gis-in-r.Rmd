@@ -8,13 +8,10 @@ output:
     theme: cerulean
 ---
 
-## Topic
 
 ### Introduction
-**Purpose:**
-
-### Background:
-Brief overview of topic and relationship to scientific synthesis.
+In this lesson we will learn how to perform some basic cleaning and plotting 
+of spatial data in R.
 
 ### Learning outcomes
 
@@ -22,7 +19,7 @@ At the end of this 30 minute overview you will be able to:
 1. Open a vector data layer in R using `readOGR()`
 1. Open a raster data layer in R using `raster()`
 1. Create basic maps using `ggplot()`
-
+1. Reproject and crop raster and vector data
 
 ## Work with vector data in R
 
@@ -458,7 +455,7 @@ plot(gulf_bathy,
 
 # Hillshade of the gulf coast
 
-```{r get-hillshade, eval=FALSE}
+```{r get-hillshade, eval=FALSE, echo=FALSE}
 # get ocean bottom hillshade
 download.file("http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/raster/GRAY_50M_SR_OB.zip",
               destfile = "GRAY_50M_SR_OB.zip")
@@ -469,7 +466,7 @@ unzip("GRAY_50M_SR_OB.zip")
 Plot the data .
 ```{r}
 # plot data - adjust the color to be grayscale
-hillshade <- raster("hillshade/GRAY_50M_SR_OB/GRAY_50M_SR_OB.tif")
+hillshade <- raster("hillshade/hillshade_3395.tif")
 plot(hillshade,
      col = grey(1:100/100))
 ```
@@ -486,8 +483,7 @@ plot(hillshade,
      main = "Bathymetric data for the gulf coast",
      col = grey(1:100/100),
      axes = FALSE,
-     box = FALSE,
-     ext = extent(gulf_study_area_wgs84))
+     box = FALSE)
 
 # add coastlines
 plot(coastlines_crop, 
@@ -495,13 +491,52 @@ plot(coastlines_crop,
 
 ```
 
+## when rasters don't line up
+
+we can use the projectRaster() function to reproject raster data in the same way we use spTransform() with 
+vector data. 
+
+
+```{r}
+# reproject the raster data 
+hillshade_wgs84 <- projectRaster(hillshade, 
+                                 crs = crs(coastlines_crop))
+
+plot(hillshade_wgs84)
+```
+
+We can crop raster data in the same way we crop vector data using the crop()
+function.
+
+```{r}
+
+# Crop the data 
+hillshade_wgs84 <- crop(hillshade_wgs84, gulf_study_area_wgs84)
+plot(hillshade_wgs84)
+
+```
+
+Now let's try to plot again - does it work?
+
+```{r}
+plot(hillshade_wgs84,
+     main = "Bathymetric data for the gulf coast",
+     col = grey(1:100/100),
+     axes = FALSE,
+     box = FALSE)
+# add coastlines
+plot(coastlines_crop, 
+     add = TRUE)
+```
+
 
 Challenge -- Create a basemap of the gulf coast using the layers 
 that we have been working with. On this map include
 
-1. This hillshade as a base map
+1. This hillshade as a base map, cropped to cover a smaller area 
 2. Coastline boundaries
-3. US State boundaries
+3. US State boundaries, cropped to cover a smaller area 
+4. Bathemetric data 
 
 NOTE: use this time to create a basemap that your group can use. If you
 have other layers that you'd like to use - go for it!
@@ -518,7 +553,9 @@ plot(hillshade,
      col = grey(1:100/100),
      axes = FALSE,
      box = FALSE,
-     ext = extent(gulf_study_area_wgs84))
+     ext = extent(gulf_study_area_wgs84),
+     legend = FALSE)
+
 # add coastlines
 plot(coastlines_crop, 
      add = TRUE)
@@ -580,9 +617,6 @@ ggmap(sq_map)
 
 
 
-## Chloropleth maps
-
-Note that this section still has some bugs so we won't be using it for today's lessons.
 
 ```{r eval=FALSE, echo=FALSE}
 library(dplyr)
@@ -640,4 +674,8 @@ texas <- us_states[us_states$NAME == "Texas",]
 plot(texas)
 ```
 
+
+## Extra magic 
+
+* [rspatial.org raster overview](http://rspatial.org/spatial/rst/8-rastermanip.html)
 

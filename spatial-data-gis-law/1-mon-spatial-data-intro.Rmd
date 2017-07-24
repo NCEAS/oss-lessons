@@ -1,6 +1,10 @@
 ---
 title: "Introduction to spatial data in R"
 author: "Leah A. Wasser"
+output: 
+  html_document: 
+    highlight: pygments
+    theme: cerulean
 ---
 
 ## Topic
