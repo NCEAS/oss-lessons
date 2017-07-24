@@ -10,13 +10,13 @@ editor_options:
 ## Introduction
 
 Making maps is something just about all of us have to do at some point but we're often making static maps (i.e. JPEG, PNG, PDF, etc.).
-Interative maps (think Google Maps) have become very popular on the web on news sites and all kinds of reporting, including science reporting.
+Interative maps (think Google Maps) have become very popular on news sites and in all kinds of reporting, including science reporting.
 Take the NYTimes for example:
 
 http://www.nytimes.com/projects/elections/2013/nyc-primary/mayor/map.html
 
 These are really great ways to vizualize our spatial data.
-It turns out we can actually create these kinds of maps and pages entirely from within R!
+It turns out we can actually create these kinds of maps entirely from within R!
 
 ## Learning objectives
 
@@ -35,7 +35,7 @@ library(leaflet)
 
 m <- leaflet() %>%
   addTiles() %>%  # Add default OpenStreetMap map tiles
-  addMarkers(lng = -119.7000545, lat = 34.419271, popup="Where we are right now!")
+  addMarkers(lng = -119.7000545, lat = 34.419271, popup = "Where we are right now!")
 
 m  # Print the map
 ```
@@ -99,19 +99,18 @@ leaflet(points_in_gom) %>%
 ```
 
 If we don't want blue pins, we can use any image we have.
-`leaflet` comes built in with some default ones:
+See https://rstudio.github.io/leaflet/markers.html.
 
 ```{r}
-points_in_gom$type <- ifelse(runif(npoints) > 0.75, "ship", "pirate")
-
-oceanIcons <- iconList(
-  ship = makeIcon("ferry-18.png", "ferry-18@2x.png", 18, 18),
-  pirate = makeIcon("danger-24.png", "danger-24@2x.png", 24, 24)
-)
+url = "https://github.com/NCEAS/oss-lessons/raw/gh-pages/publishing-maps-to-the-web/images/ship.png"
+ship = makeIcon(url, url, 24, 24)
 
 leaflet(points_in_gom) %>%
-  addTiles() %>% 
-  addMarkers(icon = ~oceanIcons[type])
+  addTiles() %>%
+  addMarkers(~longitude, 
+             ~latitude, 
+             popup = ~as.character(label),
+             icon = ship) 
 ```
 
 ### Lines and shapes
@@ -170,12 +169,22 @@ pal <- colorNumeric(
   domain = gom_states$ALAND
 )
 
-m %>% 
-  addLegend("topright", pal = pal, values = ~ALAND,
+m <- leaflet(gom_states) %>%
+  addTiles() %>% 
+  addPolygons(color = "#444444", weight = 1, smoothFactor = 0.5,
+              opacity = 1.0, fillOpacity = 0.5,
+              fillColor = ~colorQuantile("YlOrRd", ALAND)(ALAND),
+              highlightOptions = highlightOptions(color = "white", weight = 2,
+                                                  bringToFront = TRUE)) %>% 
+  addLegend("topright", 
+            pal = pal, 
+            values = ~ALAND,
             title = "Land area",
             labFormat = labelFormat(suffix = " sqkm"),
             opacity = 1
 )
+
+m
 ```
 
 ### Showing / hiding layers
@@ -216,13 +225,13 @@ m <- leaflet() %>%
 m
 ```
 
-** Exercise: Change the default center and zoom level to where you live or work **
+**Exercise: Change the default center and zoom level to where you live or work**
 
 Tip: The `ggmap` package can tells us where things are:
 
 ```{r}
 library(ggmap)
-geocode("Juneau, AK")("Juneau, Alaska")
+geocode("Juneau, AK")
 ```
 
 ```{r}
@@ -239,10 +248,10 @@ The full map is in this lesson's folder under map.Rmd.
 - Open map.Rmd
 - Click the publish button in the Source pane:
 
-    ![images/rpubs.png][RPubs]
+    ![RPubs](images/rpubs.png)
 - Create an account and log in with your credentials if you don't have them already
 
-
-## Summary
-
 ## Other resources
+
+- https://rstudio.github.io/leaflet
+- https://earthdatascience.org/course-materials/earth-analytics/week-10/leaflet-r/
