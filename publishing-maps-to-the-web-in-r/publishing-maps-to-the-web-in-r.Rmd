@@ -211,8 +211,6 @@ m
 
 ### Zooming / panning
 
-
-
 ```{r}
 # Save the lat/lon pair so we don't repeat ourselves
 nceas <- list("lon" = -119.7000545, "lat" = 34.419271)
@@ -247,7 +245,6 @@ The full map is in this lesson's folder under map.Rmd.
 
 - Open map.Rmd
 - Click the publish button in the Source pane:
-
     ![RPubs](images/rpubs.png)
 - Create an account and log in with your credentials if you don't have them already
 
