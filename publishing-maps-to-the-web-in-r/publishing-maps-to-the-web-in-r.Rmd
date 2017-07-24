@@ -102,7 +102,7 @@ If we don't want blue pins, we can use any image we have.
 See https://rstudio.github.io/leaflet/markers.html.
 
 ```{r}
-url = "https://github.com/NCEAS/oss-lessons/raw/gh-pages/publishing-maps-to-the-web/images/ship.png"
+url = "https://github.com/NCEAS/oss-lessons/raw/gh-pages/publishing-maps-to-the-web-in-r/images/ship.png"
 ship = makeIcon(url, url, 24, 24)
 
 leaflet(points_in_gom) %>%
