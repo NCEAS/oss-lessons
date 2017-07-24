@@ -1,0 +1,27 @@
+---
+title: Geospatial analysis in R 
+author: "Leah A. Wasser"
+---
+
+## Topic
+
+### Introduction
+**Purpose:**
+
+
+### Background:
+Brief overview of topic and relationship to scientific synthesis.
+
+
+### Learning outcomes
+
+At the end of this 30 minute overview you will be able to:
+
+
+FIND CARSON'"'S standards XKCD comic -- it's somewhere in slack
+
+* it's probably worth a bit of time to create some h5 module here starting with what are hierarchical data structures, lack of standards then
+1. on H4
+1. on H5
+1. on netCDF -- talk with bryce about what he uses with netcdf
+

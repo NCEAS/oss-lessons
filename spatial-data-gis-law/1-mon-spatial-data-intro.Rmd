@@ -1,0 +1,173 @@
+---
+title: "Introduction to spatial data in R"
+author: "Leah A. Wasser"
+---
+
+## Topic
+
+### Introduction
+**Time:** 30 minutes
+
+**Purpose:** In this lesson we will introduce some of the key concepts associated
+with spatial data including:
+
+* Spatial extent
+* Resolution
+* Coordinate reference system
+
+We will also define raster vs. vector data structures.
+
+**Background:**
+Often we need to use spatial data in our analysis - that is data that correspond
+to some x,y (and z) location on the Earth. however, not all spatial data are
+created the same. understanding the basic foundations of working with spatial
+data will save you a lot of time when it comes to processing the data in tools
+like R, QGIS and python!
+
+### Learning outcomes
+
+At the end of this 30 minute overview you will be able to:
+
+1. Explain the difference between the raster vs vector data structures.
+1. Define spatial extent, resolution, coordinate reference system.
+1. List the 3 vector data structures (point, line, polygon).
+1. List 2-3 `R` packages that can be used to work with spatial data.
+
+
+## Getting started with R
+
+![the R / Python learning curve](https://earthdatascience.org/images/course-materials/earth-analytics/week-9/learning-r.png)
+
+## About raster data
+
+About raster data:
+
+* data are stored in a **regular grid**
+* a value is associated with each grid cell (also called a pixel)
+* each pixel represents a geographic area - in our case that is often an area on the earth
+
+
+[About raster data  earthdatascience.org website](https://earthdatascience.org/course-materials/earth-analytics/week-3/open-lidar-raster-r/)
+
+![About raster data](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-concept.png)
+
+### Raster resolution
+
+* The size of each pixel is referred to as **resolution**
+* If pixels are smaller (represent a smaller area on the earth, they are considered HIGHER resolution) - in the example of an image, this makes the image look more 'crisp'
+* if you have fewer pixels within a particular spatial extent, the resolution is LOWER
+* if you have more pixels within a particular spatial extent, the resolution is HIGHER
+
+
+![Raster resolution](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-resolution.png)
+
+![Raster pixel resolution](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-pixel-resolution.png)
+
+
+### Raster spatial extent
+
+The spatial extent of a raster refers to the area on the earth's surface that
+the raster covers.
+
+![Raster spatial extent](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-spatial-extent-coordinates.png)
+
+Note that the raster spatial extent relates directly to the
+spatial resolution.
+
+CHALLENGE question
+1. If you have more pixels over the same spatial extent - will the image look sharper (more clear) or more blurry?
+2. If you have fewer pixels over the same spatial extent...
+
+
+![Raster pixel resolution](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-spatial-extent.png)
+
+## About vector data
+
+[Intro to vector data - EarthDataScience.org ](http://earthdatascience.org/course-materials/earth-analytics/week-4/intro-vector-data-r/)
+
+Attributes of vector data
+
+* Discrete geometric locations
+* x,y locations are vertices
+* Organization of those vertices determines structure: points, lines, polygons
+
+![About vector data](http://earthdatascience.org/images/course-materials/earth-analytics/week-5/pnt_line_poly.png)
+
+
+## Vector data formats
+
+There are many different spatial vector data formats. Let's list a few:
+
+* shapefile
+* geojson
+* text files
+* others??
+
+## Vector data spatial extent
+
+The spatial extent of a vector **dataset** is determined by the min and max x,y location
+of ALL OF THE SPATIAL OBJECTS stored in the dataset.
+
+NOTE: the spatial extent of an individual object can also be quantified!
+
+![About vector data extent](http://earthdatascience.org/images/course-materials/earth-analytics/week-5/spatial_extent.png)
+
+
+### Vector data attributes
+
+Vector data often has associated attribute tables. When in a shapefile format,
+these look like excel spreadsheets where each object has an associated set of
+attributes.
+
+
+![Attribute tables](http://earthdatascience.org/images/course-materials/earth-analytics/week-5/attribute_table.png)
+
+in a geojson structure this may look like this:
+
+
+```xml
+[ {
+  "station_name" : "SOUTH PLATTE RIVER AT COOPER BRIDGE NEAR BALZAC",
+  "amount" : "262.00",
+  "flag" : "na",
+  "station_status" : "Gage temporarily anavailable",
+  "county" : "MORGAN",
+  "wd" : "1",
+  "dwr_abbrev" : "PLABALCO",
+  "data_source" : "Co. Division of Water Resources",
+  "http_linkage" : {
+    "url" : "http://www.dwr.state.co.us/SurfaceWater/data/detail_graph.aspx?ID=PLABALCO&MTYPE=DISCHRG"
+  },
+  "div" : "1",
+  "date_time" : "2017-02-15T09:00:00",
+  "stage" : "1.86",
+  "usgs_station_id" : "06759910",
+  "variable" : "DISCHRG",
+  "location" : {
+    "latitude" : "40.357498",
+    "needs_recoding" : false,
+    "longitude" : "-103.528053"
+  },
+  "station_type" : "Stream"
+}
+...
+]
+```
+
+## Coordinate reference systems - how spatial data line up
+
+![The human head projected](https://earthdatascience.org/images/course-materials/earth-analytics/week-9/human-head-projections.jpg)
+
+
+### CRS storage formats
+
+* EPSG
+* proj.4
+* WKT
+* others!!!
+
+#### Other CRS resources
+
+* [Video about datums](https://www.youtube.com/watch?v=Z41Dt7_R180)
+* [Coordinate Reference Systems - 101 - Earthdatascience.org ](http://earthdatascience.org/course-materials/earth-analytics/week-4/intro-to-coordinate-reference-systems/)
+* [Get to know EPSG, WKT and other CRS definition structures - EarthDataScience.org](http://earthdatascience.org/course-materials/earth-analytics/week-4/understand-epsg-wkt-and-other-crs-definition-file-types/)
