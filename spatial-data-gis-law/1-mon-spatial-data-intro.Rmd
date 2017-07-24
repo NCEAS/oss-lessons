@@ -7,9 +7,7 @@ output:
     theme: cerulean
 ---
 
-## Topic
-
-### Introduction
+## Introduction
 **Time:** 30 minutes
 
 **Purpose:** In this lesson we will introduce some of the key concepts associated
@@ -41,6 +39,30 @@ At the end of this 30 minute overview you will be able to:
 ## Getting started with R
 
 ![the R / Python learning curve](https://earthdatascience.org/images/course-materials/earth-analytics/week-9/learning-r.png)
+
+
+## Why R for GIS - the power of automation
+
+It may be a bit of extra effort at the beginning to learn a tool like R. However,
+the payoff is large once you learn the basic skills to support task automation.
+
+![Geeks and automation](https://pbs.twimg.com/media/DFRpdfrV0AEOm9z.jpg)
+
+
+Specific to spatial data, R allows you to:
+
+* Create automated data cleaning workflows that crop, reproject, convert data formats across many, large datasets (Leah's example from the data institute last year)
+* Repeat workflows over and over without having to step through tasks
+* Repeat select portions of a workflow over and over if need be
+* Add new / updated data to your workflow easily if the processing workflow is robust (e.g. timeseries data)
+* Create figures that can be updated easily
+* Document your workflow to remind your future self (think you in 3 months or if you're me - tomorrow :) ) about the steps that you took to implement your workflow
+* Create POWERFUL data-driven reports that include not only static plots but INTERACTIVE (e.g. leaflet)
+
+In this lesson we are going to learn the basics of working with spatial data in R.
+Some of you may think this is the  boring stuff - however understanding these concepts will allow 
+you to do just about anything that you want with spatial data in R!
+
 
 ## About raster data
 

@@ -50,6 +50,7 @@ library(raster)
 library(ggplot2)
 library(rgeos)
 library(mapview)
+library(leaflet)
 library(broom) # if you plot with ggplot and need to turn sp data into dataframes
 options(stringsAsFactors = FALSE)
 ```
@@ -195,6 +196,16 @@ Bryce will talk more about this later today.
 ```{r, leaflet-map}
 # create leaflet 
 mapview(coastlines_sim2)
+```
+
+
+```{r}
+# create a leaflet object
+leaflet(coastlines_sim2) %>%
+  addTiles() %>% # add basemap to your map
+  # then add a lines layer
+  addPolylines(color = "#444444", weight = 1, smoothFactor = 0.5,
+    opacity = 1.0)
 ```
 
 ## Vector data with SF
@@ -386,13 +397,25 @@ m_states <- mapview(us_states)
 m_coast + m_states
 ```
 
+## Leaflet version!
+
+```{r}
+# create a leaflet object
+leaflet() %>%
+  addTiles() %>% # add basemap to your map
+  # then add a lines layer
+  addPolylines(data = coastlines_crop, color = "#444444", weight = 1, smoothFactor = 0.5,
+    opacity = 1.0) %>% 
+  addPolygons(data = us_states, color = "#444444", fillColor = "green", weight = 1, smoothFactor = 0.5,
+    opacity = 1.0)
+```
+
 
 ## Raster data in R
 
 Next, let's work with some raster data in `R`. We use the `raster()` package
 to open and manipulate raster data in `R`. This package has a large 
 community around it and is a standard for most raster operations in `R`.
-
 
 To load a raster layer with a single band - we use `raster()`.
 
@@ -668,7 +691,9 @@ ggplot() +
 # https://coastalmap.marine.usgs.gov/regional/contusa/gomex/gloria/data.html
 ```
 
-```{r, echo=FALSE}
+## Spatial queries of vector data using base R
+
+```{r}
 # select all states that equal alabama 
 texas <- us_states[us_states$NAME == "Texas",]
 plot(texas)
@@ -679,3 +704,7 @@ plot(texas)
 
 * [rspatial.org raster overview](http://rspatial.org/spatial/rst/8-rastermanip.html)
 
+![Check out mapedit for vector data editing in R!](http://r-spatial.org/images/mapedit_020_editMap_sf.gif)
+
+* [mapedit github page](http://r-spatial.org/r/2017/06/09/mapedit_0-2-0.html)
+* [More on R leaflet](https://rstudio.github.io/leaflet/shapes.html)
