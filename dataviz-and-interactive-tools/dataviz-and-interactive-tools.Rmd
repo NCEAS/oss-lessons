@@ -17,6 +17,7 @@ This module is an overview of:
 - [htmlwidgets](http://www.htmlwidgets.org/)
 - [plotly](https://plot.ly/r/)
 - [Shiny](http://shiny.rstudio.com/)
+- [dygraph](https://rstudio.github.io/dygraphs/)
 
 Alongside this module are two activites: 
 
