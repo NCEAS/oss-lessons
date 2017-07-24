@@ -548,7 +548,7 @@ When you create your map, be sure to
 
  
 ```{r}
-plot(hillshade,
+plot(hillshade_wgs84,
      main = "Bathymetric data for the gulf coast",
      col = grey(1:100/100),
      axes = FALSE,
