@@ -39,6 +39,7 @@ library(gstat)
 library(rgdal)
 library(raster)
 library(rgeos)
+library(scales)
 options(stringsAsFactors = FALSE)
 ```
 
@@ -217,6 +218,20 @@ plot(climate_mean,
      add = TRUE)
 ```
 
+Let's try to scale the points using the scales library. Here 
+we scale the elevation data to to a range inclusive of 1:3.
+
+```{r}
+# plot climate data
+plot(climate_geog_cr,
+     main = "sample points sized by surface temperature")
+plot(climate_mean,
+     pch = 19,
+     # size the points according to the temp value
+     cex = scales::rescale(climate_mean$Monthly.air.temperature.at.Surface - 280, to = c(1, 3)),
+     add = TRUE)
+```
+
 Below is an example of applying a color ramp to the data. In this
 case we don't need to do this because we have resized the points.
 
@@ -282,10 +297,6 @@ information respectively.
 ```{r}
 # create spatial points object
 sea_level_2000_sp <- sea_level_2000
-
-# define x & y as longitude and latitude
-sea_level_2000_sp$x <- sea_level_2000_sp$lon
-sea_level_2000_sp$y <- sea_level_2000_sp$lat
 class(sea_level_2000_sp)
 ```
 
@@ -300,7 +311,7 @@ convert a non spatial object into a spatial object.
 
 ```{r}
 # convert the data into spatial coordinates
-coordinates(sea_level_2000_sp) <- ~x + y
+coordinates(sea_level_2000_sp) <- ~long + lat
 class(sea_level_2000_sp)
 ```
 
@@ -315,7 +326,7 @@ plot(sea_level_2000_sp,
 
 In the next step, we will setup our interpolation. We will need to do the following:
 
-1. we create an EMPTY grid across a spatial extent that we with to interpolate our data within
+1. We create an EMPTY grid across a spatial extent that we with to interpolate our data within
 1. We populate that grid with interpolated values generated from the points layer that we created above.
 
 In the example below, we use the Inverse Distance Weighted (IDW)
@@ -327,7 +338,7 @@ with creating the grid area. You will have to decide that area that you
 think is reasonable to perform the interpolation on.
 
 
-```{r}
+```{r create-spatial-grid }
 ##### IDW interpolation #####
 # establish an extent within which you want to interpolate
 # -99/24 to -80/32.
@@ -336,8 +347,10 @@ y_range <- as.numeric(c(24, 32))  # min/max latitude of the interpolation area
 
 # create an empty grid of values ranging from the xmin-xmax, ymin-ymax
 grd <- expand.grid(x = seq(from = x_range[1],
-                   to = x_range[2], by = 0.1),
-                   y = seq(from = y_range[1],                                               to = y_range[2], by = 0.1))  # expand points to grid
+                   to = x_range[2], 
+                   by = 0.1),
+                   y = seq(from = y_range[1],                                           to = y_range[2], 
+                       by = 0.1))  # expand points to grid
 class(grd)
 ```
 
