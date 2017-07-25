@@ -1,0 +1,140 @@
+---
+title: "Reproducible Papers with RMarkdown"
+author: "Bryce Mecum, mecum@nceas.ucsb.edu"
+output:
+  html_document:
+    fig_caption: yes
+  pdf_document:
+    fig_caption: yes
+  word_document: default
+bibliography: references.bib
+---
+
+```{r setup, echo=FALSE, message=FALSE, results='hide'}
+# Set up stuff for later
+knitr::opts_chunk$set(fig.path = 'figures/', echo = FALSE, warning = FALSE, message = FALSE)
+
+# Packages we need later on
+suppressPackageStartupMessages({
+  library(ggplot2)
+  library(knitr)
+  library(broom)
+  library(readr)
+  library(captioner)
+})
+
+# Data we need later on
+diamonds <- read_csv("data/diamonds.csv")
+
+# Figure and table caption setup
+tbl_caps <- captioner(prefix = "Table")
+tbl_caps("themodel", "This is a broomed linear model summary table.")
+cap_themodel <- tbl_caps("themodel")
+
+fig_caps <- captioner(prefix = "Figure")
+fig_caps("pricevscarat", "The relationship between price and carat for the diamonds dataset.")
+cap_pricevscarat <- fig_caps("pricevscarat")
+```
+
+# Abstract
+
+I really like using R [@RCoreTeam] for science because of tools like RStudio [@RStudio] and RMarkdown [@RMarkdown].
+This document is a quick demonstration of writing an academic paper in RMarkdown.
+There's a lot of other resources available on the web but hopefully you'll find this document useful as an example.
+
+# Introduction
+
+Writing reports and academic papers is a ton of work but a large amount of that work can be spent doing monotonous tasks such as:
+
+- Updating figures and tables as we refine our analysis
+- Editing our analysis and, in turn, editing our paper's text
+- Managing bibliography sections and in-text citations/references
+
+These monotonous tasks are also highly error-prone.
+With RMarkdown, we can close the loop, so to speak, between our analysis and our manuscript because the manuscript can become the analysis.
+
+As an alternative to Microsoft Word, RMarkdown provides some advantages:
+
+- Free to use
+- Uses text so we can:
+  - Use version control for
+    - Tracking changes
+    - Collaborating
+  - Edit it with our favorite and most powerful text editors
+  - Use the command line to for automation
+
+The rest of this document will show how we get some of the features we need such as:
+
+- Attractive typesetting for mathematics
+- Figures, tables, and captions
+- In-text citations
+- Bibliographies
+
+# Methods
+
+Our analysis will be pretty simple.
+We'll use the `diamonds` dataset from the `ggplot2` [@ggplot] package and run a simple linear model.
+At the top of this document, we started with a code chunk with `echo=FALSE` set as a chunk option so that we can load the `ggplot2` package and `diamonds` dataset without outputting anything to the screen.
+
+For our analysis, we'll create a really great plot which really shows the relationship between price and carat and shows how we include plots in our document.
+Then we'll run a linear model of the form $y = mx + b$ on the relationship between price and carat and shows how we include tables in our document.
+We can also put some more advanced math in our paper and it will be beautifully typeset:
+
+\[\sum_{i=1}^{N}{log(i) + \frac{\omega}{x}}\]
+
+We can also use R itself to generate bibliographic entries for the packages we use so we can give proper credit when we use other peoples' packages in our analysis.
+Here we cite the `ggplot2` package:
+
+```{r, eval=FALSE}
+> citation('ggplot2')
+
+To cite ggplot2 in publications, please use:
+
+  H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New York, 2009.
+
+A BibTeX entry for LaTeX users is
+
+  @Book{,
+    author = {Hadley Wickham},
+    title = {ggplot2: Elegant Graphics for Data Analysis},
+    publisher = {Springer-Verlag New York},
+    year = {2009},
+    isbn = {978-0-387-98140-6},
+    url = {http://ggplot2.org},
+  }
+
+```
+
+And then we just place that in our `.bibtex` file.
+
+# Results
+
+The plot we made was really great (Figure 1).
+
+```{r pricevscarat, echo=FALSE, fig.cap=cap_pricevscarat, fig.width=8, fig.height=4, fig.align='center', cache=TRUE}
+ggplot(diamonds, aes(carat, price, color = clarity)) + 
+  geom_point() +
+  labs(x = "Carat", y = "Price")
+```
+
+But the model was even better:
+
+```{r themodel, echo=FALSE}
+mod <- lm(price ~ carat, diamonds)
+kable(tidy(mod), digits = 2, caption = cap_themodel)
+```
+
+We were delighted to find that the slope parameter was `r round(mod$coefficients["carat"][[1]], 2)`.
+
+# Discussion
+
+This was just a quick demonstration of a reproducible paper that combined text, analysis, figures, tables, and citations into multiple output formats (HTML, PDF).
+Hopefully you found it useful.
+
+A lot of people are using RMarkdown these days so there are tons of resources online but here are a few choice ones specifically about making papers:
+
+- [http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html](http://rmarkdown.rstudio.com/authoring_bibliographies_and_citations.html)
+- [http://svmiller.com/blog/2016/02/svm-r-markdown-manuscript/](http://svmiller.com/blog/2016/02/svm-r-markdown-manuscript/)
+- [http://www.petrkeil.com/?p=2401](http://www.petrkeil.com/?p=2401)
+
+# References

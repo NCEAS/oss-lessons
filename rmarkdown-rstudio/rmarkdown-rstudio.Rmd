@@ -88,7 +88,7 @@ Use the `echo` chunk option to do this:
 plot(1:10)
 ```
 
-or if you want the code to show up but not its output, use `include`
+or if you want the code to run but not show anything, use `include`
 
 
 ```{r, include = FALSE}

@@ -88,6 +88,8 @@ dp <- addData(dp, outputObj, metadataObj)
 
 myAccessRules <- data.frame(subject="http://orcid.org/0000-0003-0077-4738", permission="changePermission") 
 
+dp <- describeWorkflow(dp, sources=sourceObj, program=progObj, derivations=outputObj)
+
 dp
 ```
 

@@ -1,25 +1,47 @@
 ---
 title: "Dataviz and Interactive Tools"
 author: "Bryce Mecum"
-----
+time_slot: 2.25 hours
+---
 
-Making advanced plots including interactive plots
+## Introduction
 
-- ggplot2 overview
-- Trelliscope
-- htmlwidgets (make use of d3 in R)
-- plotly
-- Need more here to fill time slot
-- Note: I think this is too short to learn enough d3.js to matter so I should probably just stick to R packages
+## Outline
 
-Time slot: 135 minutes
+We're going to learn how to make a variety of static and interactive plots in R:
 
-Learning outcomes
+This module is an overview of:
   
+- [ggplot2](http://ggplot2.tidyverse.org/)
+- [Trelliscope](http://deltarho.org/)
+- [htmlwidgets](http://www.htmlwidgets.org/)
+- [plotly](https://plot.ly/r/)
+- [Shiny](http://shiny.rstudio.com/)
+- [dygraph](https://rstudio.github.io/dygraphs/)
+
+Alongside this module are two activites: 
+
+- [ggplot2](./module-1-ggplot2.Rmd)
+- [Shiny](./module-2-shiny.Rmd)
+
+## Learning outcomes
+
+After completing this module, 
+
 Students should be able to:
-  
-- Make awesome plots (more to outcomes to come!)
 
+- Make simple to intermediate plots in R using ggplot2
+- Make a simple Shiny app
+
+and students should have an awareness of the great number of visualization tools provided in R and what they're useful for.
+
+## Lesson
+
+TODO
+
+## Summary
+
+TODO
 
 ## Resources
 

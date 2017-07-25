@@ -1,0 +1,266 @@
+---
+title: "ggplot2 introduction"
+author: "Bryce Mecum"
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+```{r}
+library(ggplot2)
+```
+
+## Overview
+
+## Lesson
+
+### ggplot vs base vs lattice vs XYZ
+
+R provides many ways to get your data into a plot.
+Three common ones are,
+
+- "base graphics" (`plot`, `hist`, etc`)
+- lattice
+- ggplot2
+
+All of them work.
+I use base graphics for simple, quick and dirty plots.
+I use ggplot2 for most everything else.
+
+ggplot2 excels at making complicated plots easy and easy plots simple enough.
+
+### geoms / aesthetics
+
+More: http://ggplot2.tidyverse.org/reference/index.html#section-layer-geoms
+
+Every graphic you make in ggplot2 will have at least one aesthetic and at least one geom.
+The aesthetic maps your data to your geometry.
+Your geometry specifies the type of plot we're making (point, bar, etc.).
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point()
+```
+
+What makes ggplot really powerful is how quickly we can make this plot visualize more of our data.
+
+Coloring each point by class (compact, van, pickup, etc.) is just a quick extra bit of code:
+
+```{r}
+ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point()
+```
+
+Aside: How did I know to write `color = class`?
+`aes` will pass its arguments on to any geoms you use and we can find out what aesthetic mappings geom_point takes with `?geom_point` (see section "Aesthetics")
+
+
+What if we just wanted the color of the points to be blue?
+
+```{r}
+ggplot(mpg, aes(displ, hwy, color = "blue")) +
+  geom_point()
+```
+
+Well that's weird.
+What happened here?
+This is the difference between setting and mapping in ggplot.
+The `aes` function **only** takes mappings from our data onto our geom.
+If we want to make all the points blue, we need to **set** it inside the geom:
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(color = "blue")
+```
+
+
+
+Sizing each point by the number of cylinders is easy:
+
+```{r}
+ggplot(mpg, aes(displ, hwy, color = class, size = cyl)) +
+  geom_point(shape = 1)
+```
+
+Making separate plots (small multiples) is also quick:
+
+```{r}
+ggplot(mpg, aes(displ, hwy, color = class, size = cyl)) +
+  geom_point(shape = 1) + 
+  facet_wrap(~ manufacturer)
+```
+
+Let's make a histogram instead:
+
+```{r}
+ggplot(mpg, aes(hwy)) + geom_histogram()
+```
+
+You'll see with a warning (red text) something about `stat_bin` and a `bins` argument.
+ggplot2 can calculate statistics on our data such as frequencies and, in this case, it's doing that on our `hwy` column with the `stat_bin` function.
+We should change the `bins` argument:
+
+```{r}
+ggplot(mpg, aes(hwy)) + geom_histogram(binwidth = 1)
+```
+
+I'm a big fan of histograms and ggplot2 can plot these too:
+
+
+```{r}
+ggplot(mpg, aes(cyl, hwy)) + geom_boxplot()
+```
+
+Oops, we got an erro:
+
+> Warning message:
+> Continuous x aesthetic -- did you forget aes(group=...)? 
+
+That's because we need to convert `cyl` to a factor:
+
+```{r}
+ggplot(mpg, aes(factor(cyl), hwy)) + geom_boxplot()
+```
+
+Another type of visualization I use a lot for visualizing distributions is the violin plot:
+
+```{r}
+ggplot(mpg, aes(factor(class), hwy)) + geom_violin()
+```
+
+So far we've made really simple plots: One geometry per plot.
+Let's layer multiple geometries on top of one another to show the raw points on top of the violins:
+
+```{r}
+ggplot(mpg, aes(factor(class), hwy)) + 
+  geom_violin() +
+  geom_point(shape = 1, position = "jitter")
+```
+
+ggplot2 also helps us do some quick-and-dirty modeling:
+
+```{r}
+ggplot(mpg, aes(cty, hwy)) + 
+  geom_point() +
+  geom_smooth()
+```
+
+`geom_smooth()` is pretty configurable.
+Here we set the method to `lm` instead of the default `loess`:
+
+```{r}
+ggplot(mpg, aes(cty, hwy)) + 
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+
+### coordinates
+
+Every plot you make has a coordinate space.
+Most often this is the Cartesian (XY) plane.
+But we can also plot our data in other scales, like log10:
+  
+Here's some census data, unscaled:
+
+```{r}
+ggplot(midwest, aes(area, poptotal)) + 
+  geom_point()
+```
+
+And scaled (log10):
+
+```{r}
+ggplot(midwest, aes(area, poptotal)) + 
+  geom_point() + 
+  scale_y_log10()
+```
+
+#### Setting plot limits
+
+Plot limits can be controlled one of three ways:
+
+- Filter the data (because limits are auto-calculated from the data ranges)
+- Set the `limits` argument on one or both scales
+- Set the `xlim` and `ylim` arguments in `coord_cartesian`
+
+Let's show this with an example plot:
+
+```{r}
+ggplot(economics, aes(date, unemploy)) + 
+  geom_line()
+```
+
+Since we're plotting data where the zero point on the vertical axis means something, maybe we want to start the vertical axis at 0:
+
+```{r}
+ggplot(economics, aes(date, unemploy)) + 
+  geom_line() +
+  scale_y_continuous(limits = c(0, max(economics$unemploy)))
+```
+
+Or maybe we want to zoom in on just the 2000's and beyond:
+
+```{r}
+ggplot(economics, aes(date, unemploy)) + 
+  geom_line() +
+  scale_y_continuous(limits = c(0, max(economics$unemploy))) +
+  scale_x_date(limits = c(as.Date("2000-01-01"), as.Date(Sys.time())))
+```
+
+Note the warning message we received:
+
+> Warning message:
+> Removed 390 rows containing missing values (geom_path). 
+
+That's normal when data in your input data.frame are outside the range we're plotting.
+
+Let's use `coord_cartesian` instead to change the x and y limits:
+
+```{r}
+ggplot(economics, aes(date, unemploy)) + 
+  geom_line() +
+  coord_cartesian(xlim = c(as.Date("2000-01-01"), as.Date(Sys.time())),
+                  ylim = c(0, max(economics$unemploy)))
+```
+
+Note the **slight* difference when using `coord_cartesian`: ggplot didn't put a buffer around our values.
+Sometimes we want this and sometimes we don't and it's good to know this difference.
+
+### scales
+
+- show the format: scale_{aesthetic}_{method}
+
+scale_colour_viridis()
+- axis ticks
+- axis limits
+- continuous scales
+- date scales
+- discrete scales
+- log scales
+
+### plot customization
+
+#### titles
+#### axes
+#### themes
+more themes at https://github.com/jrnold/ggthemes
+legend layout / hiding
+
+### facets
+
+### saving plots
+
+### maps with ggplot2
+
+## Resources
+
+- Multiple graphs in a single graph:
+  - http://www.cookbook-r.com/Graphs/Multiple_graphs_on_one_page_(ggplot2)/
+  - cowplot: https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html
+- http://www.cookbook-r.com/Graphs/
+- Book on ggplot: https://www.amazon.com/dp/331924275X/ref=cm_sw_su_dp 
+  - Source code: https://github.com/hadley/ggplot2-book
