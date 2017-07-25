@@ -2,15 +2,15 @@
 title: Intro to spatial data in R - Open and plot raster and vector data with base
   plot
 author: "Leah A. Wasser"
-output: 
-  html_document: 
+output:
+  html_document:
     highlight: pygments
     theme: cerulean
 ---
 
 
 ### Introduction
-In this lesson we will learn how to perform some basic spatial analysis in 
+In this lesson we will learn how to perform some basic spatial analysis in
 `R`.  First we will review interpolation using the IDW interpolation method.
 
 ### Learning outcomes
@@ -26,7 +26,7 @@ knitr::opts_chunk$set(message = FALSE, warning = 'hide')
 
 ## Setup
 
-First, we load all the libraries that we plan to use in our code and 
+First, we load all the libraries that we plan to use in our code and
 ensure that the working directory is set.
 
 ```{r load-libraries}
@@ -44,7 +44,7 @@ options(stringsAsFactors = FALSE)
 
 Next, let's get the data.
 The data that we are using today - similar to yesterday are stored
-on [Figshare](https://figshare.com/articles/OSS_data_-_2017_monday/5136289). We will use R to 
+on [Figshare](https://figshare.com/articles/OSS_data_-_2017_monday/5136289). We will use R to
 
 1. download the data and
 2. unzip it into the SAME data directory that we used yesterday
@@ -60,21 +60,21 @@ unzip("tues-data.zip")
 
 ## Extract data from a raster in R
 
-Sometimes we want to extract values from a raster dataset and assign them to 
-points or polygons. In the GIS works (Arc and QGIS) we do this via zonal 
+Sometimes we want to extract values from a raster dataset and assign them to
+points or polygons. In the GIS works (Arc and QGIS) we do this via zonal
 statistics. In the R world we can perform the same tasks using the extract function.
 
 In this segment of the lesson, we will use a set of points. At each point we will
-extract raster values from a buffer region around that point and calculate a 
-summary stat (in this case a mean raster value). We will then plot the points 
-on a map weighting the size according to relative mean value.  
+extract raster values from a buffer region around that point and calculate a
+summary stat (in this case a mean raster value). We will then plot the points
+on a map weighting the size according to relative mean value.
 
 ![Extract data from a buffer](https://earthdatascience.org/images/course-materials/earth-analytics/week-5/buffer-circular.png)
 
 
 To begin let's import some raster data and the same study area file
-that we used in class yesterday. Note that the data are in `.nc` format. This is a hierarchical format which we will discuss more this 
-afternoon. 
+that we used in class yesterday. Note that the data are in `.nc` format. This is a hierarchical format which we will discuss more this
+afternoon.
 
 1. open `study-area/study-area.shp`
 1. open `climate/air.sfc.mon.mean.nc` (HINT: this is a raster)
@@ -100,10 +100,10 @@ the data in order to perform any processing on it.
 Generally I try to avoid reprojecting raster data if at all possible.
 In this case, let's reproject our raster data because we are working
 with a relatively small area (relative to the globe) and we are only
-extracting values from the data - we won't be using it for further 
+extracting values from the data - we won't be using it for further
 processing steps.
 
-Generally i'd prefer to reproject the vector data. 
+Generally i'd prefer to reproject the vector data.
 
 Do the following
 
@@ -112,18 +112,18 @@ Do the following
 3. finally - plot both layers together using the plot function
 
 ```{r reproject-climate-data }
-# reproject study area layer climate data 
-climate_geog <- projectRaster(climate, 
+# reproject study area layer climate data
+climate_geog <- projectRaster(climate,
                               crs = crs(study_area))
 # crop the data
-climate_geog_cr <- crop(climate_geog, 
+climate_geog_cr <- crop(climate_geog,
                         study_area)
 plot(climate_geog_cr)
-plot(study_area, 
+plot(study_area,
      add = TRUE)
 ```
 
-If we wanted, we could export our reprojected and cropped climate data 
+If we wanted, we could export our reprojected and cropped climate data
 as a geotiff.
 
 ```{r echo=FALSE, eval=FALSE}
@@ -148,12 +148,12 @@ extent(sea_level_2000_sp)
 
 
 ```{r export-shapefile, echo=FALSE, eval=FALSE}
-# assign a CRS to data 
+# assign a CRS to data
 crs(sea_level_2000_sp) <- CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0")
 
 # export as shapefile
 writeOGR(sea_level_2000_sp,
-          layer = 'sea_level_2000', 
+          layer = 'sea_level_2000',
           'tues-data/',
           driver = "ESRI Shapefile",
          overwrite_layer = TRUE)
@@ -161,11 +161,11 @@ writeOGR(sea_level_2000_sp,
 ```
 
 Next we will extract climate surface temperature values for each point location in our `sea_level_2000` layer. Rather than select
- a single value, we will create a circular BUFFER around each point and then 
- extract raster values that fall within that circle. Finally, we will calculate a 
+ a single value, we will create a circular BUFFER around each point and then
+ extract raster values that fall within that circle. Finally, we will calculate a
  mean of all pixels values to create a final value.
- 
- 
+
+
 ```{r}
 # Note that below will return a data.frame containing the max height
 # calculated from all pixels in the buffer for each plot
@@ -177,18 +177,18 @@ climate_mean <- raster::extract(climate_geog_cr, # the raster that you wish to e
 class(climate_mean)
 ```
 
-The default option when we extract data in R is to store all of the 
-raster pixel values in a list. However, when we add a function argument 
-to extract(), R summarizes the data for us. Also note that we are using 
+The default option when we extract data in R is to store all of the
+raster pixel values in a list. However, when we add a function argument
+to extract(), R summarizes the data for us. Also note that we are using
 the sp = TRUE argument to tell R to create a spatialPointsDataFrame.
 
 This will allow us to plot our data!
 
 Speaking of plot - let's plot the points on top of our climate data!
 Notice below that i've tricked R to plot the points by surface temperature
-value. Because the range of the data is not large, i've tricked R 
+value. Because the range of the data is not large, i've tricked R
 by sending the cex = argument (which specifies the point size)
-a command which 
+a command which
 
 1. takes the climate_mean value and subtracts 280
 2. divides by 10 to make the points smaller
@@ -204,20 +204,20 @@ climate_mean$Monthly.air.temperature.at.Surface
 
 ```
 
-Let's plot the data. 
+Let's plot the data.
 
 ```{r}
 # plot climate data
 plot(climate_geog_cr,
      main = "sample points sized by surface temperature")
 plot(climate_mean,
-     pch = 19, 
+     pch = 19,
      # size the points according to the temp value
      cex = ((climate_mean$Monthly.air.temperature.at.Surface - 280)/10),
      add = TRUE)
 ```
 
-Below is an example of applying a color ramp to the data. In this 
+Below is an example of applying a color ramp to the data. In this
 case we don't need to do this because we have resized the points.
 
 ```{r}
@@ -235,7 +235,7 @@ plot(climate_geog_cr,
      col = grey.colors(n = 100, 0, 1),
      add = TRUE)
 plot(climate_mean,
-     pch = 19, 
+     pch = 19,
      # size the points according to the temp value
      cex = (((climate_mean$Monthly.air.temperature.at.Surface) - 280)/10),
      col = climate_mean$col,
@@ -247,9 +247,9 @@ Next, we will walk through an example of interpolating our data.
 
 ----
 
-## Going from points to raster - spatial interpolation in R 
+## Going from points to raster - spatial interpolation in R
 
-First we open some point data. Here we have sea level elevation for the 
+First we open some point data. Here we have sea level elevation for the
 year 2000.
 
 ```{r}
@@ -263,18 +263,18 @@ str(sea_level_2000)
 sea_level_2000$elev_mm
 ```
 
-Notice that we have some NA values (missing data values) in our data. 
+Notice that we have some NA values (missing data values) in our data.
 Let's remove those. We will use a pipe combined with the `tidyr`
-function drop_na() to remove all rows containing na values. 
+function drop_na() to remove all rows containing na values.
 
 ```{r}
-# remove NA values 
-sea_level_2000 <- sea_level_2000 %>% 
+# remove NA values
+sea_level_2000 <- sea_level_2000 %>%
   drop_na()
 ```
 
-Next, we will create a new object. We'll use _sp in the name as we 
-will turn this object into a spatial object. Then we will make sure 
+Next, we will create a new object. We'll use _sp in the name as we
+will turn this object into a spatial object. Then we will make sure
 that we have a default x and y column that stores longitude and latitude
 information respectively.
 
@@ -284,19 +284,19 @@ information respectively.
 sea_level_2000_sp <- sea_level_2000
 
 # define x & y as longitude and latitude
-sea_level_2000_sp$x <- sea_level_2000_sp$lon  
+sea_level_2000_sp$x <- sea_level_2000_sp$lon
 sea_level_2000_sp$y <- sea_level_2000_sp$lat
 class(sea_level_2000_sp)
 ```
 
 ## Create spatial object
 
-In the next series of steps we convert our data.frame object into a 
-spatial object using the `coordinates()` function. Notice that 
+In the next series of steps we convert our data.frame object into a
+spatial object using the `coordinates()` function. Notice that
 we are using a different notation below to perform this.
 
-`~x + y` simply tells R to use the x and y columns to respectively to 
-convert a non spatial object into a spatial object. 
+`~x + y` simply tells R to use the x and y columns to respectively to
+convert a non spatial object into a spatial object.
 
 ```{r}
 # convert the data into spatial coordinates
@@ -315,16 +315,16 @@ plot(sea_level_2000_sp,
 
 In the next step, we will setup our interpolation. We will need to do the following:
 
-1. we create an EMPTY grid across a spatial extent that we with to interpolate our data within 
-1. We populate that grid with interpolated values generated from the points layer that we created above. 
+1. we create an EMPTY grid across a spatial extent that we with to interpolate our data within
+1. We populate that grid with interpolated values generated from the points layer that we created above.
 
 In the example below, we use the Inverse Distance Weighted (IDW)
-interpolator. 
+interpolator.
 
 First, let's create our grid. We are going to use a specified (in this case)
-spatial extent to populate this grid. There is no magic here associated 
-with creating the grid area. You will have to decide that area that you 
-think is reasonable to perform the interpolation on. 
+spatial extent to populate this grid. There is no magic here associated
+with creating the grid area. You will have to decide that area that you
+think is reasonable to perform the interpolation on.
 
 
 ```{r}
@@ -335,17 +335,17 @@ x_range <- as.numeric(c(-99, -80))  # min/max longitude of the interpolation are
 y_range <- as.numeric(c(24, 32))  # min/max latitude of the interpolation area
 
 # create an empty grid of values ranging from the xmin-xmax, ymin-ymax
-grd <- expand.grid(x = seq(from = x_range[1], 
-                   to = x_range[2], by = 0.1), 
+grd <- expand.grid(x = seq(from = x_range[1],
+                   to = x_range[2], by = 0.1),
                    y = seq(from = y_range[1],                                               to = y_range[2], by = 0.1))  # expand points to grid
 class(grd)
 ```
 
-Next we will convert this grid into a spatial points and then spatial 
+Next we will convert this grid into a spatial points and then spatial
 pixels object.
 
 ```{r}
-# Convert grd object to a matrix and then turn into a spatial 
+# Convert grd object to a matrix and then turn into a spatial
 # points object
 coordinates(grd) <- ~x + y
 # turn into a spatial pixels object
@@ -353,14 +353,14 @@ gridded(grd) <- TRUE
 
 #### view grid with points overlayed
 plot(grd, cex = 1.5, col = "grey")
-plot(sea_level_2000_sp, 
-       pch = 15, 
-       col = "red", 
-       cex = 1, 
+plot(sea_level_2000_sp,
+       pch = 15,
+       col = "red",
+       cex = 1,
        add = TRUE)
 ```
 
-In the last step we use idw() to interpolate our points to a grid. 
+In the last step we use idw() to interpolate our points to a grid.
 idw() takes several arguments
 
 1. first the formula: elev_mm ~ 1 tells r to use the x,y coordinates combined with the elev_mm value to perform the griding
@@ -371,12 +371,12 @@ idw() takes several arguments
 
 ```{r}
 # interpolate the data
-idw_pow1 <- idw(formula = elev_mm ~ 1, 
-           locations = sea_level_2000_sp, 
+idw_pow1 <- idw(formula = elev_mm ~ 1,
+           locations = sea_level_2000_sp,
            newdata = grd,
-           idp = 1)  
+           idp = 1)
 
-# Notice that the output data is a SpatialPixelsDataFrame 
+# Notice that the output data is a SpatialPixelsDataFrame
 class(idw_pow1)
 # plot the data
 plot(idw_pow1,
@@ -392,14 +392,14 @@ writeRaster(idw_pow1_ras,
             filename = "idw_pow1.tif", "GTiff")
 ```
 
-Let's create a difference surface with a larger power. 
+Let's create a difference surface with a larger power.
 
 ```{r}
 # interpolate the data
-idw_pow3 <- idw(formula = elev_mm ~ 1, 
-           locations = sea_level_2000_sp, 
+idw_pow3 <- idw(formula = elev_mm ~ 1,
+           locations = sea_level_2000_sp,
            newdata = grd,
-           idp = 3)  
+           idp = 3)
 
 # plot the data
 plot(idw_pow3,
@@ -410,22 +410,22 @@ Finally, let's explore how distance impacts our interpolation.
 
 ```{r}
 # interpolate the data
-idw_dist1 <- idw(formula = elev_mm ~ 1, 
-           locations = sea_level_2000_sp, 
+idw_dist1 <- idw(formula = elev_mm ~ 1,
+           locations = sea_level_2000_sp,
            newdata = grd,
            idp = 1,
-           maxdist=1)  
+           maxdist=1)
 plot(idw_dist1,
      main = "IDW: distance = 1 degree, power = 1")
 ```
 
 ```{r}
 # interpolate the data
-idw_dist5 <- idw(formula = elev_mm ~ 1, 
-           locations = sea_level_2000_sp, 
+idw_dist5 <- idw(formula = elev_mm ~ 1,
+           locations = sea_level_2000_sp,
            newdata = grd,
            idp = .2,
-           maxdist = 5)  
+           maxdist = 5)
 
 plot(idw_dist5,
      main = "IDW: distance = 5 degrees, power = 1")
@@ -435,18 +435,18 @@ Let's increase the distance evern more
 
 ```{r}
 # interpolate the data
-idw_dist15 <- idw(formula = elev_mm ~ 1, 
-           locations = sea_level_2000_sp, 
+idw_dist15 <- idw(formula = elev_mm ~ 1,
+           locations = sea_level_2000_sp,
            newdata = grd,
            idp = .2,
-           maxdist = 15)  
+           maxdist = 15)
 
 plot(idw_dist15,
      main = "IDW: distance = 15 degrees, power = .2")
 ```
 
 ```{r echo=FALSE, eval=FALSE}
-# assign lat/long (EPSG 4326 CRS) 
+# assign lat/long (EPSG 4326 CRS)
 # here i copied from spatialreference.org
 #crs(sea_level_2000_sp) <- CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0")
 ```
@@ -456,3 +456,6 @@ plot(idw_dist15,
 
 * [More on interpolation in R](rspatial.org/analysis/rst/4-interpolation.html)
 * [An overview of interpolators](http://neondataskills.org/spatial-data/spatial-interpolation-basics)
+* [Nice tutorial on kriging](https://rpubs.com/nabilabd/118172)
+8 [Spatial R tutorial - by the people who created / maintain many of the key raster packages ](http://rspatial.org/analysis/rst/4-interpolation.html#data-preparation)
+* [A dated but still VERY nice overall spatial tutorial!! ](https://pakillo.github.io/R-GIS-tutorial/#interpolation)
