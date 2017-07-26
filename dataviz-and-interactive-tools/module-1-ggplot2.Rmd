@@ -19,32 +19,35 @@ library(dplyr)
 ## Overview
 
 ggplot2 is a popular package for visualizing data in R.
-It's been around for years and has pretty good documentation and tons of example code around the web.
+
+From the [home page](http://ggplot2.tidyverse.org/):
+
+> ggplot2 is a system for declaratively creating graphics, based on The Grammar of Graphics. You provide the data, tell ggplot2 how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details.
+
+It's been around for years and has pretty good documentation and tons of example code around the web (like on [StackOverflow](https://stackoverflow.com/questions/tagged/ggplot2)).
 This lesson will introduce you to the basic components of working with ggplot2.
 
 ## Lesson
 
-### ggplot vs base vs lattice vs XYZ
+### ggplot vs base vs lattice vs XYZ...
 
-R provides many ways to get your data into a plot.
+R provides **many** ways to get your data into a plot.
 Three common ones are,
 
 - "base graphics" (`plot`, `hist`, etc`)
 - lattice
 - ggplot2
 
-All of them work.
+All of them work!
 I use base graphics for simple, quick and dirty plots.
 I use ggplot2 for most everything else.
 
 ggplot2 excels at making complicated plots easy and easy plots simple enough.
 
-### geoms / aesthetics
+### Geoms / Aesthetics
 
-More: http://ggplot2.tidyverse.org/reference/index.html#section-layer-geoms
-
-Every graphic you make in ggplot2 will have at least one aesthetic and at least one geom.
-The aesthetic maps your data to your geometry.
+Every graphic you make in ggplot2 will have at least one aesthetic and at least one geom (layer).
+The aesthetic maps your data to your geometry (layer).
 Your geometry specifies the type of plot we're making (point, bar, etc.).
 
 ```{r}
@@ -52,9 +55,7 @@ ggplot(mpg, aes(displ, hwy)) +
   geom_point()
 ```
 
-What makes ggplot really powerful is how quickly we can make this plot visualize more of our data.
-
-Coloring each point by class (compact, van, pickup, etc.) is just a quick extra bit of code:
+What makes ggplot really powerful is how quickly we can make this plot visualize more aspects of our data. Coloring each point by class (compact, van, pickup, etc.) is just a quick extra bit of code:
 
 ```{r}
 ggplot(mpg, aes(displ, hwy, color = class)) +
@@ -64,17 +65,20 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
 Aside: How did I know to write `color = class`?
 `aes` will pass its arguments on to any geoms you use and we can find out what aesthetic mappings geom_point takes with `?geom_point` (see section "Aesthetics")
 
+Challenge: Find another aesthetic mapping `geom_point` can take and add add it to the plot.
 
 What if we just wanted the color of the points to be blue?
+Maybe we'd do this:
 
 ```{r}
 ggplot(mpg, aes(displ, hwy, color = "blue")) +
   geom_point()
 ```
 
-Well that's weird.
+Well that's weird -- why are the points red?
+
 What happened here?
-This is the difference between setting and mapping in ggplot.
+This is the difference between **setting** and **mapping** in ggplot.
 The `aes` function **only** takes mappings from our data onto our geom.
 If we want to make all the points blue, we need to **set** it inside the geom:
 
@@ -83,43 +87,48 @@ ggplot(mpg, aes(displ, hwy)) +
   geom_point(color = "blue")
 ```
 
+**Challenge:** Using the aesthetic you discovered and tried above, **set** another aesthetic onto our points.
+
 Sizing each point by the number of cylinders is easy:
 
 ```{r}
 ggplot(mpg, aes(displ, hwy, color = class, size = cyl)) +
-  geom_point(shape = 1)
+  geom_point()
 ```
 
-Making separate plots (small multiples) is also quick:
+So it's clear we can make scatter and bubble plots.
+What other kinds of plots can we make? (Hint: Tons)
+
+Let's make a histogram:
 
 ```{r}
-ggplot(mpg, aes(displ, hwy, color = class, size = cyl)) +
-  geom_point(shape = 1) + 
-  facet_wrap(~ manufacturer)
+ggplot(mpg, aes(hwy)) + 
+  geom_histogram()
 ```
 
-Let's make a histogram instead:
+You'll see with a warning (red text):
 
-```{r}
-ggplot(mpg, aes(hwy)) + geom_histogram()
-```
+> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 
-You'll see with a warning (red text) something about `stat_bin` and a `bins` argument.
 ggplot2 can calculate statistics on our data such as frequencies and, in this case, it's doing that on our `hwy` column with the `stat_bin` function.
-We should change the `bins` argument:
+Binning data requires choosing a bin size and the choice of bin size can completely change our histogram (often resulting in misleading conclusions).
+We should change the `bins` argument in this case to 1 because we don't want to hide any of our frequencies:
 
 ```{r}
-ggplot(mpg, aes(hwy)) + geom_histogram(binwidth = 1)
+ggplot(mpg, aes(hwy)) + 
+  geom_histogram(binwidth = 1)
 ```
 
-I'm a big fan of histograms and ggplot2 can plot these too:
+**Challenge:** Find an aesthetic `geom_histogram` supports and try it out.
 
+I'm a big fan of box plots and ggplot2 can plot these too:
 
 ```{r}
-ggplot(mpg, aes(cyl, hwy)) + geom_boxplot()
+ggplot(mpg, aes(cyl, hwy)) + 
+  geom_boxplot()
 ```
 
-Oops, we got an erro:
+Oops, we got an error:
 
 > Warning message:
 > Continuous x aesthetic -- did you forget aes(group=...)? 
@@ -127,10 +136,11 @@ Oops, we got an erro:
 That's because we need to convert `cyl` to a factor:
 
 ```{r}
-ggplot(mpg, aes(factor(cyl), hwy)) + geom_boxplot()
+ggplot(mpg, aes(factor(cyl), hwy)) + 
+  geom_boxplot()
 ```
 
-Another type of visualization I use a lot for visualizing distributions is the violin plot:
+Another type of visualization I use a lot for seeing my distributions is the violin plot:
 
 ```{r}
 ggplot(mpg, aes(factor(class), hwy)) + geom_violin()
@@ -145,6 +155,7 @@ ggplot(mpg, aes(factor(class), hwy)) +
   geom_point(shape = 1, position = "jitter")
 ```
 
+Some geoms can do even more than just show us our data.
 ggplot2 also helps us do some quick-and-dirty modeling:
 
 ```{r}
@@ -153,7 +164,12 @@ ggplot(mpg, aes(cty, hwy)) +
   geom_smooth()
 ```
 
-`geom_smooth()` is pretty configurable.
+Notice the mesage in red text
+
+> `geom_smooth()` using method = 'loess'
+
+geom_smooth defaulted here to using a LOESS smoother.
+But `geom_smooth()` is pretty configurable.
 Here we set the method to `lm` instead of the default `loess`:
 
 ```{r}
@@ -162,13 +178,15 @@ ggplot(mpg, aes(cty, hwy)) +
   geom_smooth(method = "lm")
 ```
 
+More on geoms here: http://ggplot2.tidyverse.org/reference/index.html#section-layer-geoms
+
 ### Setting plot limits
 
 Plot limits can be controlled one of three ways:
 
 - Filter the data (because limits are auto-calculated from the data ranges)
 - Set the `limits` argument on one or both scales
-- Set the `xlim` and `ylim` arguments in `coord_cartesian`
+- Set the `xlim` and `ylim` arguments in `coord_cartesian()`
 
 Let's show this with an example plot:
 
@@ -213,10 +231,10 @@ ggplot(economics, aes(date, unemploy)) +
 Note the **slight* difference when using `coord_cartesian`: ggplot didn't put a buffer around our values.
 Sometimes we want this and sometimes we don't and it's good to know this difference.
 
-### scales
+### Scales
 
-We'll use scales in ggplot2 very often.
 The usual use case is to do things like changing scale limits or change the **way** our data are mapped onto our geom.
+We'll use scales in ggplot2 very often!
 
 For example, how do we override the default colors ggplot2 uses here?
 
@@ -225,7 +243,15 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   geom_point()
 ```
 
-Most scales follow the format `scale_{aesthetic}_{method} where aesthetic are our aesthetic mappings such as color, fill, shape and method is how the colors, fill colors, and shapes are chosen.
+**Tip:** Most scales follow the format `scale_{aesthetic}_{method} where aesthetic are our aesthetic mappings such as color, fill, shape and method is how the colors, fill colors, and shapes are chosen.
+
+```{r}
+ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point() + 
+  scale_color_manual(values = c("red", "orange", "yellow", "green", "blue", "purple", "violet")) # ROYGBIV
+```
+
+I'm sure that was a ton of fun to type out but we can make things easier on ourselves:
 
 ```{r}
 ggplot(mpg, aes(displ, hwy, color = class)) +
@@ -233,6 +259,7 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   scale_color_hue(h = c(270, 360)) # blue to red
 ```
 
+Above we were using scales to scale the `color` aesthetic.
 We can also use scales to rescale our data.
 Here's some census data, unscaled:
 
@@ -249,8 +276,8 @@ ggplot(midwest, aes(area, poptotal)) +
   scale_y_log10()
 ```
 
-
-We can override the labels:
+Scales can also be used to change our axes.
+For example, we can override the labels:
 
 ```{r}
 mpg %>%
@@ -269,15 +296,13 @@ ggplot(mpg, aes(displ, hwy)) +
   scale_y_continuous(breaks = seq(min(mpg$hwy), max(mpg$hwy)))
 ```
 
-### facets
+### Facets
 
-Facets allow us to perform a powerful visualization called a small multiple:
+Facets allow us to create a powerful visualization called a small multiple:
 
 http://www.latimes.com/local/lanow/la-me-g-california-drought-map-htmlstory.html
 
-I use small multiples all the time when I have a variable like a site or year and I want to quickly compare across years.
-
-Let's compare highway fuel economy versus engine displacement across our two samples:
+I use small multiples all the time when I have a variable like a site or year and I want to quickly compare across years. Let's compare highway fuel economy versus engine displacement across our two samples:
 
 ```{r}
 ggplot(mpg, aes(displ, hwy)) +
@@ -293,10 +318,11 @@ ggplot(mpg, aes(displ, hwy)) +
   facet_wrap(~ manufacturer)
 ```
 
-### plot customization
+### Plot customization
 
 ggplot2 offers us a very highly level of customizability in, what I think, is a fairly easy to discover and remember way with the `theme` function and pre-set themes.
 
+ggplot2 comes with a set of themes which are a quick way to get a different look to your plots.
 Let's use another theme than the default:
 
 ```{r}
@@ -305,6 +331,9 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
   theme_classic()
 ```
 
+**Challenge:** Find another theme and use it instead
+
+The legend in ggplot2 is a thematic element.
 Let's change the way the legend displays:
 
 ```{r}
@@ -333,12 +362,11 @@ ggplot(mpg, aes(displ, hwy, color = class)) +
           "or why do you need that big truck again? ")
 ```
 
+**Challenge:** Look at the help for ?theme and try changing something else about the above plot.
 
-Challenge: Look at the help for ?theme and try changing something else about the above plot.
+More themes are available in a user-contributed package called [ggthemes]( https://github.com/jrnold/ggthemes).
 
-more themes at https://github.com/jrnold/ggthemes
-
-### saving plots
+### Saving plots
 
 Let's save that great plot we just made.
 Saving plots in ggplot is done with the `ggsave()` function:
@@ -350,14 +378,16 @@ ggsave("hwy_vs_displ.png")
 `ggsave` automatically chooses the format based on your file extension and guesses a default image size.
 We can customize the size with the `width` and `height` arguments:
 
-
 ```{r}
 ggsave("hwy_vs_displ.png", width = 6, height = 6)
 ```
 
-### maps with ggplot2
+### Maps with ggplot2
+
+ggplot2 plots data.frames so if we turn our shapefiles (or rasters!) into data.frames, we can plot them in ggplot2 just like before:
 
 ```{r}
+# Change this if needed
 census <- readOGR("../publishing-maps-to-the-web-in-r/data/cb_2016_us_state_20m/cb_2016_us_state_20m.shp")
 
 census$id <- rownames(census@data)
@@ -371,7 +401,7 @@ ggplot(census_f, aes(long, lat, fill = ALAND, group = group)) +
   theme_classic()
 ```
 
-Challenge: Reproject the data before plotting
+**Challenge:** Reproject the data before plotting
 
 ## Resources
 

@@ -7,7 +7,7 @@ time_slot: 2.25 hours
 ## Introduction
 
 We're going to learn how to make a variety of static and interactive plots in R.
-Vizualizing data is an essential skill in science and knowing at least one tool well will serve you in the future.
+Visualizing data is an essential skill in science and knowing at least one tool well will serve you in the future.
 For static graphics, I prefer and recommend ggplot2.
 For interactive graphics, I'd like to introduce you to Shiny.
 
