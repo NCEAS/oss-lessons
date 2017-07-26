@@ -6,44 +6,41 @@ time_slot: 2.25 hours
 
 ## Introduction
 
-## Outline
+We're going to learn how to make a variety of static and interactive plots in R.
+Vizualizing data is an essential skill in science and knowing at least one tool well will serve you in the future.
+For static graphics, I prefer and recommend ggplot2.
+For interactive graphics, I'd like to introduce you to Shiny.
 
-We're going to learn how to make a variety of static and interactive plots in R:
+These two packages will be taught in their own submodules:
 
-This module is an overview of:
-  
-- [ggplot2](http://ggplot2.tidyverse.org/)
-- [Trelliscope](http://deltarho.org/)
-- [htmlwidgets](http://www.htmlwidgets.org/)
-- [plotly](https://plot.ly/r/)
-- [Shiny](http://shiny.rstudio.com/)
-- [dygraph](https://rstudio.github.io/dygraphs/)
+- [ggplot2](./module-1-ggplot2.html)
+- [Shiny](./module-2-shiny.html)
 
-Alongside this module are two activites: 
+And if we have time I want to introduce some really awesome R packages:
 
-- [ggplot2](./module-1-ggplot2.Rmd)
-- [Shiny](./module-2-shiny.Rmd)
+- [Trelliscope](http://deltarho.org/) (explore data quick)
+- [htmlwidgets](http://www.htmlwidgets.org/) (advanced visualizations)
+    - Example: [https://github.com/amoeba/bristol_bay_permit_viz](https://github.com/amoeba/bristol_bay_permit_viz)
+- [plotly](https://plot.ly/r/) (easy interactive plots)
+- [dygraph](https://rstudio.github.io/dygraphs/) (easy interactive timeseries plots)
 
 ## Learning outcomes
 
-After completing this module, 
+After completing this module, students should:
 
-Students should be able to:
-
-- Make simple to intermediate plots in R using ggplot2
-- Make a simple Shiny app
+- Be able to make simple to intermediate plots in R using ggplot2
+- Be able to a simple Shiny app
+- Have an increased awareness of plotting options in R
 
 and students should have an awareness of the great number of visualization tools provided in R and what they're useful for.
 
 ## Lesson
 
-TODO
-
-## Summary
-
-TODO
+See submodules 1 and 2 in this same folder.
 
 ## Resources
 
-http://enhancedatascience.com/2017/07/06/pick-best-r-packages-interactive-plot-visualisation-22/
-http://enhancedatascience.com/2017/04/12/pick-best-r-packages-data-visualization/
+- http://ggplot2.tidyverse.org/
+- [R for Data Science](http://r4ds.had.co.nz/)
+- http://enhancedatascience.com/2017/07/06/pick-best-r-packages-interactive-plot-visualisation-22/
+- http://enhancedatascience.com/2017/04/12/pick-best-r-packages-data-visualization/

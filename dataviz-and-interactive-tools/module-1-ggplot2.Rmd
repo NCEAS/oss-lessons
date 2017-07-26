@@ -1,8 +1,6 @@
 ---
-title: "ggplot2 introduction"
+title: "Data Visualization Part 1: Introduction to ggplot2"
 author: "Bryce Mecum"
-editor_options: 
-  chunk_output_type: console
 ---
 
 ```{r, echo = FALSE}
@@ -11,9 +9,18 @@ knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 
 ```{r}
 library(ggplot2)
+library(rgdal)
+library(dplyr)
+library(viridis)
+library(broom)
+library(dplyr)
 ```
 
 ## Overview
+
+ggplot2 is a popular package for visualizing data in R.
+It's been around for years and has pretty good documentation and tons of example code around the web.
+This lesson will introduce you to the basic components of working with ggplot2.
 
 ## Lesson
 
@@ -75,8 +82,6 @@ If we want to make all the points blue, we need to **set** it inside the geom:
 ggplot(mpg, aes(displ, hwy)) +
   geom_point(color = "blue")
 ```
-
-
 
 Sizing each point by the number of cylinders is easy:
 
@@ -157,29 +162,7 @@ ggplot(mpg, aes(cty, hwy)) +
   geom_smooth(method = "lm")
 ```
 
-
-### coordinates
-
-Every plot you make has a coordinate space.
-Most often this is the Cartesian (XY) plane.
-But we can also plot our data in other scales, like log10:
-  
-Here's some census data, unscaled:
-
-```{r}
-ggplot(midwest, aes(area, poptotal)) + 
-  geom_point()
-```
-
-And scaled (log10):
-
-```{r}
-ggplot(midwest, aes(area, poptotal)) + 
-  geom_point() + 
-  scale_y_log10()
-```
-
-#### Setting plot limits
+### Setting plot limits
 
 Plot limits can be controlled one of three ways:
 
@@ -232,29 +215,163 @@ Sometimes we want this and sometimes we don't and it's good to know this differe
 
 ### scales
 
-- show the format: scale_{aesthetic}_{method}
+We'll use scales in ggplot2 very often.
+The usual use case is to do things like changing scale limits or change the **way** our data are mapped onto our geom.
 
-scale_colour_viridis()
-- axis ticks
-- axis limits
-- continuous scales
-- date scales
-- discrete scales
-- log scales
+For example, how do we override the default colors ggplot2 uses here?
 
-### plot customization
+```{r}
+ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point()
+```
 
-#### titles
-#### axes
-#### themes
-more themes at https://github.com/jrnold/ggthemes
-legend layout / hiding
+Most scales follow the format `scale_{aesthetic}_{method} where aesthetic are our aesthetic mappings such as color, fill, shape and method is how the colors, fill colors, and shapes are chosen.
+
+```{r}
+ggplot(mpg, aes(displ, hwy, color = class)) +
+  geom_point() + 
+  scale_color_hue(h = c(270, 360)) # blue to red
+```
+
+We can also use scales to rescale our data.
+Here's some census data, unscaled:
+
+```{r}
+ggplot(midwest, aes(area, poptotal)) + 
+  geom_point()
+```
+
+And scaled (log10):
+
+```{r}
+ggplot(midwest, aes(area, poptotal)) + 
+  geom_point() + 
+  scale_y_log10()
+```
+
+
+We can override the labels:
+
+```{r}
+mpg %>%
+  group_by(class) %>% 
+  summarize(maxhwy = max(hwy)) %>% 
+  ggplot(aes(class, maxhwy)) +
+    geom_col() +
+    scale_x_discrete(labels = toupper(sort(unique(mpg$manufacturer))))
+```
+
+Or change the breaks:
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point() +
+  scale_y_continuous(breaks = seq(min(mpg$hwy), max(mpg$hwy)))
+```
 
 ### facets
 
+Facets allow us to perform a powerful visualization called a small multiple:
+
+http://www.latimes.com/local/lanow/la-me-g-california-drought-map-htmlstory.html
+
+I use small multiples all the time when I have a variable like a site or year and I want to quickly compare across years.
+
+Let's compare highway fuel economy versus engine displacement across our two samples:
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  facet_wrap(~ year)
+```
+
+Or fuel economy versus engine displacement across manufacturer:
+
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point() +
+  facet_wrap(~ manufacturer)
+```
+
+### plot customization
+
+ggplot2 offers us a very highly level of customizability in, what I think, is a fairly easy to discover and remember way with the `theme` function and pre-set themes.
+
+Let's use another theme than the default:
+
+```{r}
+ggplot(mpg, aes(displ, hwy, color = class)) + 
+  geom_point() +
+  theme_classic()
+```
+
+Let's change the way the legend displays:
+
+```{r}
+ggplot(mpg, aes(displ, hwy, color = class)) + 
+  geom_point() +
+  theme_classic() +
+  theme(legend.position = "bottom",
+        legend.background = element_rect(fill = "#EEEEEE", color = "black"),
+        legend.title = element_blank(),
+        axis.title = element_text(size = 16))
+```
+
+Let's adjust our axis labels and title:
+
+```{r}
+ggplot(mpg, aes(displ, hwy, color = class)) + 
+  geom_point() +
+  theme_classic() +
+  theme(legend.position = c(1, 1),
+        legend.justification = c(1,1),
+        legend.direction = "horizontal",
+        legend.title = element_blank()) +
+  xlab("Engine Displacement") +
+  ylab("Highway Fuel Economy (miles / gallon") +
+  ggtitle("Highway fuel economy versus engine displacement",
+          "or why do you need that big truck again? ")
+```
+
+
+Challenge: Look at the help for ?theme and try changing something else about the above plot.
+
+more themes at https://github.com/jrnold/ggthemes
+
 ### saving plots
 
+Let's save that great plot we just made.
+Saving plots in ggplot is done with the `ggsave()` function:
+
+```{r}
+ggsave("hwy_vs_displ.png")
+```
+
+`ggsave` automatically chooses the format based on your file extension and guesses a default image size.
+We can customize the size with the `width` and `height` arguments:
+
+
+```{r}
+ggsave("hwy_vs_displ.png", width = 6, height = 6)
+```
+
 ### maps with ggplot2
+
+```{r}
+census <- readOGR("../publishing-maps-to-the-web-in-r/data/cb_2016_us_state_20m/cb_2016_us_state_20m.shp")
+
+census$id <- rownames(census@data)
+census_f <- tidy(census, region = "id")
+census_f <- left_join(census_f, census@data, by = "id")
+
+ggplot(census_f, aes(long, lat, fill = ALAND, group = group)) +
+  geom_polygon() +
+  scale_fill_viridis() +
+  coord_cartesian(c(-180, -60)) +
+  theme_classic()
+```
+
+Challenge: Reproject the data before plotting
 
 ## Resources
 
