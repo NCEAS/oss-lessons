@@ -13,8 +13,8 @@ For interactive graphics, I'd like to introduce you to Shiny.
 
 These two packages will be taught in their own submodules:
 
-- [ggplot2](./module-1-ggplot2.Rmd)
-- [Shiny](./module-2-shiny.Rmd)
+- [ggplot2](./module-1-ggplot2.html)
+- [Shiny](./module-2-shiny.html)
 
 And if we have time I want to introduce some really awesome R packages:
 
