@@ -234,8 +234,18 @@ fx &lt;- function(current_url) {
 }
 system.time(res &lt;- lapply(url_list, fx) )</code></pre>
 </div>
-<div id="parallelize-it" class="section level1">
-<h1>Parallelize it!</h1>
+<div id="approaches-to-parallelization" class="section level1">
+<h1>Approaches to parallelization</h1>
+<p>When parallelizing jobs, one can:</p>
+<ul>
+<li>Use the multiple cores on a local computer through <code>mclapply</code></li>
+<li>Use multiple processors on local (and remote) machines using <code>makeCluster</code> and <code>clusterApply</code></li>
+<li>In this approach, one has to manually copy data and code to each cluster member using <code>clusterExport</code></li>
+<li>This is extra work, but sometimes gaining access to a large cluster is worth it</li>
+</ul>
+</div>
+<div id="parallelize-using-mclapply" class="section level1">
+<h1>Parallelize using: mclapply</h1>
 <p>The <code>parallel</code> library can be used to send tasks (encoded as function calls) to each of the processing cores on your machine in parallel. This is done by using the <code>parallel::mclapply</code> function, which is analogous to <code>lapply</code>, but distributes the tasks to multiple processors. <code>mclapply</code> gathers up the responses from each of these function calls, and returns a list of responses that is the same length as the list or vector of input data (one return per input item).</p>
 <pre class="r"><code>library(parallel)
 library(MASS)
@@ -249,15 +259,15 @@ numCores</code></pre>
   results &lt;- lapply(starts, fx)
 )</code></pre>
 <pre><code>##    user  system elapsed 
-##   1.371   0.015   1.391</code></pre>
+##   1.362   0.018   1.385</code></pre>
 <pre class="r"><code>system.time(
   results &lt;- mclapply(starts, fx, mc.cores = numCores)
 )</code></pre>
 <pre><code>##    user  system elapsed 
-##   1.842   0.263   0.461</code></pre>
+##   0.275   0.052   0.405</code></pre>
 </div>
-<div id="parallelization-using-foreach" class="section level1">
-<h1>Parallelization using: foreach</h1>
+<div id="parallelize-using-foreach-and-doparallel" class="section level1">
+<h1>Parallelize using: foreach and doParallel</h1>
 <p>The normal <code>for</code> loop in R looks like:</p>
 <pre class="r"><code>for (i in 1:3) {
   print(sqrt(i))
@@ -278,7 +288,7 @@ foreach (i=1:3) %do% {
 ## 
 ## [[3]]
 ## [1] 1.732051</code></pre>
-<p>In addition, <code>foreach</code> supports a parallelizable operator <code>%dopar%</code>, which allows each iteration through the loop to use different cores or different machines in a cluster. Here, we demonstrate with using all the cores on the current machine:</p>
+<p>In addition, <code>foreach</code> supports a parallelizable operator <code>%dopar%</code> from the <code>doParallel</code> package. This allows each iteration through the loop to use different cores or different machines in a cluster. Here, we demonstrate with using all the cores on the current machine:</p>
 <pre class="r"><code>library(foreach)
 library(doParallel)</code></pre>
 <pre><code>## Loading required package: iterators</code></pre>
@@ -294,7 +304,7 @@ foreach (i=1:3) %dopar% {
 ## 
 ## [[3]]
 ## [1] 1.732051</code></pre>
-<pre class="r"><code># To simplify output, foreach has some parameters that can simplify return values
+<pre class="r"><code># To simplify output, foreach has the .combine parameter that can simplify return values
 
 # Return a vector
 foreach (i=1:3, .combine=c) %dopar% {
@@ -309,8 +319,36 @@ foreach (i=1:3, .combine=rbind) %dopar% {
 ## result.1 1.000000
 ## result.2 1.414214
 ## result.3 1.732051</code></pre>
+<p>The <a href="https://cran.r-project.org/web/packages/doParallel/vignettes/gettingstartedParallel.pdf">doParallel vignette</a> on CRAN shows a much more realistic example, where one can use `%dopar% to parallelize a bootstrap analysis where a data set is resampled 10,000 times and the analysis is rerun on each sample, and then the results combined:</p>
+<pre class="r"><code># Let's use the iris data set to do a parallel bootstrap
+# From the doParallel vignette, but slightly modified
+x &lt;- iris[which(iris[,5] != &quot;setosa&quot;), c(1,5)]
+trials &lt;- 10000
+system.time({
+  r &lt;- foreach(icount(trials), .combine=rbind) %dopar% {
+    ind &lt;- sample(100, 100, replace=TRUE)
+    result1 &lt;- glm(x[ind,2]~x[ind,1], family=binomial(logit))
+    coefficients(result1)
+  }
+})</code></pre>
+<pre><code>##    user  system elapsed 
+##  25.156   0.988   5.084</code></pre>
+<pre class="r"><code># And compare that to what it takes to do the same analysis in serial
+system.time({
+  r &lt;- foreach(icount(trials), .combine=rbind) %do% {
+    ind &lt;- sample(100, 100, replace=TRUE)
+    result1 &lt;- glm(x[ind,2]~x[ind,1], family=binomial(logit))
+    coefficients(result1)
+  }
+})</code></pre>
+<pre><code>##    user  system elapsed 
+##  17.905   0.553  18.486</code></pre>
 <pre class="r"><code># When you're done, clean up the cluster
 stopImplicitCluster()</code></pre>
+</div>
+<div id="summary" class="section level1">
+<h1>Summary</h1>
+<p>In this lesson, we showed examples of computing tasks that are likely limited by the number of CPU cores that can be applied, and we reviewed the architecture of computers to understand the relationship between CPU processors and cores. Next, we reviewed the way in which traditional <code>for</code> loops in R can be rewritten as functions that are applied to a list serially using <code>lapply</code>, and then how the <code>parallel</code> package <code>mclapply</code> function can be substituted in order to utilize multiple cores on the local computer to speed up computations. Finally, we installed and reviewed the use of the <code>foreach</code> package with the <code>%dopar</code> operator to accomplish a similar parallelization using multiple cores.</p>
 </div>
 <div id="readings-and-tutorials" class="section level1">
 <h1>Readings and tutorials</h1>
@@ -318,6 +356,7 @@ stopImplicitCluster()</code></pre>
 <li><a href="https://blog.dominodatalab.com/multicore-data-science-r-python/">Multicore Data Science with R and Python</a></li>
 <li><a href="https://ljdursi.github.io/beyond-single-core-R/#/">Beyond Single-Core R</a> by Jonoathan Dursi (also see <a href="https://github.com/ljdursi/beyond-single-core-R">GitHub repo for slide source</a>)</li>
 <li>The venerable <a href="http://shop.oreilly.com/product/0636920021421.do">Parallel R</a> by McCallum and Weston (a bit dated on the tooling, but conceptually solid)</li>
+<li>The <a href="https://cran.r-project.org/web/packages/doParallel/vignettes/gettingstartedParallel.pdf">doParallel Vignette</a></li>
 </ul>
 </div>
 
