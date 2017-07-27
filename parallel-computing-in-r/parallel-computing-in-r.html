@@ -176,7 +176,7 @@ $(document).ready(function () {
 <pre class="sh"><code>jones@powder:~$ sysctl hw.ncpu hw.physicalcpu
 hw.ncpu: 8
 hw.physicalcpu: 4</code></pre>
-<p>To interpret that output, this machine <code>powder</code> has 4 physical CPUs, each of which has two processing cores, for a total of 8 cores for computation. I’d sure like my R computations to use all of that processing power. Now let’s look at the computational server <code>aurora</code> at NCEAS:</p>
+<p>To interpret that output, this machine <code>powder</code> has 4 physical CPUs, each of which has two processing cores, for a total of 8 cores for computation. I’d sure like my R computations to use all of that processing power. Because its all on one machine, we can easily use <em>multicore</em> processing tools to make use of those cores. Now let’s look at the computational server <code>aurora</code> at NCEAS:</p>
 <pre class="sh"><code>jones@aurora:~$ lscpu | egrep 'CPU\(s\)|per core|per socket'
 CPU(s):                88
 On-line CPU(s) list:   0-87
@@ -184,7 +184,8 @@ Thread(s) per core:    2
 Core(s) per socket:    22
 NUMA node0 CPU(s):     0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,54,56,58,60,62,64,66,68,70,72,74,76,78,80,82,84,86
 NUMA node1 CPU(s):     1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41,43,45,47,49,51,53,55,57,59,61,63,65,67,69,71,73,75,77,79,81,83,85,87</code></pre>
-<p>Now that’s some compute power! Aurora has 384 GB of RAM, and ample storage. But, maybe one of these NSF-sponsored high performance computing clusters (HPC) is what you need:</p>
+<p>Now that’s some compute power! Aurora has 384 GB of RAM, and ample storage. All still under the control of a singel operating system.</p>
+<p>However, maybe one of these NSF-sponsored high performance computing clusters (HPC) is looking attractive about now:</p>
 <ul>
 <li><a href="https://jetstream-cloud.org/">JetStream</a>
 <ul>
@@ -195,6 +196,7 @@ NUMA node1 CPU(s):     1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41
 <li>4200 nodes, 285,600 cores</li>
 </ul></li>
 </ul>
+<p>Note that these clusters have multiple nodes (hosts), and each host has multiple cores. So this is really multiple computers clustered together to act in a coordinated fashion, but each node runs its own copy of the operating system, and is in many ways independent of the other nodes in the cluster. One way to use such a cluster would be to use just one of the nodes, and use a multi-core approach to parallelization to use all of the cores on that single machine. But to truly make use of the whole cluster, one must use parallelization tools that let us spread out our computations across multiple host nodes in the cluster.</p>
 </div>
 <div id="when-to-parallelize" class="section level1">
 <h1>When to parallelize</h1>
@@ -205,43 +207,43 @@ NUMA node1 CPU(s):     1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39,41
 </div>
 <div id="loops-and-repetitive-tasks-using-lapply" class="section level1">
 <h1>Loops and repetitive tasks using lapply</h1>
-<p>When you have a list of repetitive tasks, you may be able to speed it up by adding more computing power. If each task is completely independent of the others, then it is a prime candidate for executing those tasks in parallel, each on its own core. For example, let’s build a simple loop that downloads and processes a set of data files.</p>
-<pre class="r"><code>library(httr)
-sm_service &lt;- &quot;https://knb.ecoinformatics.org/knb/d1/mn/v2/meta/&quot;
-#get_service &lt;- &quot;https://knb.ecoinformatics.org/knb/d1/mn/v2/object/&quot;
-url_list &lt;- c(
-  &quot;urn%3Auuid%3A5f74eb23-b704-4e2a-858c-f9806f5d701a&quot;,
-  &quot;urn%3Auuid%3A905026a6-ea91-47d3-b1b7-35991d82c58b&quot;)
-res_list &lt;- c()
-for(current_url in url_list) {
-  print(paste0(&quot;Processing: &quot;, sm_service, current_url))
-  #res &lt;- GET(current_url)
-  #res_list &lt;- rbind(res_list, content(res))
+<p>When you have a list of repetitive tasks, you may be able to speed it up by adding more computing power. If each task is completely independent of the others, then it is a prime candidate for executing those tasks in parallel, each on its own core. For example, let’s build a simple loop that uses sample with replacement to do a bootstrap analysis. In this case, we select <code>Sepal.Length</code> and <code>Species</code> from the <code>iris</code> dataset, subset it to 100 observations, and then iterate across 10,000 trials, each time resampling the observations with replacement. We then run a logistic regression fitting species as a function of length, and record the coefficients for each trial to be returned.</p>
+<pre class="r"><code>x &lt;- iris[which(iris[,5] != &quot;setosa&quot;), c(1,5)]
+trials &lt;- 10000
+res &lt;- data.frame()
+system.time({
+  trial &lt;- 1
+  while(trial &lt;= trials) {
+    ind &lt;- sample(100, 100, replace=TRUE)
+    result1 &lt;- glm(x[ind,2]~x[ind,1], family=binomial(logit))
+    r &lt;- coefficients(result1)
+    res &lt;- rbind(res, r)
+    trial &lt;- trial + 1
+  }
+})</code></pre>
+<p>The issue with this loop is that we execute each trial sequentially, which means that only one of our 8 processors on this machine are in use. In order to exploit parallelism, we need to be able to dispatch our tasks as functions, with one task going to each processor. To do that, we need to convert our task to a function, and then use the <code>*apply()</code> family of R functions to apply that function to all of the members of a set. In R, using <code>apply</code> is often significantly faster than the equivalent code in a loop. Here’s the same code rewritten to use <code>lapply()</code>, which applies a function to each of the members of a list (in this case the trials we want to run):</p>
+<pre class="r"><code>x &lt;- iris[which(iris[,5] != &quot;setosa&quot;), c(1,5)]
+trials &lt;- seq(1, 10000)
+boot_fx &lt;- function(trial) {
+  ind &lt;- sample(100, 100, replace=TRUE)
+  result1 &lt;- glm(x[ind,2]~x[ind,1], family=binomial(logit))
+  r &lt;- coefficients(result1)
+  res &lt;- rbind(data.frame(), r)
 }
-str(res_list)</code></pre>
-<p>The issue with this loop is that each of the files is retrieved sequentially. Which means that only one of our 8 processors on this machine are in use. In order to exploit parallelism, we need to be able to dispatch our tasks as functions, with one task going to each processor. To do that, we need to convert our task to a function, and then use the <code>*apply()</code> family of R functions to apply that function to all of the members of a set. In R, using <code>apply</code> is often significantly faster than the equivalent code in a loop. Here’s the same code rewritten to use <code>lapply()</code>, which applies a function to each of the members of a list:</p>
-<pre class="r"><code>library(httr)
-sm_service &lt;- &quot;https://knb.ecoinformatics.org/knb/d1/mn/v2/meta/&quot;
-#get_service &lt;- &quot;https://knb.ecoinformatics.org/knb/d1/mn/v2/object/&quot;
-url_list &lt;- c(
-  &quot;urn%3Auuid%3A5f74eb23-b704-4e2a-858c-f9806f5d701a&quot;,
-  &quot;urn%3Auuid%3A905026a6-ea91-47d3-b1b7-35991d82c58b&quot;)
-res_list &lt;- c()
-fx &lt;- function(current_url) {
-    print(paste0(&quot;Processing: &quot;, sm_service, current_url))
-    #res &lt;- GET(current_url)
-    #res_list &lt;- rbind(res_list, content(res))
-}
-system.time(res &lt;- lapply(url_list, fx) )</code></pre>
+system.time({
+  results &lt;- lapply(trials, boot_fx)
+})</code></pre>
 </div>
 <div id="approaches-to-parallelization" class="section level1">
 <h1>Approaches to parallelization</h1>
 <p>When parallelizing jobs, one can:</p>
 <ul>
 <li>Use the multiple cores on a local computer through <code>mclapply</code></li>
-<li>Use multiple processors on local (and remote) machines using <code>makeCluster</code> and <code>clusterApply</code></li>
+<li><p>Use multiple processors on local (and remote) machines using <code>makeCluster</code> and <code>clusterApply</code></p>
+<ul>
 <li>In this approach, one has to manually copy data and code to each cluster member using <code>clusterExport</code></li>
 <li>This is extra work, but sometimes gaining access to a large cluster is worth it</li>
+</ul></li>
 </ul>
 </div>
 <div id="parallelize-using-mclapply" class="section level1">
@@ -259,12 +261,26 @@ numCores</code></pre>
   results &lt;- lapply(starts, fx)
 )</code></pre>
 <pre><code>##    user  system elapsed 
-##   1.362   0.018   1.385</code></pre>
+##   1.378   0.019   1.400</code></pre>
 <pre class="r"><code>system.time(
   results &lt;- mclapply(starts, fx, mc.cores = numCores)
 )</code></pre>
 <pre><code>##    user  system elapsed 
-##   0.275   0.052   0.405</code></pre>
+##   0.531   0.087   0.323</code></pre>
+<p>Now let’s demonstrate with our bootstrap example:</p>
+<pre class="r"><code>x &lt;- iris[which(iris[,5] != &quot;setosa&quot;), c(1,5)]
+trials &lt;- seq(1, 10000)
+boot_fx &lt;- function(trial) {
+  ind &lt;- sample(100, 100, replace=TRUE)
+  result1 &lt;- glm(x[ind,2]~x[ind,1], family=binomial(logit))
+  r &lt;- coefficients(result1)
+  res &lt;- rbind(data.frame(), r)
+}
+system.time({
+  results &lt;- mclapply(trials, boot_fx, mc.cores = numCores)
+})</code></pre>
+<pre><code>##    user  system elapsed 
+##  21.271   0.898   4.246</code></pre>
 </div>
 <div id="parallelize-using-foreach-and-doparallel" class="section level1">
 <h1>Parallelize using: foreach and doParallel</h1>
@@ -332,7 +348,7 @@ system.time({
   }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##  25.156   0.988   5.084</code></pre>
+##  24.421   1.281   5.999</code></pre>
 <pre class="r"><code># And compare that to what it takes to do the same analysis in serial
 system.time({
   r &lt;- foreach(icount(trials), .combine=rbind) %do% {
@@ -342,7 +358,7 @@ system.time({
   }
 })</code></pre>
 <pre><code>##    user  system elapsed 
-##  17.905   0.553  18.486</code></pre>
+##  19.584   0.591  20.352</code></pre>
 <pre class="r"><code># When you're done, clean up the cluster
 stopImplicitCluster()</code></pre>
 </div>
