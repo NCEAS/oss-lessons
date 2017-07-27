@@ -1,5 +1,5 @@
 ---
-title: "Parallel Computing in R"
+title: "Quick Intro to Parallel Computing in R"
 author: "Matt Jones"
 date: "7/25/2017"
 output: html_document
@@ -23,9 +23,9 @@ Processing large amounts of data with complex models can be time consuming.  New
 
 ![Levy et al. 2016. doi:10.5063/F1Z899CZ](images/levy-map.png)
 
-There are over 400,000 individual netCDF files in the [Levy et al. microclimate data set](https://doi.org/10.5063/F1Z899CZ).  
+There are over 400,000 individual netCDF files in the [Levy et al. microclimate data set](https://doi.org/10.5063/F1Z899CZ).  Processing them would benefit massively from parallelization.
 
-Alternatively, think of remote sensing data.  Processing airborne hyperspectral data can involve processing each of hundreds of bands of data for each image in a flight path that is repeated a times.  
+Alternatively, think of remote sensing data.  Processing airborne hyperspectral data can involve processing each of hundreds of bands of data for each image in a flight path that is repeated many times over months and years.  
 
 ![NEON Data Cube](images/DataCube.png)
 
@@ -33,16 +33,16 @@ Alternatively, think of remote sensing data.  Processing airborne hyperspectral 
 # Why parallelism?
 
 Much R code runs fast and fine on a single processor.  But at times, computations
-can:
+can be:
 
-- Take too much cpu time (cpu-bound)
-- Take too much memory (memory-bound)
-- Take too much time to read/write from disk (I/O-bound)
-- Take too much time to transfer (network-bound)
+- **cpu-bound**: Take too much cpu time
+- **memory-bound**: Take too much memory
+- **I/O-bound**: Take too much time to read/write from disk
+- **network-bound**: Take too much time to transfer
 
-To help with cpu-bound computations, one can take advantage of modern processor architectures that provide multiple cores on a single processor, and thereby enable multiple computations to take place at the same time. In addition, some machines ship with multiple processors, allowing large computations to occur across the entire cluster of those computers. Plus, these machines also have large amounts of memory to enable intensive computing jobs.
+To help with **cpu-bound** computations, one can take advantage of modern processor architectures that provide multiple cores on a single processor, and thereby enable multiple computations to take place at the same time. In addition, some machines ship with multiple processors, allowing large computations to occur across the entire cluster of those computers. Plus, these machines also have large amounts of memory to avoid **memory-bound** computing jobs.
 
-# How many cores?
+# Processors (CPUs) and Cores
 
 A modern CPU (Central Processing Unit) is at the heart of every computer.  While
 traditional computers had a single CPU, modern computers can ship with mutliple processors, which in turn can each contain multiple cores.  These processors and 
@@ -94,7 +94,7 @@ Now that's some compute power!  Aurora has 384 GB of RAM, and ample storage.  Bu
 
 It's not as simple as it may seem. While in theory each added processor would linearly increase the throughput of a computation, there is overhead that reduces that efficiency.  For example, the code and, importantly, the data need to be copied to each additional CPU, and this takes time and bandwidth.  Plus, new processes and/or threads need to be created by the operating system, which also takes time.  This overhead reduces the efficiency enough that realistic performance gains are much less than theoretical, and usually do not scale linearly as a function of processing power. For example, if the time that a computation takes is short, then the overhead of setting up these additional resources may actually overwhelm any advantages of the additional processing power, and the computation could potentially take longer!
 
-In addition, not all of a task can be parallelized. Depending on the proportion, the expected speedup can be significantly reduced.  This follow's [Amdahl's Law](https://en.wikipedia.org/wiki/Amdahl%27s_law):
+In addition, not all of a task can be parallelized. Depending on the proportion, the expected speedup can be significantly reduced.  Some propose that this may follow [Amdahl's Law](https://en.wikipedia.org/wiki/Amdahl%27s_law), where the speedup of the computation (y-axis) is a function of both the number of cores (x-axis) and the proportion of the computation that can be parallelized (see colored lines):
 
 ```{r echo=FALSE}
 library(ggplot2)
@@ -119,11 +119,11 @@ ggplot(cpu_perf, aes(cpus, speedup, color=prop)) +
 ```
 
 
-So, its important to evaluate the computational efficiency of requests, and work to ensure that additional compute resources brought to bear will pay off in terms of increased work being done.  With that, let's do some computing...
+So, its important to evaluate the computational efficiency of requests, and work to ensure that additional compute resources brought to bear will pay off in terms of increased work being done.  With that, let's do some parallel computing...
 
 # Loops and repetitive tasks using lapply
 
-When you have a list repetitive tasks, you may be able to speed it up by adding more computing power.  If each task is completely independent of the others, then it is a prime candidate for executing those tasks in parallel, each on its own core.  For example, let's build a simple loop that downloads and processes a set of data files.
+When you have a list of repetitive tasks, you may be able to speed it up by adding more computing power.  If each task is completely independent of the others, then it is a prime candidate for executing those tasks in parallel, each on its own core.  For example, let's build a simple loop that downloads and processes a set of data files.
 
 ```{r eval=FALSE}
 library(httr)
@@ -162,27 +162,72 @@ system.time(res <- lapply(url_list, fx) )
 
 # Parallelize it!
 
-The `parallel` library can be used to send tasks (encoded as function calls) to each of the processors on your machine in parallel.  This is done by using the `parallel::mclapply` function, which is analogous to `lapply`, but distributes the tasks to multiple processors. `mclapply` gathers up the responses from each of these function calls, and returns a list of responses that is the same length as the list or vector of input data (one return per input item).
+The `parallel` library can be used to send tasks (encoded as function calls) to each of the processing cores on your machine in parallel.  This is done by using the `parallel::mclapply` function, which is analogous to `lapply`, but distributes the tasks to multiple processors. `mclapply` gathers up the responses from each of these function calls, and returns a list of responses that is the same length as the list or vector of input data (one return per input item).
 
 ```{r}
 library(parallel)
 library(MASS)
 
+starts <- rep(100, 40)
 fx <- function(nstart) kmeans(Boston, 4, nstart=nstart)
 numCores <- detectCores()
 numCores
 
 system.time(
-  results <- lapply(rep(1000, 36), fx) 
+  results <- lapply(starts, fx)
 )
 
 system.time(
-  results <- mclapply(rep(1000, 36), fx, mc.cores = numCores)
+  results <- mclapply(starts, fx, mc.cores = numCores)
 )
+```
+
+# Parallelization using: foreach
+
+The normal `for` loop in R looks like:
+
+```{r}
+for (i in 1:3) {
+  print(sqrt(i))
+}
+```
+
+The `foreach` method is similar, but uses the sequential `%do%` operator to indicate an expression to run. Note the difference in the returned data structure. 
+```{r}
+library(foreach)
+foreach (i=1:3) %do% {
+  sqrt(i)
+}
+```
+
+In addition, `foreach` supports a parallelizable operator `%dopar%`, which allows each iteration through the loop to use different cores or different machines in a cluster.  Here, we demonstrate with using all the cores on the current machine:
+```{r}
+library(foreach)
+library(doParallel)
+registerDoParallel(numCores)  # use multicore, set to the number of our cores
+foreach (i=1:3) %dopar% {
+  sqrt(i)
+}
+
+# To simplify output, foreach has some parameters that can simplify return values
+
+# Return a vector
+foreach (i=1:3, .combine=c) %dopar% {
+  sqrt(i)
+}
+
+# Return a data frame
+foreach (i=1:3, .combine=rbind) %dopar% {
+  sqrt(i)
+}
+
+# When you're done, clean up the cluster
+stopImplicitCluster()
 ```
 
 # Readings and tutorials
 
 - [Multicore Data Science with R and Python](https://blog.dominodatalab.com/multicore-data-science-r-python/)
+- [Beyond Single-Core R](https://ljdursi.github.io/beyond-single-core-R/#/) by Jonoathan Dursi (also see [GitHub repo for slide source](https://github.com/ljdursi/beyond-single-core-R))
 - The venerable [Parallel R](http://shop.oreilly.com/product/0636920021421.do) by McCallum and Weston (a bit dated on the tooling, but conceptually solid)
 
