@@ -18,7 +18,7 @@ Sponsor: [Gulf Research Program, National Academy of Sciences](http://www.nation
 Learning outcomes
 ========================================================
 
-- Understand basics of relational data models 
+- Understand basics of relational data models
 - Learn how to design and create effective data tables in SQL
 - Learn to query tables in SQL
 
@@ -102,6 +102,11 @@ Entity-Relationship Model (ER)
 
 ![](images/plotobs-diagram.png)
 
+Merging data
+========================================================
+
+![](images/sql-joins-venn.png)
+
 Simple Guidelines for Effective Data
 ========================================================
 
@@ -130,10 +135,10 @@ Data modeling exercise
 
 - Choose two related data sets for your project
   - Should need to be integrated
-  
+
 - Draw an ER model for the tables
   - Indicate the primary and foreign keys
-  
+
 ***
 
 ![](images/ERD_Relationship_Symbols_Quick_Reference-1.png)
