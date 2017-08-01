@@ -41,7 +41,7 @@ emlFile <- "strix-pacific-northwest.xml"
 doc <- read_eml(emlFile)
 
 # Change creator to us
-doc@dataset@creator <- c(eml_creator("Matt", "Jones", email = "jones@nceas.ucsb.edu"))
+doc@dataset@creator <- c(eml_creator("Matthew", "Jones", email = "jones@nceas.ucsb.edu"))
 
 # Change abstract to the better one we wrote
 doc@dataset@abstract <- as(set_TextType("better-abstract.md"), "abstract")
@@ -63,6 +63,7 @@ library(dataone)
 library(datapack)
 library(uuid)
 
+d1c <- D1Client("STAGING2", "urn:node:mnTestKNB")
 dp <- new("DataPackage")
 show(dp)
 ```
@@ -76,6 +77,14 @@ outputId <- paste0("urn:uuid:", uuid::UUIDgenerate())
 doc@dataset@otherEntity[[1]]@id <- new("xml_attribute", sourceId)
 doc@dataset@otherEntity[[2]]@id <- new("xml_attribute", progId)
 doc@dataset@otherEntity[[3]]@id <- new("xml_attribute", outputId)
+repo_obj_service <- paste0(d1c@mn@endpoint, "/object/")
+doc@dataset@otherEntity[[1]]@physical[[1]]@distribution[[1]]@online@url <- 
+  new("url", paste0(repo_obj_service, sourceId))
+doc@dataset@otherEntity[[2]]@physical[[1]]@distribution[[1]]@online@url <- 
+  new("url", paste0(repo_obj_service, progId))
+doc@dataset@otherEntity[[3]]@physical[[1]]@distribution[[1]]@online@url <- 
+  new("url", paste0(repo_obj_service, outputId))
+
 write_eml(doc, "strix-pacific-northwest.xml")
 
 # Add the metadata document to the package
@@ -119,12 +128,19 @@ show(dp)
 
 Finally, we upload the package to the Testing server for the KNB.
 ```{r, eval=FALSE}
-d1c <- D1Client("STAGING2", "urn:node:mnTestKNB")
 packageId <- uploadDataPackage(d1c, dp, public=TRUE, accessRules=myAccessRules, quiet=FALSE)
 ```
 
-This particular package contains the R script `filterSpecies.R`, the input file `sample.csv` that was read by
-the script and the output file `filteredSpecies.csv` that was created by the R script, which was run at a
+This particular package contains the R script `filterSpecies.R`, the input 
+file `sample.csv` that was read by the script and the output file 
+`filteredSpecies.csv` that was created by the R script, which was run at a
 previous time.  
 
-You can now search for and view the package at https://dev.nceas.ucsb.edu
+You can now search for and view the package at https://dev.nceas.ucsb.edu:
+
+![](images/data-uploaded.png)
+
+In addition, each of the uploaded entities shows the relevant provenance information, showing how the source data is linked to the derived data via the R program that was used to process the raw data:
+
+![](images/provenance-info.png)
+
