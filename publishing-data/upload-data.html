@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-<meta name="date" content="2017-07-20" />
+<meta name="date" content="2017-07-31" />
 
 <title>Uploading Data to DataONE</title>
 
@@ -68,7 +68,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">Uploading Data to DataONE</h1>
-<h4 class="date"><em>2017-07-20</em></h4>
+<h4 class="date"><em>2017-07-31</em></h4>
 
 
 
@@ -117,62 +117,72 @@ doc@dataset@abstract &lt;-<span class="st"> </span><span class="kw">as</span>(<s
 <span class="kw">library</span>(uuid)
 
 dp &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;DataPackage&quot;</span>)
-dp</code></pre></div>
-<pre><code>## This package does not contain any DataObjects:
-## 
-## This package doesn not contain any provenance relationships.</code></pre>
+<span class="kw">show</span>(dp)</code></pre></div>
+<pre><code>## This package does not contain any DataObjects.</code></pre>
+<pre><code>## NULL</code></pre>
 <p>We then add a metadata file, data file, R script and output data file to this package:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">emlFile &lt;-<span class="st"> &quot;strix-pacific-northwest.xml&quot;</span>
-metadataObj &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;DataObject&quot;</span>, <span class="dt">format=</span><span class="st">&quot;eml://ecoinformatics.org/eml-2.1.1&quot;</span>, <span class="dt">filename=</span><span class="kw">paste</span>(<span class="kw">getwd</span>(), emlFile, <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>),
-                   <span class="dt">suggestedFilename=</span><span class="kw">basename</span>(emlFile))
-dp &lt;-<span class="st"> </span><span class="kw">addData</span>(dp, metadataObj)
+metadataObj &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;DataObject&quot;</span>, 
+                   <span class="dt">format=</span><span class="st">&quot;eml://ecoinformatics.org/eml-2.1.1&quot;</span>, 
+                   <span class="dt">filename=</span><span class="kw">paste</span>(<span class="kw">getwd</span>(), emlFile, <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>))
+dp &lt;-<span class="st"> </span><span class="kw">addMember</span>(dp, metadataObj)
 
 sourceData &lt;-<span class="st"> &quot;sample.csv&quot;</span>
-sourceObj &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;DataObject&quot;</span>, <span class="dt">format=</span><span class="st">&quot;text/csv&quot;</span>, <span class="dt">filename=</span><span class="kw">paste</span>(<span class="kw">getwd</span>(), sourceData, <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>), <span class="dt">suggestedFilename=</span><span class="kw">basename</span>(sourceData))
-dp &lt;-<span class="st"> </span><span class="kw">addData</span>(dp, sourceObj, metadataObj)
+sourceObj &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;DataObject&quot;</span>, 
+                 <span class="dt">format=</span><span class="st">&quot;text/csv&quot;</span>, 
+                 <span class="dt">filename=</span><span class="kw">paste</span>(<span class="kw">getwd</span>(), sourceData, <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>))
+dp &lt;-<span class="st"> </span><span class="kw">addMember</span>(dp, sourceObj, metadataObj)
 
 progFile &lt;-<span class="st"> &quot;filterSpecies.R&quot;</span>
-progObj &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;DataObject&quot;</span>, <span class="dt">format=</span><span class="st">&quot;application/R&quot;</span>, <span class="dt">filename=</span><span class="kw">paste</span>(<span class="kw">getwd</span>(), progFile, <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>), <span class="dt">mediaType=</span><span class="st">&quot;text/x-rsrc&quot;</span>,
-                <span class="dt">suggestedFilename=</span><span class="kw">basename</span>(progFile))
-dp &lt;-<span class="st"> </span><span class="kw">addData</span>(dp, progObj, metadataObj)
+progObj &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;DataObject&quot;</span>, 
+               <span class="dt">format=</span><span class="st">&quot;application/R&quot;</span>, 
+               <span class="dt">filename=</span><span class="kw">paste</span>(<span class="kw">getwd</span>(), progFile, <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>), 
+               <span class="dt">mediaType=</span><span class="st">&quot;text/x-rsrc&quot;</span>)
+dp &lt;-<span class="st"> </span><span class="kw">addMember</span>(dp, progObj, metadataObj)
 
 outputData &lt;-<span class="st"> &quot;filteredSpecies.csv&quot;</span>
-outputObj &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;DataObject&quot;</span>, <span class="dt">format=</span><span class="st">&quot;text/csv&quot;</span>, <span class="dt">filename=</span><span class="kw">paste</span>(<span class="kw">getwd</span>(), outputData, <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>), <span class="dt">suggestedFilename=</span><span class="kw">basename</span>(outputData))
-dp &lt;-<span class="st"> </span><span class="kw">addData</span>(dp, outputObj, metadataObj)
+outputObj &lt;-<span class="st"> </span><span class="kw">new</span>(<span class="st">&quot;DataObject&quot;</span>, 
+                 <span class="dt">format=</span><span class="st">&quot;text/csv&quot;</span>, 
+                 <span class="dt">filename=</span><span class="kw">paste</span>(<span class="kw">getwd</span>(), outputData, <span class="dt">sep=</span><span class="st">&quot;/&quot;</span>))
+dp &lt;-<span class="st"> </span><span class="kw">addMember</span>(dp, outputObj, metadataObj)
 
 myAccessRules &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">subject=</span><span class="st">&quot;http://orcid.org/0000-0003-0077-4738&quot;</span>, <span class="dt">permission=</span><span class="st">&quot;changePermission&quot;</span>) 
 
 dp &lt;-<span class="st"> </span><span class="kw">describeWorkflow</span>(dp, <span class="dt">sources=</span>sourceObj, <span class="dt">program=</span>progObj, <span class="dt">derivations=</span>outputObj)
 
-dp</code></pre></div>
+<span class="kw">show</span>(dp)</code></pre></div>
 <pre><code>## Members:
 ## 
-## identifier format          submitter       rightsHolder    mediaType       filename             size       
-## urn...4582 text/csv        NA              NA              NA              filteredSpecies.csv  6017       
-## urn...7331 eml://...-2.1.1 NA              NA              NA              strix-pa...hwest.xml 5116       
-## urn...55ec text/csv        NA              NA              NA              sample.csv           11577      
-## urn...4b90 application/R   NA              NA              text/x-rsrc     filterSpecies.R      380        
+## filename        format    mediaType  size     identifier    modified local 
+## strix-...st.xml eml...1.1 NA         5116     urn:u...b87c0 n        y     
+## sample.csv      text/csv  NA         11577    urn:u...43eb5 n        y     
+## filter...es.csv text/csv  NA         6017     urn:u...3ae4a n        y     
+## filterSpecies.R app...n/R tex...rsrc 380      urn:u...e78ad n        y     
 ## 
-## Relationships:
+## Package identifier: NA
+## RightsHolder: NA
+## 
+## 
+## Relationships (updated):
 ## 
 ##                  subject             predicate                object
-## 12 _:33b94f4...baa28d67f              rdf:type      prov:Association
-## 11 _:33b94f4...baa28d67f          prov:hadPlan       filterSpecies.R
+## 12 _11c43e96...e848d11e5              rdf:type      prov:Association
+## 11 _11c43e96...e848d11e5          prov:hadPlan       filterSpecies.R
 ## 6    filteredSpecies.csv   cito:isDocumentedBy strix-pac...hwest.xml
 ## 8    filteredSpecies.csv              rdf:type          provone:Data
 ## 17   filteredSpecies.csv   prov:wasDerivedFrom            sample.csv
-## 16   filteredSpecies.csv   prov:wasGeneratedBy urn:uuid:...70cc1a61a
-## 5  strix-pac...hwest.xml        cito:documents   filteredSpecies.csv
-## 1  strix-pac...hwest.xml        cito:documents            sample.csv
-## 3  strix-pac...hwest.xml        cito:documents       filterSpecies.R
-## 14 urn:uuid:...70cc1a61a    dcterms:identifier urn:uuid:...70cc1a61a
-## 10 urn:uuid:...70cc1a61a              rdf:type     provone:Execution
-## 9  urn:uuid:...70cc1a61a prov:qual...sociation _:33b94f4...baa28d67f
-## 15 urn:uuid:...70cc1a61a             prov:used            sample.csv
+## 16   filteredSpecies.csv   prov:wasGeneratedBy urn:uuid:...d8a5bb645
+## 4        filterSpecies.R   cito:isDocumentedBy strix-pac...hwest.xml
+## 13       filterSpecies.R              rdf:type       provone:Program
 ## 2             sample.csv   cito:isDocumentedBy strix-pac...hwest.xml
 ## 7             sample.csv              rdf:type          provone:Data
-## 4        filterSpecies.R   cito:isDocumentedBy strix-pac...hwest.xml
-## 13       filterSpecies.R              rdf:type       provone:Program</code></pre>
+## 1  strix-pac...hwest.xml        cito:documents            sample.csv
+## 5  strix-pac...hwest.xml        cito:documents   filteredSpecies.csv
+## 3  strix-pac...hwest.xml        cito:documents       filterSpecies.R
+## 14 urn:uuid:...d8a5bb645    dcterms:identifier urn:uuid:...d8a5bb645
+## 10 urn:uuid:...d8a5bb645              rdf:type     provone:Execution
+## 9  urn:uuid:...d8a5bb645 prov:qual...sociation _11c43e96...e848d11e5
+## 15 urn:uuid:...d8a5bb645             prov:used            sample.csv</code></pre>
 <p>Finally, we upload the package to the Testing server for the KNB.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d1c &lt;-<span class="st"> </span><span class="kw">D1Client</span>(<span class="st">&quot;STAGING2&quot;</span>, <span class="st">&quot;urn:node:mnTestKNB&quot;</span>)
 packageId &lt;-<span class="st"> </span><span class="kw">uploadDataPackage</span>(d1c, dp, <span class="dt">public=</span><span class="ot">TRUE</span>, <span class="dt">accessRules=</span>myAccessRules, <span class="dt">quiet=</span><span class="ot">FALSE</span>)</code></pre></div>

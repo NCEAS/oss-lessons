@@ -63,34 +63,41 @@ library(datapack)
 library(uuid)
 
 dp <- new("DataPackage")
-dp
+show(dp)
 ```
 
 We then add a metadata file, data file, R script and output data file to this package:
 ```{r}
 emlFile <- "strix-pacific-northwest.xml"
-metadataObj <- new("DataObject", format="eml://ecoinformatics.org/eml-2.1.1", filename=paste(getwd(), emlFile, sep="/"),
-                   suggestedFilename=basename(emlFile))
-dp <- addData(dp, metadataObj)
+metadataObj <- new("DataObject", 
+                   format="eml://ecoinformatics.org/eml-2.1.1", 
+                   filename=paste(getwd(), emlFile, sep="/"))
+dp <- addMember(dp, metadataObj)
 
 sourceData <- "sample.csv"
-sourceObj <- new("DataObject", format="text/csv", filename=paste(getwd(), sourceData, sep="/"), suggestedFilename=basename(sourceData))
-dp <- addData(dp, sourceObj, metadataObj)
+sourceObj <- new("DataObject", 
+                 format="text/csv", 
+                 filename=paste(getwd(), sourceData, sep="/"))
+dp <- addMember(dp, sourceObj, metadataObj)
 
 progFile <- "filterSpecies.R"
-progObj <- new("DataObject", format="application/R", filename=paste(getwd(), progFile, sep="/"), mediaType="text/x-rsrc",
-                suggestedFilename=basename(progFile))
-dp <- addData(dp, progObj, metadataObj)
+progObj <- new("DataObject", 
+               format="application/R", 
+               filename=paste(getwd(), progFile, sep="/"), 
+               mediaType="text/x-rsrc")
+dp <- addMember(dp, progObj, metadataObj)
 
 outputData <- "filteredSpecies.csv"
-outputObj <- new("DataObject", format="text/csv", filename=paste(getwd(), outputData, sep="/"), suggestedFilename=basename(outputData))
-dp <- addData(dp, outputObj, metadataObj)
+outputObj <- new("DataObject", 
+                 format="text/csv", 
+                 filename=paste(getwd(), outputData, sep="/"))
+dp <- addMember(dp, outputObj, metadataObj)
 
 myAccessRules <- data.frame(subject="http://orcid.org/0000-0003-0077-4738", permission="changePermission") 
 
 dp <- describeWorkflow(dp, sources=sourceObj, program=progObj, derivations=outputObj)
 
-dp
+show(dp)
 ```
 
 Finally, we upload the package to the Testing server for the KNB.
