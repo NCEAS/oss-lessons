@@ -34,6 +34,7 @@ Next, modify the metadata file associated with the package to set yourself as th
 
 ```{r}
 library(EML)
+# devtools::install_github("NCEAS/arcticdatautils")
 library(arcticdatautils)
 
 # Load the EML file into R
