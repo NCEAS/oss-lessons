@@ -144,7 +144,7 @@ The cloning process will automatically create a directory on your machine named 
 
 Let us have a closer look at the git workflow. It is important to stress that almost all of the git workflow happens on your local machine:
 
-![](images/git_commands_workflow.png)
+![](images/git_commands_workflow_new.png)
 
 ## Example
 
@@ -186,7 +186,7 @@ My name, My desert
 Julien, Ice cream
 Eliott, Crepes
 ```
-Save and exit vim
+Save and exit vim by typing `:wq`
 
 5.) Add (stage) and commit the new version of the file
 
@@ -215,9 +215,6 @@ git log
 git log -1
 ```
 
-## <img style="float: left;width: 35px;" src="images/challengeproblemred_scribble.png"/>  Challenge
-
-Write a R code to read the favorite_desserts.csv files in and add a new row to the dataframe and overwrite the csv with the new entry. Of course you need to track the development of your code using git!!
 
 # Getting information about git
 

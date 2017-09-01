@@ -8,42 +8,8 @@ output:
 ---
 
 
-# Working with remotes
 
-
-***So far we have used git locally, on one machine***. One strength of Git is that it allows you to share and co-edit codes and files.
-
-## Adding remotes to your workflow
-
-It is important that a good portion of the worflow happens on your local machine (in blue) and a part requires interactions with a remote machine (in purple):
-
-![](images/git_workflow_detailed.png)
-
-### Sequence order: 
-
-1.) ```git add```(adding the guys you want on the picture)
-
-2.) ```git commit -m "my descriptive message"``` (taking the picture)
-
--------------------------------------------  REMOTE  -------------------------------------------
-
-3.) ```git pull``` : be sure you have the latest version of the picture album from the server
-
-4.) ```git push``` : send your latest version of the picture album to the server
-
-
-## Working with remote repositories
-
-### Adding your local repository to a remote server
-
-Within your local repository:
-
-1. Add the remote address: ```git remote add origin https://github.nceas.ucsb.edu/brun/demo.git```
-2. Do your initial push: ```git push -u origin master```
-
-The `-u` flag sets the upstream tracking. This allows git to track changes on the remote branch. It also allows you to `pull` without argument (or `merge` to be exact). You only need to set it once (per branch). Note that when you `clone` a repository, the upstream tracking is set automatically to `origin/master`, therefore you can directly use `git push` on the master branch without additional arguments. 
-
-### Managing Merge Conflicts
+## Managing Merge Conflicts
 
 The most common cause of merge conflicts happens if a different user changes the same file that you have modified. It can happen during pull from a remote repository (or when merging branches).
 
@@ -76,6 +42,10 @@ During this process, if you want to roll back to the situation before you starte
 3. `commit -m "descriptive message"`
 4. `git pull`
 5. `git push`
+
+## Example
+
+Continuing with the `dessert` example we used in the first part of this tutorial, we now have on our local machine
 
 
 # Branches
