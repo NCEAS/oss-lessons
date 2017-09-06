@@ -15,9 +15,9 @@ output:
 
 <img style="align: left;width: 450px;" src=images/phd_comics_final.png />
 
-So code versioning is very useful to **keep track of changes you made to your scripts**. It allows you to choose when you have reached a stage in your code that you think is worth keeping track of, like a new function that makes your data analysis soooooo much better. 
+Version control is very useful to **keep track of changes you made to your scripts**. It allows you to choose when you have reached a stage in your code that you think is worth keeping track of, like a new function that makes your data analysis soooooo much better. 
 
-For scientists, version control is a useful tool to help you to track changes you make to your scripts and enable you to share your codes with your collaborators. For example, if you break your code, git can help you to revert to an earlier working version. Want one of your collaborators to add a feature to your code to do a specific analysis? Code versioning can help you to do so in a smooth and organized manner, tracking who changed what.
+For scientists, version control is a useful tool to help you to track changes you make to your scripts and enable you to share your codes with your collaborators. For example, if you break your code, git can help you to revert to an earlier working version. Want one of your collaborators to add a feature to your code to do a specific analysis? Version control can help you to do so in a smooth and organized manner, tracking who changed what.
 
 This training material focuses on the code verioning system calld `Git`. Note that there are others, such as `Mercurial` or `svn` for example.
 
@@ -31,7 +31,7 @@ Git is a *free* and *open source* distributed *version control system*. It has m
 
 ## How does it work?
 
-Git can be enabled on a specific folder/directory on your filesystem to version files within that directory (including sub-directories). In git (and other version control systems) terms, this “tracked folder” is called a **repository** (which formally is a specific data structure storing versioning information).
+Git can be enabled on a specific folder/directory on your file system to version files within that directory (including sub-directories). In git (and other version control systems) terms, this “tracked folder” is called a **repository** (which formally is a specific data structure storing versioning information).
 
 ### More details:
   
@@ -59,7 +59,7 @@ Git can be enabled on a specific folder/directory on your filesystem to version 
 
 **And repeat!!**
 
-Everytime you create a new snapshot, you add the new version of the file to the database, while keeping all the previous versions in the database. It creates an history that is like a graph that you can navigate:
+Every time you create a new snapshot, you add the new version of the file to the database, while keeping all the previous versions in the database. It creates an history that is like a graph that you can navigate:
 
 <img style="align: left;width: 200px;" src=images/version-graph_mattJones.png />
 
@@ -109,7 +109,7 @@ Cache your GitHub credentials (for 1 hour):
 git config --global credential.helper 'cache --timeout=3600'
 ```
 
-<img style="float: left;width: 30px;" src="images/tip.png"/> Want to know more about the available configuration options? How to change the default [text editor](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) used byt git? How make git remember your [GitHub credentials](https://help.github.com/articles/caching-your-github-password-in-git/#platform-all)?
+<img style="float: left;width: 30px;" src="images/tip.png"/> Want to know more about the available configuration options? How to change the default [text editor](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) used by git? How make git remember your [GitHub credentials](https://help.github.com/articles/caching-your-github-password-in-git/#platform-all)?
 
 ## 2. Starting a git repository
 
@@ -253,7 +253,7 @@ To know more: <https://git-scm.com/docs/gitignore>
 ```{bash}
 git reset HEAD <my_file_I_added_by_mistake.xls>
 ``` 
-This will remove the file from your next commit. Can be used to undo an erronous `git add`.
+This will remove the file from your next commit. Can be used to undo an erroneous `git add`.
 
 ## Undo your last commit
 
@@ -268,7 +268,7 @@ More info about how to undo things [here](https://git-scm.com/book/en/v2/Git-Bas
 
 ## Undo your changes
 
-***Warning!*** `git checkout` overwrite the file version by the latest commited one => your changes will be lost!
+***Warning!*** `git checkout` overwrite the file version by the latest committed one => your changes will be lost!
 
 ```{bash}
 git checkout -- test_file.txt

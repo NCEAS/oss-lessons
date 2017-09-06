@@ -2,8 +2,8 @@
 title: "Why considering Python"
 author: "Julien Brun, NCEAS - OSS2017"
 output:
-  ioslides_presentation: default
   slidy_presentation: default
+  ioslides_presentation: default
 ---
 
 ## The Why <img style="float: right;width: 300px;" src="images/python.png">

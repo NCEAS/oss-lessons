@@ -9,9 +9,9 @@ output:
 
 
 
-## Managing Merge Conflicts
+# Managing Merge Conflicts
 
-The most common cause of merge conflicts happens if a different user changes the same file that you have modified. It can happen during pull from a remote repository (or when merging branches).
+The most common cause of merge conflicts happens when another user changes the same file that you just modified. It can happen during pull from a remote repository (or when merging branches).
 
 1. If you **know for sure** what file version you want to keep:
 
@@ -35,7 +35,7 @@ remote version (theirs)
 
 During this process, if you want to roll back to the situation before you started the merge: `git merge --abort`
 
-**NOTE:** By doing a `pull` before commiting, you can avoid a lot of git conflicts. Your git workflow should therefore be:
+**NOTE:** By doing a `pull` before committing, you can avoid a lot of git conflicts. Your git workflow should therefore be:
 
 1. `git add`
 2. `git pull`

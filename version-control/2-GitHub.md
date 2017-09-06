@@ -1,5 +1,5 @@
 ---
-title: "Git and Github as collaborative tools"
+title: "Git and GitHub as collaborative tools"
 author: "Julien Brun"
 output: 
   html_document:
@@ -14,7 +14,7 @@ output:
 
 ## Adding remotes to your workflow
 
-It is important to highlight that a good portion of the worflow happens on your local machine (in green) and a part requires interactions with a remote machine (in blue):
+It is important to highlight that a good portion of the workflow happens on your local machine (in green) and a part requires interactions with a remote machine (in blue):
 
 ### Sequence order: 
 
@@ -37,7 +37,7 @@ It is important to highlight that a good portion of the worflow happens on your 
 
 ## GitHub
 	
-You might also have heard of [GitHub](https://github.com). **GitHub is a company that hosts git repositories online** and provides several collaboration features (among which `forking`). GitHub fosters a great user community and has built a nice webinterface to git, also adding great visualization/rendering capacities of your data.
+You might also have heard of [GitHub](https://github.com). **GitHub is a company that hosts git repositories online** and provides several collaboration features (among which `forking`). GitHub fosters a great user community and has built a nice web interface to git, also adding great visualization/rendering capacities of your data.
 
 * **GitHub.com**: <https://github.com>
 * **A user account**: <https://github.com/brunj7>
@@ -49,23 +49,23 @@ You might also have heard of [GitHub](https://github.com). **GitHub is a company
 We are going to create a new repository on your GitHub account:
 
 * Click on ![image alt text](images/image_10.png)
-* Enter a descriptive name for your new repo (avoid upper case and use `-` instead of spaces)
+* Enter a descriptive name for your new repository (avoid upper case and use `-` instead of spaces)
 * Choose **"Public"** (Private repositories are not free)
 * Check **"Initialize this repository with a README”**
-* Add a `.gitignore` file (optional). As the name suggest, the gitignore file is used to specify the file format that git should to track. GitHub offers prewritten gitignore files for commodity
+* Add a `.gitignore` file (optional). As the name suggest, the gitignore file is used to specify the file format that git should to track. GitHub offers pre-written gitignore files for commodity
 * Add a license file (optional) 
 
 <img style="align: left;width: 100px;" src=images/github_cloud_with_repo.png /> **=> Here it is, you now have a repository in the cloud!!** 
 
 
-<img style="align: left;width: 35px;" src=images/tip.png /> Here is a website to look for more prewritten`.gitignore` files: <https://github.com/github/gitignore>
+<img style="align: left;width: 35px;" src=images/tip.png /> Here is a website to look for more pre-written`.gitignore` files: <https://github.com/github/gitignore>
 
 
 ## Pushing your local repository to a remote server
 
-This is the case where you already worked in a local reposiotry and you would like to add your local reposiotry to a remote computer or server
+This is the case where you already worked in a local repository and you would like to add your local repository to a remote computer or server
 
-First, we will need to create a **bare** remote repository. In this example we wil create a bare repository on GitHub. It is the exact same steps we have seen previously, except we **will not check**`initialize this repository with a README file`. 
+First, we will need to create a **bare** remote repository. In this example we wile create a bare repository on GitHub. It is the exact same steps we have seen previously, except we **will not check**`initialize this repository with a README file`. 
 
 Keeping on our `dessert` example, go to your GitHub account and create a new **bare** repository called `dessert`
 
@@ -97,11 +97,11 @@ The `-u` flag sets the upstream tracking. This allows git to track changes on th
 
 ## Cloning a remote repository to your local machine
 
-This is the opposite situation: You would like to bring an exact copy (clone) of a remote reposiotry to your local machine.
+This is the opposite situation: You would like to bring an exact copy (clone) of a remote repository to your local machine.
 
-In this example we are going to clone to your local machine the repository containing all the reachin material for the OSS:
+In this example we are going to clone to your local machine the repository containing all the teaching material for the OSS:
 
-At the command line, you meed to navigate to the location where you would like to create your new reposiroty. Remember a repository is a directory/folder a the file system level. Note that the cloning process is going to create the directory/folder of the repository, so you should navigate to the folder where you would like the repository to be a subfolder. Assuming you are in your `dessert` repository and that you want to clone the `oss-lessons` remote repository next to it:
+At the command line, you meed to navigate to the location where you would like to create your new repository. Remember a repository is a directory/folder a the file system level. Note that the cloning process is going to create the directory/folder of the repository, so you should navigate to the folder where you would like the repository to be a sub-folder. Assuming you are in your `dessert` repository and that you want to clone the `oss-lessons` remote repository next to it:
 
 ```bash
 cd ..
@@ -115,13 +115,13 @@ This is it! Note that no login was required since anybody can clone a public rep
 
 We will use the `dessert` repository created in the previous section to illustrate how these tools can be used to move your work to another machine and help you to keep versions up-to-date between these machines.
 
-You should be now in the following situation with oyr dessert example: your local repository should be pushed to github, with the two content being identical:
+You should be now in the following situation with our dessert example: your local repository should be pushed to github, with the two content being identical:
 
 ![](images/git_remote_local_sync.png) 
 
 ### Clone the repository to a second machine
 
-First we should bring our repository to the new machine. Since it is not currently on the other mahinc we will have to clone the repository from Github to this new machine. In our case this second machine will be NCEAS analaytical server Aurora:
+First we should bring our repository to the new machine. Since it is not currently on this machine, we will have to clone the repository from GitHub to this computer. In our case, this second machine will be NCEAS analytical server Aurora:
 
 1. Connect to Aurora via the command line using `ssh`
 
@@ -141,7 +141,7 @@ git clone https://github.nceas.ucsb.edu/<my_github_username>/dessert.git
 
 ### Keeping things synchronized
 
-Now, let say we are working on the server to scale up our analaysis or in our dessert example write a R script to read the csv about the favorite desserts.
+Now, let say we are working on the server to scale up our analysis or in our dessert example write a R script to read the csv about the favorite desserts.
 
 ##### Let us add a new person to our csv
 
@@ -172,30 +172,30 @@ git add favorite_desserts.csv
 git commit -m"adding Sophia"
 ```
 
-Ok, where are we at?
+OK, where are we at?
 
 ![](images/git_server_changed.png)
 
-As you can see, now the git commit history is different on the server than on Github and on your computer. You can verify by going to your github account and looking at `favorite_desserts.csv`. These are only two name listed. To implement the latest changes to the dessert repository on GitHub we will have to use `git pull and pull`.
+As you can see, now the git commit history is different on the server than on GitHub and on your computer. You can verify by going to your github account and looking at `favorite_desserts.csv`. These are only two name listed. To implement the latest changes to the dessert repository on GitHub we will have to use `git pull and pull`.
 
 ##### pushing the latest changes
 
-When you want to push your change to a repository, it is always good to first pull the latest version of the remote repository to your local repository (the reposiotry on the server in this case) to be sure you have all the changes that might have been created on the online repository
+When you want to push your change to a repository, it is always good to first pull the latest version of the remote repository to your local repository (the repository on the server in this case) to be sure you have all the changes that might have been created on the online repository
 
 ```bash
 git pull
 git push
 ```
 
-Enter your Github credentials when asked.
+Enter your GitHub credentials when asked.
 
-Now if you use your web browser to go to your repositry on GitHub and click on the `favorite_desserts.csv`. It should have 3 rows.
+Now if you use your web browser to go to your repository on GitHub and click on the `favorite_desserts.csv`. It should have 3 rows.
 
 ![](images/git_server_github_synchronized.png)
 
 ##### getting the latest changes
 
-Now we want to pull the latest version to our Deasktop.
+Now we want to pull the latest version to our Desktop.
 
 ```bash
 git pull
@@ -210,7 +210,7 @@ Note that you do not need to synchronize your repositories across your machines/
 
 ## <img style="float: left;width: 35px;" src="images/challengeproblemred_scribble.png"/>  Challenge
 
-Write a R code to read the favorite_desserts.csv files in and add a new row to the dataframe and overwrite the csv with the new entry. Of course you need to track the development of your code using git!!
+Write a R code to read the favorite_desserts.csv files in and add a new row to the data frame and overwrite the csv with the new entry. Of course you need to track the development of your code using git!!
 
 
 ## Collaborating with others
@@ -221,7 +221,7 @@ A **fork** is a **copy of a repository** that will be stored under your user acc
 
 Most commonly, forks are used to either propose changes to someone else's project or to use someone else's project as a starting point for your own idea.
 
-When you are satisified with your work, you can intiate a ***Pull Request*** to initiate discussion about your modifications. Your commit history allows the original repository administrators to see exactly what changes would be merged if they accept your request.  
+When you are satisfied with your work, you can initiate a ***Pull Request*** to initiate discussion about your modifications. Your commit history allows the original repository administrators to see exactly what changes would be merged if they accept your request.  
 
 By using GitHub's `@mention` syntax in your Pull Request message, you can ask for feedback from specific people or teams.
 
