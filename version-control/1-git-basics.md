@@ -287,6 +287,11 @@ git checkout e11e34 test_file.txt
 * **Branches**: A branch represents an independent line of development, parallel to the master. In fact, the default branch name that is created by ```git init``` is called ***master***.
 
 
+# Next session
+
+[**Remote repositories and collaboration with GitHub**](https://nceas.github.io/oss-lessons/version-control/2-git-remote-collaboration.html)
+
+
 # References
 - Interactive git 101: [https://try.github.io/](https://try.github.io/)
 - Very good tutorial about git: [https://www.atlassian.com/git/tutorials/what-is-version-control](https://www.atlassian.com/git/tutorials/what-is-version-control)

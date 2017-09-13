@@ -95,7 +95,11 @@ Done with your branch? Want to merge your new - ready for prime time - script to
 4. Delete the branch:			```git branch -d myBranchName```
 
 
-## References
+# Next Session
+
+[**git using RStudio**](https://nceas.github.io/oss-lessons/version-control/4-getting-started-with-git-in-RStudio.html)
+
+# References
 
 - General
  - Interactive git 101: <https://try.github.io/>

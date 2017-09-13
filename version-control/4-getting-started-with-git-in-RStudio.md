@@ -1,5 +1,5 @@
 ---
-title: "Using git From RStudio"
+title: "Using git from RStudio"
 author: "Julien Brun"
 output: 
   html_document:

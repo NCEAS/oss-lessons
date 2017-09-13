@@ -245,6 +245,9 @@ When you collaborate closely and actively with colleagues, you do not want neces
 
 ![image alt text](images/image_14.png)
 
+# Next session
+
+[**git advanced: branches and merge conflicts**](https://nceas.github.io/oss-lessons/version-control/3-git-advanced.html)
 
 # References
 
