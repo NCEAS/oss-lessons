@@ -30,7 +30,7 @@ This produces a weird result:
 
 Or maybe our user tries something more unexpected:
 
-```{r}
+```{r, eval=FALSE}
 my_log_transform("bananas")
 ```
 
@@ -62,7 +62,7 @@ There are two packages we'll need to get set up testing:
 
 If you need then, install them with:
 
-```{r}
+```{r, eval=FALSE}
 install.packages(c("testthat", "devtools"))
 ```
 
@@ -87,7 +87,7 @@ Your tests live in one or more files that start with the filename `test_` (e.g. 
 
 Let's get started using `testthat` with:
 
-```{r}
+```{r, eval=FALSE}
 devtools::use_testthat()
 ```
 

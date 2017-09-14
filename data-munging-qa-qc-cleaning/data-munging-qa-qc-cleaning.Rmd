@@ -1,13 +1,13 @@
 ---
-  title: "Data Munging / QA / QC / Cleaning"
+title: "Data Munging / QA / QC / Cleaning"
 time_slot: 60 minutes
 ---
   
-  ## Introduction
+## Introduction
   
-  ## Leaning outcomes
+## Leaning outcomes
   
-  Students should
+Students should
 
 - Learn what it means to test assumptions about their data with base R
 - Learn how to reshape and restructure their data (tidyr)
@@ -207,6 +207,8 @@ mydf <- data.frame(fish = c("Redfish", "Gag Grouper", "Striped Bass", "Redfish")
 ### Complete analysis script:
 
 ```{r}
+library(dplyr)
+
 # Import
 fundata <- read.csv("fundata.csv", stringsAsFactors = FALSE)
 

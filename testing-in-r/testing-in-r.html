@@ -120,25 +120,113 @@ $(document).ready(function () {
 </div>
 
 
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
 <p>When we write R code to do our analyses, we’re usually making use of other peoples’ functions. But sometimes we have a need to write our own functions and, when we do this, it is a great idea to test them to make sure they work as we expect.</p>
-<p>As an example, we’ll create a new R package that provides a single function to calculate Z scores for a vector of numbers. A Z score tells us how many standard deviations a value is from the mean of a set of values. Mathematically, it is defined as <span class="math inline">\(z = (X - μ) / σ\)</span> where <span class="math inline">\(X\)</span> is the value, <span class="math inline">\(µ\)</span> is the mean and <span class="math inline">\(σ\)</span> is the standard deviation. In reality, this is the <code>scale</code> function in R but we’re going to write it for ourselves as a simple example.</p>
+<p>When writing functions, we often develop them against some set of test data.</p>
+<pre class="r"><code>input_values &lt;- c(1, 2, 3)
+my_log_transform &lt;- function(values) {
+  log(values)
+}
+my_log_transform(input_values) # Should be: 0.0000000 0.6931472 1.0986123</code></pre>
+<pre><code>## [1] 0.0000000 0.6931472 1.0986123</code></pre>
+<p>We do this with data we know the result of running our function on so we can verify that our code actually works. In reality, we often find we didn’t test with enough different types of test data to cover data our users might pass to our function.</p>
+<pre class="r"><code>log(-1)</code></pre>
+<pre><code>## Warning in log(-1): NaNs produced</code></pre>
+<pre><code>## [1] NaN</code></pre>
+<p>This produces a weird result:</p>
+<blockquote>
+<p>NaNs produced [1] NaN</p>
+</blockquote>
+<p>Or maybe our user tries something more unexpected:</p>
+<pre class="r"><code>my_log_transform(&quot;bananas&quot;)</code></pre>
+<p>This results in an error:</p>
+<blockquote>
+<p>Error in log(values) : non-numeric argument to mathematical function</p>
+</blockquote>
+<p>Testing helps us make sure our code produces a correct result. But it also helps us get in the mindest of our users:</p>
 <ul>
-<li>Step 1: Get set up</li>
-<li>Use already-created package if we get there in previous lesson</li>
-<li>Setup
-<ul>
-<li><p>Add to Suggests. What is Suggests?</p></li>
-<li><p>Add to tests/testthat.R:</p></li>
+<li>What values might we expect a user to pass in. e.g. does our function accept numbers <em>and</em> strings or just numbers?</li>
+<li>What behavior might the user expect when certain values are pased in: Does our function produce a cryptic or useful error message when something goes wrong?</li>
 </ul>
-<p>``` library(testthat) library(yourpackage)</p>
-<p>test_check(“yourpackage”) ```</p>
+<p>Creating a useful function is both about writing a correct function but also a function that is easy to use.</p>
+</div>
+<div id="lesson" class="section level2">
+<h2>Lesson</h2>
+<p>As an example of how to test, we’ll create a new R package that provides a single function to calculate Z scores for a vector of numbers. A Z score tells us how many standard deviations a value is from the mean of a set of values. Mathematically, it is defined as <span class="math inline">\(z = (X - μ) / σ\)</span> where <span class="math inline">\(X\)</span> is the value, <span class="math inline">\(µ\)</span> is the mean and <span class="math inline">\(σ\)</span> is the standard deviation. In reality, this is already proivded by R with the <code>scale</code> function but we’re going to write it for ourselves as a simple example.</p>
+<div id="task-one-create-a-new-r-package-in-rstudio" class="section level3">
+<h3>Task one: Create a new R package in RStudio</h3>
+<p>There are two packages we’ll need to get set up testing:</p>
 <ul>
-<li>Each test file should start with test and end in .R or .r</li>
+<li>testthat</li>
+<li>devtools</li>
+</ul>
+<p>If you need then, install them with:</p>
+<pre class="r"><code>install.packages(c(&quot;testthat&quot;, &quot;devtools&quot;))</code></pre>
+<p><code>testthat</code> is the easiest way to get started testing your R code. It uses a convention to help you organize your tests and help itself find and run them. Your tests live in one or more files that start with the filename <code>test_</code> (e.g. <code>test_z_score.R</code>, <code>test_analysis.R</code>) inside the <code>tests/testthat/</code> folder in the root of your package:</p>
+<pre><code>.
+├── DESCRIPTION
+├── NAMESPACE
+├── R
+│   └── hello.R
+├── man
+│   └── hello.Rd
+├── testingdemo.Rproj
+└── tests
+    ├── testthat
+    │   └── test files go here!
+    └── testthat.R</code></pre>
+<p>Let’s get started using <code>testthat</code> with:</p>
+<pre class="r"><code>devtools::use_testthat()</code></pre>
+<p>This does a few things to our package:</p>
+<ul>
+<li>Adds <code>testthat</code> to the Suggests section of the DESCRIPTION file</li>
+<li>Adds the <code>tests</code> folder at the root of our package with a place to put our tests</li>
+</ul>
+<p>Let’s get started:</p>
+<ul>
+<li>Make a new R script at <code>R/z_score.R</code></li>
+<li>Fill it with or type in:</li>
+</ul>
+<pre class="r"><code>z_score &lt;- function(x) {
+  (x - mean(x)) / sd(x)
+}</code></pre>
+<p>Before we get to testing our new <code>z_score</code> function, make sure to see how it works. Go ahead and “source” <code>R/z_score.R</code> and try it out a few times to see. For example, you could try <code>z_score(c(1, 2, 3))</code>.</p>
+<p>Let’s write our first test for <code>z_score</code>:</p>
+<p>First:</p>
+<ul>
+<li>Create an empty R script at <code>tests/testthat/test_z_score.R</code></li>
+</ul>
+<p><code>testthat</code> tests take are all function calls to a function called <code>test_that()</code>. Each test file will just be a number of these <code>test_that()</code> functions being called. There are no real restrictions on how you test your code but, typically, people tend to make each call to <code>test_that</code> test some specific behavior:</p>
+<p>For example:</p>
+<ul>
+<li>Less good:
+<ul>
+<li>“Test that z_scale works” (this is vague)</li>
 </ul></li>
-<li>Step 2: Test our code and analyis</li>
-<li>Basic code testing analysis</li>
-<li><p>Show a model function being tested</p></li>
+<li>Better:
+<ul>
+<li>“Test that z_scale returns correct values”</li>
+<li>“Test that z_scale produces an error when passed non-sensical input”</li>
+</ul></li>
 </ul>
+<p>A simple function may have only a test or two, depending on how simple it is. As your functions get more complex, you may need to write many tests, so keeping tests specific can help your organize your tests.</p>
+<p>They look like this:</p>
+<pre class="r"><code>test_that(&quot;z_scale returns correct values&quot;, {
+  expect_identical(z_scale(c(1, 2, 3)), as.numeric(t(scale(c(1,2,3)))))
+})</code></pre>
+<p>Let’s break it down and talk about each part.</p>
+<p>Each <code>test_that()</code> call has two arguments: A description (character) and the code for the test, wrapped in curly braces.</p>
+<pre class="r"><code>test_that(&quot;z_scale returns correct values&quot;, { # your code here })</code></pre>
+<p>And the code can be any R code you want, but should contain at least one call to an expectation function, like <code>expect_true</code>. <code>testthat</code> comes with a number of <code>expect_</code> functions like:</p>
+<ul>
+<li><code>expect_equal</code></li>
+<li><code>expect_true</code></li>
+<li><code>expect_length</code></li>
+<li><code>expect_error</code> (checks if the code produces an error)</li>
+</ul>
+</div>
+</div>
 
 
 

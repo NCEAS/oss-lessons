@@ -18,7 +18,6 @@ I often use fairly simple regular expressions, like the ones we used on the comm
 ls *.Rmd
 ```
 
-
 ## Learning Outcomes
   
 Students should:
