@@ -35,8 +35,11 @@ library("quanteda")
 ## Import the PDFs into R
 
 ```{r}
+# set path to the PDF (here on Aurora)
+pdf_path <- "/tmp/oil_spill_pdfs"
+
 # List the PDFs about the BP oil spill
-pdfs <- list.files(path="/tmp/oil_spill_pdfs", pattern= 'pdf$',  full.names = TRUE) 
+pdfs <- list.files(path = pdf_path, pattern = 'pdf$',  full.names = TRUE) 
 
 # Import the PDFs into R
 spill_texts <- readtext(pdfs, 
