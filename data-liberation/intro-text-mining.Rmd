@@ -14,7 +14,7 @@ The Goal of this session is to learn how to mine PDFs to get information out of 
 
 Looking at the Natural Language Processing (NLP) CRAN view, you will realize there are a lot of different packages to accomplish this complex task : <https://cran.r-project.org/web/views/NaturalLanguageProcessing.html>.
 
-Here are some examples:
+Here are some important packages:
 
 - `tm`: provides a framework and the algorithmic background for mining text
 - `quanteda`: A fast and flexible framework for the management, processing, and quantitative analysis of textual data in R. It has very nice features, among which include finding specific words and their context in the text
@@ -24,6 +24,8 @@ Here are some examples:
 
 
 # Analyzing peer-reviewed journal articles about BP Deep Horizon's oil spill
+
+## Load the necessary packages
 
 ```{r, echo=FALSE,warning=F,message=F}
 library("readtext")
@@ -46,18 +48,16 @@ spill_texts <- readtext(pdfs,
 ## Create the Corpus object needed for the text analysis
 
 ```{r}
-
 # Transform the journal articles into a corpus object
 spill_corpus  <- corpus(spill_texts)
 
 # Some stats about the journal articles
 tokenInfo <- summary(spill_corpus)
-
 ```
 
 ### Add metadata to the Corpus object
 
-For example we can add that texts are written in English.
+For example we can add the information that these texts are written in English.
 ```{r}
 # add metadata to files, in this case that they are written in english
 metadoc(spill_corpus, 'language') <- "english" 
@@ -68,11 +68,12 @@ summary(spill_corpus, showmeta = T)
 
 ### Subset coprus
 
-Want only articles before 2017?
+Do you want only articles before 2017?
 
 ```{r}
 summary(corpus_subset(spill_corpus, Year < 2017))
 ```
+
 ### Search for words with context: 4 words on each side of the keyword
 
 ```{r, results="hide"}
@@ -101,9 +102,11 @@ Note: You can check what words are listed by default in stopwords:
 head(stopwords("english"), 20)
 ```
 
+## Extract information from a Document-Feature Matrix (DFM) 
+
 ### Word cloud
 
-Quickly visualize the most frequent words.
+Quickly visualize the most frequent words:
 
 ```{r}
 # set the seed for wordcloud
@@ -158,4 +161,3 @@ spills_DFM
     - Getting started: http://quanteda.io/articles/quickstart.html
 - Munzert, Simon. Automated Data Collection with R: A Practical Guide to Web Scraping and Text Mining. Chichester, West Sussex, United Kingdom: John Wiley & Sons Inc, 2015.
 - [Text Mining with R](http://tidytextmining.com): A Tidy Approach, by Julia Silge and David Robinson.
-
