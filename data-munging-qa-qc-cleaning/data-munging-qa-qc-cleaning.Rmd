@@ -1,13 +1,13 @@
 ---
-  title: "Data Munging / QA / QC / Cleaning"
+title: "Data Munging / QA / QC / Cleaning"
 time_slot: 60 minutes
 ---
   
-  ## Introduction
+## Introduction
   
-  ## Leaning outcomes
+## Leaning outcomes
   
-  Students should
+Students should
 
 - Learn what it means to test assumptions about their data with base R
 - Learn how to reshape and restructure their data (tidyr)
@@ -30,7 +30,6 @@ summary(fundata)
 
 What's our assessment of this dataset from the above commands?
 
-
 - The site and plot codes are smushed together in one column
 - The dates look a bit funky. What format is that?
 - The range on the temperatures surely can't be right
@@ -49,7 +48,7 @@ lettersdf %>%
 
 **Exercise:** Split the `siteplot` column into two columns called `site` and `plot`:
   
-  ```{r}
+```{r}
 # Your code here
 ```
 
@@ -60,7 +59,7 @@ This is mainly so plotting functions work correctly but it helps elsewhere too.
 
 The function we'll use is `as.Date`:
   
-  ```{r}
+```{r}
 datestrings <- c("2000-08-03", "2017-02-20", "1980-04-27")
 mydate <- as.Date(datestrings, format = "%Y-%m-%d")
 mydate
@@ -69,7 +68,7 @@ class(mydate)
 
 ** Exercise: Convert the `date` column in `fundata` to from a character vector to a Date vector with `as.Date()`:
   
-  ```{r}
+```{r}
 # Your code here
 # e.g fundata$date <- 
 ```
@@ -131,9 +130,9 @@ Use `boxplot` to make a boxplot of the temperature values:
 
 Before we move on, let's fix the -9999 and 180 observations by removing them:
   
-  **Exercise: Remove the rows with temperatures of -9999 and 180:**
+**Exercise: Remove the rows with temperatures of -9999 and 180:**
   
-  ```{r}
+```{r}
 # Your code here
 ```
 
@@ -168,12 +167,12 @@ fundata[which(fundata$site == "A"),] # Just the rows with site == "A"
 # e.g. fundata$site <- 
 ```
 
-#### Check for duplicate
+#### Check for duplicate values
 
 Since have a hierarchical design, we might want to check that all the data we expect are present.
 If we know we have 6 sites with 6 plots at each site and ten samples, we can check this assumption a few ways:
   
-  ```{r}
+```{r}
 nrow(fundata) == 6 * 6 * 10
 ```
 
@@ -185,8 +184,8 @@ nrow(fundata) == 6 * 6 * 10
 
 The functions `unique` and `duplicated` great ways to find duplicates in a vector of values.
 For example, we can create a vector with a duplicate value in it:
-  
-  ```{r}
+
+```{r}
 some_letters <- c("A", "F", "X", "S", "X")
 some_letters
 length(unique(some_letters)) == length(some_letters)
@@ -196,7 +195,7 @@ some_letters[!duplicated(some_letters)]
 
 See how `nrow` and `unique` can tell us *if* there are duplicates and `duplicated` can tell us *which* values are duplicates?
   
-  **Exercise:** Remove the duplicate value with duplicated from the following data.frame:
+**Exercise:** Remove the duplicate value with duplicated from the following data.frame:
   
   ```{r}
 mydf <- data.frame(fish = c("Redfish", "Gag Grouper", "Striped Bass", "Redfish"),
@@ -208,6 +207,8 @@ mydf <- data.frame(fish = c("Redfish", "Gag Grouper", "Striped Bass", "Redfish")
 ### Complete analysis script:
 
 ```{r}
+library(dplyr)
+
 # Import
 fundata <- read.csv("fundata.csv", stringsAsFactors = FALSE)
 
@@ -255,7 +256,7 @@ fishdf_g
 
 Why gather? Analysis often needs us to reshape the data in this way:
   
-  ```{r}
+```{r}
 library(dplyr)
 
 fishdf_g %>% 
@@ -265,22 +266,23 @@ fishdf_g %>%
 
 Also, ggplot2 needs this form:
   
-  ```{r}
+```{r}
 library(ggplot2)
-ggplot(fishdf_g, aes(variable, value)) + geom_boxplot()
+ggplot(fishdf_g, aes(variable, value)) + 
+  geom_boxplot()
 ```
 
 #### `spread`
 
 `spread` does the opposite of `gather`:
   
-  ```{r}
+```{r}
 fishdf_g %>% spread(variable, value)
 ```
 
 Why spread? Usually modeling requires this "wide" format:
   
-  ```{r}
+```{r}
 lm(weight ~ age, data = fishdf)
 ```
 
@@ -323,7 +325,7 @@ We don't know who created it and, in order to do an analysis with it, we might w
 
 This could be written (in order) using assertr like this:
   
-  ```{r}
+```{r}
 library(dplyr)
 library(assertr)
 

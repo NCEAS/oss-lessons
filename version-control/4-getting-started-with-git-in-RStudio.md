@@ -1,5 +1,5 @@
 ---
-title: "Using git From RStudio"
+title: "Using git from RStudio"
 author: "Julien Brun"
 output: 
   html_document:
@@ -8,7 +8,7 @@ output:
 ---
 
 
-# Code Versioning using RStudio
+# Version control using RStudio
 
 *Notes:* 
 
@@ -40,11 +40,11 @@ Now, you have two options:
 
 ### Starting git version control 
 
-Now you that have successfully created a RStudio project, you can enable the code versioning. Go to the *Tools* menu *-> Version Control -> Project Setup…*
+Now you that have successfully created a RStudio project, you can enable the version control. Go to the *Tools* menu *-> Version Control -> Project Setup…*
 
 ![image alt text](images/image_2.png)
 
-This will open a new window. Change the *None* setting by choosing *Git* from the dropdown menu
+This will open a new window. Change the *None* setting by choosing *Git* from the drop-down menu
 
 <img style="align: left;width: 450px;" src=images/image_3.png />
 
@@ -104,7 +104,7 @@ And you can start the whole commit process again, once you have reached a milest
 
 ### Pulling
 
-Once you have committed your changes, you can `pull` the latest version of the repository from GitHub by clicking on the pull button. Conflict may happen during this steps if several persons have modified the same file. Don't worry, git will walk you through the necessary steps to fix the conflicts (see 3-code-versioning-remote for more info on this).This is the equivalent of the `git pull` command.
+Once you have committed your changes, you can `pull` the latest version of the repository from GitHub by clicking on the pull button. Conflict may happen during this steps if several persons have modified the same file. Don't worry, git will walk you through the necessary steps to fix the conflicts (see 3-git-advanced for more info on this).This is the equivalent of the `git pull` command.
 
 ### Pushing
 
@@ -115,7 +115,7 @@ Once you have finished the pull process, you can click on the `push` button to u
 
 ## References
 
-- RStudio IDE cheatsheet: [https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf)
+- RStudio IDE cheat sheet: [https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf)
 - Using RStudio: [https://support.rstudio.com/hc/en-us/sections/200107586-Using-RStudio](https://support.rstudio.com/hc/en-us/sections/200107586-Using-RStudio)
 - RStudio keyboard shortcuts: [https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts)
 - Debugging with R Studio: [https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio](https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio)  

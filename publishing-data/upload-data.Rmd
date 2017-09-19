@@ -34,13 +34,15 @@ Next, modify the metadata file associated with the package to set yourself as th
 
 ```{r}
 library(EML)
+# devtools::install_github("NCEAS/arcticdatautils")
 library(arcticdatautils)
 
 # Load the EML file into R
-doc <- read_eml("strix-pacific-northwest.xml")
+emlFile <- "strix-pacific-northwest.xml"
+doc <- read_eml(emlFile)
 
 # Change creator to us
-doc@dataset@creator <- c(eml_creator("Bryce", "Mecum", email = "mecum@nceas.ucsb.edu"))
+doc@dataset@creator <- c(eml_creator("Matthew", "Jones", email = "jones@nceas.ucsb.edu"))
 
 # Change abstract to the better one we wrote
 doc@dataset@abstract <- as(set_TextType("better-abstract.md"), "abstract")
@@ -62,43 +64,84 @@ library(dataone)
 library(datapack)
 library(uuid)
 
+d1c <- D1Client("STAGING2", "urn:node:mnTestKNB")
 dp <- new("DataPackage")
-dp
+show(dp)
 ```
 
 We then add a metadata file, data file, R script and output data file to this package:
 ```{r}
-emlFile <- "strix-pacific-northwest.xml"
-metadataObj <- new("DataObject", format="eml://ecoinformatics.org/eml-2.1.1", filename=paste(getwd(), emlFile, sep="/"),
-                   suggestedFilename=basename(emlFile))
-dp <- addData(dp, metadataObj)
+# Generate identifiers for our data and program objects, and add them to the metadata
+sourceId <- paste0("urn:uuid:", uuid::UUIDgenerate())
+progId <- paste0("urn:uuid:", uuid::UUIDgenerate())
+outputId <- paste0("urn:uuid:", uuid::UUIDgenerate())
+doc@dataset@otherEntity[[1]]@id <- new("xml_attribute", sourceId)
+doc@dataset@otherEntity[[2]]@id <- new("xml_attribute", progId)
+doc@dataset@otherEntity[[3]]@id <- new("xml_attribute", outputId)
+repo_obj_service <- paste0(d1c@mn@endpoint, "/object/")
+doc@dataset@otherEntity[[1]]@physical[[1]]@distribution[[1]]@online@url <- 
+  new("url", paste0(repo_obj_service, sourceId))
+doc@dataset@otherEntity[[2]]@physical[[1]]@distribution[[1]]@online@url <- 
+  new("url", paste0(repo_obj_service, progId))
+doc@dataset@otherEntity[[3]]@physical[[1]]@distribution[[1]]@online@url <- 
+  new("url", paste0(repo_obj_service, outputId))
 
+write_eml(doc, "strix-pacific-northwest.xml")
+
+# Add the metadata document to the package
+metadataObj <- new("DataObject", 
+                   format="eml://ecoinformatics.org/eml-2.1.1", 
+                   filename=paste(getwd(), emlFile, sep="/"))
+dp <- addMember(dp, metadataObj)
+
+# Add our input data file to the package
 sourceData <- "sample.csv"
-sourceObj <- new("DataObject", format="text/csv", filename=paste(getwd(), sourceData, sep="/"), suggestedFilename=basename(sourceData))
-dp <- addData(dp, sourceObj, metadataObj)
+sourceObj <- new("DataObject",
+                 id = sourceId,
+                 format="text/csv", 
+                 filename=paste(getwd(), sourceData, sep="/"))
+dp <- addMember(dp, sourceObj, metadataObj)
 
+# Add our processing script to the package
 progFile <- "filterSpecies.R"
-progObj <- new("DataObject", format="application/R", filename=paste(getwd(), progFile, sep="/"), mediaType="text/x-rsrc",
-                suggestedFilename=basename(progFile))
-dp <- addData(dp, progObj, metadataObj)
+progObj <- new("DataObject",
+               id = progId,
+               format="application/R", 
+               filename=paste(getwd(), progFile, sep="/"), 
+               mediaType="text/x-rsrc")
+dp <- addMember(dp, progObj, metadataObj)
 
+# Add our derived output data file to the package
 outputData <- "filteredSpecies.csv"
-outputObj <- new("DataObject", format="text/csv", filename=paste(getwd(), outputData, sep="/"), suggestedFilename=basename(outputData))
-dp <- addData(dp, outputObj, metadataObj)
+outputObj <- new("DataObject", 
+               id = outputId,
+               format="text/csv", 
+               filename=paste(getwd(), outputData, sep="/"))
+dp <- addMember(dp, outputObj, metadataObj)
 
 myAccessRules <- data.frame(subject="http://orcid.org/0000-0003-0077-4738", permission="changePermission") 
 
-dp
+# Add the provenance relationships to the data package
+dp <- describeWorkflow(dp, sources=sourceObj, program=progObj, derivations=outputObj)
+
+show(dp)
 ```
 
 Finally, we upload the package to the Testing server for the KNB.
 ```{r, eval=FALSE}
-d1c <- D1Client("STAGING2", "urn:node:mnTestKNB")
 packageId <- uploadDataPackage(d1c, dp, public=TRUE, accessRules=myAccessRules, quiet=FALSE)
 ```
 
-This particular package contains the R script `filterSpecies.R`, the input file `sample.csv` that was read by
-the script and the output file `filteredSpecies.csv` that was created by the R script, which was run at a
+This particular package contains the R script `filterSpecies.R`, the input 
+file `sample.csv` that was read by the script and the output file 
+`filteredSpecies.csv` that was created by the R script, which was run at a
 previous time.  
 
-You can now search for and view the package at https://dev.nceas.ucsb.edu
+You can now search for and view the package at https://dev.nceas.ucsb.edu:
+
+![](images/data-uploaded.png)
+
+In addition, each of the uploaded entities shows the relevant provenance information, showing how the source data is linked to the derived data via the R program that was used to process the raw data:
+
+![](images/provenance-info.png)
+

@@ -192,9 +192,8 @@ dbListTables(con)</code></pre>
 ## 30 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
 ## 31 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
 ## 32 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
-<p>Running queries is pretty simple but requires some care. Each query is going to be three lines of code:</p>
-<pre class="r"><code>res &lt;- dbSendQuery(con, &quot;SELECT * FROM mtcars WHERE cyl = 4&quot;)
-dbFetch(res)</code></pre>
+<p>Running queries is pretty simple:</p>
+<pre class="r"><code>dbGetQuery(con, &quot;SELECT * FROM mtcars WHERE cyl = 4&quot;)</code></pre>
 <pre><code>##     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
 ## 1  22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
 ## 2  24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
@@ -207,10 +206,8 @@ dbFetch(res)</code></pre>
 ## 9  26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
 ## 10 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
 ## 11 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2</code></pre>
-<pre class="r"><code>dbClearResult(res)</code></pre>
-<p>Make sure to run your queries just like that to make sure you don’t run into any errors.</p>
 <p>Often times, when working with database, we won’t want to see all of the rows because there are just too many to store in memory. In fact, that’s often the point of using the database in the first place.</p>
-<p>The <code>DBI</code> package lets us iterate through the rows in groups of our choosing so that memroy usage stays low:</p>
+<p>The <code>DBI</code> package lets us iterate through the rows in groups of our choosing so that memory usage stays low:</p>
 <pre class="r"><code>res &lt;- dbSendQuery(con, &quot;SELECT * FROM mtcars WHERE cyl = 4&quot;)
 
 while (!dbHasCompleted(res)) {
@@ -279,26 +276,17 @@ mtcars_db</code></pre>
 ## 10  19.2     6 167.6   123  3.92 3.440 18.30     1     0     4     4
 ## # ... with more rows</code></pre>
 <pre class="r"><code>mtcars_db %&gt;% 
-  select(mpg)</code></pre>
-<pre><code>## # Source:   lazy query [?? x 1]
-## # Database: sqlite 3.19.3 [:memory:]
-##      mpg
-##    &lt;dbl&gt;
-##  1  21.0
-##  2  21.0
-##  3  22.8
-##  4  21.4
-##  5  18.7
-##  6  18.1
-##  7  14.3
-##  8  24.4
-##  9  22.8
-## 10  19.2
-## # ... with more rows</code></pre>
+  select(mpg) %&gt;% 
+  show_query()</code></pre>
+<pre><code>## &lt;SQL&gt;
+## SELECT `mpg` AS `mpg`
+## FROM `mtcars`</code></pre>
 <pre class="r"><code>mpg_query &lt;- mtcars_db %&gt;% 
   group_by(cyl) %&gt;% 
   summarize(mean(mpg))
-mpg_query %&gt;% show_query()</code></pre>
+
+mpg_query %&gt;% 
+  show_query()</code></pre>
 <pre><code>## &lt;SQL&gt;
 ## SELECT `cyl`, AVG(`mpg`) AS `mean(mpg)`
 ## FROM `mtcars`
@@ -329,6 +317,15 @@ dbListTables(con)
 # Time range of assessment per stock
 # Your code here</code></pre>
 </div>
+<div id="accessing-an-microsoft-access-database-in-r" class="section level3">
+<h3>Accessing an Microsoft Access database in R</h3>
+<p>Working with Microsoft Access databases in R is notoriously tricky. As far as I can tell, the only way to make it work is to be running 32-bit Windows. Most people are not running 32-bit Windows.</p>
+<p>If you are, the basic incantation is:</p>
+<pre class="r"><code>install.packages('RODBC')
+library(RODBC)
+db &lt;- odbcConnectAccess(&quot;yourAccessDB.db&quot;)</code></pre>
+<p>And then you can send queries with <code>odbcQuery()</code></p>
+</div>
 </div>
 <div id="summary" class="section level2">
 <h2>Summary</h2>
@@ -344,9 +341,7 @@ library(dplyr)
 con &lt;- dbConnect(RSQLite::SQLite(), dbname = &quot;:memory:&quot;)
 dbWriteTable(con, &quot;starwars&quot;, select(starwars, -films, -vehicles, -starships))
 
-res &lt;- dbSendQuery(con, &quot;SELECT * FROM starwars WHERE species = 'Droid'&quot;)
-dbFetch(res)
-dbClearResult(res)
+dbGetQuery(con, &quot;SELECT * FROM starwars WHERE species = 'Droid'&quot;)
 
 dbDisconnect(con)</code></pre>
 <pre class="r"><code>library(dplyr)
