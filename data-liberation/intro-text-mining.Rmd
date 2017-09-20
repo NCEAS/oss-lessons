@@ -25,14 +25,14 @@ Here are some important packages:
 
 # Analyzing peer-reviewed journal articles about BP Deep Horizon's oil spill
 
-## Load the necessary packages
+First, let us load the necessary packages
 
-```{r, echo=FALSE,warning=F,message=F}
+```{r,warning=F,message=F}
 library("readtext")
 library("quanteda")
 ```
 
-## Import the PDFs into R
+## 1. Import the PDFs into R
 
 ```{r}
 # set path to the PDF (here on Aurora)
@@ -48,7 +48,7 @@ spill_texts <- readtext(pdfs,
                         docvarnames = c("First_author", "Year"))
 ```
 
-## Create the Corpus object needed for the text analysis
+## 2. Create the Corpus object needed for the text analysis
 
 ```{r}
 # Transform the journal articles into a corpus object
@@ -84,10 +84,9 @@ kwic(spill_corpus, "dispersant", 4)
 ```
 
 
-## Build a Document-Feature Matrix (DFM) 
+## 3. Build a Document-Feature Matrix (DFM) 
 
 More information about DFM can be found on Quanteda's vignette: http://quanteda.io/articles/quickstart.html. In a nutshell, additional rules can be applied on top of the tokenization process, such as ignoring certain words, punctuation, case, ...
-
 
 ```{r}
 # construct the DFM, which is the base object to further analyze the journal articles
@@ -105,7 +104,7 @@ Note: You can check what words are listed by default in stopwords:
 head(stopwords("english"), 20)
 ```
 
-## Extract information from a Document-Feature Matrix (DFM) 
+## 4. Extract information from a Document-Feature Matrix (DFM) 
 
 ### Word cloud
 
@@ -152,7 +151,6 @@ spills_DFM
 ```
 
 ***The above text manipulations are the necessary steps to enable more advanced text analaysis, such as topical modeling and similarities between texts.***
-
 
 
 # References and sources

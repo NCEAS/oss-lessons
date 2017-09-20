@@ -129,7 +129,7 @@ $(document).ready(function () {
 <div id="which-r-packages-are-available" class="section level1">
 <h1>Which R packages are available?</h1>
 <p>Looking at the Natural Language Processing (NLP) CRAN view, you will realize there are a lot of different packages to accomplish this complex task : <a href="https://cran.r-project.org/web/views/NaturalLanguageProcessing.html" class="uri">https://cran.r-project.org/web/views/NaturalLanguageProcessing.html</a>.</p>
-<p>Here are some examples:</p>
+<p>Here are some important packages:</p>
 <ul>
 <li><code>tm</code>: provides a framework and the algorithmic background for mining text</li>
 <li><code>quanteda</code>: A fast and flexible framework for the management, processing, and quantitative analysis of textual data in R. It has very nice features, among which include finding specific words and their context in the text</li>
@@ -139,10 +139,16 @@ $(document).ready(function () {
 </div>
 <div id="analyzing-peer-reviewed-journal-articles-about-bp-deep-horizons-oil-spill" class="section level1">
 <h1>Analyzing peer-reviewed journal articles about BP Deep Horizon’s oil spill</h1>
+<p>First, let us load the necessary packages</p>
+<pre class="r"><code>library(&quot;readtext&quot;)
+library(&quot;quanteda&quot;)</code></pre>
 <div id="import-the-pdfs-into-r" class="section level2">
-<h2>Import the PDFs into R</h2>
-<pre class="r"><code># List the PDFs about the BP oil spill
-pdfs &lt;- list.files(path=&quot;/tmp/oil_spill_pdfs&quot;, pattern= 'pdf$',  full.names = TRUE) 
+<h2>1. Import the PDFs into R</h2>
+<pre class="r"><code># set path to the PDF (here on Aurora)
+pdf_path &lt;- &quot;/tmp/oil_spill_pdfs&quot;
+
+# List the PDFs about the BP oil spill
+pdfs &lt;- list.files(path = pdf_path, pattern = 'pdf$',  full.names = TRUE) 
 
 # Import the PDFs into R
 spill_texts &lt;- readtext(pdfs, 
@@ -151,7 +157,7 @@ spill_texts &lt;- readtext(pdfs,
                         docvarnames = c(&quot;First_author&quot;, &quot;Year&quot;))</code></pre>
 </div>
 <div id="create-the-corpus-object-needed-for-the-text-analysis" class="section level2">
-<h2>Create the Corpus object needed for the text analysis</h2>
+<h2>2. Create the Corpus object needed for the text analysis</h2>
 <pre class="r"><code># Transform the journal articles into a corpus object
 spill_corpus  &lt;- corpus(spill_texts)
 
@@ -173,11 +179,11 @@ tokenInfo &lt;- summary(spill_corpus)</code></pre>
 ##     Wilson_2014.pdf   876   2503        79       Wilson 2014
 ## 
 ## Source:  /home/brun/oss/oss-lessons/data-liberation/* on x86_64 by brun
-## Created: Wed Jul 12 23:36:10 2017
+## Created: Wed Sep 20 14:41:23 2017
 ## Notes:</code></pre>
 <div id="add-metadata-to-the-corpus-object" class="section level3">
 <h3>Add metadata to the Corpus object</h3>
-<p>For example we can add that texts are written in English.</p>
+<p>For example we can add the information that these texts are written in English.</p>
 <pre class="r"><code># add metadata to files, in this case that they are written in english
 metadoc(spill_corpus, 'language') &lt;- &quot;english&quot; 
 
@@ -199,12 +205,12 @@ summary(spill_corpus, showmeta = T)</code></pre>
 ##     Wilson_2014.pdf   876   2503        79       Wilson 2014   english
 ## 
 ## Source:  /home/brun/oss/oss-lessons/data-liberation/* on x86_64 by brun
-## Created: Wed Jul 12 23:36:10 2017
+## Created: Wed Sep 20 14:41:23 2017
 ## Notes:</code></pre>
 </div>
 <div id="subset-coprus" class="section level3">
 <h3>Subset coprus</h3>
-<p>Want only articles before 2017?</p>
+<p>Do you want only articles before 2017?</p>
 <pre class="r"><code>summary(corpus_subset(spill_corpus, Year &lt; 2017))</code></pre>
 <pre><code>## Corpus consisting of 9 documents.
 ## 
@@ -220,7 +226,7 @@ summary(spill_corpus, showmeta = T)</code></pre>
 ##     Wilson_2014.pdf   876   2503        79       Wilson 2014
 ## 
 ## Source:  /home/brun/oss/oss-lessons/data-liberation/* on x86_64 by brun
-## Created: Wed Jul 12 23:36:10 2017
+## Created: Wed Sep 20 14:41:23 2017
 ## Notes:</code></pre>
 </div>
 <div id="search-for-words-with-context-4-words-on-each-side-of-the-keyword" class="section level3">
@@ -229,7 +235,7 @@ summary(spill_corpus, showmeta = T)</code></pre>
 </div>
 </div>
 <div id="build-a-document-feature-matrix-dfm" class="section level2">
-<h2>Build a Document-Feature Matrix (DFM)</h2>
+<h2>3. Build a Document-Feature Matrix (DFM)</h2>
 <p>More information about DFM can be found on Quanteda’s vignette: <a href="http://quanteda.io/articles/quickstart.html" class="uri">http://quanteda.io/articles/quickstart.html</a>. In a nutshell, additional rules can be applied on top of the tokenization process, such as ignoring certain words, punctuation, case, …</p>
 <pre class="r"><code># construct the DFM, which is the base object to further analyze the journal articles
 spills_DFM &lt;- dfm(spill_corpus, tolower = TRUE, stem = FALSE, 
@@ -253,9 +259,12 @@ topfeatures(spills_DFM, 20) </code></pre>
 ##  [6] &quot;our&quot;        &quot;ours&quot;       &quot;ourselves&quot;  &quot;you&quot;        &quot;your&quot;      
 ## [11] &quot;yours&quot;      &quot;yourself&quot;   &quot;yourselves&quot; &quot;he&quot;         &quot;him&quot;       
 ## [16] &quot;his&quot;        &quot;himself&quot;    &quot;she&quot;        &quot;her&quot;        &quot;hers&quot;</code></pre>
+</div>
+<div id="extract-information-from-a-document-feature-matrix-dfm" class="section level2">
+<h2>4. Extract information from a Document-Feature Matrix (DFM)</h2>
 <div id="word-cloud" class="section level3">
 <h3>Word cloud</h3>
-<p>Quickly visualize the most frequent words.</p>
+<p>Quickly visualize the most frequent words:</p>
 <pre class="r"><code># set the seed for wordcloud
 set.seed(1)
 
