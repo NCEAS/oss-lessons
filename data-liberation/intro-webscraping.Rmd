@@ -114,12 +114,15 @@ Let us get started with organizing your evenings. The *Funk Zone* is a pretty fu
 
 We are going to scrape the name of the places and their websites out of this webpage and compile this information into a csv, so you will be able to quickly choose where to go to relax at the end of the day.
 
-First, Let us have a closer look at the website:
+### 1. Look at the website structure using our web browser inspector:
+
+![web browser inspector](images/webbrowser_inspector.png)
 
 
-Then use this information to extract the bar names from the webpage:
 
-```{r}
+### 2. Use this information to extract the bar names from the webpage:
+
+```{r, message=FALSE, warning=FALSE, error=FALSE}
 #install.packages("rvest")
 library("rvest")
 
@@ -137,10 +140,9 @@ bar_names <- html_text(bars)
 bar_names
 ```
 
-Now let us get the URLs to the websites:
+### 4. Extract the URLs to the websites:
 
 ```{r}
-
 # Parse the page for the nodes containing the website URLs
 websites <- html_nodes(webpage, ".neighborhoods-towns-business .website-button")
 
@@ -160,7 +162,7 @@ mb_ind <- which(bar_names == "Municipal Winemakers")
 websites_urls <- append(websites_urls, "http://www.municipalwinemakers.com/", after = mb_ind-1)
 ```
 
-Create a data frame and save it as csv:
+### 5. Create a data frame and save it as csv:
 
 ```{r}
 # Create the data frame
@@ -171,7 +173,6 @@ my_cool_bars <- data.frame(funkzone_bar = bar_names,
 
 # write it to csv
 write.csv(my_cool_bars, "~/oss/places_you_will_go.csv", row.names = FALSE)
-
 ```
 
 
@@ -180,11 +181,13 @@ write.csv(my_cool_bars, "~/oss/places_you_will_go.csv", row.names = FALSE)
 In groups of two, work on downloading all the fishery shapefiles for the Gulf of Mexico from this NOAA website:
 <http://sero.nmfs.noaa.gov/maps_gis_data/fisheries/gom/GOM_index.html>
 
+<br>
 
 # Final Thoughts
 
 Please always check that **the data you are scraping are publicly available data** and that there is no personal or confidential information gathered. Also please **do not overload the web server** you are scraping: when getting a large amount of data, it is often recommended to insert pauses between the requests sent to the web server to let it handle other requests.
 
+<br>
 
 # References and sources
 
