@@ -1,3 +1,0 @@
-the Farmers market data was downloaded from: https://www.ams.usda.gov/services/local-regional/farmers-markets-and-direct-consumer-marketing
-
-Julien Brun, NCEAS/UCSB, June 2016
