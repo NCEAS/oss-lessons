@@ -66,7 +66,7 @@ images_dir <- file.path(getwd(), "images")
 dir.create(images_dir, showWarnings = FALSE)
 
 
-## Copy files to the respectives directories ----
+## Copy files to the respective directories ----
 
 # Copy images 
 lapply(images_files, file.copy, to=images_dir)
