@@ -1,0 +1,4 @@
+book_filename: "_OSS17"
+new_session: yes
+rmd_files:
+  html: ["index.Rmd", "version-control/1-git-basics.md"]

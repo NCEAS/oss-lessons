@@ -1,0 +1,20 @@
+--- 
+title: "Open Science for Synthesis 2017: Gulf Research Program"
+subtitle: "Training Course Curriculm"
+author: ["Matt Jones", "Amber Budden", "Christopher Lortie", "Bryce Mecum", "Julien Brun", "Leah Wasser", "Tracy Teal"]
+date: "`r Sys.Date()`"
+documentclass: book
+link-citations: yes
+description: "This is a collection of training materials that were created and used for the Open Science for Synthesis 2017: Gulf Research Program summer training institute, hosted at the National Center for Ecological Analysis and Synthesis on July 2017"
+github-repo: "NCEAS/oss-lessons"
+cover-image: "images/participants_OSS17.jpg"
+---
+
+# Preface
+
+Open Science for Synthesis: Gulf Research Program is a hands-on data science course for both early career and established researchers to gain skills in data science, including scientific synthesis, reproducible science, and data management. These skills are critical for understanding the complex environmental, human, and energy systems in the Gulf of Mexico, especially following large disturbance events like the Deepwater Horizon oil spill in 2010. This 3-week intensive training, convening in July 2017 at the National Center for Ecological Analysis and Synthesis ( [NCEAS](https://www.nceas.ucsb.edu) ) in Santa Barbara, CA, has revolved around scientific computing and scientific software for reproducible science.
+ 
+The course focused on techniques for data management, scientific programming, synthetic analysis, and collaboration techniques through the use of open-source, community-supported tools. Participants learned skills for rapid and robust use of open source scientific software. These approaches were explored and applied to scientific synthesis projects related to the Gulf of Mexico’s human, environmental, and energy systems, and increased community capability and efficiency in synthesis research. The funding for this project is provided by a grant from the [Gulf Research Program](http://www.nationalacademies.org/gulf/about/), dedicated to improving understanding of the Gulf of Mexico’s human, environmental, and energy systems in response to the Deepwater Horizon oil spill.
+
+![](images/participants_OSS17.jpg)
+<br>
