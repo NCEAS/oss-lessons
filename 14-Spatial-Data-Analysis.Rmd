@@ -1,0 +1,994 @@
+# Spatial Data and Analysis in R
+
+## Introduction to spatial data
+
+
+**Purpose:** In this lesson we will introduce some of the key concepts associated
+with spatial data including:
+
+* Spatial extent
+* Resolution
+* Coordinate reference system
+
+We will also define raster vs. vector data structures.
+
+**Background:**
+Often we need to use spatial data in our analysis - that is data that correspond
+to some x,y (and z) location on the Earth. however, not all spatial data are
+created the same. understanding the basic foundations of working with spatial
+data will save you a lot of time when it comes to processing the data in tools
+like R, QGIS and python!
+
+### Learning outcomes
+
+At the end of this 30 minute overview you will be able to:
+
+1. Explain the difference between the raster vs vector data structures.
+1. Define spatial extent, resolution, coordinate reference system.
+1. List the 3 vector data structures (point, line, polygon).
+1. List 2-3 `R` packages that can be used to work with spatial data.
+
+
+### Getting started with R
+
+![the R / Python learning curve](https://earthdatascience.org/images/course-materials/earth-analytics/week-9/learning-r.png)
+
+
+### Why R for GIS - the power of automation
+
+It may be a bit of extra effort at the beginning to learn a tool like R. However,
+the payoff is large once you learn the basic skills to support task automation.
+
+![Geeks and automation](https://pbs.twimg.com/media/DFRpdfrV0AEOm9z.jpg)
+
+
+Specific to spatial data, R allows you to:
+
+* Create automated data cleaning workflows that crop, reproject, convert data formats across many, large datasets (Leah's example from the data institute last year)
+* Repeat workflows over and over without having to step through tasks
+* Repeat select portions of a workflow over and over if need be
+* Add new / updated data to your workflow easily if the processing workflow is robust (e.g. timeseries data)
+* Create figures that can be updated easily
+* Document your workflow to remind your future self (think you in 3 months or if you're me - tomorrow :) ) about the steps that you took to implement your workflow
+* Create POWERFUL data-driven reports that include not only static plots but INTERACTIVE (e.g. leaflet)
+
+In this lesson we are going to learn the basics of working with spatial data in R.
+Some of you may think this is the  boring stuff - however understanding these concepts will allow 
+you to do just about anything that you want with spatial data in R!
+
+
+### About vector data
+
+[Intro to vector data - EarthDataScience.org ](http://earthdatascience.org/course-materials/earth-analytics/week-4/intro-vector-data-r/)
+
+Attributes of vector data
+
+* Discrete geometric locations
+* x,y locations are vertices
+* Organization of those vertices determines structure: points, lines, polygons
+
+![About vector data](http://earthdatascience.org/images/course-materials/earth-analytics/week-5/pnt_line_poly.png)
+
+
+### Vector data formats
+
+There are many different spatial vector data formats. Let's list a few:
+
+* shapefile
+* geojson
+* text files
+* others??
+
+### Vector data spatial extent
+
+The spatial extent of a vector **dataset** is determined by the min and max x,y location
+of ALL OF THE SPATIAL OBJECTS stored in the dataset.
+
+NOTE: the spatial extent of an individual object can also be quantified!
+
+![About vector data extent](http://earthdatascience.org/images/course-materials/earth-analytics/week-5/spatial_extent.png)
+
+
+#### Vector data attributes
+
+Vector data often has associated attribute tables. When in a shapefile format,
+these look like excel spreadsheets where each object has an associated set of
+attributes.
+
+
+![Attribute tables](http://earthdatascience.org/images/course-materials/earth-analytics/week-5/attribute_table.png)
+
+in a geojson structure this may look like this:
+
+
+```xml
+[ {
+  "station_name" : "SOUTH PLATTE RIVER AT COOPER BRIDGE NEAR BALZAC",
+  "amount" : "262.00",
+  "flag" : "na",
+  "station_status" : "Gage temporarily anavailable",
+  "county" : "MORGAN",
+  "wd" : "1",
+  "dwr_abbrev" : "PLABALCO",
+  "data_source" : "Co. Division of Water Resources",
+  "http_linkage" : {
+    "url" : "http://www.dwr.state.co.us/SurfaceWater/data/detail_graph.aspx?ID=PLABALCO&MTYPE=DISCHRG"
+  },
+  "div" : "1",
+  "date_time" : "2017-02-15T09:00:00",
+  "stage" : "1.86",
+  "usgs_station_id" : "06759910",
+  "variable" : "DISCHRG",
+  "location" : {
+    "latitude" : "40.357498",
+    "needs_recoding" : false,
+    "longitude" : "-103.528053"
+  },
+  "station_type" : "Stream"
+}
+...
+]
+```
+
+### Coordinate reference systems - how spatial data line up
+
+![The human head projected](https://earthdatascience.org/images/course-materials/earth-analytics/week-9/human-head-projections.jpg)
+
+### Components of a CRS
+
+The Components of a CRS
+
+The coordinate reference system is made up of several key components:
+
+* **Coordinate System:** the X, Y grid upon which our data is overlayed and how we define where a point is located in space.
+* **Horizontal and vertical units:** The units used to define the grid along the x, y (and z) axis.
+* **Datum:** A modeled version of the shape of the earth which defines the origin used to place the coordinate system in space. We will explain this further, below.
+* **Projection Information:** the mathematical equation used to flatten objects that are on a round surface (e.g. the earth) so we can view them on a flat surface (e.g. our computer screens or a paper map).
+
+#### CRS storage formats
+
+* EPSG
+* proj.4
+* WKT
+* others!!!
+
+##### Other CRS resources
+
+* [Video about datums, ellipsoids and geoids ~8mins](https://www.youtube.com/watch?v=Z41Dt7_R180)
+* [Video explaining various datums ~3mins](https://www.youtube.com/watch?v=xKGlMp__jog)
+* [Coordinate Reference Systems - 101 - Earthdatascience.org ](http://earthdatascience.org/course-materials/earth-analytics/week-4/intro-to-coordinate-reference-systems/)
+* [Get to know EPSG, WKT and other CRS definition structures - EarthDataScience.org](http://earthdatascience.org/course-materials/earth-analytics/week-4/understand-epsg-wkt-and-other-crs-definition-file-types/)
+
+
+### About raster data
+
+About raster data:
+
+* data are stored in a **regular grid**
+* a value is associated with each grid cell (also called a pixel)
+* each pixel represents a geographic area - in our case that is often an area on the earth
+
+
+[About raster data  earthdatascience.org website](https://earthdatascience.org/course-materials/earth-analytics/week-3/open-lidar-raster-r/)
+
+![About raster data](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-concept.png)
+
+#### Raster resolution
+
+* The size of each pixel is referred to as **resolution**
+* If pixels are smaller (represent a smaller area on the earth, they are considered HIGHER resolution) - in the example of an image, this makes the image look more 'crisp'
+* if you have fewer pixels within a particular spatial extent, the resolution is LOWER
+* if you have more pixels within a particular spatial extent, the resolution is HIGHER
+
+
+![Raster resolution](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-resolution.png)
+
+![Raster pixel resolution](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-pixel-resolution.png)
+
+
+#### Raster spatial extent
+
+The spatial extent of a raster refers to the area on the earth's surface that
+the raster covers.
+
+![Raster spatial extent](http://earthdatascience.org/images/course-materials/earth-analytics/week-3/raster-spatial-extent-coordinates.png)
+
+Note that the raster spatial extent relates directly to the
+spatial resolution.
+
+CHALLENGE question
+1. If you have more pixels over the same spatial extent - will the image look sharper (more clear) or more blurry?
+2. If you have fewer pixels over the same spatial extent...
+
+
+
+
+## Introduction to Quantum GIS (QGIS)
+
+### Background:
+Brief overview of topic and relationship to scientific synthesis.
+
+
+### Learning outcomes
+
+At the end of this 30 minute overview you will be able to:
+
+* Add vector data to QGIS
+* Add raster data to QGIS
+* Explore the metadata - CRS, resolution, extent of a spatial data layer in QGIS
+* Create a basic map in QGIS ??
+
+
+### Intro to Quantum GIS (QGIS)
+
+![QGIS logo](images/QGIS-logo.png)
+
+[QGIS](http://www.qgis.org/en/site/) is a free and open GIS tool that can be used
+across many different platforms. You can think of it as ESRI's ArcGIS but it plays
+nicely with MACs and PC's!
+
+QGIS is:
+
+* Cross-platform
+* Open source
+* Free
+
+QGIS is an ideal tool to explore  geospatial data. Naturally it can also be used
+for geospatial processing and analysis however keep in mind that these workflows
+can also be performed in R and Python and make even **more reproducible**!
+
+NOTE: you can script QGIS analysis in Python.
+
+You can do just about anything you can do with ArcGIS in QGIS including:
+
+1. data visualization and exploration
+1. Make maps
+1. Edit / Manipulate / create and save new data
+
+# Harness greater powers
+
+* Interface to GRASS GIS
+    - Full-fledged analytical GIS environment
+* Run many GDAL/OGR utilities
+    - Swiss army knife for geospatial data
+
+### QGIS plugins
+
+QGIS is an open source product and as with many open source, tools, there are
+people constantly creating new features via PLUGINS to this tool. To install a
+plugin, use the Plugins drop down and select manage and install plugins. You will
+then see a list of plugins - similar to the list below.
+
+![QGIS plugins](http://underdark.files.wordpress.com/2014/04/installpluginbuilder.png)
+
+A few of my favorite plugins
+
+* **Value tool:** A MUST if you work with raster data. use this to view the value of a pixel in a raster dataset like you would the identify tool in ArcMap.
+* **MapSwipeTool:** A cool tool if you want to view before/ after rasters and look at differences.
+
+Note: that there is also a python console tool that can be used to add command
+line access to the tool.
+
+### Challenge
+
+If there's time...create a map of the Gulf of mexico.
+
+
+
+## Introduction to GIS in R
+
+In this lesson we will learn how to perform some basic cleaning and plotting 
+of spatial data in R.
+
+### Learning outcomes
+
+At the end of this 30 minute overview you will be able to:
+1. Open a vector data layer in R using `readOGR()`
+1. Open a raster data layer in R using `raster()`
+1. Create basic maps using `ggplot()`
+1. Reproject and crop raster and vector data
+
+### Work with vector data in R
+
+<a href="https://earthdatascience.org/course-materials/earth-analytics/week-4/intro-vector-data-r/" target="_blank">Intro to vector data in R - Earth Data Science website</a>
+
+
+There are many ways to import and map vector data in R.
+
+To read the data, you have several options
+
+* `sp`: Import shapefiles and other data using `readOGR()` from the `sp` package
+* `sp`: more recently the `sf` package has proved to be both faster and more efficient that `sp`
+* if you have geojson data - there are several json packages that you can use - check out <a href="https://earthdatascience.org/course-materials/earth-analytics/week-10/co-water-data-spatial-r/">this tutorial on dealing with geojson imported from API's in R if you're interested in learning more</a>.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+```
+
+
+```{r}
+# unzip data
+#library(utils) 
+# setwd("~/Documents/data/oss-institute")
+#setwd("~/Documents/github/oss-lessons/spatial-data-gis-law")
+library(rgdal)
+library(raster)
+library(ggplot2)
+library(rgeos)
+library(mapview)
+library(leaflet)
+library(broom) # if you plot with ggplot and need to turn sp data into dataframes
+options(stringsAsFactors = FALSE)
+```
+
+First, let's download some data from natural earth.
+
+```{r, eval=FALSE}
+# download the data 
+download.file("http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/10m/physical/ne_10m_coastline.zip", 
+              destfile = './data/coastlines.zip')
+
+# unzip the file
+unzip(zipfile = "./data/coastlines.zip", 
+      exdir = './data/ne-coastlines-10m')
+```
+
+Next, we can open the data using `readOGR` from the sp (spatial) package. 
+
+```{r}
+# load the data 
+coastlines <- readOGR("./data/ne-coastlines-10m/ne_10m_coastline.shp")
+
+```
+
+Are the data points, lines of polygons?  
+CHALLENGE -- Looking at the data, what are the 2 possible vector data structures 
+that this data could be stored in?
+
+```{r}
+# view spatial attributes
+class(coastlines)
+extent(coastlines)
+crs(coastlines)
+```
+
+Super speedy quick plot with R baseplot ... or not. Be patient - this object has 
+a lot of complex features
+
+```{r}
+plot(coastlines, 
+     main = "Global Coastlines")
+```
+
+
+ 
+This particular layer is complex. There are many details in the boundaries as 
+rendered that we may want if we zoom in but may not need to produce a global 
+map. let's **Simplify** it. The `gSimplify` function is a part of the rgeos 
+package. The simplify function removes vertices from complex lines. Remember that a line is composed of vertices. A circle is simply a line with lots of vertices - the more vertices it has, the more 'round' the line appears.  
+![Simplify vertices](http://suite.opengeo.org/docs/latest/_images/simplify.png)
+
+As you use this function keep in mind that you are modifying your data.
+You probably don't want to do this if you are performing any sort of quantitative analysis
+on the data but you definitely want to do this if you are creating online 
+maps and other visual products from your data. 
+
+The `gSimplify` function takes 3 arguments
+
+1. the data that you want to simplify
+2. tol - the **tol**erance value - a large number will remove more vertices, make the data small AND yield a "blockier" looking object. a SMALLER number will retain more vertices and maintain a smoother looking feature.  
+  
+```{r}
+# simplify geometry
+coastlines_simp <- gSimplify(coastlines, 
+                            tol = 3, 
+                            topologyPreserve = TRUE)
+```
+
+
+```{r}
+plot(coastlines_simp,
+     main = "map with boundaries simplified")
+```
+
+Notice that here the map plots faster, but now it looks blocky.
+We may have simplified TOO MUCH. let's 
+reduce the `tol =` argument value to .1. 
+
+```{r}
+# simplify with a lower tolerance value (keeping more detail)
+coastlines_sim2 <- gSimplify(coastlines, 
+                             tol = .1, 
+                             topologyPreserve = TRUE)
+plot(coastlines_sim2, 
+     main = "Map of coastlines - simplified geometry\n tol=.1")
+```
+
+That's better. We now have enough detail for plotting purposes but have increased
+speed dramatically. These types of steps become important when creating online interactive
+maps to optimize speed. 
+
+IMPORTANT: when you modify the geometry you are also modifying the data 
+- in this case any calculated perimeter or area values using these 
+data will be compromised.
+
+### ggplot example 
+
+Less speedy plot with ggplot -- but it looks so nice! 
+NOTE: ggplot throws an error if you don't include the `data = `
+argument for some reason on your geom_ element. Be sure to always
+expliceltly include this.
+
+```{r }
+
+# turn the data into a spatial data frame 
+coastlines_sim2_df <- SpatialLinesDataFrame(coastlines_sim2,
+                                            coastlines@data) 
+#tidy(coastlines_sim2_df)
+
+# plot the data 
+ggplot() +
+  geom_path(data = coastlines_sim2_df, aes(x = long, y = lat, group = group)) +
+  labs(title = "Global Coastlines - using ggplot")
+
+```
+
+`coord_fixed()` is your best friend -- it will make the map x and y 
+Also notice i'm using labs to add a title and x and y axis labels. Cool stuff. 
+  
+```{r}
+ggplot() +
+  geom_path(data = coastlines_sim2_df, aes(x = long, y = lat, group = group)) + 
+  coord_fixed() + 
+  labs(title = "My awesome ggplot map of coastlines",
+       subtitle = "my awesome subtitle",
+       x = "", y = "") # cause we don't need x and y labels do we?
+```
+
+### Interactive maps with leaflet 
+
+Make it interactive using mapview. Mapview is just a wrapper for 
+leaflet. ![Leaflet](http://leafletjs.com/) is a powerful javascript based tool that can be used to 
+create interactive maps - like google maps. The `mapview` library 
+in `R` is a wrapper around leaflet that allows you to quickly create 
+interactive maps.
+
+**COOL TIP 1:** note that when you knit to html your interactive map will 
+be embedded in your html file! This means you can send your friends
+(or yourself! :) ) and interactive map! 
+**COOL TIP 2:** you can also publish your interactive map to rpubs! 
+Bryce will talk more about this later today.
+
+```{r, leaflet-map}
+# create leaflet 
+mapview(coastlines_sim2)
+```
+
+
+```{r}
+# create a leaflet object
+leaflet(coastlines_sim2) %>%
+  addTiles() %>% # add basemap to your map
+  # then add a lines layer
+  addPolylines(color = "#444444", weight = 1, smoothFactor = 0.5,
+    opacity = 1.0)
+```
+
+### Vector data with SF
+
+This is all great but -- a bit slow. Sf will be the wave of the future. 
+It's much faster than sp however isn't fully supported across all tools and projects
+just yet... it will be! Below is just a quick example of how it works. We won't use
+it for today's lesson...
+
+First, let's get the data.
+The data that we are using today - similar to yesterday are stored
+on [Figshare](https://figshare.com/articles/OSS_data_-_2017_monday/5136289). We will use R to
+
+1. download the data and
+2. unzip it into the SAME data directory that we used yesterday
+
+```{r get-data, eval=FALSE}
+# download the data from a figshare URL
+download.file("https://ndownloader.figshare.com/files/8946178",
+              destfile = "./data/mon-data.zip")
+#unzip the data into our oss2017 data directory
+unzip("./data/mon-data.zip", exdir = "./data")
+```
+
+```{r}
+library(sf)
+# import the data - sf is much faster
+coastlines_sf <- st_read("./data/ne-coastlines-10m/ne_10m_coastline.shp")
+# plotting is still a bit slow
+plot(coastlines_sf[2])
+
+```
+
+`SF` will have full ggplot support in the future but for now, you can 
+only get to it by installing ggplot from the github dev branch.
+For this reason we won't use sf in this workshop but know that it will be more popular
+in the upcoming years.
+
+```{r, eval=FALSE}
+# this only works if you install ggplot from github
+
+#devtools::install_github("tidyverse/ggplot2")
+#library(ggplot2)
+# the dev version is not currently installing properly
+ggplot() +
+  geom_sf(data=coastlines_sf, aes(fill = featurecla))  
+```
+
+
+#### Plot two layers on top of each other 
+
+Next, let's import another data layer and plot it on top of our coastlines.
+
+```{r}
+us_states <- readOGR("./data/us-boundaries/us_bound_pop.shp")
+us_states
+```
+
+Use add = TRUE to plot us_states on top of 
+
+```{r}
+plot(coastlines_sim2, 
+     main = "Coastlines with the NE state boundaries")
+plot(us_states, 
+     add = TRUE,
+     col = "purple")
+```
+
+CHALLENGE - 
+Next, create a map with the following layers
+
+1. coastlines_sim2
+1. us_states
+1. study-area/study-area-merc.shp
+
+Note that you will need to first import the study area layer and then
+add it to your map. 
+
+```{r echo=FALSE}
+# import gulf study area
+gulf_study_area <- readOGR("./data/study-area/study-area-merc.shp")
+plot(gulf_study_area,
+     main = "map of the gulf study area")
+
+```
+
+We've plotted each of them previously so we know the data are OK.
+How does it go?
+
+```{r echo=FALSE}
+plot(coastlines_sim2, 
+     main = "Coastlines with the NE state boundaries")
+plot(us_states, 
+     add = TRUE,
+     col = "purple")
+plot(gulf_study_area, 
+     add = TRUE,
+     col = "red")
+```
+
+### Dealing with coordinate reference systems
+
+Our data are in different coordinate reference systems. To account 
+for that, we need reproject one layer to be the same as the other.
+TO reproject data we use the `spTransform()` function which takes 
+2 key arguments:
+
+1. a spatial lines, polygons or points object (that contains crs information) and
+2. a crs object which defines the CRS that we want to transform the data to.
+
+NOTE: once again we are modifying the data. Think long and hard about 
+what layers you want to reproject vs maintain the integrity of!
+
+```{r}
+# epsg 3395 - global mercator
+# reproject to something different
+gulf_study_area_wgs84 <- spTransform(gulf_study_area,
+                                     CRSobj = crs(us_states))
+
+```
+
+Your map should look like the one below
+
+```{r }
+# plot data 
+plot(coastlines_sim2, 
+     main = "Coastlines with the NE state boundaries\n all data in the same CRS")
+plot(us_states, 
+     add = TRUE,
+     col = "purple")
+plot(gulf_study_area_wgs84, 
+     add = TRUE,
+     col = "red")
+```
+
+### Map spatial extents
+
+Our map is looking better. But we may want to zoom in to our study 
+area. We also know that some of our data (ie the coastlines) are 
+particularly complex makign for slower render times. Let's crop 
+our data to our study area extent to
+
+1. make a "zoomed in" map and to
+1. control the size of the data that we are working with by getting rid of data that we don't need. 
+
+To crop the data - trimming or removing all of the data outside of our 
+crop object, we will use the `crop()` function which takes 2 arguments
+
+1. the data that you wish to crop
+1. an extent object of an spatial object with an extent definition.
+
+
+```{r}
+# crop the coastlines data to the spatial extent of the gulf study
+# area extent
+coastlines_crop <- crop(x = coastlines, 
+                        y = gulf_study_area_wgs84)
+plot(coastlines_crop)
+```
+
+Now - it's your turn! Create a final study area map!
+Adjust the colors and layers to make it look nice. If you are 
+more interested in learning ggplot, feel free to work with ggplot.
+If you'd like to use baseplot - feel free to use base.
+
+Ggplot pros: templatted maps, easy to standardize, cleaner mapping code
+base plot pros: faster maps, more difficult 
+
+| Tool  | Pros   | Cons  |
+|---|---|---|---|---|
+| ggplot()  | templated maps, easy to standardize, clean mapping code, simple fast legends  | need to convert sp objects from `readOGR()` to a data frame |   
+| BASE R plot()  | faster mapping, supports sp objects natively  | legends are tedious to create and customize |
+|   |   |   |   
+===
+
+```{r, echo=FALSE}
+plot(coastlines_crop, 
+     main = "Coastlines with the NE state boundaries")
+plot(us_states,
+     add = TRUE,
+     col = 'grey90')
+plot(gulf_study_area_wgs84,
+     add = TRUE,
+     #col = "grey93", 
+     border = "grey",
+     lwd = 3)
+```
+
+### Leaflet 
+
+Finally it is always nice to create interactive maps. This allows your 
+colleagues to not only see but also interact with your data.
+Let's use mapview() to create a quick interactive map.
+
+To use mapview with multpile layers, you simply create a mapview 
+object for each layer and then add them together to produce a final plot.
+Note that mapview will take care of spatial extent for you! 
+
+```{r}
+# create mapview map with multiple layers
+m_coast <- mapview(coastlines_crop)
+m_states <- mapview(us_states)
+
+m_coast + m_states
+```
+
+### Leaflet version!
+
+```{r}
+# create a leaflet object
+leaflet() %>%
+  addTiles() %>% # add basemap to your map
+  # then add a lines layer
+  addPolylines(data = coastlines_crop, color = "#444444", weight = 1, smoothFactor = 0.5,
+    opacity = 1.0) %>% 
+  addPolygons(data = us_states, color = "#444444", fillColor = "green", weight = 1, smoothFactor = 0.5,
+    opacity = 1.0)
+```
+
+
+### Raster data in R
+
+Next, let's work with some raster data in `R`. We use the `raster()` package
+to open and manipulate raster data in `R`. This package has a large 
+community around it and is a standard for most raster operations in `R`.
+
+To load a raster layer with a single band - we use `raster()`.
+
+
+
+A raster layer can have one or depending on the format more than 1 band of information stored within it. Sometimes those bands are for images (see below) and will be RGB or in the case of a multi or hyperspectral 
+remote sensing instrument - hundreds of bands across the light spectrum.
+
+Sometimes those bands will be time series (for example climate data which we will work with tomorrow).
+
+
+Below we will simply open a single band. The data format is .asc which 
+is an ESRI format that is text based. ASC files contain a header where the key metadata are described. 
+
+```xml
+ncols         2400
+nrows         1560
+xllcorner     -98.004166666667
+yllcorner     18.004166666667
+cellsize      0.0083333333333333
+NODATA_value  -9999
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2 0 0 0 0 0 0 -2 -2 -2 -2 -2 0 0 -4 0 -2 -2 -3 -2 -2 -3 -6 -5 -9 -12 -10 -7 -2 -2 -3 -3 -2 -4 -6 -8 -7 -8 -9 -9 -8 -9 -10 -10 -10 -11 -12 -12 -13 -12 -12 -12 -12 -13 -13 -13 -13 -14 -15 -14 -14 -14 -15 -14 -15 -14 -14 -15 -16 -16 -16 -16 -16 -16 -16 -17 -18 -19 -20 -20 -20 -20 -22 -22 -22 -22 -22 -21 -22 -23 -23 -23 -22 -23 -24 -25 -25 -25 -26 -26 -26 -26 -26 -25 -25 -24 -24 -24 -24 -24 -24 -23 -24 -25 -26 -26 -26 -27 -28 -27 -28 -28 -27 -27 -27 -27 -27 -28 -29 -29 -29 -29 -29 -28 -29 -30 -31 -31 -32 -32 -33 -33 -33 -34 -34 -34 -35 -36 -36 -36 -36 -36 -36 -36 -36 -36 -34 -36 -37 -37 -38 -38 -39 -39 -39
+```
+
+We can open an .asc layer using the raster() function. Note that this 
+same process can be used with geotiffs and many other raster formats.
+The raster package is adept at figuring out what format of data you are 
+providing it and using the correct drivers to open and read in the data!
+
+The raster package also has a wrapper around the base plot() function 
+allowing us to plot data using the same approach that we used above!
+
+```{r}
+# load raster data in r
+gulf_bathy <- raster("./data/bathymetry/gom_bathy_srtm30plus_asc.asc")
+plot(gulf_bathy)
+
+```
+
+Remove the box and axes.
+
+```{r}
+# remove the box and axes from the plot
+plot(gulf_bathy,
+     box = FALSE,
+     axes = FALSE)
+```
+
+Adjust the colors.
+
+```{r}
+# remove the box and axes from the plot
+plot(gulf_bathy,
+     box = FALSE,
+     axes = FALSE,
+     col = grey(1:100/100),
+     main = "grayscale bathymetric map")
+```
+
+#### Hillshade of the gulf coast
+
+```{r get-hillshade, eval=FALSE, echo=FALSE}
+# get ocean bottom hillshade
+download.file("http://www.naturalearthdata.com/http//www.naturalearthdata.com/download/50m/raster/GRAY_50M_SR_OB.zip",
+              destfile = "GRAY_50M_SR_OB.zip")
+# unzip data
+unzip("GRAY_50M_SR_OB.zip")
+```
+
+Plot the data .
+```{r}
+# plot data - adjust the color to be grayscale
+hillshade <- raster("./data/hillshade/hillshade_3395.tif")
+plot(hillshade,
+     col = grey(1:100/100))
+```
+
+If you don't want to crop your data - and simply want a quick plot
+of a particular spatial area, you can use the `ext = ` argument 
+with baseplot. 
+
+Below we specify the spatial extent of the gulf_study_area object
+that we used above to "zoom in" on just that area
+
+```{r}
+plot(hillshade,
+     main = "Bathymetric data for the gulf coast",
+     col = grey(1:100/100),
+     axes = FALSE,
+     box = FALSE)
+
+# add coastlines
+plot(coastlines_crop, 
+     add = TRUE)
+
+```
+
+#### when rasters don't line up
+
+we can use the projectRaster() function to reproject raster data in the same way we use spTransform() with 
+vector data. 
+
+
+```{r}
+# reproject the raster data 
+hillshade_wgs84 <- projectRaster(hillshade, 
+                                 crs = crs(coastlines_crop))
+
+plot(hillshade_wgs84)
+```
+
+We can crop raster data in the same way we crop vector data using the crop()
+function.
+
+```{r}
+
+# Crop the data 
+hillshade_wgs84 <- crop(hillshade_wgs84, gulf_study_area_wgs84)
+plot(hillshade_wgs84)
+
+```
+
+Now let's try to plot again - does it work?
+
+```{r}
+plot(hillshade_wgs84,
+     main = "Bathymetric data for the gulf coast",
+     col = grey(1:100/100),
+     axes = FALSE,
+     box = FALSE)
+# add coastlines
+plot(coastlines_crop, 
+     add = TRUE)
+```
+
+
+Challenge -- Create a basemap of the gulf coast using the layers 
+that we have been working with. On this map include
+
+1. This hillshade as a base map, cropped to cover a smaller area 
+2. Coastline boundaries
+3. US State boundaries, cropped to cover a smaller area 
+4. Bathemetric data 
+
+NOTE: use this time to create a basemap that your group can use. If you
+have other layers that you'd like to use - go for it!
+
+When you create your map, be sure to 
+
+1. CROP the hillshade for quicker plotting
+2. Experiment with the alpha argument to overlay a raster on top of a hillshade. Valid alpha values range between 0-1 (e.g. `alpha = .5`)
+
+ 
+```{r}
+plot(hillshade_wgs84,
+     main = "Bathymetric data for the gulf coast",
+     col = grey(1:100/100),
+     axes = FALSE,
+     box = FALSE,
+     ext = extent(gulf_study_area_wgs84),
+     legend = FALSE)
+
+# add coastlines
+plot(coastlines_crop, 
+     add = TRUE)
+plot(gulf_bathy,
+     add = TRUE,
+     alpha = .5)
+plot(us_states,
+     add = TRUE)
+```
+
+
+### Static basemaps in R
+
+You can also create static basemaps quickly in R. Below we use ggmap()
+to create a basemap for a particular lat/long location.
+
+```{r}
+# devtools::install_github("dkahle/ggmap")
+library(ggplot2)
+library(ggmap)
+```
+
+Let's create a basemap!
+
+
+https://earthdatascience.org/course-materials/earth-analytics/week-3/ggmap-basemap/
+
+```{r, eval=FALSE}
+# get map
+sq_map <- get_map(location = c(lon = -89.89, lat = 25.68),
+                  maptype = "satellite",
+                  source = "google", zoom = 5)
+
+ggmap(sq_map)
+```
+
+Your turn -- try a different maptype
+
+Hint: use ??get_map to find different options
+
+
+```{r, eval=FALSE}
+# get map
+sq_map <- get_map(location = c(lon = -89.89, lat = 25.68),
+                  maptype = "terrain",
+                  source = "google", zoom=5)
+
+ggmap(sq_map)
+```
+
+```{r, eval=FALSE}
+# get map
+sq_map <- get_map(location = c(lon = -89.89, lat = 25.68),
+                  maptype = "watercolor",
+                  source = "stamen", zoom=5)
+
+ggmap(sq_map)
+```
+
+
+
+
+```{r eval=FALSE, echo=FALSE}
+library(dplyr)
+
+# convert to data frame
+us_states_df <- tidy(us_states)
+us_states_df$id <- row.names(us_states_df)
+us_states$id <- row.names(us_states@data)
+
+# merge the attributes back
+us_states_data <- base::merge(us_states_df, 
+     us_states@data, 
+     by="id")
+
+us_states_data$HD01_VD <- as.numeric(us_states_data$HD01_VD)
+
+library(scales)
+
+ggplot() + geom_polygon(data = us_states_data, 
+                        aes(x=long, y=lat, group=group))
+
+ggplot() + geom_polygon(data = us_states_data, 
+                        aes(x=long, y=lat, group=group, fill=HD01_VD), 
+                        color = "black", size=0.2) + 
+                        coord_fixed() +
+                        scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) 
+  
+
+```
+
+
+```{r eval=FALSE, echo=FALSE}
+## ggplot!
+# turn sp object into a data frame
+us_states_df <- tidy(us_states)
+
+# need to figure out how to  
+ggplot() +
+  geom_path(data = coastlines_crop, aes(x = long, y = lat, group = group)) +
+  geom_polygon(data = us_states_df, aes(x = long, y = lat, group = group)) +
+  geom_polygon(data = gulf_study_area_wgs84, aes(x = long, y = lat, group = group, fill = "purple")) + 
+  theme_bw() 
+
+
+```  
+  
+  
+```{r the-data, echo=FALSE, eval=FALSE}
+# https://coastalmap.marine.usgs.gov/regional/contusa/gomex/gloria/data.html
+```
+
+### Spatial queries of vector data using base R
+
+```{r}
+# select all states that equal alabama 
+texas <- us_states[us_states$NAME == "Texas",]
+plot(texas)
+```
+
+
+### Extra magic 
+
+* [rspatial.org raster overview](http://rspatial.org/spatial/rst/8-rastermanip.html)
+
+![Check out mapedit for vector data editing in R!](http://r-spatial.org/images/mapedit_020_editMap_sf.gif)
+
+* [mapedit github page](http://r-spatial.org/r/2017/06/09/mapedit_0-2-0.html)
+* [More on R leaflet](https://rstudio.github.io/leaflet/shapes.html)
+
+
+
+

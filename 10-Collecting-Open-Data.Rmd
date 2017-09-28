@@ -1,0 +1,385 @@
+# Collecting Open Data
+
+## Open Data in R and rOpenSci
+
+Getting data is a critical step in most research yet it can sometimes be one of the most difficult and time-consuming steps.
+This is especially true in synthesis research which may incorporate hundreds of thousands of datasets in the analysis.
+
+I just ran across this last week:
+
+> The first report of the Open Research Data Task Force has found that two of the greatest challenges to effectively using open research data are that: even when it is notionally accessible researchers often simply cannot find that data, and if they do find it they cannot use it because of frustrating format variabilities and other compatibility issues.
+
+From: http://www2.warwick.ac.uk/newsandevents/pressreleases/task_force_finds/
+
+### Learning Outcomes
+
+- Understand what open data is and why/how its useful
+- Be aware of the open data ecosystem in R
+- Become familiar with a few packages rOpenSci provides
+
+### Open data
+
+Data can come from many sources.
+On a continuum from least good to most good, we might have:
+
+- Data on a researcher's hard drive
+- Data on institution website or FTP server
+- Data on some sort of portal behind a wall of some sort (e.g., accounts)
+- Data in an open repository (no API)
+- Data in an open repository (w/ public API)
+
+A really great list of R packages for getting at open data can be found here:
+
+- https://github.com/ropensci/opendata
+
+So what is open data?
+Open data is data that are:
+
+- Properly licensed for re-use
+- Accessible w/o gates (e.g., paywall, login)
+- Use open formats (formats you can work with)
+
+### What is rOpenSci?
+
+From https://ropensci.org/:
+
+> At rOpenSci we are creating packages that allow access to data repositories through the R statistical programming environment that is already a familiar part of the workflow of many scientists. 
+
+Package categories:
+
+- Data Publication
+- Data Access
+- Literature
+- Altmetrics
+- Scalable & Reproducible Computing
+- Databases
+- Data Vizualization
+- Image Processing
+- Data Tools
+- Taxonomy
+- HTTP tools
+- Geospatial
+- Data Analysis
+
+Full list of packages: https://ropensci.org/packages/
+Many of these are on CRAN and can be installed via `install.packages()` but some are not.
+rOpenSci addresses the issues raised in that top quote.
+
+### Overview of some of the interetsing packages rOpenSci provides
+
+Let's go through a few of packages sponsored by rOpenSci to demonstrate the power of open data + APIs + R.
+
+#### `mregions`: Tools to get marine regions data from  www.marineregions.org
+
+- Website: http://marineregions.org/
+- Package: https://github.com/ropenscilabs/mregions
+
+```{r}
+library(mregions)
+library(leaflet)
+
+res2 <- mr_shp(key = "MarineRegions:eez_iho_union_v2", maxFeatures = 5)
+
+leaflet() %>%
+  addProviderTiles(provider = 'OpenStreetMap') %>%
+  addPolygons(data = res2)
+```
+
+#### `rplos`: R client for the PLoS Journals API
+
+- Package: https://github.com/ropensci/rplos
+- Website: http://api.plos.org/
+
+```{r}
+library(rplos)
+searchplos(q='everything:"gulf of mexico"', fl='title', fq='doc_type:full', limit=10)
+```
+
+#### `rnaturalearth`: an R package to hold and facilitate interaction with natural earth map data
+
+- Website: www.naturalearthdata.com/
+- Package: https://github.com/ropenscilabs/rnaturalearth
+
+```{r}
+library(rnaturalearth)
+library(sp)
+library(ggplot2)
+
+# Plot the countries of the world
+plot(ne_countries())
+
+# Get the 110m coastline shapefile and make a plot of the Gulf of Mexico
+coastline <- ne_download(scale = 110, type = 'coastline', category = 'physical')
+
+ggplot(coastline, aes(long, lat, group = group)) + 
+  geom_path() +
+  xlim(-120, -50) +
+  ylim(0, 40)
+```
+
+#### `rfishbase`: R interface to the fishbase.org database
+
+- Website: http://www.fishbase.org/search.php
+- Package: https://github.com/ropensci/rfishbase
+
+```{r}
+library(rfishbase)
+
+fish <- common_to_sci("grouper")
+
+species_list <- species(fish)
+
+library(ggplot2)
+library(dplyr)
+
+ggplot(species_list, aes(Length, Weight)) + geom_point()
+
+species_list %>%
+  group_by(Genus) %>% 
+  summarize(MeanVulnerability = mean(Vulnerability)) %>% 
+  ggplot() + 
+  geom_col(aes(Genus, MeanVulnerability)) + 
+  coord_flip()
+```
+
+#### `taxize`: A taxonomic toolbelt for R
+
+```{r}
+library(taxize)
+
+classification("Chironomus riparius", db = "itis")
+```
+
+#### `rnoaa`: R interface to many NOAA data APIs 
+
+Access data like:
+
+- Air temps
+- Sea ice extent
+- Buoy data
+- Tons more!
+
+```{r}
+library(rnoaa)
+
+# Go here: http://www.ndbc.noaa.gov/
+# Find a station ID, like http://www.ndbc.noaa.gov/station_page.php?station=42039
+bd <- buoy(dataset = "cwind",  buoyid = 42039, datatype = "cc")
+plot(bd$data$wind_spd)
+```
+
+### Summary
+
+- Open data greatly assist in the data aquisition step in research
+- Finding open data is still hard
+- R, via rOpenSci, has a lot of packages for accessing open data already available to you
+
+### Resources
+
+- https://ropensci.org/
+- https://github.com/ropensci/opendata
+
+
+## Web Scraping
+
+---
+title: "Introduction to Web Scraping"
+author: "Julien Brun"
+output: html_document
+---
+
+### Goal
+
+The Goal of this session is to learn how to get data from the World Wide Web using R. Although we are going to talk about a few concepts first, the core of this session will be spent on getting data from websites that do not offer any interface to automate information retrieval, like via Web services such as REST, SOAP nor application programming interfaces (APIs). Therefore it is necessary to `scrape` the information embedded in the website itself.
+
+When you want to extract information or download data from a website that is too large for efficient manual downloading or needs to be frequently updated, you should first:
+
+1. Check if the website has any available Web services or if APIs have been developed to this end
+2. Check if any R (or other language you know) package has been developed by others as a wrapper around the API to facilitate the use of these Web services 
+3. Nothing found? Well let's code this ourselves then!
+
+
+### Which R packages are available?
+
+As usual, it is a good start to look at the CRAN View to have an idea of R packages available: <https://CRAN.R-project.org/view=WebTechnologies>
+
+Here are some of the key packages:
+
+- `Rcurl`: low level wrapper for `libcurl` that provides convenient functions to allow you to fetch URIs, get & post forms; [Quick guide](http://www.omegahat.net/RCurl/philosophy.html).
+- `httr`: similar to Rcurl; provides a user-friendly interface for executing HTTP methods and provides support for modern web authentication protocols (OAuth 1.0, OAuth 2.0). It is a wrapper around the [`curl` package](https://cran.r-project.org/web/packages/curl/index.html)
+- `rvest`: a higher level package mostly based on httr. It is simpler to use for basic tasks.
+- `Rselenium`: can be used to automate interactions and extract page content from dynamically generated webpages (i.e., those requiring user interaction to display results like clicking on button)
+
+There are also function in the `utils` package, such as `download.file()`. Note that these functions do not handle https (motivation behind the `curl` R package)
+
+**In this session we are going to use `rvest`: first for a simple tutorial, followed by a challenge in groups**
+
+
+### Some background
+
+#### HTTP:  Hypertext Transfer Protocol
+
+##### URL
+
+At the heart of web communications is the request message, which is sent via *U*niform *R*esource *L*ocators (URLs). Basic `URL` structure:
+
+![credits: https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177](./images/http1-url-structure.png)
+
+The protocol is typically http or https for secure communications. The default port is 80, but one can be set explicitly, as illustrated in the above image. The resource path is the local path to the resource on the server.
+
+
+##### Request
+
+![credits: https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177](./images/http1-req-res-details.png) 
+
+The actions that should be performed on the host are specified via HTTP verbs. Today we are going to focus on two actions that are often used in web forms:
+
+- `GET`: fetch an existing resource. The URL contains all the necessary information the server needs to locate and return the resource.
+- `POST`: create a new resource. POST requests usually carry a payload that specifies the data for the new resource.
+
+##### Response
+
+Status codes:
+
+- `1xx`: Informational Messages
+- `2xx`: Successful; most known is 200: OK, request was successfully processed
+- `3xx`: Redirection
+- `4xx`: Client Error; the famous 404: resource not found
+- `5xx`: Server Error
+
+#### HTML
+
+The *H*yper*T*ext *M*arkup *L*anguage (`HTML`) describes and defines the content of a webpage. Other technologies besides HTML are generally used to describe a webpage's appearance/presentation (CSS) or functionality (JavaScript).
+
+"Hyper Text" in HTML refers to links that connect webpages to one another, either within a single website or between websites. Links are a fundamental aspect of the Web. 
+
+HTML uses "markup" to annotate text, images, and other content for display in a Web browser. HTML markup includes special "elements" such as `<head>`, `<title>`, `<body>`, `<header>`, `<footer>`, `<article>`, `<section>`, `<p>`, `<div>`, `<span>`, `<img>`, and many others.
+
+Using you web browser, you can inspect the HTML content of any webpage of the World Wide Web.
+
+#### XML
+
+The e*X*tensible *M*arkup *L*anguage (XML) provides a general approach for representing all types of information, such as data sets containing numerical and categorical variables. XML provides the basic, common, and quite simple structure and syntax for all “dialects” or vocabularies. For example, `HTML`, `SVG` and `EML` are specific vocabularies of XML.
+
+#### XPath
+
+`XPath` is quite simple but yet very powerful. Similar syntax to a file system hierarchy, it allows to identify nodes of interest by specifying paths through the tree, based on node names, node content, and a node’s relationship to other nodes in the hierarchy. We typically use XPath to locate nodes in a tree and then use R functions to extract data from those nodes and bring the data into R.
+
+#### CSS
+
+*C*ascading *S*tyle *S*heets (`CSS`) is a stylesheet language used to describe the presentation of a document written in HTML or XML. CSS describes how elements should be rendered on screen, on paper, in speech, or on other media. In CSS, **selectors** are used to target the HTML elements on a web page that we want to style. There are a wide variety of CSS selectors available, allowing for fine grained precision when selecting elements to style.
+
+
+### Web scraping workflow
+
+1. Check for existing API and existing R packages
+2. Information identification: use your web browser inspector and/or http://selectorgadget.com/ to inspect the content and structure of the webpages you want to extract information from
+3. Choice of strategy: e.g. Xpath, CSS selector, ...
+4. Information extraction: Choose the relevant R package(s) to accomplish your data extraction and code it
+
+<br>
+
+### rvest
+
+`rvest` is a set of wrappers functions around the `xml2` and `httr` packages
+
+#### Main functions
+
+- `read_html`:  read a webpage into R as XML (document and nodes)
+- `html_nodes`: extract pieces out of HTML documents using XPath and/or CSS selectors
+- `html_attr`: extract attributes from HTML, such as `href`
+- `html_text`: extract text content
+
+For more information on the package: [here](https://github.com/hadley/rvest)
+
+#### Quick example
+
+Let us get started with organizing your evenings. The *Funk Zone* is a pretty fun part of Santa Barbara, where you can find wineries, bars and restaurants. Check this out: <http://santabarbaraca.com/explore-and-discover-santa-barbara/neighborhoods-towns/santa-barbara/the-funk-zone/>
+
+We are going to scrape the name of the places and their websites out of this webpage and compile this information into a csv, so you will be able to quickly choose where to go to relax at the end of the day.
+
+##### 1. Look at the website structure using our web browser inspector:
+
+![web browser inspector](images/webbrowser_inspector.png)
+
+
+
+##### 2. Use this information to extract the bar names from the webpage:
+
+```{r, message=FALSE, warning=FALSE, error=FALSE}
+#install.packages("rvest")
+library("rvest")
+
+URL <- "http://santabarbaraca.com/explore-and-discover-santa-barbara/neighborhoods-towns/santa-barbara/the-funk-zone/"
+
+# Read the webpage into R
+webpage <- read_html(URL)
+
+# Parse the webpage for bars
+bars <- html_nodes(webpage, ".neighborhoods-towns-business .neighborhoods-towns-business-title")
+
+# Extract the name of the bar
+bar_names <- html_text(bars)
+
+bar_names
+```
+
+##### 4. Extract the URLs to the websites:
+
+```{r}
+# Parse the page for the nodes containing the website URLs
+websites <- html_nodes(webpage, ".neighborhoods-towns-business .website-button")
+
+# Extract the reference 
+websites_urls <- html_attr(websites, "href")
+
+websites_urls
+```
+
+We got back only 11 URLs, but we got 12 bar names returned!? Looking at the website, we realize for one of the new bar, no website was provided. Yes, web scraping is messy. A short Goggling let us find the website URL: http://www.municipalwinemakers.com/. Let us add it to the list:
+
+```{r}
+# Get the index of the missing bar
+mb_ind <- which(bar_names == "Municipal Winemakers")
+
+# add the URL
+websites_urls <- append(websites_urls, "http://www.municipalwinemakers.com/", after = mb_ind-1)
+```
+
+##### 5. Create a data frame and save it as csv:
+
+```{r}
+# Create the data frame
+my_cool_bars <- data.frame(funkzone_bar = bar_names, 
+                           website = websites_urls)
+
+# my_cool_bars
+
+# write it to csv
+write.csv(my_cool_bars, "~/oss/places_you_will_go.csv", row.names = FALSE)
+```
+
+
+### Challenge
+
+In groups of two, work on downloading all the fishery shapefiles for the Gulf of Mexico from this NOAA website:
+<http://sero.nmfs.noaa.gov/maps_gis_data/fisheries/gom/GOM_index.html>
+
+<br>
+
+### Final Thoughts
+
+Please always check that **the data you are scraping are publicly available data** and that there is no personal or confidential information gathered. Also please **do not overload the web server** you are scraping: when getting a large amount of data, it is often recommended to insert pauses between the requests sent to the web server to let it handle other requests.
+
+<br>
+
+### References and sources
+
+- CRAN view on web technologies: https://CRAN.R-project.org/view=WebTechnologies
+- HTML intro: https://code.tutsplus.com/tutorials/http-the-protocol-every-web-developer-must-know-part-1--net-31177
+- Good definitions and introduction to web basics: https://developer.mozilla.org/en-US/docs/Web
+- Scrapping via API; example of `rnoaa`: http://bradleyboehmke.github.io/2016/01/scraping-via-apis.html
+- Munzert, Simon. Automated Data Collection with R: A Practical Guide to Web Scraping and Text Mining. Chichester, West Sussex, United Kingdom: John Wiley & Sons Inc, 2015.
+- Nolan, Deborah, and Duncan Temple Lang. XML and Web Technologies for Data Sciences with R. Use R! New York, NY: Springer New York, 2014. doi:10.1007/978-1-4614-7900-0.
+
+

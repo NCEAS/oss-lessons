@@ -1,0 +1,724 @@
+# Data Management and Preservation
+
+## Data Management and Data Repositories
+
+![](images/Repos.png)
+
+### The Need for Data Management: Big Data
+
+![](images/ClimateNews.png)
+
+### The Need for Data Management: Data Deluge
+
+![](images/Deluge.png)
+
+### The Need for Data Management: Data Entropy
+
+<br>
+![](images/Entropy.png)
+
+### The Need for Data Management: Public Perception
+
+
+![](images/ClimateGate.png)
+
+<br><br>
+
+*"The climate scientists at the centre of a media storm over leaked emails were yesterday cleared of accusations that they fudged their results and silenced critics, but a review found they had failed to be open enough about their work."*
+
+### Why Manage Data? Researcher Perspective
+
+- Keep yourself organized – be able to find your files (data inputs, analytic scripts, outputs at various stages of the analytic process, etc.) 
+- Track your science processes for reproducibility – be able to match up your outputs with exact inputs and transformations that produced them
+- Better control versions of data – easily identify versions that can be periodically purged
+- Quality control your data more efficiently
+- To avoid data loss (e.g. making backups)
+- Format your data for re-use (by yourself or others)
+- Be prepared: Document your data for your own recollection, accountability, and re-use (by yourself or others) 
+- Gain credibility and recognition for your science efforts through data sharing!
+
+### Why Manage Data? Advancement of Science
+
+- Data is a valuable asset – it is expensive and time consuming to collect 
+- Data should be managed to:
+  - maximize the effective use and value of data and information assets
+  - continually improve the quality including: data accuracy, integrity, integration, timeliness of data capture and presentation, relevance, and usefulness
+  - ensure appropriate use of data and information
+  - facilitate data sharing
+  - ensure sustainability and accessibility in long term for re-use in science
+
+### The Data Life Cycle
+
+<br>
+![](images/DLC.png)
+
+### The Data Life Cycle
+
+<br>
+![](images/DLCSynth.png)
+
+
+
+<br>
+![](images/WhyManage.png)
+
+
+<br>
+![](images/where-data-end.png)
+
+
+<br>
+![](images/data-more-accessible.png)
+
+### Barriers to Synthesis
+
+- Data not preserved
+  - Tiny proportion of ecological data are readily available
+- Dispersed, isolated repositories
+  - Each community has its own; disconnected; underutilized
+- Lack of software interoperability
+  - Metacat, DSpace, Mercury, iRODS, XMCat, OPeNDAP, ...
+- Heterogeneous data
+  - Many data formats, metadata formats, and varying semantics
+  
+### Solutions
+
+- Preserve data
+- Adopt standards
+- Create networks
+- Create interoperable software
+
+
+### Synthesis Channels
+
+<br><br>
+![](images/SynthMethods1.png)
+
+### Data Repositories
+
+![](images/RepoLogos.png) 
+![](images/RepoTable.png) 
+
+
+Arctic Data Center
+![](images/ADC.png) 
+Knowledge Network for Biocomplexity
+![](images/KNB.png)
+
+DRYAD
+![](images/Dryad.png) 
+LTER
+![](images/LTER.png)
+
+
+
+![](images/re3datalogo.png) 
+![](images/Re3data.png) 
+
+
+<strong>Activity</strong>
+
+Search for a data repository
+
+<br><br>
+
+<strong>Resources</strong>
+
+re3data.org
+
+### Metadata and Data Heterogeneity
+
+Every community has ...
+
+- many data schemas
+  - one for each project and person
+- many data formats
+  - ASCII, NetCDF, HDF, GeoTiff, ...
+- many metadata schemas
+  - Biological Data Profile, Darwin Core, Dublin Core, <strong>Ecological Metadata Language (EML)</strong>, Open GIS schemas, ISO Schemas, ...
+
+Accepting this heterogeneity is critical
+
+
+
+### KNB and the MetaCat Data Server
+
+![](images/KNBlogo.png)
+
+Diverse Contributors
+- Individual investigators
+- Field stations and networks
+- Agencies, Non-profit partnerships
+- Scientific Societies, Centers
+
+KNB Data Types
+- Ecological
+- Environmental
+- Demographic
+- Social/Legal/Economic
+
+
+![](images/metacat.png)
+
+MetaCat
+- Data and metadata management
+- Stores, search, and document data
+- Customizable web-based search interface
+- Web metadata entry tool
+- Replication capabilities
+- DOI Support
+
+
+
+### Making Data Count
+
+![](images/MDC.png)
+
+
+![](images/MDC_DL.png)
+
+
+![](images/MDC_Cit.png)
+
+### KNB and the MetaCat Data Server
+
+![](images/KNBlogo.png)
+
+Diverse Contributors
+- Individual investigators
+- Field stations and networks
+- Agencies, Non-profit partnerships
+- Scientific Societies, Centers
+
+KNB Data Types
+- Ecological
+- Environmental
+- Demographic
+- Social/Legal/Economic
+
+
+![](images/metacat.png)
+
+MetaCat
+- Data and metadata management
+- Stores, search, and document data
+- Customizable web-based search interface
+- Web metadata entry tool
+- Replication capabilities
+- DOI Support
+
+
+### What is Metadata?
+
+![](images/busytown.jpeg)
+
+***
+
+<strong>Who
+
+What
+
+When
+
+Where
+
+Why
+
+How</strong>
+
+
+![](images/Metadata.png)
+
+### What are Metadata Good For?
+
+
+- Captures Information
+- Enables Discovery
+- Enables Exchange
+
+### Metadata Standards
+
+
+A Standard provides a structure to describe data with:
+- Common terms to allow consistency between records
+- Common definitions for easier interpretation
+- Common language for ease of communication
+- Common structure to quickly locate information
+
+In search and retrieval, standards provide:
+- Documentation structure in a reliable and predictable format for computer interpretation
+- A uniform summary description of the dataset
+
+Many standards exist
+- Biological Data Profile, Darwin Core, Dublin Core, <strong>Ecological Metadata Language (EML)</strong>, Open GIS schemas, ISO Schemas, ...
+
+
+
+![](images/KNBRecord.png)
+
+### Synthesis Channels
+
+<br><br>
+![](images/SynthMethods1.png)
+
+
+<br><br>
+![](images/SynthMethods2.png)
+
+
+![](images/DataONE_LOGO.jpg)
+
+### Federated Network of Repositories
+
+![](images/MNs.png)
+
+
+Diverse Federation: Resilience
+- Failover for temporary outages
+- Insurance against project/institutional failure
+- Avoid correlated failures
+
+Diverse Federation: Scalability
+- Storage increases with Repositories (Member Nodes)
+- Incremental costs to each Member Node to replicate
+- Distributes sustainability costs
+
+Communication across repositories is managed by Coordinating Nodes
+
+### DataONE Coordination
+
+![](images/DataONECNs.png)
+
+### DataONE Search
+
+![](images/Search.png)
+
+
+![](images/Search2.png)
+
+
+
+<strong>Activity</strong>
+
+Search for data
+
+<br><br>
+
+<strong>Resources</strong>
+
+search.dataone.org
+
+
+<strong>Activity</strong>
+
+Upload data to KNB
+
+
+<br><br>
+
+<strong>Resources</strong>
+
+dev.nceas.ucsb.edu
+
+~oss/~oss-lessons/publishing-data/oss_Pond2010_Metadata.pdf
+
+~oss/~oss-lessons/publishing-data/pond2010.csv
+
+
+## Ecological Metadata in R
+
+Science metadata is:
+
+- Standardized
+- Machine-readable (usually XML)
+- Usually really hard to generate
+
+Science metadata underpins data repositories:
+
+- https://search.dataone.org/
+- https://www.ncdc.noaa.gov/data-access
+- https://data.nasa.gov/browse
+
+The R EML package aims to help us generate EML science metadata from within R.
+The learning process here is two-fold:
+
+- Learn the EML standard
+- Learn how to use the EML R package
+
+Both of these are relatively hard!
+
+Today, I'll show a bit of EML and a bit of the EML R package in the hopes that when it comes time to create your own science metadata you'll know where to look for guidance.
+
+### Learning outcomes:
+
+Upon completing this module, students will
+
+- Have a basic understanding of scientific metadata and how it fits into research
+- Have a basic familiarity with generating scientific metadata using the EML R package
+- Have watched the instructor generate fairly complete metadata for an simple example dataset
+
+### Lesson
+
+#### The EML standard
+
+EML covers lots of stuff, importantly:
+
+- Proper citation of your dataset
+- Who is involved with the dataset and how
+- Coverage (temporal, spatial, taxonomic)
+- Methodological information
+- Documentation on files and their formats
+
+Examples:
+
+- Simple: https://github.com/ropensci/EML/blob/master/inst/examples/example-eml-2.1.1.xml
+- Advanced: https://github.com/ropensci/EML/blob/master/inst/examples/hf205.xml
+
+### Generating an EML record from scratch
+
+This is modeled after this vignette inside the EML package: https://github.com/ropensci/EML/blob/master/vignettes/creating-EML.Rmd
+
+#### The dataset
+
+As an example, let's create an EML record for the `iris` dataset that comes with the `ggplot2` package.
+
+```{r}
+library(ggplot2)
+data("iris") # requires ggplot2
+head(iris)
+summary(iris)
+```
+
+#### The metadata
+
+First we load the EML package:
+
+```{r}
+library(EML)
+```
+
+The easiest way to create an EML record from scratch is to get the information into R first, then create the EML record with that information.
+
+So let's start with the title and abstract:
+
+```{r}
+title <- "Edgar Anderson's Iris Data"
+```
+
+The easiest way to set an abstract is to create a separate Markdown file which lets us use rich formatting:
+
+```{r}
+abstract <- as(set_TextType("./data/abstract.md"), "abstract")
+```
+
+Though not required, including licensing information is a crucial step in metadata authoring.
+Let's use the Create Commons Attribute license which is a permissive license.
+
+```{r}
+intellectualRights <- "This work is licensed under a Creative Commons Attribution 4.0 International License."
+```
+
+Every dataset should have a publication date.
+I can guess at the most appropriate publication date from the ?iris help page.
+
+```{r}
+pubDate <- "1935"
+```
+
+##### Keywords
+
+Search systems often take advantage of keywords to make it easier to find what you're looking for and find related datasets.
+
+```{r}
+keywordSet <-
+  c(new("keywordSet",
+        keyword = c("iris",
+                    "ra fisher",
+                    "setosa",
+                    "virginica",
+                    "versicolor")))
+keywordSet
+```
+
+##### Parties
+
+Every EML record needs to have a creator and a contact set.
+The creator is the party or parties (e.g., person, organization) that should be cited when giving credit for the dataset.
+
+```{r}
+edgar <- as.person("Edgar Anderson <edgaranderson@iris.net>") # Fake email
+creator <- as(edgar, "creator")
+contact <- as(edgar, "contact")
+```
+
+##### Methods
+
+We don't have detailed methods for this dataset so we'll make something up.
+The easiest way to get methods into an EML record is to create a separate Markdown file which lets us get rich formatting.
+
+```{r}
+methods <- set_methods("./data/methods.md")
+methods
+```
+
+##### Coverage
+
+We also don't have detailed coverage information but we can fill some things in from a bit of research.
+
+```{r}
+coverage <- 
+  set_coverage(beginDate = '1936-01-01', 
+               endDate = '1936-12-31', # Fake tempporal information
+               sci_names = c("Iris setosa", "Iris versicolor", "Iris virginica"),
+               geographicDescription = "Gaspé Peninsula", # Approximated spatial coverage
+               westBoundingCoordinate = -65.75, 
+               eastBoundingCoordinate = -65.75,
+               northBoundingCoordinate = 48.66, 
+               southBoundingCoordinate = 48.66)
+coverage
+```
+
+##### Attributes
+
+Attributes are one of the more powerful parts of EML.
+We can describe, in very specific detail, the meaning of the tabular data we're documenting.
+A lot of information is required to sufficiently describe datasets so we'll have to enter in a fair bit of information.
+The easiest way to do that is to create a separate CSV file with a set of columns that the EML package is looking for and bring it in as a `data.frame`.
+
+```{r}
+attributes <- read.csv("./data/attributes.csv")
+
+# For the Species column, we need to define the values as codes and we need
+# to tell EML what they mean
+species_codes <- c("setosa" = "Iris setosa",
+                   "virginica" = "Iris virginica",
+                   "versicolor" = "Iris versicolo")
+
+factors <- data.frame(attributeName = "Species",
+                      code = names(species_codes),
+                      definition = species_codes)
+
+attributeList <- set_attributes(attributes, 
+                                factors,
+                                col_classes = c("numeric",
+                                                "numeric",
+                                                "numeric",
+                                                "numeric",
+                                                "factor"))
+attributeList
+```
+
+##### Entities
+
+We've described the attributes (columns) for `iris.csv` but we haven't describe `iris.csv` itself.
+In EML, files like this are called `entities` and `entities` contain information about their file formats and more.
+
+```{r}
+write.csv(iris, row.names = FALSE, "iris.csv")
+physical <- set_physical("iris.csv", 
+                         size = as.character(file.size("iris.csv")),
+                         authentication = digest::digest("iris.csv", algo = "md5", file = TRUE),
+                         authMethod = "MD5")
+physical
+```
+
+Because `iris.csv` is tabular, we create an `entity` of type `dataTable`:
+
+```{r}
+dataTable <- new("dataTable",
+                 entityName = "iris.csv",
+                 entityDescription = "Edgar Anderosn's Iris data exported from R",
+                 physical = physical,
+                 attributeList = attributeList)
+```
+
+Note that the `attributeList` we created before gets entered directly into the `dataTable` entity.
+
+##### Create the `eml` object
+
+Now that we have everything all entered into R, we can create the 
+```{r}
+dataset <- new("dataset",
+               title = title,
+               creator = edgar,
+               pubDate = pubDate,
+               intellectualRights = intellectualRights,
+               abstract = abstract,
+               keywordSet = keywordSet,
+               coverage = coverage,
+               contact = contact,
+               methods = methods,
+               dataTable = dataTable)
+
+eml <- new("eml",
+           packageId = paste0("urn:uuid", uuid::UUIDgenerate()),
+           system = "uuid",
+           dataset = dataset)
+```
+
+##### Save and validate
+
+Now that our `eml` object is created, we can save it:
+
+```{r}
+write_eml(eml, "eml.xml")
+```
+
+We should also validate the file:
+
+```{r}
+eml_validate("eml.xml")
+```
+
+### Summary
+
+- EML can be used to create scientific metadata for our datasets
+- The R EML package can help us create EML from scratch
+
+### Resources
+
+- https://knb.ecoinformatics.org/#external//emlparser/docs/index.html
+- https://knb.ecoinformatics.org/#external//emlparser/docs/eml-2.1.1/index.html
+- https://github.com/ropensci/EML
+
+
+
+## Uploading Data to DataONE
+  
+This document describes how to use the *dataone* R package to upload data to DataONE.
+
+The *dataone* R package provides methods to enable R scripts to interact with DataONE Coordinating Nodes (CN) and Member Nodes (MN), to search for, download, upload and update data and metadata. The *dataone* R package takes care of 
+the details of calling the  corresponding DataONE web service on a DataONE node. For example, the *dataone* 
+`createObject` R method calls the DataONE web service [MNStorage.create()](https://purl.dataone.org/architecture/apis/MN_APIs.html#MNStorage.create) that uploads a dataset to a DataONE MN. 
+
+### Logging in
+Before uploading any data to a DataONE MN, it is necessary to obtain a DataONE user identity that will
+be provided with each request to upload or update data. The method that DataONE uses
+requires an *authentication token*, which is a character string, to be provided during upload. This token can be retrieved by logging into the DataONE network and copying the token into your R session.  
+
+#### Obtain an ORCID
+ORCID is a researcher identifier that provides a common way to link your researcher identity to your articles and data.  An ORCID is to a researcher as a DOI is to a research article.  To obtain an ORCID, register at https://orcid.org.
+
+#### Log in to DataONE
+We will be using a test server, so login and retrieve your token at https://search-stage-2.test.dataone.org.
+
+Once you are logged in, navigate to your Profile Settings, and locate the "Authentication Token" section, and then copy the token for R to your clipboard.
+
+### Modify metadata
+Next, modify the metadata file associated with the package to set yourself as the owner.  This will help us differentiate the test data later.  Open the `strix-pacific-northwest.xml` file in RStudio, and change the `givenName` and `surName` fields at the top to your name.
+
+```{r}
+library(EML)
+# devtools::install_github("NCEAS/arcticdatautils")
+library(arcticdatautils)
+
+# Load the EML file into R
+emlFile <- "./data/strix-pacific-northwest.xml"
+doc <- read_eml(emlFile)
+
+# Change creator to us
+doc@dataset@creator <- c(eml_creator("Matthew", "Jones", email = "jones@nceas.ucsb.edu"))
+
+# Change abstract to the better one we wrote
+doc@dataset@abstract <- as(set_TextType("./data/better-abstract.md"), "abstract")
+
+# Save it back to the filesystem
+write_eml(doc, "./data/strix-pacific-northwest.xml")
+```
+
+### Uploading A Package Using `uploadDataPackage`
+Datasets and metadata can be uploaded individually or as a collection. Such a collection, whether contained in local 
+R objects or existing on a DataONE repository, will be informally referred to as a `package`. The steps necessary to
+to prepare and upload a package to DataONE using the `uploadDataPackage` method 
+will be shown. A complete script that uses these steps is shown here.
+
+In the first section, we create a 'DataPackage as a container for our data and metadata and scripts:
+
+```{r}
+library(dataone)
+library(datapack)
+library(uuid)
+
+d1c <- D1Client("STAGING2", "urn:node:mnTestKNB")
+dp <- new("DataPackage")
+show(dp)
+```
+
+We then add a metadata file, data file, R script and output data file to this package:
+```{r}
+# Generate identifiers for our data and program objects, and add them to the metadata
+sourceId <- paste0("urn:uuid:", uuid::UUIDgenerate())
+progId <- paste0("urn:uuid:", uuid::UUIDgenerate())
+outputId <- paste0("urn:uuid:", uuid::UUIDgenerate())
+doc@dataset@otherEntity[[1]]@id <- new("xml_attribute", sourceId)
+doc@dataset@otherEntity[[2]]@id <- new("xml_attribute", progId)
+doc@dataset@otherEntity[[3]]@id <- new("xml_attribute", outputId)
+repo_obj_service <- paste0(d1c@mn@endpoint, "/object/")
+doc@dataset@otherEntity[[1]]@physical[[1]]@distribution[[1]]@online@url <- 
+  new("url", paste0(repo_obj_service, sourceId))
+doc@dataset@otherEntity[[2]]@physical[[1]]@distribution[[1]]@online@url <- 
+  new("url", paste0(repo_obj_service, progId))
+doc@dataset@otherEntity[[3]]@physical[[1]]@distribution[[1]]@online@url <- 
+  new("url", paste0(repo_obj_service, outputId))
+
+write_eml(doc, "./data/strix-pacific-northwest.xml")
+
+# Add the metadata document to the package
+metadataObj <- new("DataObject", 
+                   format="eml://ecoinformatics.org/eml-2.1.1", 
+                   filename=paste(getwd(), emlFile, sep="/"))
+dp <- addMember(dp, metadataObj)
+
+# Add our input data file to the package
+sourceData <- "./data/sample.csv"
+sourceObj <- new("DataObject",
+                 id = sourceId,
+                 format="text/csv", 
+                 filename=paste(getwd(), sourceData, sep="/"))
+dp <- addMember(dp, sourceObj, metadataObj)
+
+# Add our processing script to the package
+progFile <- "./data/filterSpecies.R"
+progObj <- new("DataObject",
+               id = progId,
+               format="application/R", 
+               filename=paste(getwd(), progFile, sep="/"), 
+               mediaType="text/x-rsrc")
+dp <- addMember(dp, progObj, metadataObj)
+
+# Add our derived output data file to the package
+outputData <- "./data/filteredSpecies.csv"
+outputObj <- new("DataObject", 
+               id = outputId,
+               format="text/csv", 
+               filename=paste(getwd(), outputData, sep="/"))
+dp <- addMember(dp, outputObj, metadataObj)
+
+myAccessRules <- data.frame(subject="http://orcid.org/0000-0003-0077-4738", permission="changePermission") 
+
+# Add the provenance relationships to the data package
+dp <- describeWorkflow(dp, sources=sourceObj, program=progObj, derivations=outputObj)
+
+show(dp)
+```
+
+Finally, we upload the package to the Testing server for the KNB.
+```{r, eval=FALSE}
+packageId <- uploadDataPackage(d1c, dp, public=TRUE, accessRules=myAccessRules, quiet=FALSE)
+```
+
+This particular package contains the R script `filterSpecies.R`, the input 
+file `sample.csv` that was read by the script and the output file 
+`filteredSpecies.csv` that was created by the R script, which was run at a
+previous time.  
+
+You can now search for and view the package at https://dev.nceas.ucsb.edu:
+
+![](images/data-uploaded.png)
+
+In addition, each of the uploaded entities shows the relevant provenance information, showing how the source data is linked to the derived data via the R program that was used to process the raw data:
+
+![](images/provenance-info.png)
+
+
+
