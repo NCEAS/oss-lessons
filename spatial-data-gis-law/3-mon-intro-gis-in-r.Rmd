@@ -639,30 +639,36 @@ ggmap(sq_map)
 ```
 
 
-
+## Chloropleth with ggplot
 
 ```{r eval=FALSE, echo=FALSE}
 library(dplyr)
 
+nrow(us_states@data)
 # convert to data frame
-us_states_df <- tidy(us_states)
-us_states_df$id <- row.names(us_states_df)
 us_states$id <- row.names(us_states@data)
+us_states_df <- tidy(us_states, region = "id")
 
 # merge the attributes back
-us_states_data <- base::merge(us_states_df, 
+us_states_data <- left_join(us_states_df, 
      us_states@data, 
      by="id")
 
+
+
+# convert to numeric
+us_states_data$ALAND <- as.numeric(us_states_data$ALAND)
 us_states_data$HD01_VD <- as.numeric(us_states_data$HD01_VD)
+
+
+# plot on a gradient 
+ggplot(us_states_data) +
+  geom_polygon(aes(x=long, y=lat, group=group, fill = ALAND))
 
 library(scales)
 
 ggplot() + geom_polygon(data = us_states_data, 
-                        aes(x=long, y=lat, group=group))
-
-ggplot() + geom_polygon(data = us_states_data, 
-                        aes(x=long, y=lat, group=group, fill=HD01_VD), 
+                        aes(x=long, y=lat, group=group, fill = HD01_VD), 
                         color = "black", size=0.2) + 
                         coord_fixed() +
                         scale_fill_distiller(type="seq", trans="reverse", palette = "Reds", breaks=pretty_breaks(n=10)) 
@@ -699,6 +705,45 @@ texas <- us_states[us_states$NAME == "Texas",]
 plot(texas)
 ```
 
+
+
+```{r}
+gulf_study_area <- readOGR("study-area/study-area.shp")
+us_states <- readOGR("us-boundaries/us_bound_pop.shp")
+hillshade <- raster("hillshade/hillshade_3395.tif") 
+# reproject to lat/long
+hillshade_geog <- projectRaster(hillshade, crs = crs(us_states))
+# crop layer
+hillshade_crop <- crop(hillshade_geog, gulf_study_area)
+
+# convert to spatial pixels
+hillshade_crop_spdf <- as(hillshade_crop, "SpatialPixelsDataFrame")
+hillshade_crop_df <- as.data.frame(hillshade_crop_spdf)
+names(hillshade_crop_df) <- c("value", "x", "y")
+
+us_states_df <- tidy(us_states)
+
+library(ggplot2)
+grayscale <- grey.colors(100, start = 0.3, end = 0.9, gamma = 2.2)
+ggplot() +
+  geom_tile(data = hillshade_crop_df, aes(x = x, y = y, fill = value)) +  scale_fill_distiller(palette = "Greys") +
+  geom_polygon(data=us_states_df, aes(x = long, y = lat, group = group), fill = NA, color = "black") +
+  coord_fixed(xlim = c(-100, -70), ylim=c(10, 32))
+
+
+
+ggplot() +
+ annotate(geom = 'tile', x = hillshade_crop_df$x, hillshade_crop_df$y,
+          fill = scales::colour_ramp(c("black", "white"))(hillshade_crop_df$value))
+
+         
+ geom_tile(data = gridcountdf, aes(x = x, y = y, fill = value), alpha = 0.5)
+
+
+plot(hillshade_crop,
+     col=grey.colors(100, 0,1))
+
+```
 
 ## Extra magic 
 
