@@ -7,15 +7,6 @@ output:
     theme: cerulean
 ---
 
-## Topic
-
-### Introduction
-**Purpose:**
-
-
-### Background:
-Brief overview of topic and relationship to scientific synthesis.
-
 
 ### Learning outcomes
 
@@ -24,7 +15,7 @@ At the end of this 30 minute overview you will be able to:
 * Add vector data to QGIS
 * Add raster data to QGIS
 * Explore the metadata - CRS, resolution, extent of a spatial data layer in QGIS
-* Create a basic map in QGIS ??
+* Create a basic map in QGIS
 
 
 ## Intro to Quantum GIS (QGIS)
@@ -69,7 +60,7 @@ then see a list of plugins - similar to the list below.
 
 ![QGIS plugins](http://underdark.files.wordpress.com/2014/04/installpluginbuilder.png)
 
-A few of my favorite plugins
+A few favorite plugins:
 
 * **Value tool:** A MUST if you work with raster data. use this to view the value of a pixel in a raster dataset like you would the identify tool in ArcMap.
 * **MapSwipeTool:** A cool tool if you want to view before/ after rasters and look at differences.
@@ -79,4 +70,4 @@ line access to the tool.
 
 ## Challenge
 
-If there's time...create a map of the Gulf of mexico.
+Create a map of the Gulf of mexico.

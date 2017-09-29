@@ -23,9 +23,9 @@ At the end of this 30 minute overview you will be able to:
 
 ## Work with vector data in R
 
-<a href="https://earthdatascience.org/course-materials/earth-analytics/week-4/intro-vector-data-r/" target="_blank">Intro to vector data in R - Earth Data Science website</a>
+<a href="https://earthdatascience.org/courses/earth-analytics/spatial-data-r/intro-vector-data-r/" target="_blank">Introduction to vector data in R - Earth Data Science website</a>
 
-![Point, line OR polygon features can be stored within a vector dataset ](https://earthdatascience.org/images/course-materials/earth-analytics/week-5/pnt_line_poly.png)
+![Point, line OR polygon features can be stored within a vector dataset ](https://earthdatascience.org/images/courses/earth-analytics/spatial-data/points-lines-polygons-vector-data-types.png)
 
 There are many ways to import and map vector data in R.
 
@@ -33,7 +33,7 @@ To read the data, you have several options
 
 * `sp`: Import shapefiles and other data using `readOGR()` from the `sp` package
 * `sp`: more recently the `sf` package has proved to be both faster and more efficient that `sp`
-* if you have geojson data - there are several json packages that you can use - check out <a href="https://earthdatascience.org/course-materials/earth-analytics/week-10/co-water-data-spatial-r/">this tutorial on dealing with geojson imported from API's in R if you're interested in learning more</a>.
+* if you have geojson data - there are several json packages that you can use - check out <a href="https://earthdatascience.org/courses/earth-analytics/week-10/co-water-data-spatial-r/">this tutorial on dealing with geojson imported from API's in R if you're interested in learning more</a>.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE)
@@ -361,8 +361,8 @@ base plot pros: faster maps, more difficult
 
 | Tool  | Pros   | Cons  |
 |---|---|---|---|---|
-| ggplot()  | templated maps, easy to standardize, clean mapping code, simple fast legends  | need to convert sp objects from `readOGR()` to a data frame |   
-| BASE R plot()  | faster mapping, supports sp objects natively  | legends are tedious to create and customize |
+| `ggplot()`  | templated maps, easy to standardize, clean mapping code, simple fast legends  | need to convert sp objects from `readOGR()` to a data frame |   
+| BASE R `plot()`  | faster mapping, supports sp objects natively  | legends are tedious to create and customize |
 |   |   |   |   
 ===
 
@@ -383,7 +383,7 @@ plot(gulf_study_area_wgs84,
 
 Finally it is always nice to create interactive maps. This allows your 
 colleagues to not only see but also interact with your data.
-Let's use mapview() to create a quick interactive map.
+Let's use `mapview()` to create a quick interactive map.
 
 To use mapview with multpile layers, you simply create a mapview 
 object for each layer and then add them together to produce a final plot.
@@ -419,14 +419,14 @@ community around it and is a standard for most raster operations in `R`.
 
 To load a raster layer with a single band - we use `raster()`.
 
-![raster bands](https://earthdatascience.org/images/course-materials/earth-analytics/week-6/single_multi_raster.png)
+![raster bands](https://earthdatascience.org/images/courses/earth-analytics/raster-data/single-vs-multi-band-raster-data.png)
 
 A raster layer can have one or depending on the format more than 1 band of information stored within it. Sometimes those bands are for images (see below) and will be RGB or in the case of a multi or hyperspectral 
 remote sensing instrument - hundreds of bands across the light spectrum.
 
 Sometimes those bands will be time series (for example climate data which we will work with tomorrow).
 
-![RGB raster bands ](https://earthdatascience.org/images/course-materials/earth-analytics/week-6/RGBSTack_1.jpg)
+![RGB raster bands ](https://earthdatascience.org/images/course-materials/earth-analytics/raster-data/RGB-bands-raster-stack.jpg)
 
 Below we will simply open a single band. The data format is .asc which 
 is an ESRI format that is text based. ASC files contain a header where the key metadata are described. 
@@ -441,12 +441,12 @@ NODATA_value  -9999
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2 0 0 0 0 0 0 -2 -2 -2 -2 -2 0 0 -4 0 -2 -2 -3 -2 -2 -3 -6 -5 -9 -12 -10 -7 -2 -2 -3 -3 -2 -4 -6 -8 -7 -8 -9 -9 -8 -9 -10 -10 -10 -11 -12 -12 -13 -12 -12 -12 -12 -13 -13 -13 -13 -14 -15 -14 -14 -14 -15 -14 -15 -14 -14 -15 -16 -16 -16 -16 -16 -16 -16 -17 -18 -19 -20 -20 -20 -20 -22 -22 -22 -22 -22 -21 -22 -23 -23 -23 -22 -23 -24 -25 -25 -25 -26 -26 -26 -26 -26 -25 -25 -24 -24 -24 -24 -24 -24 -23 -24 -25 -26 -26 -26 -27 -28 -27 -28 -28 -27 -27 -27 -27 -27 -28 -29 -29 -29 -29 -29 -28 -29 -30 -31 -31 -32 -32 -33 -33 -33 -34 -34 -34 -35 -36 -36 -36 -36 -36 -36 -36 -36 -36 -34 -36 -37 -37 -38 -38 -39 -39 -39
 ```
 
-We can open an .asc layer using the raster() function. Note that this 
+We can open an `.asc` layer using the `raster()` function. Note that this 
 same process can be used with geotiffs and many other raster formats.
 The raster package is adept at figuring out what format of data you are 
 providing it and using the correct drivers to open and read in the data!
 
-The raster package also has a wrapper around the base plot() function 
+The raster package also has a wrapper around the base `plot()` function 
 allowing us to plot data using the same approach that we used above!
 
 ```{r}
@@ -516,7 +516,7 @@ plot(coastlines_crop,
 
 ## when rasters don't line up
 
-we can use the projectRaster() function to reproject raster data in the same way we use spTransform() with 
+we can use the `projectRaster()` function to reproject raster data in the same way we use spTransform() with 
 vector data. 
 
 
@@ -592,7 +592,7 @@ plot(us_states,
 
 ## Static basemaps in R
 
-You can also create static basemaps quickly in R. Below we use ggmap()
+You can also create static basemaps quickly in `R`. Below we use `ggmap()`
 to create a basemap for a particular lat/long location.
 
 ```{r}
@@ -603,8 +603,8 @@ library(ggmap)
 
 Let's create a basemap!
 
+<a href="https://earthdatascience.org/courses/earth-analytics/lidar-raster-data-r/ggmap-basemap/" target="_blank">Create basemaps with ggmap in R - Earth Data Science website </a>
 
-https://earthdatascience.org/course-materials/earth-analytics/week-3/ggmap-basemap/
 
 ```{r, eval=FALSE}
 # get map
@@ -617,7 +617,7 @@ ggmap(sq_map)
 
 Your turn -- try a different maptype
 
-Hint: use ??get_map to find different options
+Hint: use `??get_map` to find different options
 
 
 ```{r, eval=FALSE}
@@ -653,8 +653,6 @@ us_states_df <- tidy(us_states, region = "id")
 us_states_data <- left_join(us_states_df, 
      us_states@data, 
      by="id")
-
-
 
 # convert to numeric
 us_states_data$ALAND <- as.numeric(us_states_data$ALAND)
@@ -727,8 +725,8 @@ library(ggplot2)
 grayscale <- grey.colors(100, start = 0.3, end = 0.9, gamma = 2.2)
 ggplot() +
   geom_tile(data = hillshade_crop_df, aes(x = x, y = y, fill = value)) +  scale_fill_distiller(palette = "Greys") +
-  geom_polygon(data=us_states_df, aes(x = long, y = lat, group = group), fill = NA, color = "black") +
-  coord_fixed(xlim = c(-100, -70), ylim=c(10, 32))
+  geom_polygon(data = us_states_df, aes(x = long, y = lat, group = group), fill = NA, color = "black") +
+  coord_fixed(xlim = c(-100, -70), ylim = c(10, 32))
 
 
 
@@ -741,7 +739,7 @@ ggplot() +
 
 
 plot(hillshade_crop,
-     col=grey.colors(100, 0,1))
+     col = grey.colors(100, 0,1))
 
 ```
 
