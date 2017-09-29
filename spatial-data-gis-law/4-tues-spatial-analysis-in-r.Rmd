@@ -70,7 +70,7 @@ extract raster values from a buffer region around that point and calculate a
 summary stat (in this case a mean raster value). We will then plot the points
 on a map weighting the size according to relative mean value.
 
-![Extract data from a buffer](https://earthdatascience.org/images/course-materials/earth-analytics/week-5/buffer-circular.png)
+![Extract data from a buffer](https://earthdatascience.org/images/courses/earth-analytics/spatial-data/buffer-circular.png)
 
 
 To begin let's import some raster data and the same study area file
@@ -349,7 +349,7 @@ y_range <- as.numeric(c(24, 32))  # min/max latitude of the interpolation area
 grd <- expand.grid(x = seq(from = x_range[1],
                    to = x_range[2], 
                    by = 0.1),
-                   y = seq(from = y_range[1],                                           to = y_range[2], 
+                   y = seq(from = y_range[1], to = y_range[2], 
                        by = 0.1))  # expand points to grid
 class(grd)
 ```
@@ -427,7 +427,7 @@ idw_dist1 <- idw(formula = elev_mm ~ 1,
            locations = sea_level_2000_sp,
            newdata = grd,
            idp = 1,
-           maxdist=1)
+           maxdist = 1)
 plot(idw_dist1,
      main = "IDW: distance = 1 degree, power = 1")
 ```
