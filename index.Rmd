@@ -5,6 +5,8 @@ author: ["Matt Jones", "Amber Budden", "Christopher Lortie", "Bryce Mecum", "Jul
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
+md_document:
+  always_allow_html: yes
 link-citations: yes
 description: "This is a collection of training materials that were created and used for the Open Science for Synthesis 2017: Gulf Research Program summer training institute, hosted at the National Center for Ecological Analysis and Synthesis on July 2017"
 github-repo: "NCEAS/oss-lessons"

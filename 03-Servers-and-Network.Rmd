@@ -21,7 +21,7 @@ remote computing and computing in the 'Cloud' for speeding up scientific analysi
 
 ### The Internet
 
-![](images/internet-1024x1024.png)
+![](./images/internet-1024x1024.png)
 
 ### Our goal is to:
 
@@ -35,19 +35,19 @@ remote computing and computing in the 'Cloud' for speeding up scientific analysi
 * Client: the host *initiating* the request
 * Server: the host *responding* to a request
 
-![](images/tcp_ports.jpg)
+![](./images/tcp_ports.jpg)
 
 
 ### Local networks
 
-![](images/client-server-network.png)
+![](./images/client-server-network.png)
 
 - All messages broadcast on the local network
     - Local hosts only "listen" for data that targets them
 
 ### Routed networks
 
-![](images/routers_archs.gif)
+![](./images/routers_archs.png)
 
 * Mechanism to connect networks together via forwarding data along routing paths
 
@@ -69,11 +69,11 @@ remote computing and computing in the 'Cloud' for speeding up scientific analysi
 
 ### Client-Server and the Internet
 
-![](images/client-server.png)
+![](./images/client-server.png)
 
 ### Peer to Peer networking
 
-![](images/p2p-network.png)
+![](./images/p2p-network.png)
 
 
 ### Internet versus the Web
@@ -97,7 +97,7 @@ remote computing and computing in the 'Cloud' for speeding up scientific analysi
 * dense "mantle" of routers at the periphery
     - loss of the core still leaves > 70% of internet connected peer-to-peer
 
-![](images/internet-core.jpg)
+![](./images/internet-core.jpg)
 
 ### Internet Application Protocols
 
@@ -115,7 +115,7 @@ remote computing and computing in the 'Cloud' for speeding up scientific analysi
 * Web documents connected using hyperlinked HTML documents
 * Other document types common (images, other media)
 
-![](images/img_HTTP_request.png)
+![](./images/img_HTTP_request.png)
 
 ### Secure Shell
 
@@ -131,7 +131,7 @@ remote computing and computing in the 'Cloud' for speeding up scientific analysi
 - Windows: __Git Bash__ Navigate to `Windows Start | Git` and open `Git Bash`
     - Note: Alternate and possibly better terminal for Windows is [cmder](http://cmder.net/)
 
-![](images/terminal-powder.png)
+![](./images/terminal-powder.png)
 
 
 ### Connecting to a remote server
@@ -142,7 +142,7 @@ jones@aurora.nceas.ucsb.edu's password:
 jones@aurora:~$ 
 ```
 
-![](images/terminal-aurora.png)
+![](./images/terminal-aurora.png)
 
 ## Change your password
 

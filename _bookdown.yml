@@ -1,3 +1,4 @@
-book_filename: "_OSS17"
-new_session: yes
-
+book_filename: "OSS17_curriculum"
+language:
+  ui:
+    chapter_name: "Chapter "

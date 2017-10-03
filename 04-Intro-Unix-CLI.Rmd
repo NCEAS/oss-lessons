@@ -14,7 +14,7 @@ what they did, when, and why.  Thus, traditional approaches to managing the rese
 often fail the reproducibility test, as even the original investigators can't repeat their initial
 process.
 
-![versions](images/phd-datamanagement-story-filenames-052810s.gif)
+![versions](./images/phd-datamanagement-story-filenames-052810s.png)
 - From [PhDComics](http://phdcomics.com/comics/archive.php?comicid=1323)
 
 Thus, the __command line__.  The command-line provides two major advantages to the researcher:
@@ -37,14 +37,14 @@ These advantages come at the cost of:
 
 ### The Command Line
 
-![Command Line](images/terminal-aurora.png)
+![Command Line](./images/terminal-aurora.png)
 Command line interpreters come in many flavors.  We will focus on Unix shell syntax, 
 but even with Unix there is tremendous diversity.  Learning all of the nuances of one shell
 can take years, but you will also find many variants on the servers you encounter.
 
 _Draw Bridge_
 
-![](images/draw-bridge-literalism.jpg)
+![](./images/draw-bridge-literalism.jpg)
 
 In this lesson, you will learn the power of the command line. But, you will 
 undoubtedly also internalize that computers are exceedingly literal.  You type, they do. 
@@ -59,13 +59,13 @@ far more productive when my attitude towards the computer is:
 
 ### The operating system
 
-![OS Diagram](images/OSDiagram.png)
+![OS Diagram](./images/OSDiagram.png)
 
-![OSes](images/OSes.png)
+![OSes](./images/OSes.png)
 
 ### All about the X
 
-![UNIX logo](images/40years.png)
+![UNIX logo](./images/40years.png)
 
 * OS X
  :  [is a Unix](http://unix.stackexchange.com/questions/1489/is-mac-os-x-unix)!
@@ -75,7 +75,7 @@ far more productive when my attitude towards the computer is:
 
 ### Some Unix hallmarks
 
-![Dilbert cartoon](images/dilbert-unix.png)
+![Dilbert cartoon](./images/dilbert-unix.png)
 
 * Multi-user, multi-process
 * Separation of engine from interface
@@ -84,20 +84,20 @@ far more productive when my attitude towards the computer is:
 
 ## The Command Line
 
-![Screenshot of SQL DB Browser GUI](images/SQLite_Cmd_GUI_Compare.png)
+![Screenshot of SQL DB Browser GUI](./images/SQLite_Cmd_GUI_Compare.png)
 
 - GUI: Graphical user interface
 - CLI: Command-line interface
  
 ### GUIs can be impressive
 
-![](images/oz-wizard.png)
+![](./images/oz-wizard.png)
 
 _[Pay no attention to that man behind the curtain](http://www.youtube.com/watch?v=YWyCCJ6B2WE)_
 
 ### CLIs let you get things done
 
-![](images/oz-man.jpg)
+![](./images/oz-man.jpg)
 
 
 ### Why the CLI is worth learning
@@ -116,7 +116,7 @@ jones@powder:~$ ssh jones@aurora.nceas.ucsb.edu
 
 which should give you a terminal window showing `aurora` as the host name:
 
-![](images/terminal-aurora.png)
+![](./images/terminal-aurora.png)
 
 
 ### Files and directories
@@ -285,7 +285,7 @@ jones@aurora:~/oss$
 
 You can interpret the permissions as follows:
 
-![File permissions](images/UnixFileLongFormat.png)
+![File permissions](./images/UnixFileLongFormat.png)
 
 ### All files have permissions and ownership
 
@@ -304,7 +304,7 @@ jones@aurora:~/oss$
 
 ### Getting help
 
-![I will ask for help before my problems get out of control](images/asking-for-help.jpg)  
+![I will ask for help before my problems get out of control](./images/asking-for-help.jpg)  
 
 * `<command> -h`, `<command> --help`
 * `man`, `info`, `apropos`, `whereis`
@@ -334,7 +334,7 @@ repository page and copy the reposiotry clone URL:
 
 https://github.com/NCEAS/oss-lessons
 
-![](images/github-clone.png)
+![](./images/github-clone.png)
 Now, open a terminal on aurora, login, and clone the repository:
 
 ```bash
@@ -389,7 +389,7 @@ $ nano paleo-mammals.txt
 
 ### Get into the flow, with pipes 
 
-![`stdin`, `stdout`, `stderr`](images/pipe_split.png)
+![`stdin`, `stdout`, `stderr`](./images/pipe_split.png)
 
 ```bash
 $ ls -1 ../../lakes | wc -l
@@ -458,7 +458,7 @@ $
 
 ### grep
 
-![The file pattern searcher](images/needle_in_a_haystack-300x223.jpg)
+![The file pattern searcher](./images/needle_in_a_haystack-300x223.jpg)
 
 
 #### Show all lines containing "bug" in my R scripts
@@ -505,7 +505,7 @@ $ grep -v bug *.Rmd |wc -l
 
 ### sed
 
-![The high tech filter](images/chromeblack-faucet-filter.jpg)
+![The high tech filter](./images/chromeblack-faucet-filter.jpg)
 
 #### Remove all lines containing "bug"!
 
@@ -528,7 +528,7 @@ $ sed '/#/ s/bug/buglet/g' 2-commandline-intro.Rmd
 
 ### find
 
-![Search for stuff](images/rover.gif)
+![Search for stuff](./images/rover.png)
 
 _Like Rover, the Windows search dog. But more useful._
 
@@ -719,7 +719,7 @@ $
 
 _Stand Back!_
 
-![](images/xkcd-regex.png)
+![](./images/xkcd-regex.png)
 
 ### What is a regular expression?
 
