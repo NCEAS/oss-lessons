@@ -12,7 +12,7 @@
 Tidy data make your life easier. Data strutures should match intuition and common sense. Data should have logical structure.  Rows are are observations, columns are variables. Tidy data also increase the viability that others can use your data, do better science, reuse science, and help you and your ideas survive and thrive. A workflow should also include the wrangling you did to get your data ready. If data are already very clean in a spreadsheet, they can easily become a literate, logical dataframe. Nonetheless, you should still use annotation within the introductory code to explain the meta-data of your data to some extent and what you did pre-R to get it tidy.  The philosophy here is very similar to the data viz lesson forthcoming with two dominant paradigms. Base R code functions, and pipes %>% and the logic embodied within the libraries associated with the the tidyverse. Generally, I prefer the tidyverse because it is more logical and much easier to remember.  It also has some specific functions needed to address common errors in modern data structures with little code needed to fix them up.
 
 [Why to love the tidverse](https://www.slideshare.net/cjlortie/whyr)  
-<br>
+
 
 ### Learning outcomes
 1. To appreciate the differences between base R and tidyverse packages in terms of function and grammmar.  
@@ -22,6 +22,7 @@ Tidy data make your life easier. Data strutures should match intuition and commo
 5. To use pipes to move/wrangle chunks of your dataset.
 
 ### Key concepts listed
+
 <b>Data wrangling</b>
 
 <b>Base R</b>
@@ -47,6 +48,7 @@ mutate for new variables
 summarise for bringing together many values
  
 ### Additional resources
+
 [Excellent list of wrangling tools](http://www.computerworld.com/article/2921176/business-intelligence/great-r-packages-for-data-import-wrangling-visualization.html)
 
 
@@ -59,6 +61,7 @@ summarise for bringing together many values
 Here are some exercises to address basic challenges you will certainly encounter.  
 
 ### Exercise 1. Missing data
+
 Missing data are typically termed NAs. Missing data are not necessarily the same as true zeros. See [Mixed Effects Models and Extension in Ecology with R](https://link.springer.com/content/pdf/10.1007%2F978-0-387-87458-6.pdf) for an excellent discussion of this. Missing data due to experimental design, observer error, or failures to detect a process are 'false zeros' and equivalent to missing data. True negatives (measured and detected absences) are recommended to be coded as a zero.
 
 The read_csv from the tidyverse handles data import well, does not assume factors, and typically takes a parsimonous approach to vector interpretation. The analog from base R is read.csv but comes with many limitations.
@@ -67,7 +70,7 @@ The read_csv from the tidyverse handles data import well, does not assume factor
 #Missing data. In error, missing cells/observations in some measure can kick back an error. In other apps, sometimes ignored but can introduce error.
 #setwd('data-wrangling')
 library(tidyverse)
-ttc <-read_csv("data/ttc.csv") #The Toronto Transit Commission Data.
+ttc <-read_csv("./data/ttc.csv") #The Toronto Transit Commission Data.
 ttc #tibble produced if use read_csv versus dataframe. Tibbles include str() list of vector attributes at the top of output.
 
 #check for missing values
@@ -82,14 +85,15 @@ setdiff(ttc, new.ttc)
 ```
 
 ### Exercise 2. Selecting part of a dataset
+
 Dplyr provides select (columns/vectors), filter (rows/observations), and now pull (returns a vector not df or tibble). Fantastic functions (and beasts) to wrangle out specifics or simplify your dataframe.
 
 ```{r, selections}
-survey<-read_csv("data/5081.survey.1.csv")
+survey<-read_csv("./data/5081.survey.1.csv")
 survey
 #I want just a simple tibble with experience by discipline for students new to rstats in a graduate-level course.
 
-experience <- survey %>% select(discipline, r.experience)
+experience <- survey %>% dplyr::select(discipline, r.experience)
 experience
 
 #Now I just want to select the physiology folks
@@ -107,8 +111,10 @@ experience <-survey %>% group_by(discipline) %>% summarise(
 ```
 
 ### Exercise 3. Updated dplyr package
+
 To explore the Star Wars dataset within the tidyverse updated package dplyr 0.7.0 and make a new column.
 Full details list on its own [blog](https://blog.rstudio.org/2017/06/13/dplyr-0-7-0/).
+
 <br>
 
 ![](./images/starwars.png)
@@ -135,6 +141,7 @@ counts$gender <- factor(counts$gender, levels = counts$gender[order(counts$n)])
 ```
 
 <br>
+
 **Data viz**
 ```{r viz, warning=FALSE, message=FALSE}
 #library(plotly)
@@ -151,7 +158,8 @@ p
 
 <br>
 
-###Exercise 4. Two-table wrangle challenge
+### Exercise 4. Two-table wrangle challenge
+
 Data are likely to be distributed amongst different tables and files. The updated package dpyr (and tidy friend packages) provides an excellent set of verbs to address this challenge.
 
 Take a moment and review the brief blog post [here](http://dplyr.tidyverse.org/articles/two-table.html) describing the two categories of tools. Now, on your own, examine two datasets using the three families of tools (mutating, filtering joins, and set element exploration). Select ONE of the following challenges.
@@ -159,10 +167,10 @@ Take a moment and review the brief blog post [here](http://dplyr.tidyverse.org/a
 **SEAMAP Challenge**
 ```{r SEAMAP, warning=FALSE, message=FALSE}
 
-seamap <- read_csv("data/BGSREC.csv") #all meta-data listed in the PDF in directory
+seamap <- read_csv("./data/BGSREC.csv") #all meta-data listed in the PDF in directory
 seamap
 
-cruises <- read_csv("data/CRUISES.csv")
+cruises <- read_csv("./data/CRUISES.csv")
 cruises
 
 ```
@@ -171,17 +179,18 @@ cruises
 **Whole-brain Challenge**
 ```{r brains, warning=FALSE, message=FALSE}
 
-brains <- read_csv("data/brains.csv")
+brains <- read_csv("./data/brains.csv")
 brains
 
-ninja.scores <- read_csv("data/ninja.scores.csv")
+ninja.scores <- read_csv("./data/ninja.scores.csv")
 ninja.scores
 
 ```
 
 <br>  
 
-### Interpretation of the tidyverse   
+### Interpretation of the tidyverse  
+
 1. Even a simple datframe can provide adequate complexity for padawan and jedi alike.  
 2. Literate coding is embodied with the tidyverse structure.  
 3. The code is not verbose but gets the job done.  
@@ -838,7 +847,7 @@ site_data$site <- str_extract(site_data$x, "") # <- Fill this in between the ""
 site_data$plot <- str_extract(site_data$x, "") # <- Fill this in between the ""
 ```
 
-# Common R functions that use regular expressions
+### Common R functions that use regular expressions
 
 - Base R
   - `grep`

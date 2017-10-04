@@ -4,7 +4,7 @@
 
 ## Gulf Research Program
 
-![NCEAS](images/nceas-logo.png)
+<img style="align: left;width: 150px;" src=images/nceas-logo.png />
 
 Matthew B. Jones, Amber Budden, Christopher Lortie
 
@@ -14,7 +14,6 @@ Sponsor: [Gulf Research Program, National Academy of Sciences](http://www.nation
 
 
 ## Instructors
-
 
 - Matt Jones, Amber Budden, Chris Lortie
 - Bryce Mecum, Leah Wasser, Julien Brun, Tracy Teal
