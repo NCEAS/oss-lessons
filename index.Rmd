@@ -19,5 +19,14 @@ Open Science for Synthesis: Gulf Research Program is a hands-on data science cou
  
 The course focused on techniques for data management, scientific programming, synthetic analysis, and collaboration techniques through the use of open-source, community-supported tools. Participants learned skills for rapid and robust use of open source scientific software. These approaches were explored and applied to scientific synthesis projects related to the Gulf of Mexico’s human, environmental, and energy systems, and increased community capability and efficiency in synthesis research. The funding for this project is provided by a grant from the [Gulf Research Program](http://www.nationalacademies.org/gulf/about/), dedicated to improving understanding of the Gulf of Mexico’s human, environmental, and energy systems in response to the Deepwater Horizon oil spill.
 
-![](images/participants_OSS17.jpg)
+![OSS 2017 - Paticipants and Instructors](images/participants_OSS17.jpg)
 
+<br>
+<br>
+<br>
+
+*Acknowledgements*
+
+OSS2017 was funded under a grant from the [Gulf Research Program, National Academy of Sciences](http://www.nationalacademies.org/gulf/index.html)
+
+[![CC-BY](images/ccby.png)](http://creativecommons.org/licenses/by/4.0/) This work is licensed under a Creative Commons Attribution 4.0 International License.

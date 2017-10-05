@@ -1,24 +1,16 @@
 # Scientific Communication and Collaboration
 
-
-
 ## Thinking Preferences
 
-
-### A tool for understanding group dynamics
-
-![](images/brain.jpg)
+\LARGE A tool for understanding group dynamics\par
 
 
-### The brain
+![The brain](images/Brain.jpg)
 
 
 
-![](images/Brain.jpg)
-
-
-
-### Left brain
+\newpage
+\LARGE Left brain\par
 
 
 ![](images/LeftBrain.jpg)
@@ -26,7 +18,8 @@
 **Analytical / Systematic**
 
 
-### Right brain
+\newpage
+\LARGE Right brain\par
 
 
 ![](images/RightBrain.jpg)
@@ -34,7 +27,8 @@
 
 **Artistic / Emotional**
 
-### Neocortex 
+\newpage
+\LARGE Neocortex\par
 
 
 ![](images/Neocortex.jpg)
@@ -42,7 +36,8 @@
 
 **Intellect**
 
-### Limbic system
+\newpage
+\LARGE Limbic system\par
 
 
 
@@ -54,7 +49,8 @@
 **Emotion**
 
 
-### The whole brain
+\newpage
+\LARGE The whole brain\par
 
 
 
@@ -73,35 +69,41 @@ Emotion
 ![WholeBrain](images/wholebrain.png)
 
 
-### Ned Herrmann: Whole Brain Model
+\newpage
+\LARGE Ned Herrmann: Whole Brain Model\par
 
 
 ![WholeBrain](images/whole-brain-model-2016.jpg)
 www.herrmannsolutions.com
 
-### Ned Herrmann: Whole Brain Model
+\newpage
+\LARGE Ned Herrmann: Whole Brain Model\par
 
 ![WholeBrain](images/whole-brain-model-2016v2.jpg)
 www.herrmannsolutions.com
 
-### Traits Exhibited
+\newpage
+\LARGE Traits Exhibited\par
 
 ![WholeBrain](images/WholeBrainTraits.jpg)
 
 
-### A Complex Self
+\newpage
+\LARGE A Complex Self\par
 
 
 ![WholeBrain](images/WholeBrainSelf.jpg)
 
 
-### Mapping Your Thinking Preferences
+\newpage
+\LARGE Mapping Your Thinking Preferences\par
 
 
 ![WholeBrain](images/WholeBrainMap.jpg)
 
 
-### Communication and Learning
+\newpage
+\LARGE Communication and Learning\par
 
 
 
@@ -111,21 +113,18 @@ www.herrmannsolutions.com
 
 ## The Message Box
 
+\LARGE Communicating Your Science Effectively\par
 
-### Communicating Your Science Effectively
+![Message box](images/MessageBox.png)
 
-![](images/MessageBox.png)
-
-
-
-
-
-
-![](images/Compass.png)
+```{r, out.width = "30%", echo=FALSE, fig.cap="Compass"}
+knitr::include_graphics("images/Compass.png")
+```
 
 
 
-### Principles of Science Communication
+\newpage
+\LARGE Principles of Science Communication\par
 
 
 - Know Your Audience
@@ -133,44 +132,48 @@ www.herrmannsolutions.com
 - Lead With Results
 - Avoid Jargon
 
-### Know Your Audience
+\newpage
+\LARGE Know Your Audience\par
 
 
 ![](images/Audience.jpg)
 
-### Frame Your Message 
+\newpage
+\LARGE Frame Your Message\par 
 
 
 ![](images/resonate.png)
 
 
-### Lead With Results
+\newpage
+\LARGE Lead With Results\par
 
 
 
 ![](images/Approach.png)
 
 
-### Avoid Jargon
-
-
-
+\newpage
+\LARGE Avoid Jargon\par
 
 ![](images/Jargon.png)
 
-### The Message Box
+\newpage
+\LARGE The Message Box\par
 
 
 
 
 ![](images/MessageBox2.png)
 
-### The Message Box
+\newpage
+\LARGE The Message Box\par
 
 
 ![](images/BlankMessageBox.png)
 
-### Know Your Audience
+\newpage
+\LARGE Know Your Audience\par
 
 ![](images/Public.jpg)
 
@@ -180,7 +183,8 @@ www.herrmannsolutions.com
 
 ![](images/Students.jpg)
 
-### Section 1: The Issue
+\newpage
+\LARGE Section 1: The Issue\par
 
 - Describes the overarching issue or topic: Big Picture
 - Broad enough to cover key points
@@ -188,7 +192,8 @@ www.herrmannsolutions.com
 - Concise and clear
 - "Frames" the rest of the message box
 
-### Section 2: The Problem
+\newpage
+\LARGE Section 2: The Problem\par
 
 - The part of the broader issue that your work is addressing
 - Builds upon your work and expert knowledge
@@ -196,7 +201,8 @@ www.herrmannsolutions.com
 - Often the **Problem** is your research question
 - This section sets you up for **So What**
 
-### Section 3: The "So What?"
+\newpage
+\LARGE Section 3: The "So What?"\par
 
 - This is the crux of the message box
 - Why should you audience care?
@@ -205,21 +211,24 @@ www.herrmannsolutions.com
 
 ![](images/SoWhat.png)
 
-### Section 4: The Solution
+\newpage
+\LARGE Section 4: The Solution\par
 
 - Outlines the options for solving the **Problem**
 - Can your audience influence or act upon this?
 - There may be multiple solutions
 - Make sure your **Solution** relates back to the **Problem**. Edit one or both as needed
 
-### Section 5: The Benefit
+\newpage
+\LARGE Section 5: The Benefit\par
 
 - What are the benefits of addressing the **Problem**?
 - What good things come from implementing your **Solution**?
 - Make sure it connects with you **So What**
 - **Benefits** and **So What** may be similar
 
-### Make Your Message Memorable
+\newpage
+\LARGE Make Your Message Memorable\par
 
 - Support your message with data
 - Limit the use of numbers and statistics
@@ -228,7 +237,8 @@ www.herrmannsolutions.com
 - Don't use jargon
 - Lead with what you know
 
-### The Message Box
+\newpage
+\LARGE The Message Box\par
 
 
 ![](images/MessageBoxPrompts.png)
