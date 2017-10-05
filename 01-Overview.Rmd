@@ -32,19 +32,19 @@ Sponsor: [Gulf Research Program, National Academy of Sciences](http://www.nation
 - Threats and Population Declines
 - Understanding Ocean Health
 
-```{r, out.width = "70%", echo=FALSE, fig.align="center", fig.cap="Ecology of Infectious Disease"}
+```{r, out.width = "80%", echo=FALSE, fig.align="center", fig.cap="Ecology of Infectious Disease"}
 knitr::include_graphics("images/syn-inf-disease.png")
 ```
 
-```{r, out.width = "70%", echo=FALSE, fig.align="center", fig.cap="Climate Effects"}
+```{r, out.width = "80%", echo=FALSE, fig.align="center", fig.cap="Climate Effects"}
 knitr::include_graphics("images/syn-climate-effects.png")
 ```
 
-```{r, out.width = "70%", echo=FALSE, fig.align="center", fig.cap="Threats and Population Declines"}
+```{r, out.width = "80%", echo=FALSE, fig.align="center", fig.cap="Threats and Population Declines"}
 knitr::include_graphics("images/syn-marine-systems.png")
 ```
 
-```{r, out.width = "70%", echo=FALSE, fig.align="center", fig.cap="Understanding Ocean Health"}
+```{r, out.width = "80%", echo=FALSE, fig.align="center", fig.cap="Understanding Ocean Health"}
 knitr::include_graphics("images/syn-human-impacts.png")
 ```
 
@@ -85,6 +85,9 @@ knitr::include_graphics("images/ohicore-github.png")
 knitr::include_graphics("images/Sediment_in_the_Gulf_of_Mexico.jpg")
 ```
 
+
+\newpage
+
 ## GRP Components
 
 - Natural systems
@@ -96,6 +99,9 @@ knitr::include_graphics("images/gulf-grp-components.jpg")
 ```
 
 
+\newpage
+
+
 ## Introductions
 
 - Participant bios: https://www.nceas.ucsb.edu/OSS2017
@@ -103,11 +109,17 @@ knitr::include_graphics("images/gulf-grp-components.jpg")
 - Software you love, or love to hate
 
 
+\newpage
+
+
 ## Synthesis Skills
 
 ```{r, out.width = "50%", echo=FALSE, fig.align="center", fig.cap="Synthesis skills"}
 knitr::include_graphics("images/conway-data-science.png")
 ```
+
+
+\newpage
 
 
 ## Course Topics
@@ -119,6 +131,8 @@ knitr::include_graphics("images/conway-data-science.png")
 - Programming using agile and sustainable software practices
 - Data analysis and modeling
 - Communicating results to broad communities
+
+\newpage
 
 
 ## Curriculum
@@ -133,6 +147,8 @@ Tabular data, reproducible research and coding, and metagenomics.
 Communication, geospatial analysis, data viz, and synthesis project results.
 
 View the [Full Schedule](https://nceas.github.io/oss-2017/schedule.html)
+
+\newpage
 
 
 ## Communications
@@ -153,6 +169,8 @@ View the [Full Schedule](https://nceas.github.io/oss-2017/schedule.html)
 - Create one issue per discussion item
 - We'll review each morning
 
+\newpage
+
 
 ## Course materials and resources
 
@@ -161,6 +179,8 @@ View the [Full Schedule](https://nceas.github.io/oss-2017/schedule.html)
 - Lessons and code examples: https://nceas.github.io/oss-2017/lessons.html
     - Plus raw source code in GitHub: https://github.com/NCEAS/oss-lessons
 - Reading list by day: https://nceas.github.io/oss-2017/readings.html
+
+\newpage
 
 
 ### Peanut Gallery
@@ -171,6 +191,7 @@ View the [Full Schedule](https://nceas.github.io/oss-2017/schedule.html)
 knitr::include_graphics("images/statler-and-waldorf.png")
 ```
 
+\newpage
 
 ## Open Science for Synthesis: Gulf Research Program Code of Conduct
 
@@ -221,6 +242,7 @@ In the instance of a violation of the above guidelines please speak to either Ma
 
 - Provide a mechanism to table questions and comments
 
+\newpage
 
 ## Acknowledgements
 
