@@ -2,10 +2,15 @@
 
 ## Git 
 
+```{r, out.width="10%", echo=FALSE, fig.align="right", fig.cap="git"}
+knitr::include_graphics("images/git_icon.png")
+```
 
 ### Why do I need that again?
 
-<img style="align: left;width: 450px;" src=images/phd_comics_final.png />
+```{r, out.width = "75%", echo=FALSE, fig.align="center", fig.cap="Versions - PhD comics"}
+knitr::include_graphics("images/phd_comics_final.png")
+```
 
 Version control is very useful to **keep track of changes you made to your scripts**. It allows you to choose when you have reached a stage in your code that you think is worth keeping track of, like a new function that makes your data analysis soooooo much better. 
 
@@ -13,11 +18,12 @@ For scientists, version control is a useful tool to help you to track changes yo
 
 This training material focuses on the code verioning system calld `Git`. Note that there are others, such as `Mercurial` or `svn` for example.
 
+
 ### What is git?
 
-<img style="float: right;width: 100px;" src="images/git_icon.png">
-
-![xkcd - git, aka what we want to avoid!](images/git_xkcd.png)
+```{r, out.width="40%", echo=FALSE, fig.align="center", fig.cap="xkcd - git, aka what we want to avoid!"}
+knitr::include_graphics("images/git_xkcd.png")
+```
 
 Git is a *free* and *open source* distributed *version control system*. It has many functionalities and was originally geared towards software development and production environment. In fact, Git was initially designed and developed in 2005 by Linux kernel developers (including Linus Torvalds) to track the development of the Linux kernel. Here is a [fun video](https://www.youtube.com/watch?v=4XpnKHJAok8) of Linus Torvalds touting Git to Google. 
 
@@ -37,11 +43,16 @@ Git can be enabled on a specific folder/directory on your file system to version
 - Git is not GitHub (or more exactly: GitHub is not Git)
 - Git is not good at versioning large data (there are work around that)
 
+\newpage 
 
 ## The Git workflow
 
 ### Overview
-<img style="float: right;width: 300px;" src="images/git_workflow_general.png">
+
+```{r, out.width="50%", echo=FALSE, fig.align="center", fig.cap="the git workflow"}
+knitr::include_graphics("images/git_workflow_general.png")
+```
+
 
 1. You modify files in your working directory and save them as usual
 
@@ -53,8 +64,10 @@ Git can be enabled on a specific folder/directory on your file system to version
 
 Every time you create a new snapshot, you add the new version of the file to the database, while keeping all the previous versions in the database. It creates an history that is like a graph that you can navigate:
 
-<img style="align: left;width: 200px;" src=images/version-graph_mattJones.png />
-
+```{r, out.width="35%", echo=FALSE, fig.align="center", fig.cap="git history graph - from Matt Jones"}
+knitr::include_graphics("images/version-graph_mattJones.png")
+```
+\newpage
 
 ## Getting started with Git
 
@@ -101,7 +114,7 @@ Cache your GitHub credentials (for 1 hour):
 git config --global credential.helper 'cache --timeout=3600'
 ```
 
-<img style="float: left;width: 30px;" src="images/tip.png"/> Want to know more about the available configuration options? How to change the default [text editor](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) used by git? How make git remember your [GitHub credentials](https://help.github.com/articles/caching-your-github-password-in-git/#platform-all)?
+![](images/tip.png) Want to know more about the available configuration options? How to change the default [text editor](https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup) used by git? How make git remember your [GitHub credentials](https://help.github.com/articles/caching-your-github-password-in-git/#platform-all)?
 
 ### 2. Starting a git repository
 
@@ -136,7 +149,7 @@ The cloning process will automatically create a directory on your machine named 
 
 Let us have a closer look at the git workflow. It is important to stress that almost all of the git workflow happens on your local machine:
 
-![](images/git_commands_workflow_new.png)
+![git workflow on your local machine](images/git_commands_workflow_new.png)
 
 ### Example
 
@@ -208,7 +221,7 @@ git log -1
 ```
 
 
-## Getting information about git
+### Getting information about git
 
 * `git status` this command is your friend! It will tell you where you are at and what are your options. You can use at any point in your process.
 * `git log` displays history of committed snapshots. It lets you list the project history, filter it, and search for specific changes.
@@ -220,7 +233,7 @@ To be used before committing, to preview the changes to be committed.
 
 Git has a lot of terms and commands, see reference at the end of this document for an extensive terminology.
 
-## Ignoring certain types of file
+### Ignoring certain types of file
 
 `.gitignore` is a specific file used to list what (type of) files you do not want git to track. This file need to be placed at the top level of the directory.
 
@@ -236,9 +249,9 @@ vim .gitignore
 To know more: <https://git-scm.com/docs/gitignore>
 
 
-## Undoing things
+### Undoing things
 
-### Unstage a file
+#### Unstage a file
 
 `git reset HEAD` lets you remove a file from the staging area
 
@@ -247,7 +260,7 @@ git reset HEAD <my_file_I_added_by_mistake.xls>
 ``` 
 This will remove the file from your next commit. Can be used to undo an erroneous `git add`.
 
-### Undo your last commit
+#### Undo your last commit
 
 `git commit --amend` let you amend your last commit with the most recent changes, like for example if you forgot a file
 
@@ -258,7 +271,7 @@ git commit --amend -m "My new message"
 
 More info about how to undo things [here](https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things)
 
-### Undo your changes
+#### Undo your changes
 
 ***Warning!*** `git checkout` overwrite the file version by the latest committed one => your changes will be lost!
 
@@ -272,11 +285,12 @@ You can also revert a file to a former commit in the history using the unique co
 git checkout e11e34 test_file.txt
 ``` 
 
-## Few other terms you might have heard
+### Few other terms you might have heard
 
 * **HEAD**: it is the reference that points by default to the latest commit
 * **Branches**: A branch represents an independent line of development, parallel to the master. In fact, the default branch name that is created by ```git init``` is called ***master***.
 
+\newpage
 
 ## Collaborating with git and GitHub
 
@@ -299,13 +313,13 @@ It is important to highlight that a good portion of the workflow happens on your
 4.) `git push` : send your latest version of the picture album to the server
 
 
-![](images/git_push_pull_overview.png)
+![Working with remote repository - pull and push](images/git_push_pull_overview.png)
 
 
 **=> To allow to exchange files with a remote repository, we will first to tell git where this remote repository is located on the Web**
 
 
-## GitHub
+### GitHub
 	
 You might also have heard of [GitHub](https://github.com). **GitHub is a company that hosts git repositories online** and provides several collaboration features (among which `forking`). GitHub fosters a great user community and has built a nice web interface to git, also adding great visualization/rendering capacities of your data.
 
@@ -314,21 +328,28 @@ You might also have heard of [GitHub](https://github.com). **GitHub is a company
 * **An organization account**: <https://github.com/nceas>
 * **NCEAS GitHub instance**: <https://github.nceas.ucsb.edu/> 
 
-### Creating a new repository
+#### Creating a new repository
 
 We are going to create a new repository on your GitHub account:
 
-* Click on ![image alt text](images/image_10.png)
+* Click on 
+
+```{r, out.width="30%", echo=FALSE, fig.align="center", fig.cap="New repository"}
+knitr::include_graphics("images/image_10.png")
+```
 * Enter a descriptive name for your new repository (avoid upper case and use `-` instead of spaces)
 * Choose **"Public"** (Private repositories are not free)
 * Check **"Initialize this repository with a README”**
 * Add a `.gitignore` file (optional). As the name suggest, the gitignore file is used to specify the file format that git should to track. GitHub offers pre-written gitignore files for commodity
 * Add a license file (optional) 
 
-<img style="align: left;width: 100px;" src=images/github_cloud_with_repo.png /> **=> Here it is, you now have a repository in the cloud!!** 
+```{r, out.width="30%", echo=FALSE, fig.align="center", fig.cap="New repository on GitHub"}
+knitr::include_graphics("images/github_cloud_with_repo.png")
+```
+**=> Here it is, you now have a repository in the cloud!!** 
 
 
-<img style="align: left;width: 35px;" src=images/tip.png /> Here is a website to look for more pre-written`.gitignore` files: <https://github.com/github/gitignore>
+![](images/tip.png) Here is a website to look for more pre-written`.gitignore` files: <https://github.com/github/gitignore>
 
 
 ## Pushing your local repository to a remote server
@@ -340,7 +361,7 @@ First, we will need to create a **bare** remote repository. In this example we w
 Keeping on our `dessert` example, go to your GitHub account and create a new **bare** repository called `dessert`
 
 
-![](images/bare_repo_created.png)
+![Creating a bare reposiotry on GitHub](images/bare_repo_created.png)
 
 
 Then, within your local repository on your computer, you will need to tell git where on the web is located the bare repository ready to receive the entire content of your local repository:
@@ -360,12 +381,12 @@ git push -u origin master
 3. Enter your GitHub credentials when asked
 
 
-![](images/set_remote_existing_repo.png)
+![Pushing local repository to GitHub](images/set_remote_existing_repo.png)
 
 The `-u` flag sets the upstream tracking. This allows git to track changes on the remote branch. It also allows you to `pull` without argument (or `merge` to be exact). You only need to set it once (per branch). Note that when you `clone` a repository, the upstream tracking is set automatically to `origin/master`, therefore you can directly use `git push` on the master branch without additional arguments. 
 
 
-## Cloning a remote repository to your local machine
+### Cloning a remote repository to your local machine
 
 This is the opposite situation: You would like to bring an exact copy (clone) of a remote repository to your local machine.
 
@@ -381,13 +402,13 @@ git clone https://github.com/NCEAS/oss-lessons.git
 This is it! Note that no login was required since anybody can clone a public repository from GitHub.
 
 
-## Moving codes and files from one computer to a server or another remote machine
+### Moving codes and files from one computer to a server or another remote machine
 
 We will use the `dessert` repository created in the previous section to illustrate how these tools can be used to move your work to another machine and help you to keep versions up-to-date between these machines.
 
 You should be now in the following situation with our dessert example: your local repository should be pushed to github, with the two content being identical:
 
-![](images/git_remote_local_sync.png) 
+![Same version of the repository on your local machine and remote (GitHub in this case)](images/git_remote_local_sync.png) 
 
 ### Clone the repository to a second machine
 
@@ -405,7 +426,9 @@ ssh <username>@aurora.nceas.ucsb.edu
 git clone https://github.nceas.ucsb.edu/<my_github_username>/dessert.git
 ```
 
-![](images/git_clone_repo_server.png)
+```{r, out.width="70%", echo=FALSE, fig.align="center", fig.cap="Clone a repository from GitHub to new machine"}
+knitr::include_graphics("images/git_clone_repo_server.png")
+```
 
 => _Now, we have three **exact** copies of our repository on a server, in the cloud and on a desktop._
 
@@ -413,7 +436,9 @@ git clone https://github.nceas.ucsb.edu/<my_github_username>/dessert.git
 
 Now, let say we are working on the server to scale up our analysis or in our dessert example write a R script to read the csv about the favorite desserts.
 
-##### Let us add a new person to our csv
+#### Modifying the content of the repository
+
+Let us add a new person to our csv
 
 1. Go inside the dessert directory
 
@@ -444,11 +469,11 @@ git commit -m"adding Sophia"
 
 OK, where are we at?
 
-![](images/git_server_changed.png)
+![Same git local workflow on the second machine (here a server)](images/git_server_changed.png)
 
 As you can see, now the git commit history is different on the server than on GitHub and on your computer. You can verify by going to your github account and looking at `favorite_desserts.csv`. These are only two name listed. To implement the latest changes to the dessert repository on GitHub we will have to use `git pull and pull`.
 
-##### pushing the latest changes
+#### pushing the latest changes
 
 When you want to push your change to a repository, it is always good to first pull the latest version of the remote repository to your local repository (the repository on the server in this case) to be sure you have all the changes that might have been created on the online repository
 
@@ -461,9 +486,9 @@ Enter your GitHub credentials when asked.
 
 Now if you use your web browser to go to your repository on GitHub and click on the `favorite_desserts.csv`. It should have 3 rows.
 
-![](images/git_server_github_synchronized.png)
+![Pushing local changes from the server to the remote repository (here on GitHub)](images/git_server_github_synchronized.png)
 
-##### getting the latest changes
+#### getting the latest changes
 
 Now we want to pull the latest version to our Desktop.
 
@@ -473,15 +498,16 @@ git pull
 
 This is it!, we are back to the situation were we have 3 exacts copies of our dessert repository. 
 
-![](images/git_server_github_desktop_synchronized.png)
+![Pulling the changes made on the second machine from GitHub (remote) to your laptop](images/git_server_github_desktop_synchronized.png)
 
 Note that you do not need to synchronize your repositories across your machines/locations at every commit. You can work and commit on one machine numerous times before synchronizing with GitHub or another machine.
 
 
-## <img style="float: left;width: 35px;" src="images/challengeproblemred_scribble.png"/>  Challenge
+### Challenge
 
 Write a R code to read the favorite_desserts.csv files in and add a new row to the data frame and overwrite the csv with the new entry. Of course you need to track the development of your code using git!!
 
+\newpage
 
 ## Collaborating with others
 
@@ -502,21 +528,22 @@ When you collaborate closely and actively with colleagues, you do not want neces
 #### Adding collaborators to a repository 
 
 * Click on the repository
-* On the right panel, click ![image alt text](images/image_11.png)
-* On the left pane, click Collaborators and enter the usernames you want to add![collaborators](images/github_collaborators.png) 
+* On the right panel, click ![Settings](images/image_11.png)
+* On the left pane, click Collaborators and enter the usernames you want to add![collaborators & teams](images/github_collaborators.png) 
 
 #### Adding a team to a repository (organization only)
 
-* Click on the repository
-* On the right panel, click ![image alt text](images/image_11.png)
-* On the left pane, click Collaborators & teams ![image alt text](images/image_12.png)
-* Select your team ![image alt text](images/image_13.png)
-* Select the appropriate Permission level. We recommend Write or Admin. Admin allows people to also add collaborators. 
+- Click on the repository
+- On the right panel, click `Settings`
+- On the left pane, click `Collaborators & teams` 
+- Select your team ![Select team](images/image_13.png)
+- Select the appropriate Permission level. We recommend Write or Admin. Admin allows people to also add collaborators.
 
-![image alt text](images/image_14.png)
+```{r, out.width = "30%", echo=FALSE, fig.align="center", fig.cap="GitHub - Access permissions"}
+knitr::include_graphics("images/image_14.png")
+```
 
-
-
+\newpage
 
 ## Managing Merge Conflicts
 
@@ -542,7 +569,7 @@ remote version (theirs)
 
 *=> You still have to* `git add` *and* `git commit` *after this*
 
-During this process, if you want to roll back to the situation before you started the merge: `git merge --abort`
+During this process, if you want to roll back to the situation before you started the merge: ```git merge --abort```
 
 **NOTE:** By doing a `pull` before committing, you can avoid a lot of git conflicts. Your git workflow should therefore be:
 
@@ -556,10 +583,12 @@ During this process, if you want to roll back to the situation before you starte
 
 Continuing with the `dessert` example we used in the first part of this tutorial, we now have on our local machine
 
+\newpage
 
 ## Branches
-
-![adapted from https://www.atlassian.com/git/tutorials/git-merge](images/atlassian_branches_sketch.png)
+```{r, out.width = "60%", echo=FALSE, fig.align="center", fig.cap="Branches - adapted from https://www.atlassian.com/git/tutorials/git-merge"}
+knitr::include_graphics("images/atlassian_branches_sketch.png")
+```
 
 What are branches?  Well in fact nothing new, as the master is a branch. A branch represents an independent line of development, parallel to the master (branch). 
 
@@ -574,17 +603,16 @@ Why should I use branches? For 2 main reasons:
 
 Few commands to deal with branches:
 
-* `git branch`	Will list the existing branches
-* `git branch myBranchName` 	Will create a new branch with the
+* `git branch`:	Will list the existing branches
+* `git branch myBranchName`: Will create a new branch with the
 							name myBranchName
-* `git checkout myBranchName` Will switch to the branch myBranchName
+* `git checkout myBranchName`: Will switch to the branch myBranchName
 
-<img style="float: left;width: 30px;" src="images/tip.png"/> In a rush? create a new branch and switch to it directly:
+![](images/tip.png) In a rush? create a new branch and switch to it directly:
 
 ```bash
 git checkout -b branchName
 ```
-
 
 **Want to switch back to master?**
 
@@ -603,15 +631,19 @@ Done with your branch? Want to merge your new - ready for prime time - script to
 3. Merge the branch: 			```git merge myBranchName ```
 4. Delete the branch:			```git branch -d myBranchName```
 
+\newpage
 
 ## Version control using RStudio
 
-*Notes:* 
+**Notes:** 
 
 - It is assumed that you already know the basics of version control systems. If not, here is a good hands-on introduction to the Git version control system: <https://try.github.io/levels/1/challenges/1>
 - It is also assumed that you already have used git on this computer/server. If not, you must first set up your identity; see here for more details: <https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup>.
 
-<img style="float: right;width: 200px;" src=images/image_0.png />
+```{r, out.width = "60%", echo=FALSE, fig.align="center", fig.cap="Branches - adapted from https://www.atlassian.com/git/tutorials/git-merge"}
+knitr::include_graphics("images/atlassian_branches_sketch.png")
+```
+![Starting a new RStudio project](images/image_0.png)
 
 **If you want to use the RStudio interface to control git, you need to create a RStudio Project**. To do so, you should first organize your files in one folder that will become your git repository. Once this is done, you can create a new RStudio Project from the upper-right corner of the RStudio IDE window, choosing *New Project*
 
@@ -628,7 +660,9 @@ Now, you have two options:
 
 * Choose *Existing Directory* from the wizard
 
-<img style="align: left;width: 400px;" src=images/image_1.png />
+```{r, out.width = "50%", echo=FALSE, fig.align="center", fig.cap="Select Existing directory"}
+knitr::include_graphics("images/image_1.png")
+```
 
 * *Browse* to the main folder containing your data
 
@@ -638,11 +672,16 @@ Now, you have two options:
 
 Now you that have successfully created a RStudio project, you can enable the version control. Go to the *Tools* menu *-> Version Control -> Project Setup…*
 
-![image alt text](images/image_2.png)
+```{r, out.width = "50%", echo=FALSE, fig.align="center", fig.cap="Connecting git to a RStudio project"}
+knitr::include_graphics("images/image_2.png")
+```
+
 
 This will open a new window. Change the *None* setting by choosing *Git* from the drop-down menu
 
-<img style="align: left;width: 450px;" src=images/image_3.png />
+```{r, out.width = "50%", echo=FALSE, fig.align="center", fig.cap="Select git"}
+knitr::include_graphics("images/image_3.png")
+```
 
 Click *OK*. Answer *Yes* to the 2 following pop-ups to restart RStudio and enable git on your project.
 
@@ -654,17 +693,24 @@ If you are starting to work on a new project for which you have not yet started 
 
 * Choose *New Directory* 
 
-<img style="align: left;width: 450px;" src=images/image_4.png />
+```{r, out.width = "50%", echo=FALSE, fig.align="center", fig.cap="RStudio project - Select New Directory"}
+knitr::include_graphics("images/image_4.png")
+```
 
 Note: The Version control option at the bottom is only to be chosen when you want to clone an existing repository.
 
 * Choose *Empty* *Project*
 
-<img style="align: left;width: 450px;" src=images/image_5.png />
+```{r, out.width = "50%", echo=FALSE, fig.align="center", fig.cap="RStudio project - Select Empty Project"}
+knitr::include_graphics("images/image_5.png")
+```
 
 * Give your project (folder) a *name*, *Browse* for its location on your drive. Finally, check the option *Create a git repository* before clicking *Create Project*.
 
-<img style="align: left;width: 450px;" src=images/image_6.png />
+```{r, out.width = "70%", echo=FALSE, fig.align="center", fig.cap="RStudio project - Set project name and location on your HD"}
+knitr::include_graphics("images/image_6.png")
+```
+
 
 **Congratulations, you have a new project with git versioning enabled!!**
 
@@ -672,7 +718,10 @@ Note: The Version control option at the bottom is only to be chosen when you wan
 
 Now that you have enabled git versioning for your Project, a "Git" tab should have been added to your interface next to "Environment" and "History" tabs
 
-![image alt text](images/image_7.png)
+
+```{r, out.width = "70%", echo=FALSE, fig.align="center", fig.cap="RStudio GUI to manage the git workflow"}
+knitr::include_graphics("images/image_7.png")
+```
 
 Note that the *.gitignore* file is automatically generated by RStudio. It lists all file formats we do not want to track, here specifically the temporary files from R and RStudio. You can edit this document to add any type of file you would like git not to track.
 
@@ -680,7 +729,10 @@ Note that the *.gitignore* file is automatically generated by RStudio. It lists 
 
 To specify which files you want to track (aka staging), you need to check the boxes in front of the file names. This is the equivalent of the `git add` command.
 
-![image alt text](images/image_8.png)
+```{r, out.width = "70%", echo=FALSE, fig.align="center", fig.cap="RStudio git GUI - add files by checking boxes"}
+knitr::include_graphics("images/image_8.png")
+```
+
 
 #### Committing
 
@@ -688,7 +740,9 @@ Then you can do your first commit -taking a snapshot of the current status of yo
 
 A new window should pop up. Note that certain web browsers will block this pop-up.
 
-<img style="align: left;width: 500px;" src=images/image_9.png />
+```{r, out.width = "70%", echo=FALSE, fig.align="center", fig.cap="RStudio git GUI - Commit"}
+knitr::include_graphics("images/image_9.png")
+```
 
 You need to write a descriptive message of the work accomplished from the last commit in the Commit message window, then you can click the Commit button (below the Commit message window).
 
@@ -706,8 +760,7 @@ Once you have committed your changes, you can `pull` the latest version of the r
 
 Once you have finished the pull process, you can click on the `push` button to upload your changes to GitHub and share your work with others. This is the equivalent of the `git push` command.
  
-<img style="float: left;width: 50px;" src=images/tip.png /> On the RStudio git panel, the order of the buttons from left to right matches the sequence of actions you need to follow to submit your changes to the GitHub repository!
-
+![](images/tip.png) On the RStudio git panel, the order of the buttons from left to right matches the sequence of actions you need to follow to submit your changes to the GitHub repository!
 
 
 ## References
@@ -741,8 +794,6 @@ Once you have finished the pull process, you can click on the `push` button to u
 - Using RStudio: [https://support.rstudio.com/hc/en-us/sections/200107586-Using-RStudio](https://support.rstudio.com/hc/en-us/sections/200107586-Using-RStudio)
 - RStudio keyboard shortcuts: [https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts)
 - Debugging with R Studio: [https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio](https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio)  
-- Using git from RStudio: [https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN)
+- [Using git from RStudio] (https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN)
 - Tips on using git and GitHub from RStudio, Hadley Wickham's [R packages](http://r-pkgs.had.co.nz/git.html#git-pull) book
-
-
 
