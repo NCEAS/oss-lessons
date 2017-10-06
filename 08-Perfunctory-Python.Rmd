@@ -1,8 +1,13 @@
 # Perfunctory Python
 
-## The Why <img style="float: right;width: 300px;" src="images/python.png">
+```{r, out.width="10%", echo=FALSE, fig.align="right", fig.cap="Python logo"}
+knitr::include_graphics("images/python.png")
+```
 
-<img style="align: Left;width: 700px;" src="images/IEEE_spectrum.png">
+## The Why 
+```{r, out.width="80%", echo=FALSE, fig.align="right", fig.cap="Scripting languages"}
+knitr::include_graphics("images/IEEE_spectrum.png")
+```
 
 http://spectrum.ieee.org/computing/software/the-2017-top-programming-languages
 
@@ -68,6 +73,7 @@ IMPORTANT: If you install anaconda on your machine and ArcGIS is already install
 **For Mac users:**
 
 - Homebrew: <http://python-guide-pt-br.readthedocs.io/en/latest/starting/install3/osx/> 
+
 
 ## References
 

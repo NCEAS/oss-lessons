@@ -1,47 +1,60 @@
 # Scientific Communication and Collaboration
 
+
 ## Thinking Preferences
 
-\LARGE A tool for understanding group dynamics\par
 
-
-![The brain](images/Brain.jpg)
-
+```{block, type='slides'}
+A tool for understanding group dynamics
+```
 
 
 \newpage
-\LARGE Left brain\par
+
+```{block, type='slides'} 
+Left brain
+```
 
 
-![](images/LeftBrain.jpg)
+
+![Left brain](images/LeftBrain.jpg)
 
 **Analytical / Systematic**
 
 
 \newpage
-\LARGE Right brain\par
+
+```{block, type='slides'} 
+Right brain
+```
 
 
-![](images/RightBrain.jpg)
+![Right brain](images/RightBrain.jpg)
 
 
 **Artistic / Emotional**
 
 \newpage
-\LARGE Neocortex\par
+
+```{block, type='slides'} 
+Neocortex
+```
 
 
-![](images/Neocortex.jpg)
+![Neocortex](images/Neocortex.jpg)
 
 
 **Intellect**
 
 \newpage
-\LARGE Limbic system\par
+
+```{block, type='slides'} 
+Limbic system
+```
 
 
 
-![](images/Limbic.jpg)
+![Limbic system](images/Limbic.jpg)
 
 
 
@@ -50,19 +63,16 @@
 
 
 \newpage
-\LARGE The whole brain\par
+
+```{block, type='slides'} 
+The whole brain
+```
 
 
-
-
-Analytical
-
-Artistic
-
-Intellect
-
-Emotion
-
+- Analytical
+- Artistic
+- Intellect
+- Emotion
 
 
 
@@ -70,50 +80,70 @@ Emotion
 
 
 \newpage
-\LARGE Ned Herrmann: Whole Brain Model\par
+
+```{block, type='slides'}
+Ned Herrmann: Whole Brain Model
+```
 
 
 ![WholeBrain](images/whole-brain-model-2016.jpg)
 www.herrmannsolutions.com
 
 \newpage
-\LARGE Ned Herrmann: Whole Brain Model\par
 
-![WholeBrain](images/whole-brain-model-2016v2.jpg)
+```{block, type='slides'}
+Ned Herrmann: Whole Brain Model
+```
+
+![WholeBrain version 2](images/whole-brain-model-2016v2.jpg)
 www.herrmannsolutions.com
 
 \newpage
-\LARGE Traits Exhibited\par
 
-![WholeBrain](images/WholeBrainTraits.jpg)
+```{block, type='slides'} 
+Traits Exhibited
+```
 
-
-\newpage
-\LARGE A Complex Self\par
-
-
-![WholeBrain](images/WholeBrainSelf.jpg)
+![Traits Exhibited](images/WholeBrainTraits.jpg)
 
 
 \newpage
-\LARGE Mapping Your Thinking Preferences\par
+
+```{block, type='slides'} 
+A Complex Self
+```
 
 
-![WholeBrain](images/WholeBrainMap.jpg)
+![Complex Self](images/WholeBrainSelf.jpg)
 
 
 \newpage
-\LARGE Communication and Learning\par
+
+```{block, type='slides'}
+Mapping Your Thinking Preferences
+```
+
+
+![Brain Map](images/WholeBrainMap.jpg)
+
+
+\newpage
+
+```{block, type='slides'} 
+Communication and Learning
+```
 
 
 
-![WholeBrain](images/WholeBrainCommunication.jpg)
+![Communication and Learning](images/WholeBrainCommunication.jpg)
 
-
+\newpage
 
 ## The Message Box
 
-\LARGE Communicating Your Science Effectively\par
+```{block, type='slides'} 
+Communicating Your Science Effectively
+```
 
 ![Message box](images/MessageBox.png)
 
@@ -124,8 +154,10 @@ knitr::include_graphics("images/Compass.png")
 
 
 \newpage
-\LARGE Principles of Science Communication\par
 
+```{block, type='slides'} 
+Principles of Science Communication
+```
 
 - Know Your Audience
 - Frame Your Message
@@ -133,58 +165,79 @@ knitr::include_graphics("images/Compass.png")
 - Avoid Jargon
 
 \newpage
-\LARGE Know Your Audience\par
 
+```{block, type='slides'}
+Know Your Audience
+```
 
-![](images/Audience.jpg)
-
-\newpage
-\LARGE Frame Your Message\par 
-
-
-![](images/resonate.png)
-
+![Know Your Audience](images/Audience.jpg)
 
 \newpage
-\LARGE Lead With Results\par
+
+```{block, type='slides'} 
+Frame Your Message 
+```
 
 
-
-![](images/Approach.png)
+![Frame Your Message](images/resonate.png)
 
 
 \newpage
-\LARGE Avoid Jargon\par
 
-![](images/Jargon.png)
+```{block, type='slides'} 
+Lead With Results
+```
+
+
+
+![Lead With Results](images/Approach.png)
+
 
 \newpage
-\LARGE The Message Box\par
 
+```{block, type='slides'} 
+Avoid Jargon
+```
 
-
-
-![](images/MessageBox2.png)
-
-\newpage
-\LARGE The Message Box\par
-
-
-![](images/BlankMessageBox.png)
+![Avoid Jargon](images/Jargon.png)
 
 \newpage
-\LARGE Know Your Audience\par
 
-![](images/Public.jpg)
+```{block, type='slides'} 
+The Message Box
+```
 
-![](images/Teachers.jpg)
 
-![](images/PolicyMakers.jpg)
-
-![](images/Students.jpg)
+![From paper to Message Box](images/MessageBox2.png)
 
 \newpage
-\LARGE Section 1: The Issue\par
+
+```{block, type='slides'} 
+The Message Box
+```
+
+
+![Blank Message Box](images/BlankMessageBox.png)
+
+\newpage
+
+```{block, type='slides'} 
+Know Your Audience
+```
+
+![Audience](images/Public.jpg)
+
+![Teachers](images/Teachers.jpg)
+
+![Policy Makers](images/PolicyMakers.jpg)
+
+![Students](images/Students.jpg)
+
+\newpage
+
+```{block, type='slides'} 
+Section 1: The Issue
+```
 
 - Describes the overarching issue or topic: Big Picture
 - Broad enough to cover key points
@@ -192,8 +245,9 @@ knitr::include_graphics("images/Compass.png")
 - Concise and clear
 - "Frames" the rest of the message box
 
-\newpage
-\LARGE Section 2: The Problem\par
+```{block, type='slides'} 
+Section 2: The Problem
+```
 
 - The part of the broader issue that your work is addressing
 - Builds upon your work and expert knowledge
@@ -201,18 +255,20 @@ knitr::include_graphics("images/Compass.png")
 - Often the **Problem** is your research question
 - This section sets you up for **So What**
 
-\newpage
-\LARGE Section 3: The "So What?"\par
+```{block, type='slides'} 
+Section 3: The "So What?"
+```
 
 - This is the crux of the message box
 - Why should you audience care?
 - What about your research is important for them to know?
 - Why are you talking to them about it?
 
-![](images/SoWhat.png)
+!["So What?" test](images/SoWhat.png)
 
-\newpage
-\LARGE Section 4: The Solution\par
+```{block, type='slides'}
+Section 4: The Solution
+```
 
 - Outlines the options for solving the **Problem**
 - Can your audience influence or act upon this?
@@ -220,15 +276,20 @@ knitr::include_graphics("images/Compass.png")
 - Make sure your **Solution** relates back to the **Problem**. Edit one or both as needed
 
 \newpage
-\LARGE Section 5: The Benefit\par
+
+```{block, type='slides'} 
+Section 5: The Benefit
+```
 
 - What are the benefits of addressing the **Problem**?
 - What good things come from implementing your **Solution**?
 - Make sure it connects with you **So What**
 - **Benefits** and **So What** may be similar
 
-\newpage
-\LARGE Make Your Message Memorable\par
+
+```{block, type='slides'} 
+Make Your Message Memorable
+```
 
 - Support your message with data
 - Limit the use of numbers and statistics
@@ -238,18 +299,21 @@ knitr::include_graphics("images/Compass.png")
 - Lead with what you know
 
 \newpage
-\LARGE The Message Box\par
+
+```{block, type='slides'}
+The Message Box
+```
+
+![Message Box](images/MessageBoxPrompts.png)
 
 
-![](images/MessageBoxPrompts.png)
-
-
+\newpage
 
 ## Meeting Facilitation
 
-
-
-![](images/StickyDos1.png)
+```{r, echo=FALSE, out.width="100%"}
+knitr::include_graphics("images/StickyDos1.png")
+```
 
 
 ![](images/StickyDos2.png)

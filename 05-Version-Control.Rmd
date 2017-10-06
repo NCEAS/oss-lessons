@@ -1,14 +1,10 @@
-# 05 Version Control
+# Version Control
 
 ## Git 
 
-```{r, out.width="10%", echo=FALSE, fig.align="right", fig.cap="git"}
-knitr::include_graphics("images/git_icon.png")
-```
-
 ### Why do I need that again?
 
-```{r, out.width = "75%", echo=FALSE, fig.align="center", fig.cap="Versions - PhD comics"}
+```{r, out.width = "60%", echo=FALSE, fig.align="center", fig.cap="Versions - PhD comics"}
 knitr::include_graphics("images/phd_comics_final.png")
 ```
 
@@ -43,7 +39,6 @@ Git can be enabled on a specific folder/directory on your file system to version
 - Git is not GitHub (or more exactly: GitHub is not Git)
 - Git is not good at versioning large data (there are work around that)
 
-\newpage 
 
 ## The Git workflow
 
@@ -67,7 +62,6 @@ Every time you create a new snapshot, you add the new version of the file to the
 ```{r, out.width="35%", echo=FALSE, fig.align="center", fig.cap="git history graph - from Matt Jones"}
 knitr::include_graphics("images/version-graph_mattJones.png")
 ```
-\newpage
 
 ## Getting started with Git
 
@@ -290,7 +284,6 @@ git checkout e11e34 test_file.txt
 * **HEAD**: it is the reference that points by default to the latest commit
 * **Branches**: A branch represents an independent line of development, parallel to the master. In fact, the default branch name that is created by ```git init``` is called ***master***.
 
-\newpage
 
 ## Collaborating with git and GitHub
 
@@ -507,7 +500,6 @@ Note that you do not need to synchronize your repositories across your machines/
 
 Write a R code to read the favorite_desserts.csv files in and add a new row to the data frame and overwrite the csv with the new entry. Of course you need to track the development of your code using git!!
 
-\newpage
 
 ## Collaborating with others
 
@@ -529,21 +521,23 @@ When you collaborate closely and actively with colleagues, you do not want neces
 
 * Click on the repository
 * On the right panel, click ![Settings](images/image_11.png)
-* On the left pane, click Collaborators and enter the usernames you want to add![collaborators & teams](images/github_collaborators.png) 
+* On the left pane, click Collaborators and enter the usernames you want to add
+
+![collaborators & teams](images/github_collaborators.png) 
 
 #### Adding a team to a repository (organization only)
 
 - Click on the repository
 - On the right panel, click `Settings`
 - On the left pane, click `Collaborators & teams` 
-- Select your team ![Select team](images/image_13.png)
+- Select your team !
+[Select team](images/image_13.png)
 - Select the appropriate Permission level. We recommend Write or Admin. Admin allows people to also add collaborators.
 
 ```{r, out.width = "30%", echo=FALSE, fig.align="center", fig.cap="GitHub - Access permissions"}
 knitr::include_graphics("images/image_14.png")
 ```
 
-\newpage
 
 ## Managing Merge Conflicts
 
@@ -583,7 +577,6 @@ During this process, if you want to roll back to the situation before you starte
 
 Continuing with the `dessert` example we used in the first part of this tutorial, we now have on our local machine
 
-\newpage
 
 ## Branches
 ```{r, out.width = "60%", echo=FALSE, fig.align="center", fig.cap="Branches - adapted from https://www.atlassian.com/git/tutorials/git-merge"}
@@ -631,7 +624,7 @@ Done with your branch? Want to merge your new - ready for prime time - script to
 3. Merge the branch: 			```git merge myBranchName ```
 4. Delete the branch:			```git branch -d myBranchName```
 
-\newpage
+
 
 ## Version control using RStudio
 
@@ -794,6 +787,6 @@ Once you have finished the pull process, you can click on the `push` button to u
 - Using RStudio: [https://support.rstudio.com/hc/en-us/sections/200107586-Using-RStudio](https://support.rstudio.com/hc/en-us/sections/200107586-Using-RStudio)
 - RStudio keyboard shortcuts: [https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts)
 - Debugging with R Studio: [https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio](https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio)  
-- [Using git from RStudio] (https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN)
+- [Using git from RStudio](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN)
 - Tips on using git and GitHub from RStudio, Hadley Wickham's [R packages](http://r-pkgs.had.co.nz/git.html#git-pull) book
 

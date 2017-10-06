@@ -12,3 +12,7 @@ pre {
 pre code {
   white-space: inherit;
 }
+.slides {
+  font-weight: bold;
+  font-size: 18pt;
+}

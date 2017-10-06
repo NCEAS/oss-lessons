@@ -138,7 +138,7 @@ remote computing and computing in the 'Cloud' for speeding up scientific analysi
 
 ```bash
 jones@powder:~$ ssh jones@aurora.nceas.ucsb.edu
-jones@aurora.nceas.ucsb.edu's password: 
+jones@aurora.nceas.ucsb.edu\'s password: 
 jones@aurora:~$ 
 ```
 
