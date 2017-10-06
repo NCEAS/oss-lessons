@@ -21,11 +21,8 @@ The course focused on techniques for data management, scientific programming, sy
 
 ![OSS 2017 - Paticipants and Instructors](images/participants_OSS17.jpg)
 
-<br>
-<br>
-<br>
 
-*Acknowledgements*
+**Acknowledgements**
 
 OSS2017 was funded under a grant from the [Gulf Research Program, National Academy of Sciences](http://www.nationalacademies.org/gulf/index.html)
 

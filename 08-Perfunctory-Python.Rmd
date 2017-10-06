@@ -1,9 +1,5 @@
 # Perfunctory Python
 
-```{r, out.width="10%", echo=FALSE, fig.align="right", fig.cap="Python logo"}
-knitr::include_graphics("images/python.png")
-```
-
 ## The Why 
 ```{r, out.width="80%", echo=FALSE, fig.align="right", fig.cap="Scripting languages"}
 knitr::include_graphics("images/IEEE_spectrum.png")
@@ -54,7 +50,7 @@ Here are some reasons why you might want to dive into Python:
 
 ## Python Distributions
 
-**For Windows users: **
+### For Windows users:
 
 - [WinPython](http://winpython.sourceforge.net/)
 - [Anaconda](https://store.continuum.io/cshop/anaconda/)
@@ -68,9 +64,7 @@ IMPORTANT: If you install anaconda on your machine and ArcGIS is already install
 1. make Anaconda the default Python
 2. add Anaconda's Python to the PATH.
 
-<br>
-
-**For Mac users:**
+### For Mac users:
 
 - Homebrew: <http://python-guide-pt-br.readthedocs.io/en/latest/starting/install3/osx/> 
 

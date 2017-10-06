@@ -1,5 +1,7 @@
 # Version Control
-
+```{r, include=FALSE}
+knitr::opts_chunk$set(fig.pos = 'H')
+```
 ## Git 
 
 ### Why do I need that again?
@@ -345,7 +347,7 @@ knitr::include_graphics("images/github_cloud_with_repo.png")
 ![](images/tip.png) Here is a website to look for more pre-written`.gitignore` files: <https://github.com/github/gitignore>
 
 
-## Pushing your local repository to a remote server
+### Pushing your local repository to a remote server
 
 This is the case where you already worked in a local repository and you would like to add your local repository to a remote computer or server
 
@@ -786,7 +788,7 @@ Once you have finished the pull process, you can click on the `push` button to u
  - RStudio IDE cheat sheet: [https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf](https://www.rstudio.com/wp-content/uploads/2016/01/rstudio-IDE-cheatsheet.pdf)
 - Using RStudio: [https://support.rstudio.com/hc/en-us/sections/200107586-Using-RStudio](https://support.rstudio.com/hc/en-us/sections/200107586-Using-RStudio)
 - RStudio keyboard shortcuts: [https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts](https://support.rstudio.com/hc/en-us/articles/200711853-Keyboard-Shortcuts)
-- Debugging with R Studio: [https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio](https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio)  
+- Debugging with R Studio: [https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio](https://support.rstudio.com/hc/en-us/articles/205612627-Debugging-with-RStudio)
 - [Using git from RStudio](https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN)
 - Tips on using git and GitHub from RStudio, Hadley Wickham's [R packages](http://r-pkgs.had.co.nz/git.html#git-pull) book
 
