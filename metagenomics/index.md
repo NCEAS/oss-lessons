@@ -36,7 +36,7 @@ In this lesson we'll go through an introduction and example of the role of micro
 ### II. Using cloud computing for fun and genomic data
 **Goals:** Discuss needs for cloud computing and what are some options. Connect to Amazon AWS resources using ssh. Provide documentation on how to get access to cloud computing resources.
 
-**Materials:**  [Introduction to cloud computing](http://www.datacarpentry.org/cloud-genomics/02-why-cloud-computing/)  
+**Materials:**  [Introduction to cloud computing](http://www.datacarpentry.org/cloud-genomics/01-why-cloud-computing/)  
 
 **Additional resources:**  
 - [Setting up instances on Amazon AWS and CyVerse for remote computing](http://www.datacarpentry.org/cloud-genomics/02-logging-onto-cloud/)
