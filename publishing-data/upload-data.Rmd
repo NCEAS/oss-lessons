@@ -42,7 +42,7 @@ emlFile <- "strix-pacific-northwest.xml"
 doc <- read_eml(emlFile)
 
 # Change creator to us
-doc$dataset$creator <- set_responsibleParty("Matthew",  "Jones", email = "jones@nceas.ucsb.edu>")
+doc$dataset$creator <- set_responsibleParty("Matthew",  "Jones", email = "jones@nceas.ucsb.edu")
 
 # Change abstract to the better one we wrote
 doc$dataset$abstract <- set_TextType("better-abstract.md")
