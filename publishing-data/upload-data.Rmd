@@ -33,22 +33,23 @@ Once you are logged in, navigate to your Profile Settings, and locate the "Authe
 Next, modify the metadata file associated with the package to set yourself as the owner.  This will help us differentiate the test data later.  Open the `strix-pacific-northwest.xml` file in RStudio, and change the `givenName` and `surName` fields at the top to your name.
 
 ```{r}
-library(EML)
-# devtools::install_github("NCEAS/arcticdatautils")
-library(arcticdatautils)
+
+# devtools::install_github("cboettig/eml2")
+library(eml2)
 
 # Load the EML file into R
 emlFile <- "strix-pacific-northwest.xml"
 doc <- read_eml(emlFile)
 
 # Change creator to us
-doc@dataset@creator <- c(eml_creator("Matthew", "Jones", email = "jones@nceas.ucsb.edu"))
+doc$dataset$creator <- set_responsibleParty("Matthew",  "Jones", email = "jones@nceas.ucsb.edu>")
 
 # Change abstract to the better one we wrote
-doc@dataset@abstract <- as(set_TextType("better-abstract.md"), "abstract")
+doc$dataset$abstract <- set_TextType("better-abstract.md")
 
 # Save it back to the filesystem
 write_eml(doc, "strix-pacific-northwest.xml")
+eml_validate("strix-pacific-northwest.xml")
 ```
 
 ## Uploading A Package Using `uploadDataPackage`
@@ -75,19 +76,29 @@ We then add a metadata file, data file, R script and output data file to this pa
 sourceId <- paste0("urn:uuid:", uuid::UUIDgenerate())
 progId <- paste0("urn:uuid:", uuid::UUIDgenerate())
 outputId <- paste0("urn:uuid:", uuid::UUIDgenerate())
-doc@dataset@otherEntity[[1]]@id <- new("xml_attribute", sourceId)
-doc@dataset@otherEntity[[2]]@id <- new("xml_attribute", progId)
-doc@dataset@otherEntity[[3]]@id <- new("xml_attribute", outputId)
+doc$dataset$otherEntity[[1]]$id <-  sourceId
+doc$dataset$otherEntity[[2]]$id <-  progId
+doc$dataset$otherEntity[[3]]$id <- outputId
+```
+
+```{r}
 repo_obj_service <- paste0(d1c@mn@endpoint, "/object/")
-doc@dataset@otherEntity[[1]]@physical[[1]]@distribution[[1]]@online@url <- 
-  new("url", paste0(repo_obj_service, sourceId))
-doc@dataset@otherEntity[[2]]@physical[[1]]@distribution[[1]]@online@url <- 
-  new("url", paste0(repo_obj_service, progId))
-doc@dataset@otherEntity[[3]]@physical[[1]]@distribution[[1]]@online@url <- 
-  new("url", paste0(repo_obj_service, outputId))
+
+doc$dataset$otherEntity[[1]]$physical$distribution$online$url <- 
+  paste0(repo_obj_service, sourceId)
+
+doc$dataset$otherEntity[[2]]$physical$distribution$online$url <- 
+ paste0(repo_obj_service, progId)
+
+doc$dataset$otherEntity[[3]]$physical$distribution$online$url <- 
+   paste0(repo_obj_service, outputId)
 
 write_eml(doc, "strix-pacific-northwest.xml")
+eml_validate("strix-pacific-northwest.xml")
+```
 
+
+```{r}
 # Add the metadata document to the package
 metadataObj <- new("DataObject", 
                    format="eml://ecoinformatics.org/eml-2.1.1", 
